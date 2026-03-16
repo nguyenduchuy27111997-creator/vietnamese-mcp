@@ -104,45 +104,45 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| INFRA-01 | — | Pending |
-| INFRA-02 | — | Pending |
-| INFRA-03 | — | Pending |
-| INFRA-04 | — | Pending |
-| INFRA-05 | — | Pending |
-| INFRA-06 | — | Pending |
-| INFRA-07 | — | Pending |
-| INFRA-08 | — | Pending |
-| INFRA-09 | — | Pending |
-| INFRA-10 | — | Pending |
-| MOMO-01 | — | Pending |
-| MOMO-02 | — | Pending |
-| MOMO-03 | — | Pending |
-| MOMO-04 | — | Pending |
-| MOMO-05 | — | Pending |
-| ZPAY-01 | — | Pending |
-| ZPAY-02 | — | Pending |
-| ZPAY-03 | — | Pending |
-| ZPAY-04 | — | Pending |
-| ZPAY-05 | — | Pending |
-| VNPY-01 | — | Pending |
-| VNPY-02 | — | Pending |
-| VNPY-03 | — | Pending |
-| VNPY-04 | — | Pending |
-| ZLOA-01 | — | Pending |
-| ZLOA-02 | — | Pending |
-| ZLOA-03 | — | Pending |
-| ZLOA-04 | — | Pending |
-| ZLOA-05 | — | Pending |
-| VTPAY-01 | — | Pending |
-| VTPAY-02 | — | Pending |
-| VTPAY-03 | — | Pending |
-| VTPAY-04 | — | Pending |
+| INFRA-01 | Phase 1 | Pending |
+| INFRA-02 | Phase 1 | Pending |
+| INFRA-03 | Phase 1 | Pending |
+| INFRA-04 | Phase 1 | Pending |
+| INFRA-05 | Phase 1 | Pending |
+| INFRA-06 | Phase 1 | Pending |
+| INFRA-07 | Phase 4 | Pending |
+| INFRA-08 | Phase 4 | Pending |
+| INFRA-09 | Phase 4 | Pending |
+| INFRA-10 | Phase 1 | Pending |
+| MOMO-01 | Phase 2 | Pending |
+| MOMO-02 | Phase 2 | Pending |
+| MOMO-03 | Phase 2 | Pending |
+| MOMO-04 | Phase 2 | Pending |
+| MOMO-05 | Phase 2 | Pending |
+| ZPAY-01 | Phase 3 | Pending |
+| ZPAY-02 | Phase 3 | Pending |
+| ZPAY-03 | Phase 3 | Pending |
+| ZPAY-04 | Phase 3 | Pending |
+| ZPAY-05 | Phase 3 | Pending |
+| VNPY-01 | Phase 3 | Pending |
+| VNPY-02 | Phase 3 | Pending |
+| VNPY-03 | Phase 3 | Pending |
+| VNPY-04 | Phase 3 | Pending |
+| ZLOA-01 | Phase 4 | Pending |
+| ZLOA-02 | Phase 4 | Pending |
+| ZLOA-03 | Phase 4 | Pending |
+| ZLOA-04 | Phase 4 | Pending |
+| ZLOA-05 | Phase 4 | Pending |
+| VTPAY-01 | Phase 4 | Pending |
+| VTPAY-02 | Phase 4 | Pending |
+| VTPAY-03 | Phase 4 | Pending |
+| VTPAY-04 | Phase 4 | Pending |
 
 **Coverage:**
 - v1 requirements: 33 total
-- Mapped to phases: 0
-- Unmapped: 33 ⚠️
+- Mapped to phases: 33
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-03-16*
-*Last updated: 2026-03-16 after initial definition*
+*Last updated: 2026-03-16 after roadmap creation*
