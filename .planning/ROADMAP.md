@@ -29,12 +29,12 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. Any file containing `console.log` fails the lint check — the CI guard is verifiable by adding a test violation and running the linter
   4. A new server package can be scaffolded by copying the template structure and the TypeScript project reference compiles without additional configuration
   5. Zod schemas for shared input/output types are importable from `packages/shared` and validate a sample payload correctly
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 01-01: Monorepo skeleton — npm workspaces, tsconfig.base.json, tsdown, vitest, msw, ESLint
-- [ ] 01-02: packages/shared — HMAC signing, error formatting, mock engine, test helpers, shared types
-- [ ] 01-03: Shared Zod schemas + tool naming convention + stdout lint enforcement
+- [ ] 01-01-PLAN.md — Monorepo skeleton: npm workspaces, tsconfig.base.json, vitest, ESLint no-console rule, packages/shared scaffold
+- [ ] 01-02-PLAN.md — packages/shared core modules: HMAC signing, error formatting, mock engine, test helpers
+- [ ] 01-03-PLAN.md — Shared Zod schemas, tool naming convention validator, full integration test
 
 ### Phase 2: MoMo Server
 **Goal**: The first complete MCP server is working in mock mode and every architectural pattern is proven and replicable
@@ -93,7 +93,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Monorepo Foundation | 0/3 | Not started | - |
+| 1. Monorepo Foundation | 0/3 | Planning complete | - |
 | 2. MoMo Server | 0/3 | Not started | - |
 | 3. ZaloPay + VNPAY Servers | 0/2 | Not started | - |
 | 4. Zalo OA + ViettelPay Servers | 0/3 | Not started | - |
