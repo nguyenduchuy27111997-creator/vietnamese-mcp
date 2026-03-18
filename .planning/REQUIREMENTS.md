@@ -53,10 +53,10 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### ViettelPay (`mcp-viettel-pay`)
 
-- [ ] **VTPAY-01**: `viettel_pay_create_payment` — initiate payment request
-- [ ] **VTPAY-02**: `viettel_pay_query_status` — check transaction status
-- [ ] **VTPAY-03**: `viettel_pay_refund` — refund transaction
-- [ ] **VTPAY-04**: Sandbox mock mode for all ViettelPay tools
+- [x] **VTPAY-01**: `viettel_pay_create_payment` — initiate payment request
+- [x] **VTPAY-02**: `viettel_pay_query_status` — check transaction status
+- [x] **VTPAY-03**: `viettel_pay_refund` — refund transaction
+- [x] **VTPAY-04**: Sandbox mock mode for all ViettelPay tools
 
 ## v2 Requirements
 
@@ -133,10 +133,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | ZLOA-03 | Phase 4 | Complete |
 | ZLOA-04 | Phase 4 | Complete |
 | ZLOA-05 | Phase 4 | Complete |
-| VTPAY-01 | Phase 4 | Pending |
-| VTPAY-02 | Phase 4 | Pending |
-| VTPAY-03 | Phase 4 | Pending |
-| VTPAY-04 | Phase 4 | Pending |
+| VTPAY-01 | Phase 4 | Complete |
+| VTPAY-02 | Phase 4 | Complete |
+| VTPAY-03 | Phase 4 | Complete |
+| VTPAY-04 | Phase 4 | Complete |
 
 **Coverage:**
 - v1 requirements: 33 total
