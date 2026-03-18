@@ -15,9 +15,9 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **INFRA-04**: Shared error formatting utility with VN error code translation
 - [x] **INFRA-05**: Zod validation schemas for all tool inputs and outputs
 - [x] **INFRA-06**: Consistent tool naming convention (`{service}_{verb}_{noun}`)
-- [ ] **INFRA-07**: CLAUDE.md context file per server
-- [ ] **INFRA-08**: README with setup instructions per server
-- [ ] **INFRA-09**: Integration tests in mock mode per server
+- [x] **INFRA-07**: CLAUDE.md context file per server
+- [x] **INFRA-08**: README with setup instructions per server
+- [x] **INFRA-09**: Integration tests in mock mode per server
 - [x] **INFRA-10**: No stdout pollution — console.error only (lint rule enforced)
 
 ### MoMo (`mcp-momo-vn`)
@@ -110,9 +110,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | INFRA-04 | Phase 1 | Complete |
 | INFRA-05 | Phase 1 | Complete |
 | INFRA-06 | Phase 1 | Complete |
-| INFRA-07 | Phase 4 | Pending |
-| INFRA-08 | Phase 4 | Pending |
-| INFRA-09 | Phase 4 | Pending |
+| INFRA-07 | Phase 4 | Complete |
+| INFRA-08 | Phase 4 | Complete |
+| INFRA-09 | Phase 4 | Complete |
 | INFRA-10 | Phase 1 | Complete |
 | MOMO-01 | Phase 2 | Complete |
 | MOMO-02 | Phase 2 | Complete |

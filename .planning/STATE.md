@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 04-02-PLAN.md (mcp-viettel-pay)
-last_updated: "2026-03-18T08:36:56.368Z"
+stopped_at: Completed 04-03-PLAN.md (documentation and integration completeness)
+last_updated: "2026-03-18T08:42:56.131Z"
 last_activity: 2026-03-18 — Plan 02-01 completed
 progress:
   total_phases: 4
-  completed_phases: 3
+  completed_phases: 4
   total_plans: 11
-  completed_plans: 10
+  completed_plans: 11
   percent: 31
 ---
 
@@ -59,6 +59,7 @@ Progress: [███░░░░░░░] 31%
 | Phase 03-zalopay-vnpay-servers P02 | 5 | 2 tasks | 16 files |
 | Phase 04-zalo-oa-viettelpay-servers P01 | 8 | 2 tasks | 17 files |
 | Phase 04-zalo-oa-viettelpay-servers P02 | 3 min | 2 tasks | 17 files |
+| Phase 04-zalo-oa-viettelpay-servers P03 | 3 min | 2 tasks | 12 files |
 
 ## Accumulated Context
 
@@ -93,6 +94,9 @@ Recent decisions affecting current work:
 - [Phase 04-zalo-oa-viettelpay-servers]: zalo_oa error codes (0, 210, 400) added to shared VN_ERROR_CODES in error-codes.ts
 - [Phase 04-zalo-oa-viettelpay-servers]: zalo_oa_refresh_token zero-params design — credentials read from env only, no user-supplied token params
 - [Phase 04-zalo-oa-viettelpay-servers]: ViettelPay mock uses REST+HMAC-SHA256 for internal consistency — real API is SOAP+RSA per MOCK_DEVIATIONS.md
+- [Phase 04-zalo-oa-viettelpay-servers]: VIETTELPAY_SANDBOX env var used in .mcp.json (not VIETTEL_PAY_SANDBOX) to match isMockMode('viettelpay') uppercase convention
+- [Phase 04-zalo-oa-viettelpay-servers]: zalopay_validate_callback takes callbackData (raw JSON string) not separate data+mac params — per actual Zod schema
+- [Phase 04-zalo-oa-viettelpay-servers]: Root README.md written last (pitfall 6) after verifying all 5 servers and final tool counts (18 total)
 
 ### Pending Todos
 
@@ -107,6 +111,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-18T08:36:56.366Z
-Stopped at: Completed 04-02-PLAN.md (mcp-viettel-pay)
+Last session: 2026-03-18T08:42:56.129Z
+Stopped at: Completed 04-03-PLAN.md (documentation and integration completeness)
 Resume file: None
