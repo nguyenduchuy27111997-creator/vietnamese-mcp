@@ -1,0 +1,17 @@
+{
+  "name": "@vn-mcp/shared",
+  "version": "0.0.1",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./errors": "./src/errors/index.ts",
+    "./http-client": "./src/http-client/index.ts",
+    "./mock-engine": "./src/mock-engine/index.ts",
+    "./test-helpers": "./src/test-helpers/index.ts"
+  },
+  "scripts": {
+    "build": "tsdown src/index.ts --format esm --dts",
+    "dev": "tsx watch src/index.ts"
+  },
+  "engines": { "node": ">=20" }
+}
