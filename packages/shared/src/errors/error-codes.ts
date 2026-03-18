@@ -39,6 +39,11 @@ export const VN_ERROR_CODES: Record<string, Record<string, string>> = {
     '00': 'Success',
     '06': 'Insufficient balance',
   },
+  zalo_oa: {
+    '0': 'Success',
+    '210': 'User not found or not a follower',
+    '400': 'Invalid access token',
+  },
 };
 
 /**

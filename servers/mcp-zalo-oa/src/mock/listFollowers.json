@@ -1,0 +1,10 @@
+{
+  "followers": [
+    { "user_id": "3512267360915248000", "display_name": "Nguyen Van A", "avatar": "https://s120-ava-talk.zadn.vn/placeholder/avatar1.jpg", "user_gender": 1, "user_id_by_app": "app_user_001" },
+    { "user_id": "6523148079241364992", "display_name": "Tran Thi B", "avatar": "https://s120-ava-talk.zadn.vn/placeholder/avatar2.jpg", "user_gender": 2, "user_id_by_app": "app_user_002" },
+    { "user_id": "7841523096385710080", "display_name": "Le Van C", "avatar": "https://s120-ava-talk.zadn.vn/placeholder/avatar3.jpg", "user_gender": 1, "user_id_by_app": "app_user_003" }
+  ],
+  "total": 3,
+  "offset": 0,
+  "_mock": true
+}
