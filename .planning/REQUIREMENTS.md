@@ -13,8 +13,8 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **INFRA-02**: Shared HMAC signature generation utility (SHA-256, SHA-512)
 - [x] **INFRA-03**: Shared mock engine with env-flag switching (`SANDBOX_MODE=true`)
 - [x] **INFRA-04**: Shared error formatting utility with VN error code translation
-- [ ] **INFRA-05**: Zod validation schemas for all tool inputs and outputs
-- [ ] **INFRA-06**: Consistent tool naming convention (`{service}_{verb}_{noun}`)
+- [x] **INFRA-05**: Zod validation schemas for all tool inputs and outputs
+- [x] **INFRA-06**: Consistent tool naming convention (`{service}_{verb}_{noun}`)
 - [ ] **INFRA-07**: CLAUDE.md context file per server
 - [ ] **INFRA-08**: README with setup instructions per server
 - [ ] **INFRA-09**: Integration tests in mock mode per server
@@ -108,8 +108,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | INFRA-02 | Phase 1 | Complete |
 | INFRA-03 | Phase 1 | Complete |
 | INFRA-04 | Phase 1 | Complete |
-| INFRA-05 | Phase 1 | Pending |
-| INFRA-06 | Phase 1 | Pending |
+| INFRA-05 | Phase 1 | Complete |
+| INFRA-06 | Phase 1 | Complete |
 | INFRA-07 | Phase 4 | Pending |
 | INFRA-08 | Phase 4 | Pending |
 | INFRA-09 | Phase 4 | Pending |
