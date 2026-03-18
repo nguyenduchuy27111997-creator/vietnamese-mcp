@@ -1,0 +1,9 @@
+{
+  "partnerCode": "MOMOBKUN20180529",
+  "orderId": "MOMO_placeholder",
+  "requestId": "REQ_placeholder",
+  "amount": 99999999,
+  "resultCode": 1005,
+  "message": "So du khong du. Insufficient balance.",
+  "responseTime": 1710000000000
+}

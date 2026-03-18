@@ -1,0 +1,15 @@
+{
+  "partnerCode": "MOMOBKUN20180529",
+  "orderId": "MOMO_placeholder",
+  "requestId": "REQ_placeholder",
+  "extraData": "",
+  "amount": 150000,
+  "transId": 2350000001,
+  "payType": "qr",
+  "resultCode": 0,
+  "refundTrans": [],
+  "message": "Thanh cong.",
+  "responseTime": 1710000000000,
+  "orderInfo": "Test order from Nguyen Van A",
+  "orderType": "momo_wallet"
+}
