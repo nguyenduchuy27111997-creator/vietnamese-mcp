@@ -33,8 +33,8 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 Plans:
 - [x] 01-01-PLAN.md — Monorepo skeleton: npm workspaces, tsconfig.base.json, vitest, ESLint no-console rule, packages/shared scaffold
-- [ ] 01-02-PLAN.md — packages/shared core modules: HMAC signing, error formatting, mock engine, test helpers
-- [ ] 01-03-PLAN.md — Shared Zod schemas, tool naming convention validator, full integration test
+- [x] 01-02-PLAN.md — packages/shared core modules: HMAC signing, error formatting, mock engine, test helpers
+- [x] 01-03-PLAN.md — Shared Zod schemas, tool naming convention validator, full integration test
 
 ### Phase 2: MoMo Server
 **Goal**: The first complete MCP server is working in mock mode and every architectural pattern is proven and replicable
@@ -46,12 +46,12 @@ Plans:
   3. Claude Code can call `momo_refund` with a transId and receive a successful mock refund response
   4. Claude Code can call `momo_validate_ipn` with a crafted IPN payload and the tool correctly validates or rejects the HMAC signature
   5. All four MoMo tools pass their vitest integration tests when `SANDBOX_MODE=true` — tests run with `npm test` from the server package directory
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 02-01: MoMo client.ts — axios client with HMAC-SHA256 interceptor, mock/real switcher, mock fixtures
-- [ ] 02-02: MoMo tools — momo_create_payment, momo_query_status, momo_refund, momo_validate_ipn with Zod schemas
-- [ ] 02-03: MoMo integration tests + .mcp.json entry + verify Claude Code can invoke all tools
+- [ ] 02-01-PLAN.md — Package scaffold, credentials, HMAC signature builders, mock fixtures, client.ts mock/real switcher
+- [ ] 02-02-PLAN.md — 4 MoMo tool handlers (createPayment, queryStatus, refund, validateIpn) with inline Zod schemas + server entry point
+- [ ] 02-03-PLAN.md — Integration tests for all 4 tools + .mcp.json entry for Claude Code
 
 ### Phase 3: ZaloPay + VNPAY Servers
 **Goal**: Two additional payment servers are working in mock mode, each with a distinct auth scheme proven against the shared http-client factory
