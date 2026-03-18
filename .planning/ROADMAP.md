@@ -32,7 +32,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans**: 3 plans
 
 Plans:
-- [ ] 01-01-PLAN.md — Monorepo skeleton: npm workspaces, tsconfig.base.json, vitest, ESLint no-console rule, packages/shared scaffold
+- [x] 01-01-PLAN.md — Monorepo skeleton: npm workspaces, tsconfig.base.json, vitest, ESLint no-console rule, packages/shared scaffold
 - [ ] 01-02-PLAN.md — packages/shared core modules: HMAC signing, error formatting, mock engine, test helpers
 - [ ] 01-03-PLAN.md — Shared Zod schemas, tool naming convention validator, full integration test
 
@@ -93,7 +93,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Monorepo Foundation | 0/3 | Planning complete | - |
+| 1. Monorepo Foundation | 1/3 | In progress | - |
 | 2. MoMo Server | 0/3 | Not started | - |
 | 3. ZaloPay + VNPAY Servers | 0/2 | Not started | - |
 | 4. Zalo OA + ViettelPay Servers | 0/3 | Not started | - |

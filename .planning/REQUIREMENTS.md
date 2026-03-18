@@ -9,7 +9,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Shared Infrastructure
 
-- [ ] **INFRA-01**: Monorepo with npm workspaces and TypeScript project references
+- [x] **INFRA-01**: Monorepo with npm workspaces and TypeScript project references
 - [ ] **INFRA-02**: Shared HMAC signature generation utility (SHA-256, SHA-512)
 - [ ] **INFRA-03**: Shared mock engine with env-flag switching (`SANDBOX_MODE=true`)
 - [ ] **INFRA-04**: Shared error formatting utility with VN error code translation
@@ -18,7 +18,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [ ] **INFRA-07**: CLAUDE.md context file per server
 - [ ] **INFRA-08**: README with setup instructions per server
 - [ ] **INFRA-09**: Integration tests in mock mode per server
-- [ ] **INFRA-10**: No stdout pollution — console.error only (lint rule enforced)
+- [x] **INFRA-10**: No stdout pollution — console.error only (lint rule enforced)
 
 ### MoMo (`mcp-momo-vn`)
 
@@ -104,7 +104,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| INFRA-01 | Phase 1 | Pending |
+| INFRA-01 | Phase 1 | Complete |
 | INFRA-02 | Phase 1 | Pending |
 | INFRA-03 | Phase 1 | Pending |
 | INFRA-04 | Phase 1 | Pending |
@@ -113,7 +113,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | INFRA-07 | Phase 4 | Pending |
 | INFRA-08 | Phase 4 | Pending |
 | INFRA-09 | Phase 4 | Pending |
-| INFRA-10 | Phase 1 | Pending |
+| INFRA-10 | Phase 1 | Complete |
 | MOMO-01 | Phase 2 | Pending |
 | MOMO-02 | Phase 2 | Pending |
 | MOMO-03 | Phase 2 | Pending |
@@ -145,4 +145,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 ---
 *Requirements defined: 2026-03-16*
-*Last updated: 2026-03-16 after roadmap creation*
+*Last updated: 2026-03-18 — INFRA-01, INFRA-10 completed in plan 01-01*
