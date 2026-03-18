@@ -1,2 +1,15 @@
-// MoMo MCP Server entry point — tools registered in Plan 02
-// This file is a placeholder until Plan 02 adds tool handlers
+import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
+import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
+import { registerAll } from './tools/index.js';
+
+const server = new McpServer({
+  name: 'mcp-momo-vn',
+  version: '0.0.1',
+});
+
+// CRITICAL: Register all tools BEFORE connecting transport.
+// If transport connects first, Claude Code's tools/list request returns empty.
+registerAll(server);
+
+const transport = new StdioServerTransport();
+await server.connect(transport);
