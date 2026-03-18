@@ -1,0 +1,9 @@
+{
+  "return_code": 1,
+  "return_message": "Thanh cong.",
+  "sub_return_code": 1,
+  "sub_return_message": "",
+  "zp_trans_token": "240318_abc123token",
+  "order_url": "https://sbgateway.zalopay.vn/openinapp?order=token_placeholder",
+  "order_token": "abc123token"
+}

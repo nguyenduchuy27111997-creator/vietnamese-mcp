@@ -1,0 +1,11 @@
+{
+  "return_code": 1,
+  "return_message": "Giao dich thanh cong.",
+  "sub_return_code": 1,
+  "sub_return_message": "",
+  "is_processing": false,
+  "amount": 150000,
+  "zp_trans_id": 240318000000001,
+  "server_time": 1710720000000,
+  "discount_amount": 0
+}
