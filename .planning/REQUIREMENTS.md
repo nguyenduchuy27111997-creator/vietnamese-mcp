@@ -38,10 +38,10 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### VNPAY (`mcp-vnpay`)
 
-- [ ] **VNPY-01**: `vnpay_create_payment_url` — build signed payment URL
-- [ ] **VNPY-02**: `vnpay_verify_return` — verify return URL signature
-- [ ] **VNPY-03**: `vnpay_query_transaction` — query transaction status
-- [ ] **VNPY-04**: Sandbox mock mode for all VNPAY tools
+- [x] **VNPY-01**: `vnpay_create_payment_url` — build signed payment URL
+- [x] **VNPY-02**: `vnpay_verify_return` — verify return URL signature
+- [x] **VNPY-03**: `vnpay_query_transaction` — query transaction status
+- [x] **VNPY-04**: Sandbox mock mode for all VNPAY tools
 
 ### Zalo OA (`mcp-zalo-oa`)
 
@@ -124,10 +124,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | ZPAY-03 | Phase 3 | Complete |
 | ZPAY-04 | Phase 3 | Complete |
 | ZPAY-05 | Phase 3 | Complete |
-| VNPY-01 | Phase 3 | Pending |
-| VNPY-02 | Phase 3 | Pending |
-| VNPY-03 | Phase 3 | Pending |
-| VNPY-04 | Phase 3 | Pending |
+| VNPY-01 | Phase 3 | Complete |
+| VNPY-02 | Phase 3 | Complete |
+| VNPY-03 | Phase 3 | Complete |
+| VNPY-04 | Phase 3 | Complete |
 | ZLOA-01 | Phase 4 | Pending |
 | ZLOA-02 | Phase 4 | Pending |
 | ZLOA-03 | Phase 4 | Pending |

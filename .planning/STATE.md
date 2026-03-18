@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 03-01-PLAN.md
-last_updated: "2026-03-18T06:26:58.761Z"
+stopped_at: Completed 03-zalopay-vnpay-servers-03-02-PLAN.md
+last_updated: "2026-03-18T06:27:41.618Z"
 last_activity: 2026-03-18 — Plan 02-01 completed
 progress:
   total_phases: 4
-  completed_phases: 2
+  completed_phases: 3
   total_plans: 8
-  completed_plans: 7
+  completed_plans: 8
   percent: 31
 ---
 
@@ -56,6 +56,7 @@ Progress: [███░░░░░░░] 31%
 | Phase 02-momo-server P02 | 2 min | 2 tasks | 6 files |
 | Phase 02-momo-server P03 | 3 min | 2 tasks | 2 files |
 | Phase 03-zalopay-vnpay-servers P01 | 5 min | 2 tasks | 19 files |
+| Phase 03-zalopay-vnpay-servers P02 | 5 | 2 tasks | 16 files |
 
 ## Accumulated Context
 
@@ -84,6 +85,9 @@ Recent decisions affecting current work:
 - [Phase 02-momo-server]: .mcp.json uses MoMo published sandbox credentials — safe to commit, server works out of the box
 - [Phase 03-zalopay-vnpay-servers]: ZaloPay callback validation uses key2 (not key1) for HMAC-SHA256 over raw data field string
 - [Phase 03-zalopay-vnpay-servers]: Pipe-separated field ordering for all ZaloPay signatures (not &key=value like MoMo)
+- [Phase 03-zalopay-vnpay-servers]: buildVnpaySecureHash uses signHmacSha512 from shared (NOT sha256) — architectural proof that shared HMAC primitives handle different signing strategies
+- [Phase 03-zalopay-vnpay-servers]: VNPAY credentials use placeholder VNPAY_TMN_DEMO / VNPAY_HASH_SECRET_DEMO — no public sandbox test values available unlike MoMo
+- [Phase 03-zalopay-vnpay-servers]: verifyReturn accepts both full HTTPS URL and bare query string — handles VNPAY gateway return redirect variations
 
 ### Pending Todos
 
@@ -98,6 +102,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-18T06:26:58.759Z
-Stopped at: Completed 03-01-PLAN.md
+Last session: 2026-03-18T06:27:41.615Z
+Stopped at: Completed 03-zalopay-vnpay-servers-03-02-PLAN.md
 Resume file: None
