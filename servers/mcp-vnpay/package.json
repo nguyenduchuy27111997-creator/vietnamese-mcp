@@ -1,0 +1,21 @@
+{
+  "name": "@vn-mcp/mcp-vnpay",
+  "version": "0.0.1",
+  "type": "module",
+  "bin": {
+    "mcp-vnpay": "./build/index.js"
+  },
+  "scripts": {
+    "build": "tsdown src/index.ts --format esm --dts",
+    "dev": "tsx src/index.ts",
+    "test": "VNPAY_SANDBOX=true vitest run"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.27.1",
+    "zod": "^3.25.76",
+    "@vn-mcp/shared": "*"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

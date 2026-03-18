@@ -1,0 +1,10 @@
+{
+  "vnp_TxnRef": "VNP_placeholder",
+  "vnp_TransactionNo": "14000001",
+  "vnp_ResponseCode": "00",
+  "vnp_Message": "Giao dich thanh cong.",
+  "vnp_BankCode": "NCB",
+  "vnp_Amount": 15000000,
+  "vnp_PayDate": "20260318120000",
+  "_mock": true
+}
