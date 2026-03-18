@@ -14,7 +14,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Monorepo Foundation** - Shared package + monorepo skeleton that all 5 servers depend on (completed 2026-03-18)
 - [x] **Phase 2: MoMo Server** - First complete server; validates all architectural patterns for replication (completed 2026-03-18)
-- [ ] **Phase 3: ZaloPay + VNPAY Servers** - Two payment servers following proven MoMo patterns
+- [x] **Phase 3: ZaloPay + VNPAY Servers** - Two payment servers following proven MoMo patterns (completed 2026-03-18)
 - [ ] **Phase 4: Zalo OA + ViettelPay Servers** - Complete remaining servers and ship all docs and tests
 
 ## Phase Details
@@ -95,5 +95,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 |-------|----------------|--------|-----------|
 | 1. Monorepo Foundation | 3/3 | Complete   | 2026-03-18 |
 | 2. MoMo Server | 3/3 | Complete   | 2026-03-18 |
-| 3. ZaloPay + VNPAY Servers | 0/2 | Not started | - |
+| 3. ZaloPay + VNPAY Servers | 2/2 | Complete   | 2026-03-18 |
 | 4. Zalo OA + ViettelPay Servers | 0/3 | Not started | - |

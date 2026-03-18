@@ -30,11 +30,11 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### ZaloPay (`mcp-zalopay-vn`)
 
-- [ ] **ZPAY-01**: `zalopay_create_order` — create order with redirect URL
-- [ ] **ZPAY-02**: `zalopay_query_order` — check status by app_trans_id
-- [ ] **ZPAY-03**: `zalopay_refund` — refund by zp_trans_id
-- [ ] **ZPAY-04**: `zalopay_validate_callback` — validate callback MAC
-- [ ] **ZPAY-05**: Sandbox mock mode for all ZaloPay tools
+- [x] **ZPAY-01**: `zalopay_create_order` — create order with redirect URL
+- [x] **ZPAY-02**: `zalopay_query_order` — check status by app_trans_id
+- [x] **ZPAY-03**: `zalopay_refund` — refund by zp_trans_id
+- [x] **ZPAY-04**: `zalopay_validate_callback` — validate callback MAC
+- [x] **ZPAY-05**: Sandbox mock mode for all ZaloPay tools
 
 ### VNPAY (`mcp-vnpay`)
 
@@ -119,11 +119,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 | MOMO-03 | Phase 2 | Complete |
 | MOMO-04 | Phase 2 | Complete |
 | MOMO-05 | Phase 2 | Complete |
-| ZPAY-01 | Phase 3 | Pending |
-| ZPAY-02 | Phase 3 | Pending |
-| ZPAY-03 | Phase 3 | Pending |
-| ZPAY-04 | Phase 3 | Pending |
-| ZPAY-05 | Phase 3 | Pending |
+| ZPAY-01 | Phase 3 | Complete |
+| ZPAY-02 | Phase 3 | Complete |
+| ZPAY-03 | Phase 3 | Complete |
+| ZPAY-04 | Phase 3 | Complete |
+| ZPAY-05 | Phase 3 | Complete |
 | VNPY-01 | Phase 3 | Pending |
 | VNPY-02 | Phase 3 | Pending |
 | VNPY-03 | Phase 3 | Pending |
