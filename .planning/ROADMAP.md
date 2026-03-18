@@ -63,11 +63,11 @@ Plans:
   3. Claude Code can call `vnpay_create_payment_url` and receive a mock signed payment URL
   4. Claude Code can call `vnpay_verify_return` with a crafted return URL and the tool correctly validates or rejects the HMAC-SHA512 signature
   5. All ZaloPay and VNPAY tools pass their vitest integration tests when `SANDBOX_MODE=true`
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 03-01: ZaloPay client + tools (zalopay_create_order, zalopay_query_order, zalopay_refund, zalopay_validate_callback) + tests
-- [ ] 03-02: VNPAY client + tools (vnpay_create_payment_url, vnpay_verify_return, vnpay_query_transaction) + tests
+- [x] 03-01-PLAN.md — ZaloPay client + tools (zalopay_create_order, zalopay_query_order, zalopay_refund, zalopay_validate_callback) + tests
+- [x] 03-02-PLAN.md — VNPAY client + tools (vnpay_create_payment_url, vnpay_verify_return, vnpay_query_transaction) + tests
 
 ### Phase 4: Zalo OA + ViettelPay Servers
 **Goal**: All five servers are working in mock mode with complete documentation and integration tests — the hub is shippable
@@ -79,12 +79,12 @@ Plans:
   3. Claude Code can call `viettel_pay_create_payment` and receive a mock payment initiation response with all assumptions explicitly documented in MOCK_DEVIATIONS.md
   4. Every server package has a CLAUDE.md and a README.md that accurately describe tool names, required environment variables, and mock mode setup
   5. `npm test` from the repo root runs all integration tests across all five servers and they all pass in mock mode
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 04-01: Zalo OA client + tools (zalo_oa_send_message, zalo_oa_get_follower_profile, zalo_oa_list_followers, zalo_oa_refresh_token) + OAuth token refresh + tests
-- [ ] 04-02: ViettelPay client + tools (viettel_pay_create_payment, viettel_pay_query_status, viettel_pay_refund) + MOCK_DEVIATIONS.md + tests
-- [ ] 04-03: CLAUDE.md + README.md per server + root .mcp.json with all 5 servers + full test suite pass
+- [ ] 04-01-PLAN.md — Zalo OA server: package scaffold, credentials, client, 4 tools (send_message, get_follower_profile, list_followers, refresh_token), mock fixtures, integration tests
+- [ ] 04-02-PLAN.md — ViettelPay server: MOCK_DEVIATIONS.md, package scaffold, credentials, signatures, client, 3 tools (create_payment, query_status, refund), mock fixtures, integration tests
+- [ ] 04-03-PLAN.md — CLAUDE.md + README.md for all 5 servers, root README.md, .mcp.json with all 5 entries, full test suite verification
 
 ## Progress
 
