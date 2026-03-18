@@ -96,4 +96,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | 1. Monorepo Foundation | 3/3 | Complete   | 2026-03-18 |
 | 2. MoMo Server | 3/3 | Complete   | 2026-03-18 |
 | 3. ZaloPay + VNPAY Servers | 2/2 | Complete   | 2026-03-18 |
-| 4. Zalo OA + ViettelPay Servers | 0/3 | Not started | - |
+| 4. Zalo OA + ViettelPay Servers | 2/3 | In Progress|  |

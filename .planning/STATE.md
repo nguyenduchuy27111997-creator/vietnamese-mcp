@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Phase 4 context gathered
-last_updated: "2026-03-18T07:47:47.791Z"
+stopped_at: Completed 04-02-PLAN.md (mcp-viettel-pay)
+last_updated: "2026-03-18T08:36:56.368Z"
 last_activity: 2026-03-18 — Plan 02-01 completed
 progress:
   total_phases: 4
   completed_phases: 3
-  total_plans: 8
-  completed_plans: 8
+  total_plans: 11
+  completed_plans: 10
   percent: 31
 ---
 
@@ -57,6 +57,8 @@ Progress: [███░░░░░░░] 31%
 | Phase 02-momo-server P03 | 3 min | 2 tasks | 2 files |
 | Phase 03-zalopay-vnpay-servers P01 | 5 min | 2 tasks | 19 files |
 | Phase 03-zalopay-vnpay-servers P02 | 5 | 2 tasks | 16 files |
+| Phase 04-zalo-oa-viettelpay-servers P01 | 8 | 2 tasks | 17 files |
+| Phase 04-zalo-oa-viettelpay-servers P02 | 3 min | 2 tasks | 17 files |
 
 ## Accumulated Context
 
@@ -88,6 +90,9 @@ Recent decisions affecting current work:
 - [Phase 03-zalopay-vnpay-servers]: buildVnpaySecureHash uses signHmacSha512 from shared (NOT sha256) — architectural proof that shared HMAC primitives handle different signing strategies
 - [Phase 03-zalopay-vnpay-servers]: VNPAY credentials use placeholder VNPAY_TMN_DEMO / VNPAY_HASH_SECRET_DEMO — no public sandbox test values available unlike MoMo
 - [Phase 03-zalopay-vnpay-servers]: verifyReturn accepts both full HTTPS URL and bare query string — handles VNPAY gateway return redirect variations
+- [Phase 04-zalo-oa-viettelpay-servers]: zalo_oa error codes (0, 210, 400) added to shared VN_ERROR_CODES in error-codes.ts
+- [Phase 04-zalo-oa-viettelpay-servers]: zalo_oa_refresh_token zero-params design — credentials read from env only, no user-supplied token params
+- [Phase 04-zalo-oa-viettelpay-servers]: ViettelPay mock uses REST+HMAC-SHA256 for internal consistency — real API is SOAP+RSA per MOCK_DEVIATIONS.md
 
 ### Pending Todos
 
@@ -102,6 +107,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-18T07:47:47.789Z
-Stopped at: Phase 4 context gathered
-Resume file: .planning/phases/04-zalo-oa-viettelpay-servers/04-CONTEXT.md
+Last session: 2026-03-18T08:36:56.366Z
+Stopped at: Completed 04-02-PLAN.md (mcp-viettel-pay)
+Resume file: None

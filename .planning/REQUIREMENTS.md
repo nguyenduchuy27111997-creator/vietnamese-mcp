@@ -45,11 +45,11 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Zalo OA (`mcp-zalo-oa`)
 
-- [ ] **ZLOA-01**: `zalo_oa_send_message` — send text/image/file to follower by userId
-- [ ] **ZLOA-02**: `zalo_oa_get_follower_profile` — get profile info by userId
-- [ ] **ZLOA-03**: `zalo_oa_list_followers` — paginated follower list
-- [ ] **ZLOA-04**: `zalo_oa_refresh_token` — refresh expired access token
-- [ ] **ZLOA-05**: Sandbox mock mode for all Zalo OA tools
+- [x] **ZLOA-01**: `zalo_oa_send_message` — send text/image/file to follower by userId
+- [x] **ZLOA-02**: `zalo_oa_get_follower_profile` — get profile info by userId
+- [x] **ZLOA-03**: `zalo_oa_list_followers` — paginated follower list
+- [x] **ZLOA-04**: `zalo_oa_refresh_token` — refresh expired access token
+- [x] **ZLOA-05**: Sandbox mock mode for all Zalo OA tools
 
 ### ViettelPay (`mcp-viettel-pay`)
 
@@ -128,11 +128,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 | VNPY-02 | Phase 3 | Complete |
 | VNPY-03 | Phase 3 | Complete |
 | VNPY-04 | Phase 3 | Complete |
-| ZLOA-01 | Phase 4 | Pending |
-| ZLOA-02 | Phase 4 | Pending |
-| ZLOA-03 | Phase 4 | Pending |
-| ZLOA-04 | Phase 4 | Pending |
-| ZLOA-05 | Phase 4 | Pending |
+| ZLOA-01 | Phase 4 | Complete |
+| ZLOA-02 | Phase 4 | Complete |
+| ZLOA-03 | Phase 4 | Complete |
+| ZLOA-04 | Phase 4 | Complete |
+| ZLOA-05 | Phase 4 | Complete |
 | VTPAY-01 | Phase 4 | Pending |
 | VTPAY-02 | Phase 4 | Pending |
 | VTPAY-03 | Phase 4 | Pending |
