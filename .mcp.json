@@ -30,6 +30,27 @@
         "VNPAY_HASH_SECRET": "VNPAY_HASH_SECRET_DEMO",
         "VNPAY_ENDPOINT": "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html"
       }
+    },
+    "zalo-oa": {
+      "command": "node",
+      "args": ["./servers/mcp-zalo-oa/build/index.js"],
+      "env": {
+        "ZALO_OA_SANDBOX": "true",
+        "ZALO_OA_APP_ID": "demo_app_id",
+        "ZALO_OA_APP_SECRET": "demo_app_secret",
+        "ZALO_OA_ACCESS_TOKEN": "demo_access_token",
+        "ZALO_OA_REFRESH_TOKEN": "demo_refresh_token"
+      }
+    },
+    "viettel-pay": {
+      "command": "node",
+      "args": ["./servers/mcp-viettel-pay/build/index.js"],
+      "env": {
+        "VIETTELPAY_SANDBOX": "true",
+        "VIETTEL_PAY_PARTNER_CODE": "VTPAY_DEMO",
+        "VIETTEL_PAY_SECRET_KEY": "demo_secret_key_vtpay",
+        "VIETTEL_PAY_ENDPOINT": "https://sandbox.viettelpay.vn/vtpay-api"
+      }
     }
   }
 }
