@@ -1,0 +1,1 @@
+{ "transactionId": "VTP_placeholder", "paymentUrl": "https://sandbox.viettelpay.vn/pay/VTP_placeholder", "amount": 100000, "code": "00", "message": "Success", "_mock": true }
