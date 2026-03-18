@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: completed
-stopped_at: Completed 02-momo-server/02-01-PLAN.md
-last_updated: "2026-03-18T03:44:00Z"
+status: executing
+stopped_at: Completed 02-momo-server/02-02-PLAN.md
+last_updated: "2026-03-18T03:49:33.622Z"
 last_activity: 2026-03-18 — Plan 02-01 completed
 progress:
   total_phases: 4
   completed_phases: 1
-  total_plans: 4
-  completed_plans: 4
+  total_plans: 6
+  completed_plans: 5
   percent: 31
 ---
 
@@ -53,6 +53,7 @@ Progress: [███░░░░░░░] 31%
 | Phase 01-monorepo-foundation P02 | 4 min | 2 tasks | 18 files |
 | Phase 01-monorepo-foundation P03 | 1 min | 2 tasks | 4 files |
 | Phase 02-momo-server P01 | 3 min | 2 tasks | 11 files |
+| Phase 02-momo-server P02 | 2 min | 2 tasks | 6 files |
 
 ## Accumulated Context
 
@@ -75,6 +76,8 @@ Recent decisions affecting current work:
 - [Phase 01-03]: Zod schemas are per-server inline (INFRA-05) — integration test establishes the reference pattern
 - [Phase 02-01]: TypeScript composite project references require packages/shared built with tsc --build before momo-vn tsc --noEmit
 - [Phase 02-01]: momoClient curated responses exclude requestId from queryStatus/refund (not in output spec)
+- [Phase 02-momo-server]: validateIpn uses getMomoCredentials() + buildIpnSignature() directly — no isMockMode check, real HMAC always runs
+- [Phase 02-momo-server]: registerAll(server) called before server.connect(transport) per MCP bootstrap ordering requirement
 
 ### Pending Todos
 
@@ -89,6 +92,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-18T03:44:00Z
-Stopped at: Completed 02-momo-server/02-01-PLAN.md
-Resume file: .planning/phases/02-momo-server/02-02-PLAN.md
+Last session: 2026-03-18T03:49:33.621Z
+Stopped at: Completed 02-momo-server/02-02-PLAN.md
+Resume file: None

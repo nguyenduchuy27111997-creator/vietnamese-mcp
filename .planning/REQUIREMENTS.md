@@ -22,10 +22,10 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### MoMo (`mcp-momo-vn`)
 
-- [ ] **MOMO-01**: `momo_create_payment` — create QR/wallet/ATM payment with payUrl output
-- [ ] **MOMO-02**: `momo_query_status` — check transaction by orderId
-- [ ] **MOMO-03**: `momo_refund` — full and partial refund by transId
-- [ ] **MOMO-04**: `momo_validate_ipn` — validate + parse incoming IPN payload signature
+- [x] **MOMO-01**: `momo_create_payment` — create QR/wallet/ATM payment with payUrl output
+- [x] **MOMO-02**: `momo_query_status` — check transaction by orderId
+- [x] **MOMO-03**: `momo_refund` — full and partial refund by transId
+- [x] **MOMO-04**: `momo_validate_ipn` — validate + parse incoming IPN payload signature
 - [x] **MOMO-05**: Sandbox mock mode for all MoMo tools
 
 ### ZaloPay (`mcp-zalopay-vn`)
@@ -114,10 +114,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | INFRA-08 | Phase 4 | Pending |
 | INFRA-09 | Phase 4 | Pending |
 | INFRA-10 | Phase 1 | Complete |
-| MOMO-01 | Phase 2 | Pending |
-| MOMO-02 | Phase 2 | Pending |
-| MOMO-03 | Phase 2 | Pending |
-| MOMO-04 | Phase 2 | Pending |
+| MOMO-01 | Phase 2 | Complete |
+| MOMO-02 | Phase 2 | Complete |
+| MOMO-03 | Phase 2 | Complete |
+| MOMO-04 | Phase 2 | Complete |
 | MOMO-05 | Phase 2 | Complete |
 | ZPAY-01 | Phase 3 | Pending |
 | ZPAY-02 | Phase 3 | Pending |
