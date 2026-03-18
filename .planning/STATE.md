@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 02-momo-server/02-02-PLAN.md
-last_updated: "2026-03-18T03:49:33.622Z"
+stopped_at: Completed 02-momo-server/02-03-PLAN.md
+last_updated: "2026-03-18T03:54:01.855Z"
 last_activity: 2026-03-18 — Plan 02-01 completed
 progress:
   total_phases: 4
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 6
-  completed_plans: 5
+  completed_plans: 6
   percent: 31
 ---
 
@@ -54,6 +54,7 @@ Progress: [███░░░░░░░] 31%
 | Phase 01-monorepo-foundation P03 | 1 min | 2 tasks | 4 files |
 | Phase 02-momo-server P01 | 3 min | 2 tasks | 11 files |
 | Phase 02-momo-server P02 | 2 min | 2 tasks | 6 files |
+| Phase 02-momo-server P03 | 3 min | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -78,6 +79,8 @@ Recent decisions affecting current work:
 - [Phase 02-01]: momoClient curated responses exclude requestId from queryStatus/refund (not in output spec)
 - [Phase 02-momo-server]: validateIpn uses getMomoCredentials() + buildIpnSignature() directly — no isMockMode check, real HMAC always runs
 - [Phase 02-momo-server]: registerAll(server) called before server.connect(transport) per MCP bootstrap ordering requirement
+- [Phase 02-momo-server]: Integration tests use in-memory MCP transport (no HTTP server) via createTestClient — consistent with shared package pattern
+- [Phase 02-momo-server]: .mcp.json uses MoMo published sandbox credentials — safe to commit, server works out of the box
 
 ### Pending Todos
 
@@ -92,6 +95,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-18T03:49:33.621Z
-Stopped at: Completed 02-momo-server/02-02-PLAN.md
+Last session: 2026-03-18T03:54:01.853Z
+Stopped at: Completed 02-momo-server/02-03-PLAN.md
 Resume file: None
