@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: in-progress
-stopped_at: Completed 01-01-PLAN.md
-last_updated: "2026-03-18T00:57:51Z"
-last_activity: 2026-03-18 — Plan 01-01 monorepo foundation completed
+status: executing
+stopped_at: Completed 01-02-PLAN.md
+last_updated: "2026-03-18T01:07:12.164Z"
+last_activity: 2026-03-18 — Plan 01-01 completed
 progress:
   total_phases: 4
   completed_phases: 0
   total_plans: 3
-  completed_plans: 1
+  completed_plans: 2
   percent: 8
 ---
 
@@ -50,6 +50,7 @@ Progress: [█░░░░░░░░░] 8%
 - Trend: -
 
 *Updated after each plan completion*
+| Phase 01-monorepo-foundation P02 | 4 min | 2 tasks | 18 files |
 
 ## Accumulated Context
 
@@ -65,6 +66,9 @@ Recent decisions affecting current work:
 - [01-01]: ESLint ignores .claude/** and .planning/** — GSD tooling uses CJS require() which violates ESM linting rules
 - [01-01]: tsdown outputs to dist/ (tsdown convention) for packages/shared; tsc outDir (./build) used for direct compilation
 - [01-01]: packages/shared exports map uses source .ts paths for workspace development
+- [Phase 01-02]: HMAC signing functions are node:crypto primitives only — field ordering per-server per PITFALLS.md
+- [Phase 01-02]: translateErrorCode uses raw error_code as lookup key (e.g. '1005', not 'MOMO_1005')
+- [Phase 01-02]: ESLint ignores extended to **/dist/** and **/build/** to cover nested package build output
 
 ### Pending Todos
 
@@ -79,6 +83,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-18T00:57:51Z
-Stopped at: Completed 01-01-PLAN.md
-Resume file: .planning/phases/01-monorepo-foundation/01-01-SUMMARY.md
+Last session: 2026-03-18T01:07:12.161Z
+Stopped at: Completed 01-02-PLAN.md
+Resume file: None

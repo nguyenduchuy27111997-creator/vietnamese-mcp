@@ -10,9 +10,9 @@ Requirements for initial release. Each maps to roadmap phases.
 ### Shared Infrastructure
 
 - [x] **INFRA-01**: Monorepo with npm workspaces and TypeScript project references
-- [ ] **INFRA-02**: Shared HMAC signature generation utility (SHA-256, SHA-512)
-- [ ] **INFRA-03**: Shared mock engine with env-flag switching (`SANDBOX_MODE=true`)
-- [ ] **INFRA-04**: Shared error formatting utility with VN error code translation
+- [x] **INFRA-02**: Shared HMAC signature generation utility (SHA-256, SHA-512)
+- [x] **INFRA-03**: Shared mock engine with env-flag switching (`SANDBOX_MODE=true`)
+- [x] **INFRA-04**: Shared error formatting utility with VN error code translation
 - [ ] **INFRA-05**: Zod validation schemas for all tool inputs and outputs
 - [ ] **INFRA-06**: Consistent tool naming convention (`{service}_{verb}_{noun}`)
 - [ ] **INFRA-07**: CLAUDE.md context file per server
@@ -105,9 +105,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | Requirement | Phase | Status |
 |-------------|-------|--------|
 | INFRA-01 | Phase 1 | Complete |
-| INFRA-02 | Phase 1 | Pending |
-| INFRA-03 | Phase 1 | Pending |
-| INFRA-04 | Phase 1 | Pending |
+| INFRA-02 | Phase 1 | Complete |
+| INFRA-03 | Phase 1 | Complete |
+| INFRA-04 | Phase 1 | Complete |
 | INFRA-05 | Phase 1 | Pending |
 | INFRA-06 | Phase 1 | Pending |
 | INFRA-07 | Phase 4 | Pending |

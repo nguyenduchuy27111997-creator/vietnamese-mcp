@@ -10,6 +10,6 @@ export default [
     },
   },
   {
-    ignores: ['build/**', 'dist/**', 'node_modules/**', '*.config.*', '.claude/**', '.planning/**'],
+    ignores: ['build/**', 'dist/**', '**/dist/**', '**/build/**', 'node_modules/**', '**/node_modules/**', '*.config.*', '.claude/**', '.planning/**'],
   },
 ];
