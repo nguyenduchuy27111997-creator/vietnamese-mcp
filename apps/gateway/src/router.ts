@@ -1,6 +1,7 @@
 import { WebStandardStreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/webStandardStreamableHttp.js';
 import { servers } from './serverRegistry.js';
 import { checkTierAccess } from './tierAccess.js';
+import { wrapWithHeartbeat } from './heartbeat.js';
 
 /**
  * Handle an incoming MCP request for a named server.
@@ -32,5 +33,6 @@ export async function handleMcpRequest(
   });
 
   await server.connect(transport);
-  return transport.handleRequest(req);
+  const response = await transport.handleRequest(req);
+  return wrapWithHeartbeat(response);
 }
