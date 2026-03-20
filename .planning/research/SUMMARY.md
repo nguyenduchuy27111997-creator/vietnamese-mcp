@@ -1,269 +1,288 @@
 # Project Research Summary
 
-**Project:** Vietnamese MCP Hub — MCP servers wrapping Vietnamese fintech and messaging APIs
-**Domain:** MCP server monorepo — payments (MoMo, ZaloPay, VNPAY, ViettelPay) + messaging (Zalo OA)
-**Researched:** 2026-03-16
-**Confidence:** MEDIUM-HIGH (core MCP stack HIGH; ViettelPay and Zalo OA docs MEDIUM/LOW)
+**Project:** VN MCP Hub v1.1 — Hosted MCP Gateway Platform
+**Domain:** Developer SaaS — hosted MCP gateway with dual-currency billing for Vietnamese fintech APIs
+**Researched:** 2026-03-21
+**Confidence:** MEDIUM–HIGH (stack and architecture HIGH from verified SDK source; VN market specifics MEDIUM)
 
 ## Executive Summary
 
-This project is a greenfield MCP server monorepo with no existing competition — zero MCP servers for Vietnamese APIs exist on npm, GitHub, or the MCP Registry as of March 2026. The correct approach is a shared-package monorepo using npm workspaces with five independent STDIO-only MCP servers, each wrapping one Vietnamese API. All servers follow an identical internal structure (McpServer → tools/ → client.ts → shared utilities), with a `packages/shared` library providing HMAC signing, error formatting, mock engine, and test helpers. The entire Phase 1 runs in mock mode because real API accounts are not yet available, making mock fidelity a first-class requirement rather than an afterthought.
+VN MCP Hub v1.1 transforms an existing five-server stdio monorepo into a hosted developer platform: a Cloudflare Workers gateway exposing all MCP servers over Streamable HTTP transport, fronted by API key auth, metered billing, and a marketing site. The recommended approach layers cleanly on the v1.0 foundation — existing tool logic, schemas, and the shared HMAC package are all reused unchanged. The gateway wraps servers at the transport layer only, using `WebStandardStreamableHTTPServerTransport` from the installed MCP SDK (v1.27.1), which explicitly supports Cloudflare Workers. The dependency chain is strict: gateway must exist before auth, auth before metering, metering before billing; npm publishing and docs are independent and can proceed in parallel with billing.
 
-The recommended stack is Node.js 20 LTS + TypeScript 5.8 + `@modelcontextprotocol/sdk@1.27.x` + Zod 3.25+ + axios + vitest + msw. The MCP SDK is Anthropic-maintained and TypeScript-first; Zod is its required peer dependency. Build tooling is tsdown (tsup's maintained successor built on Rolldown). Each server exposes 4–6 curated tools designed around user intent, not raw API surface. The monorepo structure is justified by code sharing across five similar servers, and npm workspaces with TypeScript project references is sufficient at this scale — Turborepo/pnpm is unnecessary overhead.
+The dual-currency billing requirement is the single highest-risk element of the build. Stripe handles international (USD) subscribers via standard webhooks and is well-documented. MoMo billing for Vietnamese developers is significantly more complex: MoMo has no native recurring/subscription API, requires a registered Vietnamese business entity with 3–7 business day KYC approval, and cannot be tested locally without a deployed public URL for IPN callbacks. The practical mitigation is to launch Stripe-only, build a `PaymentProvider` abstraction, submit the MoMo merchant application immediately, and add MoMo billing only after approval arrives — not blocking launch on it.
 
-The two highest risks are mock drift (mocks diverging from real APIs before real accounts arrive, causing silent breakage) and stdout pollution (any `console.log` silently corrupts the stdio JSON-RPC stream, crashing all Claude Code sessions). Both must be prevented at Phase 1 via ESLint rules, CI checks, and mock schema discipline. A secondary risk cluster applies to the Vietnamese payment signature implementations: MoMo, ZaloPay, and VNPAY each use unique HMAC field orderings per endpoint — a shared "generic HMAC helper" will produce wrong signatures. Signature builders must be implemented and verified per gateway, per endpoint, using official test vectors.
+The three risks most likely to derail the project are (1) Cloudflare Workers CPU time limits terminating SSE sessions if the Unbound usage model is not set from day one, (2) Supabase RLS misconfiguration causing silent cross-tenant data leakage that is invisible without explicit two-user test coverage, and (3) Tinybird silently dropping metering events when the ingestion schema does not match the datasource definition. All three are avoidable with upfront configuration and verification checklists — none require architectural changes if caught early.
+
+---
 
 ## Key Findings
 
 ### Recommended Stack
 
-The MCP SDK (`@modelcontextprotocol/sdk@1.27.x`) is the only viable choice — it is Anthropic-maintained, TypeScript-first, and the project already constrains npm as the package manager. All five servers use STDIO transport exclusively; SSE is deprecated per MCP spec 2025-03-26 and StreamableHTTP is only needed when hosting servers remotely. tsdown replaces the now-unmaintained tsup and handles ESM import rewriting automatically. Vitest is preferred over Jest because it is ESM-native with zero extra configuration; msw intercepts HTTP at the network layer (not via monkey-patching) for clean mock isolation.
+The v1.1 stack extends the existing v1.0 foundation (Node.js 20, TypeScript 5.x, MCP SDK 1.27.x, Zod, Vitest) with a Cloudflare Workers gateway package. Hono 4.x is the correct HTTP framework choice — it is purpose-built for edge runtimes, ships `streamSSE()` for SSE in `hono/streaming`, and the MCP SDK's own docstring shows Hono as the reference integration. Supabase handles auth, API key storage (with RLS), and subscription state in a single managed Postgres instance. Tinybird provides ClickHouse-backed usage metering via a simple REST POST endpoint — no SDK required, just `fetch()`. Stripe 16.x (the first version with explicit CF Workers support) handles USD billing. MoMo billing reuses the existing `@vn-mcp/shared` HMAC-SHA256 signing — no new npm package is needed. Mintlify handles developer docs. `@changesets/cli` manages monorepo versioning for npm publishing.
 
 **Core technologies:**
-- Node.js 20 LTS: required by MCP SDK; stable ESM support
-- TypeScript 5.8+: MCP SDK is TypeScript-first; required by tsdown
-- `@modelcontextprotocol/sdk@1.27.x`: Tier 1 Anthropic-maintained SDK; only production-ready option
-- Zod 3.25+: required MCP SDK peer dependency; pin to 3.25+ to avoid Zod v4 API churn
-- axios 1.x: handles HMAC header injection cleanly via interceptors for all five VN APIs
-- tsdown: ESM-aware build tool; successor to tsup (no longer maintained)
-- vitest 2.x + msw 2.x: ESM-native test runner + network-layer mock interception
-- npm workspaces + TypeScript project references: sufficient for 5-package monorepo; no Turborepo needed
-
-**Critical constraint:** Never use `console.log` — all output must go to `stderr`. Never use CommonJS. Never use tsup, SSE transport, fastmcp, jest, or ts-node.
+- **Hono 4.x**: HTTP framework for CF Workers gateway — edge-native, SSE built-in, referenced in MCP SDK docs as the integration example
+- **Wrangler 3.x**: CF Workers CLI — required for local dev parity with D1, KV, and Miniflare; set `usage_model = "unbound"` in `wrangler.toml` from day one
+- **@supabase/supabase-js 2.x**: API key validation, RLS enforcement, subscription state — CF Workers compatible (no Node.js-only deps)
+- **stripe 16.x**: USD billing — first version with explicit CF Workers support; earlier versions break in edge runtime
+- **Tinybird REST API (no SDK)**: Usage metering via `fetch()` POST to `/v0/events` with `ctx.waitUntil()` — ClickHouse-backed, real-time aggregation
+- **@changesets/cli 2.x**: Monorepo version coordination and changelog generation for npm publishing
+- **Mintlify**: Developer docs — MDX + `mint.json`, purpose-built for developer API documentation
+- **@cloudflare/workers-types 4.x**: TypeScript types for CF Workers — requires `moduleResolution: "Bundler"`, do NOT use `@types/node` in the Worker
 
 ### Expected Features
 
-Every server must deliver create payment/order, query transaction status, refund, IPN signature validation, and sandbox mock mode. These are non-negotiable table stakes. Zod validation on all inputs and consistent `{service}_{verb}_{noun}` tool naming are required by project spec. Error code translation (Vietnamese numeric codes → English descriptions) is required for usability — MoMo alone has 40+ result codes.
+The gateway must implement Streamable HTTP (not the deprecated 2024-11-05 HTTP+SSE transport) — a single endpoint handling both POST (tool calls) and GET (SSE stream). Every request requires Bearer API key validation with tier enforcement: Free tier = 2 servers + 1k calls/month, Starter = 5 servers + 10k calls/month. MoMo IPN and Stripe webhook endpoints are required on the same Worker. CORS headers and a `/health` endpoint are table stakes.
 
-**Must have (table stakes):**
-- Payment/order creation with payUrl + QR output — the core action for all payment servers
-- Transaction status query — required for IPN fallback and polling
-- Refund (full + partial) — expected by any serious integration
-- IPN/callback signature validation — validates inbound webhook payloads
-- Sandbox mock mode across all tools — project constraint; no real accounts yet
-- Zod input schemas on all tools — MCP SDK contract; project spec requirement
-- Error code → English message mapping — VN error codes are numeric and undocumented in English
-- Zalo OA: send message, get follower profile, list followers, refresh token
+**Must have (table stakes — v1.1 launch):**
+- StreamableHTTP gateway endpoint per server (`/mcp/:server`) with POST + GET on same route
+- API key validation middleware (Bearer token → SHA-256 hash → Supabase lookup → 60s KV cache)
+- Tier-based server access control (Free gets 2 servers, Starter gets 5)
+- Monthly call limit enforcement via Tinybird count (hard stop at limit with MCP-formatted error)
+- Rate limiting per API key via KV sliding window
+- Stripe subscription (Free and Starter tiers at launch; Pro/Business deferred)
+- MoMo one-time payment for first-month Starter (manual recurring, not automated at launch)
+- Tinybird fire-and-forget usage event per request (`ctx.waitUntil`)
+- npm publish all 5 server packages with `files: ["dist/", "README.md"]` and `bin` entries
+- Mintlify landing page: hero, pricing table (USD + VND), server catalog, signup CTA
+- Mintlify docs: quickstart, per-server tool reference, auth guide, error code reference
+- MCP-formatted error responses (JSON-RPC envelope, not plain HTTP 4xx) for all gateway errors
 
-**Should have (competitive):**
-- Realistic mock responses matching exact real API field names — differentiator (no competitors have VN mocks)
-- QR code output as a discrete field — payment via QR is dominant in Vietnam
-- Idempotent requestId/orderId generation helper — prevents double-charge bugs
-- VNPAY bank list tool — enables AI-guided bank selection before payment
-- Mock mode clearly flagged in responses (`"_mock": true`)
-
-**Defer (v1.x after real accounts obtained):**
-- Zalo ZNS (requires pre-approved templates — external dependency, unknown lead time)
-- Zalo broadcast to all followers
-- MoMo recurring subscription token
-- Live API integration (blocked on developer account approval)
-- Audit log MCP resource
+**Should have (v1.2 — after first 20 paying customers):**
+- Usage dashboard (per-key, per-server, per-day charts via Tinybird)
+- Automated MoMo monthly billing (cron + email + IPN re-initiation)
+- Usage warning emails at 80% and 100% of monthly limit
+- Pro ($49) and Business ($149) Stripe tiers
+- Annual billing discount (Stripe only)
+- VND pricing display on landing page (499k, 1.2M, 3.7M VND)
+- Vietnamese quickstart guide in docs
+- Key expiry dates and rotation reminders
+- `vn-mcp doctor` CLI health check tool
 
 **Defer (v2+):**
-- Banking API servers (Vietcombank, BIDV, VietinBank)
-- E-commerce platform integrations (Shopee, Lazada)
-- npm publishing + MCP Registry listing
-- Multi-tenant credential management
+- Team seats / shared subscriptions
+- Live playground on landing page (requires sandboxed demo gateway)
+- Vietnamese-language PDF invoice generation
+- Banking API servers (Phase 2 per brief)
+- PDPA VN compliance audit + DPA for enterprise customers
+- Per-tool granular access control
+- WebSocket transport (non-standard; MCP spec uses Streamable HTTP)
 
 ### Architecture Approach
 
-The architecture follows a strict monorepo with `packages/shared` as the only internal dependency. Each of the five servers is structurally identical: `index.ts` (McpServer init + stdio transport) → `tools/` (one file per tool group, each exports `register(server)`) → `client.ts` (real or mock HTTP client, transparent to tools) → `schemas.ts` (all Zod schemas centralized per server) → `mock/` (JSON fixtures per tool). The shared package provides error formatting, HMAC/RSA signing factory, mock engine (MOCK_MODE env var + fixture loader), test helpers (in-memory transport wiring), and cross-server types. No API-specific code belongs in shared — only generic utilities.
+The gateway is a new `workers/mcp-gateway/` package added to the monorepo workspace. All five existing server packages are imported for their `registerAll` tool registration functions — the existing `index.ts` files (which contain `StdioServerTransport`) are never imported by the gateway (importing them crashes CF Workers due to Node.js `process.stdin` dependency). Five `McpServer` instances are pre-instantiated at module scope in `serverRegistry.ts`; a new `WebStandardStreamableHTTPServerTransport({ sessionIdGenerator: undefined })` is created per-request in stateless mode. Cloudflare KV caches API key metadata for 60 seconds. Supabase stores users, api_keys (hash only, never plaintext), and subscriptions. Tinybird receives usage events via `ctx.waitUntil(fetch(...))` — non-blocking. Stripe and MoMo webhooks are handled in `workers/webhooks/` routes that upsert the Supabase `subscriptions` table and then update `api_keys.tier`.
 
 **Major components:**
-1. `packages/shared` — HMAC signing, error formatting, mock engine, test helpers, shared types; built first; depended on by all servers
-2. Per-server `client.ts` — transparent real/mock switcher; HMAC auth injected via axios interceptor; only file that changes when moving from mock to real
-3. Per-server `tools/` — one file per tool group; `register(server: McpServer)` pattern; testable without server instance
-4. Per-server `mock/` — JSON fixtures named after tool files; mock engine loads by name
-5. `.mcp.json` (workspace root) — registers all 5 servers for local Claude Code dev sessions
-
-**Build order:** `packages/shared` must be built first (no internal deps). All 5 servers can then be built in parallel. Build MoMo server first to validate patterns, then replicate to remaining 4.
+1. **`workers/mcp-gateway`** — Hono app on CF Workers: auth middleware, rate limit middleware, MCP router, metering emitter, Stripe and MoMo webhook handlers
+2. **Supabase** — Postgres with RLS: `api_keys` (hash, prefix, tier, user_id), `subscriptions` (provider, tier, status, period_end), `webhook_events` (idempotency table for Stripe)
+3. **Cloudflare KV** — 60s auth cache keyed by `apikey:{sha256(rawKey)}`; sliding window rate limit counters per key per minute
+4. **Tinybird** — `api_calls` datasource receiving `{api_key_id, user_id, server, tool, tier, status, latency_ms, timestamp}` events; queried for monthly totals and dashboard charts
+5. **`apps/dashboard`** (optional v1.1 scope) — Astro or Next.js; Supabase Auth for login; API key generation UI
+6. **`docs/` (Mintlify)** — MDX pages: quickstart, per-server reference, pricing, changelog
 
 ### Critical Pitfalls
 
-1. **stdout pollution kills stdio transport** — any `console.log` silently corrupts JSON-RPC and causes cryptic `-32000 connection closed` errors. Prevention: enforce `console.error`-only via ESLint + CI grep check at Phase 1 before any server code is written. The failure mode is invisible and the error message is misleading.
+1. **CF Workers CPU limit kills SSE sessions** — Set `[usage_model] = "unbound"` in `wrangler.toml` before writing any SSE code. The free/bundled plan's 10ms CPU limit terminates SSE handlers immediately in production (works locally — `wrangler dev` does not enforce limits).
 
-2. **Mock drift** — mocks diverge from real API behavior during development; when real accounts arrive, field names, error codes, and HTTP status codes differ. Prevention: treat official API documentation as the only source of truth for mock schemas; add `MOCK_DEVIATIONS.md` per server; design integration tests to toggle from mock to real with a single env var.
+2. **Importing server `index.ts` in the gateway crashes the Worker** — The `index.ts` in each server uses `StdioServerTransport` which imports `process.stdin`. This does not exist in CF Workers runtime and crashes the Worker at module evaluation. Import only `tools/index.ts` (`registerAll` function) from each server.
 
-3. **Signature field order errors** — MoMo, ZaloPay, and VNPAY all use HMAC-SHA256 but with unique per-endpoint field concatenation orders. A transposed field produces silent "invalid signature" errors with no useful debugging information. Prevention: implement a separate `buildSignatureString()` per gateway per endpoint; write unit tests using official test vectors from vendor docs.
+3. **Supabase RLS silent cross-tenant leakage** — Missing `WITH CHECK` clauses on UPDATE policies, or accidentally using the service role key for tenant queries, causes silent data leakage invisible without a two-user isolation test. Run `SELECT * FROM pg_policies` after every migration; write an explicit two-user cross-tenant test before any real data enters the system.
 
-4. **Zalo OA access token expiry** — Zalo OA tokens expire in ~1 hour. Treating them like static API keys causes all Zalo OA tools to fail after the first hour of a Claude Code session. Prevention: implement proactive token refresh every 23 hours; wrap every Zalo OA call in retry-on-401; test token expiry in mock mode.
+4. **Tinybird silently drops events on schema mismatch** — Tinybird returns HTTP 202 even when events fail schema validation; the response body contains `"quarantined_rows": N` when events are dropped. Parse the ingestion response body on every POST; verify with a 100-event test batch before wiring billing to Tinybird counts.
 
-5. **Vague or overlapping tool descriptions** — when all 5 servers are loaded simultaneously, Claude must select the correct server's tool. Vague or duplicated descriptions cause wrong-server calls or unnecessary multi-tool sequences. Prevention: prefix all tool names with gateway identifier (`momo_`, `zalopay_`, etc.); keep descriptions under 200 words focused on "when to call this" not "what the API does"; test with real Claude Code sessions.
+5. **Stripe webhook double-billing without idempotency** — Stripe retries webhooks on any non-2xx response. Store processed `stripe_event_id` values in a Supabase `webhook_events` table and check before processing — implement this before any billing logic is wired.
+
+6. **MoMo merchant approval blocks billing launch** — Real MoMo payment processing requires a registered Vietnamese business with 3–7 day KYC approval. Submit the merchant application at the start of the billing phase. Build a `PaymentProvider` abstraction so Stripe launches without waiting for MoMo approval.
+
+---
 
 ## Implications for Roadmap
 
-Based on research, the architecture dependency graph and pitfall-to-phase mapping suggest the following phase structure:
+Based on research, the dependency chain is strict and well-documented. Phase ordering is dictated by infrastructure dependencies, not feature preference. Six phases are suggested.
 
-### Phase 1: Monorepo Foundation + Shared Package
+### Phase 1: Gateway Foundation
 
-**Rationale:** Architecture research is explicit — `packages/shared` must exist before any server can be built. This phase also establishes the two highest-severity pitfall preventions (stdout cleanliness and mock schema discipline) before any server code exists, when they are cheapest to enforce.
+**Rationale:** Nothing else can be built until the HTTP gateway exists and all five MCP servers are reachable via Streamable HTTP. This is the core infrastructure that every subsequent phase depends on.
 
-**Delivers:**
-- npm workspaces monorepo skeleton with TypeScript 5.8, tsdown, vitest, msw configured
-- `packages/shared` with error formatting, HMAC signing factory, mock engine, test helpers, shared types
-- ESLint rule + CI grep check blocking any `console.log` usage
-- Root `tsconfig.base.json` + TypeScript project references wired
-- `.mcp.json` template for local dev registration
-- CLAUDE.md template and per-server folder structure scaffolded
+**Delivers:** Deployed Cloudflare Workers gateway at `api.vn-mcp.com/mcp/:server` responding correctly to MCP `tools/list` and `tools/call` for all five servers. Health check endpoint. CORS middleware.
 
-**Addresses:** Shared utility features (HMAC signing, error code formatting, mock engine, test harness)
-**Avoids:** stdout pollution (established at foundation), copy-paste server structure divergence, credential exposure in source
+**Addresses:** StreamableHTTP transport endpoint per server, per-server URL routing, CORS headers, health check (FEATURES.md table stakes)
 
-**Research flag:** Standard patterns — skip phase research. MCP SDK docs, npm workspaces, and TypeScript project references are well-documented.
+**Avoids:**
+- Set `[usage_model] = "unbound"` in `wrangler.toml` immediately (Pitfall 1)
+- Import only `tools/index.ts` from each server, never `index.ts` (Pitfall 3 / Anti-Pattern 2 in ARCHITECTURE.md)
+- Use stateless transport (`sessionIdGenerator: undefined`) — no session state in module scope (Anti-Pattern 1 in ARCHITECTURE.md)
+- SSE heartbeat ping every 15 seconds via `streamSSE()` (Pitfall 2)
+- Pre-instantiate all five McpServer instances at module scope, not per-request (Anti-Pattern 5 in ARCHITECTURE.md)
 
----
+**Gate:** `tools/list` returns correct tools for each `:server` param; two concurrent SSE clients receive isolated events; SSE connection stays alive for 60+ seconds idle with heartbeat.
 
-### Phase 2: MoMo Server (Pattern Validation)
+### Phase 2: Auth and API Key Management
 
-**Rationale:** MoMo is the most-documented Vietnamese payment API in English and has the highest confidence in feature research. Building MoMo first validates all architectural patterns (client/mock switcher, tool registration, signature builder, Zod schemas, IPN validation) before replicating to the remaining four servers. Errors caught here are cheap; errors caught at server 5 are expensive.
+**Rationale:** Gateway cannot serve paying customers without authentication. Supabase schema and KV caching must be in place before metering — Tinybird events are keyed by `api_key_id` which requires the auth schema to exist.
 
-**Delivers:**
-- `mcp-momo-vn` with 4 tools: `momo_create_payment`, `momo_query_status`, `momo_refund`, `momo_validate_ipn`
-- HMAC-SHA256 per-endpoint signature builder with unit test against official MoMo test vector
-- Realistic mock fixtures with `"_mock": true` field
-- Integration tests in mock mode with single env-var toggle to real
-- CLAUDE.md for mcp-momo-vn
-- `simulate_payment_result` mock tool for IPN testing
+**Delivers:** API key generation and validation; tier-based server access control (Free = 2 servers, Starter = 5); KV caching (60s TTL) eliminating Supabase round-trip on hot path; rate limiting per key per minute.
 
-**Uses:** `@modelcontextprotocol/sdk`, Zod 3.25+, axios + HMAC interceptor, vitest + msw, `@vn-mcp/shared`
-**Avoids:** Signature field order errors (unit-tested with official vectors), mock drift (fixtures match documented schemas), IPN untestability
+**Addresses:** API key generation, revocation, naming, test vs. live key distinction, multiple keys per account, tier enforcement (FEATURES.md table stakes)
 
-**Research flag:** Needs phase research before implementation — confirm MoMo sandbox URL, test vector format, and IPN payload schema from developers.momo.vn.
+**Uses:** `@supabase/supabase-js` service role for gateway validation; Cloudflare KV namespace; Supabase migrations for `api_keys` and `subscriptions` tables with full RLS
 
----
+**Avoids:**
+- Enable RLS on every table; write two-user isolation test before real data enters (Pitfall 4)
+- Store only SHA-256 hash in `api_keys`, never raw key (Anti-Pattern 3 in ARCHITECTURE.md)
+- Use `anon` key for tenant operations; service role only for admin writes (Technical Debt table in PITFALLS.md)
+- KV cache from day one — not as an optimization added later (Pitfall 5)
 
-### Phase 3: ZaloPay Server
+**Gate:** Authenticated requests pass; invalid/revoked keys return 401; revoked key rejected within 60 seconds; two-user RLS isolation test passes; `pg_policies` audit shows all tables covered.
 
-**Rationale:** ZaloPay uses RSA-SHA256 MAC (different from MoMo's HMAC-SHA256) and has a two-key scheme (key1/key2). Building it immediately after MoMo tests the shared http-client factory's ability to handle multiple auth schemes. The pattern from Phase 2 is proven but the auth mechanism is meaningfully different.
+### Phase 3: Usage Metering
 
-**Delivers:**
-- `mcp-zalopay-vn` with 4 tools: `zalopay_create_order`, `zalopay_query_order`, `zalopay_refund`, `zalopay_validate_callback`
-- Per-endpoint signature builders for ZaloPay's varied field orderings
-- RSA signing support added to `packages/shared/http-client`
-- Mock fixtures + integration tests
+**Rationale:** Must exist before billing. Tinybird counts drive monthly limit enforcement and quota checks. Billing tier enforcement is meaningless without usage data to enforce against.
 
-**Avoids:** ZaloPay's app_id string-vs-integer gotcha, per-endpoint field order errors, shared signature utility anti-pattern
+**Delivers:** Tinybird `api_calls` datasource with strict schema; fire-and-forget event emission per request via `ctx.waitUntil`; monthly call count enforcement (hard stop at tier limit with MCP-formatted error response); Tinybird Pipe for per-key, per-server daily aggregates.
 
-**Research flag:** Needs phase research — ZaloPay's endpoint-specific MAC field ordering must be verified from beta-docs.zalopay.vn before implementation.
+**Addresses:** Count API calls per billing period, enforce monthly call limits, usage visible in dashboard (FEATURES.md table stakes)
 
----
+**Avoids:**
+- Define Tinybird datasource schema strictly before writing ingestion code; run 100-event ingestion test before wiring billing (Pitfall 10)
+- Parse Tinybird ingestion response body for `quarantined_rows`; alert if non-zero (Integration Gotchas in PITFALLS.md)
+- Never block MCP response on metering — always `ctx.waitUntil()`, never `await fetch(tinybird)` (Anti-Pattern 4 in ARCHITECTURE.md)
+- Use a `server_id` column in Tinybird datasource from day one — do not use a single datasource without server attribution (Technical Debt table in PITFALLS.md)
 
-### Phase 4: VNPAY Server
+**Gate:** Tool calls appear in Tinybird within 5 seconds; 1000-event test shows exactly 1000 ingested (zero quarantined); monthly limit correctly blocks requests at threshold with MCP-formatted error.
 
-**Rationale:** VNPAY uses HMAC-SHA512 over an alphabetically sorted URL-encoded query string — a third distinct signing pattern. The lehuygiang28/vnpay community library can accelerate implementation but must be treated as MEDIUM confidence (not official VNPAY docs). VNPAY also has the amount-multiplication gotcha (the library multiplies by 100 internally — passing pre-multiplied amounts double-charges).
+### Phase 4: Billing (Stripe + MoMo)
 
-**Delivers:**
-- `mcp-vnpay` with 4 tools: `vnpay_create_payment_url`, `vnpay_verify_return`, `vnpay_get_bank_list`, `vnpay_query_transaction`
-- HMAC-SHA512 sorted-querystring signing verified against VNPAY sandbox
-- Amount unit test: 100,000 VND input → correct wire format (no double-multiplication)
-- Mock fixtures + integration tests
+**Rationale:** Revenue-generating phase. Stripe launches first because it requires no external approval. MoMo merchant application must be submitted at the START of this phase — the 3–7 day approval is a hard external dependency.
 
-**Avoids:** Amount multiplication double-charge, sandbox/production credential mixing, IPN URL misconfiguration (must register in merchant portal AND in code)
+**Delivers:** Stripe products for Free + Starter tiers; Checkout Session flow; webhook handler with idempotency table; Stripe-triggered tier upgrades in Supabase. MoMo one-time payment link for VND Starter (manual first-month). MoMo IPN handler with HMAC verification. `PaymentProvider` abstraction interface for future MoMo automation.
 
-**Research flag:** Needs phase research — verify official VNPAY API docs vs. community library behavior for payment URL construction and IPN verification.
+**Addresses:** Stripe subscription, MoMo first-month payment, tier enforcement linked to payment status, free tier without payment info, invoice generation (FEATURES.md table stakes)
 
----
+**Uses:** `stripe 16.x` (CF Workers compatible), existing `@vn-mcp/shared` HMAC signing for MoMo IPN verification, Supabase `webhook_events` table for Stripe idempotency
 
-### Phase 5: Zalo OA Server
+**Avoids:**
+- Read raw body with `await c.req.text()` BEFORE any JSON parsing for Stripe webhook signature verification (Pitfall 6)
+- Implement Stripe idempotency table (`webhook_events`) before any business logic — not as an afterthought (Pitfall 6)
+- Deploy MoMo IPN endpoint BEFORE any sandbox payment testing — Workers subdomain is immediately public (Pitfall 7)
+- Submit MoMo merchant account application at milestone start, not end (Pitfall 11)
+- Build `PaymentProvider` abstraction so Stripe can launch without MoMo approval (Pitfall 11)
+- Store Stripe customer ID with an index in Supabase — avoid full table scans on webhook events (Integration Gotchas in PITFALLS.md)
 
-**Rationale:** Zalo OA is architecturally distinct from the payment servers — it uses OAuth 2.0 token-based auth (short-lived tokens, not static HMAC keys) and has a follower-relationship constraint (can only message users who follow the OA). The token refresh requirement is a first-class feature, not an afterthought, and must be implemented before any other Zalo OA tool.
+**Gate:** Stripe `checkout.session.completed` webhook upgrades api_key tier in Supabase; Stripe CLI event replay of same event does not double-credit; MoMo IPN with tampered HMAC signature rejected with 400; MoMo merchant application submitted and approval timeline confirmed.
 
-**Delivers:**
-- `mcp-zalo-oa` with 4 tools: `zalo_oa_send_message`, `zalo_oa_get_follower_profile`, `zalo_oa_list_followers`, `zalo_oa_refresh_token`
-- Proactive token refresh every 23 hours + retry-on-401 pattern
-- Integration test simulating 401 response and verifying successful retry
-- Mock mode simulates token expiry after N calls
-- CLAUDE.md documenting follower opt-in constraint and OAuth setup
+**Research flag:** MoMo Business subscription payment API (receiving subscription fees) has different IPN field ordering than the standard payment gateway IPN already implemented. Verify against current MoMo Business developer docs before implementing `webhooks/momo.ts`. Consider running `/gsd:research-phase` for this phase.
 
-**Avoids:** Access token expiry causing session failures, browser-based OAuth (not possible in CLI/MCP context), mass broadcast getting OA suspended
+### Phase 5: npm Publishing
 
-**Research flag:** Needs phase research — Zalo OA developer docs are primarily Vietnamese; verify access_token TTL, refresh_token behavior, and follower-message constraints from developers.zalo.me.
+**Rationale:** Independent of gateway and billing. Can run in parallel with Phase 4. Enables the free/self-hosted tier and drives organic npm and GitHub discovery — the primary distribution channel before paid tier is adopted.
 
----
+**Delivers:** All five server packages published as `@vn-mcp/momo`, `@vn-mcp/zalopay`, `@vn-mcp/vnpay`, `@vn-mcp/zalo-oa`, `@vn-mcp/viettel-pay`. GitHub Actions publish workflow on release tag. MCP Registry submissions.
 
-### Phase 6: ViettelPay Server
+**Addresses:** npm publish, README quickstart, semantic versioning, `bin` entries for `npx` execution, provenance attestation (FEATURES.md table stakes)
 
-**Rationale:** ViettelPay is deferred last because its public API documentation is sparse and LOW confidence. Building it last means the monorepo patterns are fully proven, making it easier to adapt when the actual API behavior is discovered. Mock schemas will need adjustment when real docs become available.
+**Avoids:**
+- Add `"files": ["dist/", "README.md"]` to every server's `package.json` before first publish (Pitfall 9)
+- Run `npm pack --dry-run` and verify no `src/`, `workspace:*` references, or env files in output (Pitfall 8 + Pitfall 9)
+- Bundle `@vn-mcp/shared` inline via `tsdown` OR publish it as a versioned public package first — never use `workspace:*` as a runtime dep in published packages (Pitfall 8)
+- Use `npm token create --type=automation` for CI publish (not a regular user token) (Integration Gotchas in PITFALLS.md)
 
-**Delivers:**
-- `mcp-viettel-pay` with 3 tools: `viettel_pay_create_payment`, `viettel_pay_query_status`, `viettel_pay_refund`
-- `MOCK_DEVIATIONS.md` explicitly documenting assumed vs. confirmed API behavior
-- Mock fixtures flagged as LOW confidence in comments
+**Gate:** `npm install @vn-mcp/momo` from outside the monorepo works; `.mcp.json` stdio usage completes end-to-end tool call; published package size <50KB per server; no `src/` files in published tarball.
 
-**Avoids:** Guessing ViettelPay field behavior — document all assumptions explicitly; use Vietnamese-language docs rather than inferred behavior
+### Phase 6: Landing Page and Developer Docs
 
-**Research flag:** Requires phase research — ViettelPay has no verified English API documentation. Phase research must surface Vietnamese-language docs or confirm integration partner requirements before implementation begins.
+**Rationale:** Independent of gateway but depends on Phase 5 (npm install path documented first). Can begin in parallel with Phases 4 and 5 — docs can document the stdio/npm path before hosted gateway is complete.
+
+**Delivers:** Mintlify docs site at `docs.vn-mcp.com`: quickstart, per-server tool reference, auth guide, error code reference, pricing + limits reference, changelog. Marketing landing page: hero with code snippet demo, pricing table (USD + VND), server catalog, signup CTA linking to Supabase Auth. `.mcp.json` snippet generator per server. SEO basics (title, OG image, Vietnamese keywords).
+
+**Addresses:** Landing page with hero, pricing table, server catalog, signup CTA, SEO; Mintlify quickstart, per-server docs, auth guide, error reference, changelog (FEATURES.md table stakes)
+
+**Avoids:** Live playground in hero (defer to v1.2); OpenAPI docs (MCP is not REST; they mislead); video in hero (stales immediately; animated GIF is faster to produce); blog as primary channel (defer to integration guides in docs that serve dual purpose)
+
+**Gate:** New user can sign up, receive an API key, add it to `.mcp.json`, and complete a tool call within 5 minutes on a fresh machine.
 
 ---
 
 ### Phase Ordering Rationale
 
-- Shared package first because all 5 servers have a hard build dependency on it — this is not a choice but a constraint from the architecture dependency graph.
-- MoMo second because it is the highest-confidence API and will validate all patterns at lowest risk.
-- ZaloPay and VNPAY third and fourth because they share the payment pattern with MoMo but have meaningfully different auth schemes — each teaches something new about the shared http-client factory.
-- Zalo OA fifth because its OAuth token model requires different infrastructure (refresh loops, retry logic) that is cleanly separable from payment auth concerns.
-- ViettelPay last because of LOW documentation confidence — building it last maximizes available documentation time and minimizes rework risk.
-- Within each server phase, HMAC/signature implementation and testing must precede tool integration testing — wrong signatures produce silent mock-passing failures.
+- **Phase 1 before Phase 2:** Cannot authenticate requests to an endpoint that does not exist.
+- **Phase 2 before Phase 3:** Tinybird events are keyed by `api_key_id`; the key schema must exist before metering is meaningful.
+- **Phase 3 before Phase 4:** Billing enforcement (monthly quota checks, tier limits) queries Tinybird counts. Building billing without usage data to enforce against produces non-functional tier limits.
+- **Phases 5 and 6 are parallel-eligible:** npm publishing and docs have zero dependency on the gateway, billing, or metering infrastructure. They can begin after Phase 1 scaffolding gives the monorepo structure to publish from.
+- **MoMo merchant application submitted at Phase 4 start** — the 3–7 day KYC approval is an external hard dependency. Submitting it at milestone start (not end) is required to avoid blocking launch.
 
 ### Research Flags
 
-Phases likely needing `/gsd:research-phase` during planning:
-- **Phase 2 (MoMo):** Confirm sandbox URL, IPN payload schema, and HMAC test vectors from developers.momo.vn before implementation
-- **Phase 3 (ZaloPay):** ZaloPay endpoint-specific MAC field ordering must be verified from beta-docs.zalopay.vn; RSA signing scheme needs key format confirmed
-- **Phase 4 (VNPAY):** Cross-reference community library behavior against official VNPAY docs; confirm IPN URL registration procedure
-- **Phase 5 (Zalo OA):** Vietnamese-language docs must be read carefully; access_token TTL and refresh_token rotation behavior must be verified empirically
-- **Phase 6 (ViettelPay):** Requires exploratory research phase before any implementation — API shape is effectively unknown
+Phases needing deeper research during planning:
+
+- **Phase 4 (Billing — MoMo):** The existing codebase implements the MoMo payment gateway API (generating payment links). The billing use case uses MoMo Business merchant APIs to receive subscription payments — different flow, different IPN field ordering, separate merchant account type. English documentation is sparse. Run `/gsd:research-phase` before Phase 4 planning.
+- **Phase 1 (Gateway — SSE keepalive):** Verify whether `streamSSE()` in Hono 4.x automatically sends heartbeat pings or requires explicit implementation. CF Workers SSE connection timeout behavior varies by edge location — validate in `wrangler dev` and in production during Phase 1.
 
 Phases with standard patterns (skip research-phase):
-- **Phase 1 (Monorepo Foundation):** npm workspaces, TypeScript project references, MCP SDK setup, and ESLint configuration are all well-documented with multiple authoritative sources; no novel patterns required
+
+- **Phase 2 (Auth + API Keys):** Supabase RLS and API key hashing are well-documented, established patterns (used by Resend, Upstash, Supabase's own guides). Verification checklist from PITFALLS.md is sufficient.
+- **Phase 3 (Metering):** Tinybird Events API HTTP POST is straightforward. The main risk is schema validation — a verification checklist (100-event test, quarantined_rows check) is sufficient, not additional research.
+- **Phase 5 (npm Publishing):** Standard npm workspace publishing with `tsdown` bundling. Pitfalls are known and mechanical to prevent (`npm pack --dry-run` checklist).
+- **Phase 6 (Docs):** Mintlify setup is well-documented. Content is ported from existing CLAUDE.md files. No novel technical integration.
+
+---
 
 ## Confidence Assessment
 
 | Area | Confidence | Notes |
 |------|------------|-------|
-| Stack | HIGH | MCP SDK, Node.js, TypeScript, Zod, vitest, msw all verified from official sources. Single-source concern on tsdown (tsup successor); consistent with tsup repo inactivity. Zod 3.25+ vs. v4 resolved in current SDK. |
-| Features | MEDIUM | MoMo, ZaloPay, VNPAY features HIGH confidence from official docs. Zalo OA MEDIUM (Vietnamese docs parsed via search). ViettelPay LOW — no public English API docs found; mock schemas may require significant revision when real docs surface. |
-| Architecture | HIGH | Verified against MCP SDK official GitHub, production monorepo reference (maurocanuto/mcp-server-starter), and MCP TypeScript SDK architecture overview. Patterns are consistent across sources. |
-| Pitfalls | HIGH (MCP) / MEDIUM (VN API) | MCP pitfalls (stdout pollution, tool description quality, error handling) verified across multiple authoritative sources. VN API-specific pitfalls (signature ordering, VNPAY amount multiplication, Zalo OA token expiry) verified from official vendor docs where available; ViettelPay pitfalls inferred. |
+| Stack | HIGH | Core stack (Hono + CF Workers + MCP SDK) verified against actual `node_modules`; `WebStandardStreamableHTTPServerTransport` confirmed CF Workers-compatible from SDK docstring. Package versions (Stripe 16.x, Supabase 2.x, Hono 4.x) should be confirmed on npmjs.com before writing `package.json`. |
+| Features | MEDIUM–HIGH | SaaS feature patterns (API key management, metered billing, developer docs) are well-established from Stripe, Resend, Upstash comparisons. VN market specifics (MoMo penetration ~70%, Facebook Group distribution) are MEDIUM confidence from training data. |
+| Architecture | HIGH | MCP SDK source inspected directly in `node_modules`; CF Workers constraints verified against official docs; build order confirmed by dependency analysis. Stateless transport pattern explicitly recommended in MCP SDK docstring. |
+| Pitfalls | HIGH (CF Workers, Stripe, Supabase, npm) / MEDIUM (MoMo Business IPN, Tinybird quarantine) | CF Workers CPU limits, Stripe webhook idempotency, Supabase RLS `WITH CHECK`, and npm `workspace:*` pitfalls sourced from official documentation. MoMo Business merchant API specifics and Tinybird quarantined_rows behavior are from community docs — MEDIUM confidence. |
 
-**Overall confidence:** MEDIUM-HIGH
+**Overall confidence:** MEDIUM–HIGH
 
 ### Gaps to Address
 
-- **ViettelPay API shape:** No public English documentation exists. Before Phase 6 implementation, either locate Vietnamese-language official docs or contact ViettelPay merchant support for integration specifications. Mock schemas are placeholders — real field names, auth scheme (HMAC vs. RSA), and error codes are unconfirmed.
-- **Zalo OA access_token TTL:** Research cites "~1 hour" from a third-party workflow template (n8n). Verify the exact TTL and refresh_token expiry from official Zalo developer docs before Phase 5 implementation.
-- **ZaloPay RSA vs. HMAC:** ARCHITECTURE.md lists ZaloPay as "RSA-SHA256 MAC" while PITFALLS.md lists it as "HMAC_SHA256 mac key2." This discrepancy must be resolved during Phase 3 research — ZaloPay may use HMAC for payment flow and RSA for other operations.
-- **Real sandbox testing:** All five Vietnamese payment sandboxes have reduced feature sets compared to production. Budget explicit time post-Phase 1 for obtaining sandbox credentials and discovering sandbox-only behavioral differences before v1 launch.
-- **MoMo sandbox device requirement:** Sandbox callbacks reportedly require a physical device to simulate PIN entry — this may affect IPN testing strategy and must be clarified during Phase 2.
+- **MoMo Business merchant API field ordering:** The existing implementation handles the MoMo payment gateway IPN (for verifying payment from the MoMo app). The billing use case — where VN MCP Hub is the merchant receiving subscription payments — uses a different API path. The HMAC field order in subscription IPNs may differ from payment IPNs. Verify before Phase 4 implementation.
+
+- **Package version confirmation:** Hono 4.x, `@supabase/ssr` 0.5.x+, and Stripe 16.x should be verified on npmjs.com against current published major versions before the gateway `package.json` is written. Research confidence is MEDIUM for exact version numbers.
+
+- **MoMo merchant account approval timeline:** The 3–7 business day estimate may be optimistic if additional business documentation is required. If approval extends beyond the Phase 4 window, MoMo billing slips to v1.2. The `PaymentProvider` abstraction mitigates but does not eliminate this risk.
+
+- **Mintlify free tier custom domain support:** If the Mintlify free tier does not support custom subdomains (`docs.vn-mcp.com`), a paid Mintlify plan should be included in the infrastructure cost estimate. Verify before Phase 6 planning.
+
+- **VND pricing update policy:** The landing page VND pricing (499k, 1.2M, 3.7M) is an approximation at a fixed exchange rate. A decision is needed on update frequency and whether to label it as "approximately" to avoid confusion when the exchange rate fluctuates.
+
+- **CF Workers Unbound plan cost:** The Workers Paid plan ($5/month) is required for the Unbound usage model. Confirmed but should be included in the infrastructure budget for planning.
+
+---
 
 ## Sources
 
 ### Primary (HIGH confidence)
 
-- [modelcontextprotocol/typescript-sdk GitHub](https://github.com/modelcontextprotocol/typescript-sdk) — SDK version 1.27.1, Zod peer dep, Node16 module config
-- [MCP Transports spec 2025-03-26](https://modelcontextprotocol.io/specification/2025-03-26/basic/transports) — SSE deprecated, StreamableHTTP modern standard
-- [MCP Inspector](https://modelcontextprotocol.io/docs/tools/inspector) — official dev/debug tool
-- [MoMo Developer Docs v3](https://developers.momo.vn/v3) — create payment, refund, query, signature/HMAC
-- [ZaloPay Developer Docs](https://docs.zalopay.vn) — create order, query, refund, callback MAC
-- [MSW official](https://mswjs.io/) — msw@2.x Node.js support
-- [MCP Security Survival Guide](https://towardsdatascience.com/the-mcp-security-survival-guide-best-practices-pitfalls-and-real-world-lessons/) — stdout pollution, credential handling
-- [15 Best Practices for MCP Servers](https://thenewstack.io/15-best-practices-for-building-mcp-servers-in-production/) — error handling, tool design
-- [MCP Best Practices (philschmid.de)](https://www.philschmid.de/mcp-best-practices) — tool description quality
+- MCP SDK `node_modules/@modelcontextprotocol/sdk@1.27.1` inspected directly — `WebStandardStreamableHTTPServerTransport` docstring confirms CF Workers support and shows Hono as the reference integration
+- MCP Transports specification (`modelcontextprotocol.io/docs/concepts/transports`, fetched 2026-03-21) — Streamable HTTP current standard; HTTP+SSE 2024-11-05 deprecated
+- Existing monorepo codebase — `package.json` confirmed versions, `packages/shared/src/` HMAC utilities, `servers/*/tools/index.ts` `registerAll` export pattern confirmed present
+- Cloudflare Workers Platform Limits (official) — CPU time limits, Bundled vs Unbound usage model behavior
+- Supabase Row Level Security documentation (official) — `USING`, `WITH CHECK`, service role bypass behavior
+- Stripe Webhook Verification documentation (official) — raw body requirement, timestamp window, retry behavior
+- npm Workspaces documentation (official) — `workspace:*` protocol publish behavior, `files` field semantics
 
 ### Secondary (MEDIUM confidence)
 
-- [lehuygiang28/vnpay library](https://github.com/lehuygiang28/vnpay) — VNPAY buildPaymentUrl, verifyReturnUrl, getBankList
-- [Zalo For Developers](https://developers.zalo.me) — OA messaging, follower management, ZNS (Vietnamese-language docs)
-- [maurocanuto/mcp-server-starter](https://github.com/maurocanuto/mcp-server-starter) — real-world monorepo reference (tsdown + MCP SDK + Zod)
-- [Building MCP Servers the Right Way — Mauro Canuto](https://maurocanuto.medium.com/building-mcp-servers-the-right-way-a-production-ready-guide-in-typescript-8ceb9eae9c7f) — production monorepo patterns
-- [ZaloPay Secure Data Transmission](https://beta-docs.zalopay.vn/docs/developer-tools/security/secure-data-transmission/) — MAC key scheme
-- [Automated Zalo OA Token Management — n8n](https://n8n.io/workflows/8675-automated-zalo-oa-token-management-with-oauth-and-webhook-integration/) — token refresh pattern
-- [Zod v4 MCP compatibility issue](https://github.com/modelcontextprotocol/typescript-sdk/issues/925) — breaking change history
+- Hono 4.x documentation (training data) — `streamSSE()`, `@hono/zod-validator`, JWT middleware patterns
+- Tinybird Events API (training data + community) — NDJSON POST format, `quarantined_rows` field in ingestion response
+- MoMo IPN callback documentation (official MoMo developer docs, Vietnamese) — HMAC-SHA256 field order for standard payment IPN
+- MoMo merchant account onboarding documentation — KYC requirements, business entity requirement, approval timeline estimate
+- Mintlify documentation (training data) — `mint.json` configuration, MDX page structure, `npx mintlify dev` local preview
+- `@changesets/cli` (training data + ecosystem knowledge) — npm workspace compatibility, version bump workflow
 
-### Tertiary (LOW confidence)
+### Tertiary (LOW confidence — validate before implementation)
 
-- ViettelPay: No official public API docs found; only third-party PSP integration guides — field names, auth scheme, and error codes are unconfirmed and require validation before Phase 6
+- MoMo Business subscription API specifics — limited English documentation; verify IPN field ordering in subscription payment context (vs. standard payment IPN) against current MoMo API docs before Phase 4
+- VN market MoMo wallet penetration (~70% of smartphone users) — training data approximation, not verified from current market data
+- Exact VND pricing equivalents — exchange rate approximation at time of research
 
 ---
-*Research completed: 2026-03-16*
+
+*Research completed: 2026-03-21*
 *Ready for roadmap: yes*
