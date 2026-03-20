@@ -40,7 +40,12 @@
   3. Two concurrent SSE clients on different server routes receive isolated events with no cross-connection bleed
   4. An SSE connection stays alive for 60+ seconds idle (heartbeat active; no CF Workers CPU timeout)
   5. Browser-based MCP clients can connect — OPTIONS preflight returns correct CORS headers
-**Plans**: TBD
+**Plans**: 3 plans
+
+Plans:
+- [ ] 05-01-PLAN.md — Workspace scaffolding: `apps/*` workspace glob, server `./tools` subpath exports, gateway package with wrangler.toml (`usage_model = "unbound"`), tsconfig, vitest config, and Wave 0 test stubs
+- [ ] 05-02-PLAN.md — Gateway core: serverRegistry.ts (5 McpServer instances at module scope), tierAccess.ts (MCP error -32001), router.ts (stateless transport per request), cors.ts, index.ts (Hono app), concrete GATE-01–GATE-05 tests
+- [ ] 05-03-PLAN.md — SSE heartbeat: heartbeat.ts (`wrapWithHeartbeat` via TransformStream), router.ts update, human smoke test via wrangler dev
 
 ### Phase 6: Auth & API Keys
 **Goal**: Users can sign up, generate API keys scoped to their tier, and the gateway authenticates every request against those keys with KV caching and RLS isolation
@@ -107,7 +112,7 @@
 | 2. MoMo Server | v1.0 | 3/3 | Complete | 2026-03-18 |
 | 3. ZaloPay + VNPAY Servers | v1.0 | 2/2 | Complete | 2026-03-18 |
 | 4. Zalo OA + ViettelPay Servers | v1.0 | 3/3 | Complete | 2026-03-18 |
-| 5. Gateway | v1.1 | 0/? | Not started | - |
+| 5. Gateway | v1.1 | 0/3 | Not started | - |
 | 6. Auth & API Keys | v1.1 | 0/? | Not started | - |
 | 7. Metering | v1.1 | 0/? | Not started | - |
 | 8. Billing | v1.1 | 0/? | Not started | - |
