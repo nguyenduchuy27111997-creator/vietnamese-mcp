@@ -69,6 +69,7 @@ export const zaloOaClient = {
     throw new Error('Real API not implemented — set ZALO_OA_SANDBOX=true');
   },
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async listFollowers(args: { offset?: number; count?: number }): Promise<{
     followers: Array<{
       user_id: string;
