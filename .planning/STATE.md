@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Platform Launch
-status: in-progress
-stopped_at: "Completed 05-01-PLAN.md"
-last_updated: "2026-03-21T02:40:00.000Z"
+status: executing
+stopped_at: Completed 05-02-PLAN.md
+last_updated: "2026-03-20T19:46:59.122Z"
 last_activity: 2026-03-21 — Phase 5 Plan 01 complete; gateway workspace scaffolded
 progress:
   total_phases: 6
   completed_phases: 0
-  total_plans: 0
-  completed_plans: 1
+  total_plans: 3
+  completed_plans: 2
   percent: 5
 ---
 
@@ -26,11 +26,11 @@ See: .planning/PROJECT.md (updated 2026-03-21)
 ## Current Position
 
 Phase: 5 of 10 (Phase 5: Gateway)
-Plan: 1 complete — 05-01 Gateway Workspace Scaffold
-Status: In progress (Plan 02 next)
-Last activity: 2026-03-21 — Phase 5 Plan 01 complete; gateway workspace scaffolded
+Plan: 2 complete — 05-02 Gateway Core Implementation
+Status: In progress (Plan 03 next)
+Last activity: 2026-03-21 — Phase 5 Plan 02 complete; full gateway wired (serverRegistry, tierAccess, router, cors, index) with 15 passing GATE tests
 
-Progress: [█░░░░░░░░░] 5%
+Progress: [███████░░░] 67%
 
 ## Performance Metrics
 
@@ -38,7 +38,7 @@ Progress: [█░░░░░░░░░] 5%
 - Total plans completed: 11
 - Average duration: ~3.4 min/plan
 
-**v1.1 plans:** 1 completed (of TBD total)
+**v1.1 plans:** 2 completed (of TBD total)
 
 ## Accumulated Context
 
@@ -54,6 +54,8 @@ All v1.0 decisions logged in PROJECT.md Key Decisions table.
 Pending v1.1 decisions (to be made during planning):
 - Billing: Launch Stripe-only first; submit MoMo merchant application at Phase 8 start
 - Auth: Import only `tools/index.ts` from servers — never `index.ts` (crashes CF Workers)
+- [Phase 05-gateway]: Test pattern: create fresh McpServer per test — module-scope servers can only be connected to one transport at a time
+- [Phase 05-gateway]: CORS function origin: Hono cors does exact string matching on arrays; use function form for localhost:* wildcard
 
 ### Pending Todos
 
@@ -68,6 +70,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-21T02:40:00.000Z
-Stopped at: Completed 05-01-PLAN.md
-Resume file: .planning/phases/05-gateway/05-02-PLAN.md
+Last session: 2026-03-20T19:46:59.121Z
+Stopped at: Completed 05-02-PLAN.md
+Resume file: .planning/phases/05-gateway/05-03-PLAN.md
