@@ -9,11 +9,11 @@ Requirements for platform launch. Each maps to roadmap phases.
 
 ### Gateway
 
-- [ ] **GATE-01**: All 5 MCP servers accessible via Streamable HTTP transport on a single Cloudflare Workers endpoint
-- [ ] **GATE-02**: MCP `tools/list` returns all 18 tools from all 5 servers
-- [ ] **GATE-03**: Tool calls execute correctly through the gateway and return mock responses
-- [ ] **GATE-04**: CORS headers allow browser-based MCP clients
-- [ ] **GATE-05**: Per-connection McpServer instantiation (stateless, no shared state)
+- [x] **GATE-01**: All 5 MCP servers accessible via Streamable HTTP transport on a single Cloudflare Workers endpoint
+- [x] **GATE-02**: MCP `tools/list` returns all 18 tools from all 5 servers
+- [x] **GATE-03**: Tool calls execute correctly through the gateway and return mock responses
+- [x] **GATE-04**: CORS headers allow browser-based MCP clients
+- [x] **GATE-05**: Per-connection McpServer instantiation (stateless, no shared state)
 
 ### Auth & API Keys
 
@@ -93,11 +93,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| GATE-01 | Phase 5 | Pending |
-| GATE-02 | Phase 5 | Pending |
-| GATE-03 | Phase 5 | Pending |
-| GATE-04 | Phase 5 | Pending |
-| GATE-05 | Phase 5 | Pending |
+| GATE-01 | Phase 5 | Complete |
+| GATE-02 | Phase 5 | Complete |
+| GATE-03 | Phase 5 | Complete |
+| GATE-04 | Phase 5 | Complete |
+| GATE-05 | Phase 5 | Complete |
 | AUTH-01 | Phase 6 | Pending |
 | AUTH-02 | Phase 6 | Pending |
 | AUTH-03 | Phase 6 | Pending |

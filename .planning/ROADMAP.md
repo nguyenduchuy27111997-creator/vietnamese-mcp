@@ -112,7 +112,7 @@ Plans:
 | 2. MoMo Server | v1.0 | 3/3 | Complete | 2026-03-18 |
 | 3. ZaloPay + VNPAY Servers | v1.0 | 2/2 | Complete | 2026-03-18 |
 | 4. Zalo OA + ViettelPay Servers | v1.0 | 3/3 | Complete | 2026-03-18 |
-| 5. Gateway | v1.1 | 0/3 | Not started | - |
+| 5. Gateway | 1/3 | In Progress|  | - |
 | 6. Auth & API Keys | v1.1 | 0/? | Not started | - |
 | 7. Metering | v1.1 | 0/? | Not started | - |
 | 8. Billing | v1.1 | 0/? | Not started | - |

@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Platform Launch
-status: planning
-stopped_at: Phase 5 context gathered
-last_updated: "2026-03-20T19:21:59.747Z"
-last_activity: 2026-03-21 — Roadmap created, 28 requirements mapped across Phases 5-10
+status: in-progress
+stopped_at: "Completed 05-01-PLAN.md"
+last_updated: "2026-03-21T02:40:00.000Z"
+last_activity: 2026-03-21 — Phase 5 Plan 01 complete; gateway workspace scaffolded
 progress:
   total_phases: 6
   completed_phases: 0
   total_plans: 0
-  completed_plans: 0
-  percent: 0
+  completed_plans: 1
+  percent: 5
 ---
 
 # Project State
@@ -26,11 +26,11 @@ See: .planning/PROJECT.md (updated 2026-03-21)
 ## Current Position
 
 Phase: 5 of 10 (Phase 5: Gateway)
-Plan: — (not started)
-Status: Ready to plan
-Last activity: 2026-03-21 — Roadmap created, 28 requirements mapped across Phases 5-10
+Plan: 1 complete — 05-01 Gateway Workspace Scaffold
+Status: In progress (Plan 02 next)
+Last activity: 2026-03-21 — Phase 5 Plan 01 complete; gateway workspace scaffolded
 
-Progress: [░░░░░░░░░░] 0%
+Progress: [█░░░░░░░░░] 5%
 
 ## Performance Metrics
 
@@ -38,7 +38,7 @@ Progress: [░░░░░░░░░░] 0%
 - Total plans completed: 11
 - Average duration: ~3.4 min/plan
 
-**v1.1 plans:** TBD (counted after phase planning)
+**v1.1 plans:** 1 completed (of TBD total)
 
 ## Accumulated Context
 
@@ -46,9 +46,13 @@ Progress: [░░░░░░░░░░] 0%
 
 All v1.0 decisions logged in PROJECT.md Key Decisions table.
 
+**Phase 5 decisions (made in 05-01):**
+- Gateway: Set `usage_model = "unbound"` in wrangler.toml — avoids 10ms CF Workers CPU limit killing SSE sessions
+- Gateway: tsconfig uses `@cloudflare/workers-types` only, no `@types/node` — prevents Request/Response/ReadableStream type conflicts
+- Gateway: Server exports reference `./src/tools/index.ts` (source) not build artifact — monorepo imports work without build step
+
 Pending v1.1 decisions (to be made during planning):
 - Billing: Launch Stripe-only first; submit MoMo merchant application at Phase 8 start
-- Gateway: Set `usage_model = "unbound"` in wrangler.toml from day one (Pitfall 1)
 - Auth: Import only `tools/index.ts` from servers — never `index.ts` (crashes CF Workers)
 
 ### Pending Todos
@@ -64,6 +68,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-20T19:21:59.746Z
-Stopped at: Phase 5 context gathered
-Resume file: .planning/phases/05-gateway/05-CONTEXT.md
+Last session: 2026-03-21T02:40:00.000Z
+Stopped at: Completed 05-01-PLAN.md
+Resume file: .planning/phases/05-gateway/05-02-PLAN.md
