@@ -30,23 +30,35 @@ Developer installs an MCP server, adds it to `.mcp.json`, and immediately has Cl
 
 ### Active
 
-- [ ] Real API integration when developer accounts are approved
-- [ ] npm publishing to registry
-- [ ] QR code generation as discrete tool output
-- [ ] VNPAY bank list tool (`vnpay_get_bank_list`)
-- [ ] Zalo OA ZNS transactional notifications
-- [ ] VietQR generation (NAPAS standard)
+- [ ] Hosted MCP servers on Cloudflare Workers (SSE/streamable HTTP transport)
+- [ ] Auth + API key management via Supabase (user accounts, per-tier keys)
+- [ ] Usage tracking via Tinybird (API calls per key)
+- [ ] Billing via Stripe (USD) + MoMo (VND) with 4 pricing tiers
+- [ ] npm publishing for all 5 servers (free/self-hosted option)
+- [ ] Landing page + developer docs (Mintlify or similar)
+- [ ] 4 pricing tiers: Free / Starter $19 / Pro $49 / Business $149
 
 ### Out of Scope
 
-- API gateway / Cloudflare Workers — not needed until paid tier
-- Auth & API key management (Supabase) — platform concern
-- Usage tracking / billing / Stripe — future platform feature
-- Landing page / docs site — marketing phase
-- Banking API servers (VCB, TCB, MB) — after v1.0 validation
-- E-commerce integrations (Shopee, Tiki) — after v1.0 validation
-- Browser-based OAuth flow — MCP servers run in CLI context
+- Real API integration — still mock-first until developer accounts approved
+- Banking API servers (VCB, TCB, MB) — Phase 2 Growth per brief
+- E-commerce integrations (Shopee, Tiki) — Phase 2 Growth per brief
+- QR code generation / VietQR / VNPAY bank list — feature additions deferred to v1.2+
+- Zalo OA ZNS transactional notifications — feature addition deferred
+- White-label licensing — after platform validated with direct users
+- Browser-based OAuth flow — MCP servers use API key auth via gateway
 - 1:1 REST endpoint mapping — MCP best practice is 4-6 curated tools per server
+
+## Current Milestone: v1.1 Platform Launch
+
+**Goal:** Transform local-only MCP servers into a hosted SaaS platform with metered billing, so developers can connect via SSE transport without running anything locally.
+
+**Target features:**
+- Hosted MCP gateway on Cloudflare Workers (all 5 servers accessible via HTTP)
+- User auth + API key management (Supabase)
+- Usage metering + billing (Tinybird + Stripe + MoMo)
+- npm publish all 5 servers for self-hosted free tier
+- Landing page with pricing, docs, and signup
 
 ## Context
 
@@ -68,6 +80,11 @@ Each server proves a distinct auth/signing scheme works with shared primitives:
 - **API Access**: Mock-first — no real API sandbox accounts available yet
 - **MCP Protocol**: MCP spec v1.0 (stable as of Q1/2026)
 - **Package Manager**: npm — target audience expects npm install workflow
+- **Gateway**: Hono.js on Cloudflare Workers — edge runtime, $0 cost to 100k req/day
+- **Auth**: Supabase Auth + Postgres — built-in API key management, RLS security
+- **Metering**: Tinybird (ClickHouse) — real-time API call analytics
+- **Billing**: Stripe (USD international) + MoMo (VND domestic)
+- **Budget**: < $500 for first 3 months hosting
 
 ## Key Decisions
 
@@ -82,5 +99,10 @@ Each server proves a distinct auth/signing scheme works with shared primitives:
 | URL-parameter signing for VNPAY | Alphabetical sort + HMAC-SHA512 — distinct from POST body signing | ✓ Good — shared signHmacSha512 handles both strategies |
 | Zero-params refreshToken for Zalo OA | Credentials from env only, no user-supplied tokens | ✓ Good — simplest secure approach |
 
+| Hosted MCP via Cloudflare Workers | Edge runtime, $0 to 100k req/day, SSE transport for MCP | — Pending |
+| Supabase for auth + API keys | Built-in RLS, API key management, free tier sufficient | — Pending |
+| Stripe + MoMo dual billing | USD international + VND domestic covers all target users | — Pending |
+| Tinybird for usage metering | Real-time ClickHouse analytics, free 1k events/day | — Pending |
+
 ---
-*Last updated: 2026-03-21 after v1.0 milestone*
+*Last updated: 2026-03-21 after v1.1 milestone start*
