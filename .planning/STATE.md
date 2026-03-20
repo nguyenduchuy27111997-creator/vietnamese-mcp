@@ -3,9 +3,9 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Platform Launch
 status: executing
-stopped_at: Completed 05-02-PLAN.md
-last_updated: "2026-03-20T19:46:59.122Z"
-last_activity: 2026-03-21 — Phase 5 Plan 01 complete; gateway workspace scaffolded
+stopped_at: Checkpoint Task 2 — 05-03 human-verify (wrangler dev smoke test)
+last_updated: "2026-03-21T02:49:30Z"
+last_activity: 2026-03-21 — Phase 5 Plan 03 Task 1 complete; SSE heartbeat wrapper implemented
 progress:
   total_phases: 6
   completed_phases: 0
@@ -26,9 +26,9 @@ See: .planning/PROJECT.md (updated 2026-03-21)
 ## Current Position
 
 Phase: 5 of 10 (Phase 5: Gateway)
-Plan: 2 complete — 05-02 Gateway Core Implementation
-Status: In progress (Plan 03 next)
-Last activity: 2026-03-21 — Phase 5 Plan 02 complete; full gateway wired (serverRegistry, tierAccess, router, cors, index) with 15 passing GATE tests
+Plan: 3 in progress — 05-03 SSE Heartbeat + Smoke Test (Task 1 complete, awaiting checkpoint Task 2)
+Status: Awaiting human verification (wrangler dev smoke test)
+Last activity: 2026-03-21 — Phase 5 Plan 03 Task 1 complete; heartbeat.ts created, router.ts updated, 132 tests pass
 
 Progress: [███████░░░] 67%
 
@@ -70,6 +70,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-20T19:46:59.121Z
-Stopped at: Completed 05-02-PLAN.md
-Resume file: .planning/phases/05-gateway/05-03-PLAN.md
+Last session: 2026-03-21T02:49:30Z
+Stopped at: Checkpoint Task 2 — 05-03 human-verify
+Resume file: .planning/phases/05-gateway/05-03-PLAN.md (Task 2 checkpoint: await "approved" signal)
