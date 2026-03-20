@@ -5,6 +5,10 @@
   "bin": {
     "mcp-zalopay-vn": "./build/index.js"
   },
+  "exports": {
+    ".": "./src/index.ts",
+    "./tools": "./src/tools/index.ts"
+  },
   "scripts": {
     "build": "tsdown src/index.ts --format esm --dts",
     "dev": "tsx src/index.ts",
