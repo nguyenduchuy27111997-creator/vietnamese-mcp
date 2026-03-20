@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Platform Launch
-status: executing
-stopped_at: Checkpoint Task 2 — 05-03 human-verify (wrangler dev smoke test)
-last_updated: "2026-03-21T02:49:30Z"
-last_activity: 2026-03-21 — Phase 5 Plan 03 Task 1 complete; SSE heartbeat wrapper implemented
+status: verifying
+stopped_at: Completed 05-03 SSE Heartbeat + Smoke Test
+last_updated: "2026-03-20T19:55:38.154Z"
+last_activity: 2026-03-21 — Phase 5 Plan 03 Task 1 complete; heartbeat.ts created, router.ts updated, 132 tests pass
 progress:
   total_phases: 6
-  completed_phases: 0
+  completed_phases: 1
   total_plans: 3
-  completed_plans: 2
-  percent: 5
+  completed_plans: 3
+  percent: 100
 ---
 
 # Project State
@@ -25,12 +25,12 @@ See: .planning/PROJECT.md (updated 2026-03-21)
 
 ## Current Position
 
-Phase: 5 of 10 (Phase 5: Gateway)
-Plan: 3 in progress — 05-03 SSE Heartbeat + Smoke Test (Task 1 complete, awaiting checkpoint Task 2)
-Status: Awaiting human verification (wrangler dev smoke test)
-Last activity: 2026-03-21 — Phase 5 Plan 03 Task 1 complete; heartbeat.ts created, router.ts updated, 132 tests pass
+Phase: 5 of 10 (Phase 5: Gateway) — COMPLETE
+Plan: 3 of 3 complete — 05-03 SSE Heartbeat + Smoke Test (human smoke test approved)
+Status: Phase 5 complete; ready to plan Phase 6
+Last activity: 2026-03-21 — Phase 5 Plan 03 complete; SSE heartbeat verified end-to-end via wrangler dev
 
-Progress: [███████░░░] 67%
+Progress: [██████████] 100%
 
 ## Performance Metrics
 
@@ -38,7 +38,7 @@ Progress: [███████░░░] 67%
 - Total plans completed: 11
 - Average duration: ~3.4 min/plan
 
-**v1.1 plans:** 2 completed (of TBD total)
+**v1.1 plans:** 3 completed (of TBD total)
 
 ## Accumulated Context
 
@@ -56,6 +56,8 @@ Pending v1.1 decisions (to be made during planning):
 - Auth: Import only `tools/index.ts` from servers — never `index.ts` (crashes CF Workers)
 - [Phase 05-gateway]: Test pattern: create fresh McpServer per test — module-scope servers can only be connected to one transport at a time
 - [Phase 05-gateway]: CORS function origin: Hono cors does exact string matching on arrays; use function form for localhost:* wildcard
+- [Phase 05-gateway]: SSE heartbeat: ': ping\n\n' every 30s via TransformStream, 5-min idle timeout, non-SSE responses returned unchanged
+- [Phase 05-gateway]: Wrap-not-replace pattern: heartbeat preserves all original response headers, only body stream replaced
 
 ### Pending Todos
 
@@ -70,6 +72,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-21T02:49:30Z
-Stopped at: Checkpoint Task 2 — 05-03 human-verify
-Resume file: .planning/phases/05-gateway/05-03-PLAN.md (Task 2 checkpoint: await "approved" signal)
+Last session: 2026-03-20T19:55:29.568Z
+Stopped at: Completed 05-03 SSE Heartbeat + Smoke Test
+Resume file: None
