@@ -57,7 +57,13 @@ Plans:
   3. A revoked API key is rejected at the gateway within 60 seconds (KV cache TTL)
   4. A Free-tier key cannot access more than 2 servers — requests to restricted servers return a tier error
   5. Two separate user accounts cannot read or write each other's API keys or subscription data (RLS isolation)
-**Plans**: TBD
+**Plans**: 4 plans
+
+Plans:
+- [ ] 06-01-PLAN.md — Foundation: GatewayEnv types (types.ts), api_keys SQL migration with RLS + indexes, Wave 0 failing test stubs
+- [ ] 06-02-PLAN.md — Auth core: authMiddleware (Bearer → SHA-256 → KV → Supabase), getServiceRoleClient factory, index.ts wiring (replace const tier stub), wrangler.toml KV binding
+- [ ] 06-03-PLAN.md — Key CRUD: /keys router (GET list, POST create sk_test_ key, DELETE revoke + KV evict), mounted in index.ts
+- [ ] 06-04-PLAN.md — Dashboard: React + Vite SPA on CF Pages with Supabase Auth sign up/login, key list, create, revoke; human smoke test gate
 
 ### Phase 7: Metering
 **Goal**: Every tool call emitted through the gateway is logged to Tinybird non-blocking, monthly call counts are queryable per key, and the gateway hard-stops requests when a tier limit is reached
@@ -113,7 +119,7 @@ Plans:
 | 3. ZaloPay + VNPAY Servers | v1.0 | 2/2 | Complete | 2026-03-18 |
 | 4. Zalo OA + ViettelPay Servers | v1.0 | 3/3 | Complete | 2026-03-18 |
 | 5. Gateway | 3/3 | Complete   | 2026-03-20 | - |
-| 6. Auth & API Keys | v1.1 | 0/? | Not started | - |
+| 6. Auth & API Keys | v1.1 | 0/4 | Not started | - |
 | 7. Metering | v1.1 | 0/? | Not started | - |
 | 8. Billing | v1.1 | 0/? | Not started | - |
 | 9. npm Publishing | v1.1 | 0/? | Not started | - |
