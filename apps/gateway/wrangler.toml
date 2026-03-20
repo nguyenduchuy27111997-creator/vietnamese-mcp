@@ -1,0 +1,12 @@
+name = "vn-mcp-gateway"
+main = "src/index.ts"
+compatibility_date = "2025-01-01"
+usage_model = "unbound"
+
+[vars]
+MOCK_MODE = "true"
+
+# KV namespace placeholder — required by Phase 6 auth
+# [[kv_namespaces]]
+# binding = "KV"
+# id = "PLACEHOLDER"

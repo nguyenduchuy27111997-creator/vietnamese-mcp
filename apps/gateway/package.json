@@ -1,0 +1,26 @@
+{
+  "name": "@vn-mcp/gateway",
+  "version": "0.0.1",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.27.1",
+    "@vn-mcp/mcp-momo-vn": "*",
+    "@vn-mcp/mcp-zalopay-vn": "*",
+    "@vn-mcp/mcp-vnpay": "*",
+    "@vn-mcp/mcp-zalo-oa": "*",
+    "@vn-mcp/mcp-viettel-pay": "*",
+    "@vn-mcp/shared": "*",
+    "hono": "^4.0.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.0.0",
+    "wrangler": "^3.0.0",
+    "vitest": "^3.2.4"
+  }
+}
