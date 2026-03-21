@@ -26,9 +26,9 @@ See: .planning/PROJECT.md (updated 2026-03-21)
 ## Current Position
 
 Phase: 6 of 10 (Phase 6: Auth + API Keys) — IN PROGRESS
-Plan: 1 of 4 complete — 06-01 Foundation Types, Migration, Test Stubs
-Status: Phase 6 Plan 1 complete; ready for Plan 2 (auth middleware)
-Last activity: 2026-03-22 — Phase 6 Plan 01 complete; types.ts, SQL migration, Wave 0 stubs created
+Plan: 2 of 4 complete — 06-02 Auth Middleware Core
+Status: Phase 6 Plan 2 complete; ready for Plan 3 (key management CRUD routes)
+Last activity: 2026-03-22 — Phase 6 Plan 02 complete; authMiddleware, sha256hex, KV cache, Supabase fallback, index.ts wired
 
 Progress: [██████████] 100%
 
@@ -56,6 +56,11 @@ All v1.0 decisions logged in PROJECT.md Key Decisions table.
 - Auth: RLS policy uses FOR ALL with both USING and WITH CHECK — SELECT-only USING would allow cross-tenant inserts
 - Auth: Wave 0 test stubs use it.todo() — zero hard import errors, npm test green
 
+**Phase 6 decisions (made in 06-02):**
+- Auth: sha256hex exported from auth.ts (not private) — enables deterministic test assertions and future key generation reuse
+- Auth: KV get uses { type: 'json' } option — matches CF Workers typed get API for AuthContext deserialization
+- Auth: /keys/* middleware applied in index.ts now (keysRouter not yet mounted) — ready for Plan 03 without another index.ts edit
+
 Pending v1.1 decisions (to be made during planning):
 - Billing: Launch Stripe-only first; submit MoMo merchant application at Phase 8 start
 - Auth: Import only `tools/index.ts` from servers — never `index.ts` (crashes CF Workers)
@@ -77,6 +82,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-22T03:24:00.000Z
-Stopped at: Completed 06-01-PLAN.md
-Resume file: .planning/phases/06-auth-api-keys/06-02-PLAN.md
+Last session: 2026-03-22T03:28:00.000Z
+Stopped at: Completed 06-02-PLAN.md
+Resume file: .planning/phases/06-auth-api-keys/06-03-PLAN.md
