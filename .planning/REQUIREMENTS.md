@@ -17,11 +17,11 @@ Requirements for platform launch. Each maps to roadmap phases.
 
 ### Auth & API Keys
 
-- [ ] **AUTH-01**: User can sign up and log in via Supabase Auth (email/password)
+- [x] **AUTH-01**: User can sign up and log in via Supabase Auth (email/password)
 - [ ] **AUTH-02**: User can generate API keys from dashboard
-- [ ] **AUTH-03**: Gateway authenticates requests via API key in header
-- [ ] **AUTH-04**: API keys are scoped to pricing tiers (free/starter/pro/business)
-- [ ] **AUTH-05**: RLS isolation — users cannot access other users' keys or data
+- [x] **AUTH-03**: Gateway authenticates requests via API key in header
+- [x] **AUTH-04**: API keys are scoped to pricing tiers (free/starter/pro/business)
+- [x] **AUTH-05**: RLS isolation — users cannot access other users' keys or data
 
 ### Metering
 
@@ -98,11 +98,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 | GATE-03 | Phase 5 | Complete |
 | GATE-04 | Phase 5 | Complete |
 | GATE-05 | Phase 5 | Complete |
-| AUTH-01 | Phase 6 | Pending |
+| AUTH-01 | Phase 6 | Complete |
 | AUTH-02 | Phase 6 | Pending |
-| AUTH-03 | Phase 6 | Pending |
-| AUTH-04 | Phase 6 | Pending |
-| AUTH-05 | Phase 6 | Pending |
+| AUTH-03 | Phase 6 | Complete |
+| AUTH-04 | Phase 6 | Complete |
+| AUTH-05 | Phase 6 | Complete |
 | METR-01 | Phase 7 | Pending |
 | METR-02 | Phase 7 | Pending |
 | METR-03 | Phase 7 | Pending |

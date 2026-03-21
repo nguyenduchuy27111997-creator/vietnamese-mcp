@@ -119,7 +119,7 @@ Plans:
 | 3. ZaloPay + VNPAY Servers | v1.0 | 2/2 | Complete | 2026-03-18 |
 | 4. Zalo OA + ViettelPay Servers | v1.0 | 3/3 | Complete | 2026-03-18 |
 | 5. Gateway | 3/3 | Complete   | 2026-03-20 | - |
-| 6. Auth & API Keys | v1.1 | 0/4 | Not started | - |
+| 6. Auth & API Keys | 1/4 | In Progress|  | - |
 | 7. Metering | v1.1 | 0/? | Not started | - |
 | 8. Billing | v1.1 | 0/? | Not started | - |
 | 9. npm Publishing | v1.1 | 0/? | Not started | - |

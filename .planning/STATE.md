@@ -25,10 +25,10 @@ See: .planning/PROJECT.md (updated 2026-03-21)
 
 ## Current Position
 
-Phase: 5 of 10 (Phase 5: Gateway) — COMPLETE
-Plan: 3 of 3 complete — 05-03 SSE Heartbeat + Smoke Test (human smoke test approved)
-Status: Phase 5 complete; ready to plan Phase 6
-Last activity: 2026-03-21 — Phase 5 Plan 03 complete; SSE heartbeat verified end-to-end via wrangler dev
+Phase: 6 of 10 (Phase 6: Auth + API Keys) — IN PROGRESS
+Plan: 1 of 4 complete — 06-01 Foundation Types, Migration, Test Stubs
+Status: Phase 6 Plan 1 complete; ready for Plan 2 (auth middleware)
+Last activity: 2026-03-22 — Phase 6 Plan 01 complete; types.ts, SQL migration, Wave 0 stubs created
 
 Progress: [██████████] 100%
 
@@ -38,7 +38,7 @@ Progress: [██████████] 100%
 - Total plans completed: 11
 - Average duration: ~3.4 min/plan
 
-**v1.1 plans:** 3 completed (of TBD total)
+**v1.1 plans:** 4 completed (of TBD total)
 
 ## Accumulated Context
 
@@ -50,6 +50,11 @@ All v1.0 decisions logged in PROJECT.md Key Decisions table.
 - Gateway: Set `usage_model = "unbound"` in wrangler.toml — avoids 10ms CF Workers CPU limit killing SSE sessions
 - Gateway: tsconfig uses `@cloudflare/workers-types` only, no `@types/node` — prevents Request/Response/ReadableStream type conflicts
 - Gateway: Server exports reference `./src/tools/index.ts` (source) not build artifact — monorepo imports work without build step
+
+**Phase 6 decisions (made in 06-01):**
+- Auth: AuthContext defined in types.ts (not middleware/auth.ts) to prevent circular import
+- Auth: RLS policy uses FOR ALL with both USING and WITH CHECK — SELECT-only USING would allow cross-tenant inserts
+- Auth: Wave 0 test stubs use it.todo() — zero hard import errors, npm test green
 
 Pending v1.1 decisions (to be made during planning):
 - Billing: Launch Stripe-only first; submit MoMo merchant application at Phase 8 start
@@ -72,6 +77,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-20T20:26:25.549Z
-Stopped at: Phase 6 context gathered
-Resume file: .planning/phases/06-auth-api-keys/06-CONTEXT.md
+Last session: 2026-03-22T03:24:00.000Z
+Stopped at: Completed 06-01-PLAN.md
+Resume file: .planning/phases/06-auth-api-keys/06-02-PLAN.md
