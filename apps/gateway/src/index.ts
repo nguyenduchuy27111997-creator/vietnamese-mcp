@@ -3,6 +3,7 @@ import { cors } from 'hono/cors';
 import { handleMcpRequest } from './router.js';
 import { corsConfig } from './cors.js';
 import { authMiddleware } from './middleware/auth.js';
+import { keysRouter } from './routes/keys.js';
 import type { GatewayEnv } from './types.js';
 
 const app = new Hono<GatewayEnv>();
@@ -14,6 +15,7 @@ app.use('/mcp/*', cors(corsConfig));
 // /health is intentionally excluded — no auth required for health checks
 app.use('/mcp/*', authMiddleware);
 app.use('/keys/*', authMiddleware);
+app.route('/keys', keysRouter);
 
 // MCP routes — tier comes from auth context (not hardcoded 'free' stub)
 app.all('/mcp/:server', async (c) => {
