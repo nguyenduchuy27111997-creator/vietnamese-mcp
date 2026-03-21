@@ -4,7 +4,7 @@ milestone: v1.1
 milestone_name: Platform Launch
 status: planning
 stopped_at: Phase 6 context gathered
-last_updated: "2026-03-20T20:26:25.551Z"
+last_updated: "2026-03-22T03:32:00.000Z"
 last_activity: 2026-03-21 — Phase 5 Plan 03 complete; SSE heartbeat verified end-to-end via wrangler dev
 progress:
   total_phases: 6
@@ -26,9 +26,9 @@ See: .planning/PROJECT.md (updated 2026-03-21)
 ## Current Position
 
 Phase: 6 of 10 (Phase 6: Auth + API Keys) — IN PROGRESS
-Plan: 2 of 4 complete — 06-02 Auth Middleware Core
-Status: Phase 6 Plan 2 complete; ready for Plan 3 (key management CRUD routes)
-Last activity: 2026-03-22 — Phase 6 Plan 02 complete; authMiddleware, sha256hex, KV cache, Supabase fallback, index.ts wired
+Plan: 3 of 4 complete — 06-03 Keys CRUD Routes
+Status: Phase 6 Plan 3 complete; ready for Plan 4 (final integration/validation)
+Last activity: 2026-03-22 — Phase 6 Plan 03 complete; keysRouter (POST/DELETE/GET), 2-key limit, KV immediate eviction, cross-user guard, mounted in index.ts
 
 Progress: [██████████] 100%
 
@@ -61,6 +61,11 @@ All v1.0 decisions logged in PROJECT.md Key Decisions table.
 - Auth: KV get uses { type: 'json' } option — matches CF Workers typed get API for AuthContext deserialization
 - Auth: /keys/* middleware applied in index.ts now (keysRouter not yet mounted) — ready for Plan 03 without another index.ts edit
 
+**Phase 6 decisions (made in 06-03):**
+- Keys: DELETE /keys/:id returns 404 (not 403) for cross-user attempts — consistent with RFC 7231 not leaking resource existence
+- Keys: key_prefix = rawKey.slice(0, 16) = 'sk_test_' + first 8 hex chars — enough entropy to identify key without exposing full value
+- Keys: KV delete called synchronously before returning 200 — ensures revoked key is immediately invalid, not after 60s TTL
+
 Pending v1.1 decisions (to be made during planning):
 - Billing: Launch Stripe-only first; submit MoMo merchant application at Phase 8 start
 - Auth: Import only `tools/index.ts` from servers — never `index.ts` (crashes CF Workers)
@@ -82,6 +87,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-22T03:28:00.000Z
-Stopped at: Completed 06-02-PLAN.md
-Resume file: .planning/phases/06-auth-api-keys/06-03-PLAN.md
+Last session: 2026-03-22T03:32:00.000Z
+Stopped at: Completed 06-03-PLAN.md
+Resume file: .planning/phases/06-auth-api-keys/06-04-PLAN.md

@@ -18,7 +18,7 @@ Requirements for platform launch. Each maps to roadmap phases.
 ### Auth & API Keys
 
 - [x] **AUTH-01**: User can sign up and log in via Supabase Auth (email/password)
-- [ ] **AUTH-02**: User can generate API keys from dashboard
+- [x] **AUTH-02**: User can generate API keys from dashboard
 - [x] **AUTH-03**: Gateway authenticates requests via API key in header
 - [x] **AUTH-04**: API keys are scoped to pricing tiers (free/starter/pro/business)
 - [x] **AUTH-05**: RLS isolation — users cannot access other users' keys or data
@@ -99,7 +99,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | GATE-04 | Phase 5 | Complete |
 | GATE-05 | Phase 5 | Complete |
 | AUTH-01 | Phase 6 | Complete |
-| AUTH-02 | Phase 6 | Pending |
+| AUTH-02 | Phase 6 | Complete |
 | AUTH-03 | Phase 6 | Complete |
 | AUTH-04 | Phase 6 | Complete |
 | AUTH-05 | Phase 6 | Complete |
