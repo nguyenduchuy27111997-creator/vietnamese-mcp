@@ -10,17 +10,18 @@
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.27.1",
+    "@supabase/supabase-js": "^2.99.3",
     "@vn-mcp/mcp-momo-vn": "*",
-    "@vn-mcp/mcp-zalopay-vn": "*",
+    "@vn-mcp/mcp-viettel-pay": "*",
     "@vn-mcp/mcp-vnpay": "*",
     "@vn-mcp/mcp-zalo-oa": "*",
-    "@vn-mcp/mcp-viettel-pay": "*",
+    "@vn-mcp/mcp-zalopay-vn": "*",
     "@vn-mcp/shared": "*",
     "hono": "^4.0.0"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.0.0",
-    "wrangler": "^3.0.0",
-    "vitest": "^3.2.4"
+    "vitest": "^3.2.4",
+    "wrangler": "^3.0.0"
   }
 }
