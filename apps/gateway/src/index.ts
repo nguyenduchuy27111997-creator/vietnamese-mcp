@@ -2,23 +2,27 @@ import { Hono } from 'hono';
 import { cors } from 'hono/cors';
 import { handleMcpRequest } from './router.js';
 import { corsConfig } from './cors.js';
-
-type GatewayEnv = { Bindings: Record<string, string> };
+import { authMiddleware } from './middleware/auth.js';
+import type { GatewayEnv } from './types.js';
 
 const app = new Hono<GatewayEnv>();
 
-// Apply CORS to all /mcp/* routes — handles OPTIONS preflight automatically
+// CORS on MCP routes — handles OPTIONS preflight automatically
 app.use('/mcp/*', cors(corsConfig));
 
-// All 5 server routes: GET (SSE stream), POST (JSON-RPC), DELETE (session close)
+// Auth middleware on all MCP and key management routes
+// /health is intentionally excluded — no auth required for health checks
+app.use('/mcp/*', authMiddleware);
+app.use('/keys/*', authMiddleware);
+
+// MCP routes — tier comes from auth context (not hardcoded 'free' stub)
 app.all('/mcp/:server', async (c) => {
   const serverName = c.req.param('server');
-  // Phase 5: tier stub — always 'free'. Phase 6 replaces with real API key auth.
-  const tier = 'free';
+  const { tier } = c.get('auth');
   return handleMcpRequest(serverName, c.req.raw, tier);
 });
 
-// Health check — used by wrangler dev to confirm worker is live
+// Health check — no auth; used by wrangler dev and monitoring
 app.get('/health', (c) =>
   c.json({ status: 'ok', servers: 5, tools: 18 }),
 );

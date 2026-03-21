@@ -6,7 +6,16 @@ usage_model = "unbound"
 [vars]
 MOCK_MODE = "true"
 
-# KV namespace placeholder — required by Phase 6 auth
-# [[kv_namespaces]]
-# binding = "KV"
-# id = "PLACEHOLDER"
+# KV namespace for API key caching (60s TTL).
+# Fill in real IDs after running:
+#   wrangler kv namespace create API_KEYS
+#   wrangler kv namespace create API_KEYS --preview
+[[kv_namespaces]]
+binding = "API_KEYS"
+id = "REPLACE_WITH_PRODUCTION_KV_ID"
+preview_id = "REPLACE_WITH_PREVIEW_KV_ID"
+
+# Supabase credentials are stored as Worker secrets — NOT in this file.
+# Run once to set:
+#   wrangler secret put SUPABASE_URL
+#   wrangler secret put SUPABASE_SERVICE_ROLE_KEY
