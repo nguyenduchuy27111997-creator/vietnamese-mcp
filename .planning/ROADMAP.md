@@ -22,7 +22,7 @@
 **Milestone Goal:** Transform local-only MCP servers into a hosted SaaS platform with metered billing, so developers can connect via SSE transport without running anything locally.
 
 - [x] **Phase 5: Gateway** — All 5 MCP servers reachable via Streamable HTTP on Cloudflare Workers (completed 2026-03-20)
-- [ ] **Phase 6: Auth & API Keys** — Users can sign up, generate API keys, and be authenticated at the gateway
+- [x] **Phase 6: Auth & API Keys** — Users can sign up, generate API keys, and be authenticated at the gateway (completed 2026-03-22)
 - [ ] **Phase 7: Metering** — Every tool call is counted, enforced, and queryable per billing period
 - [ ] **Phase 8: Billing** — Stripe (USD) and MoMo (VND) payments upgrade user tiers in Supabase
 - [ ] **Phase 9: npm Publishing** — All 5 servers published to npm under @vn-mcp scope for self-hosted use
@@ -74,7 +74,11 @@ Plans:
   2. A 1000-event ingestion batch shows exactly 1000 events in Tinybird (zero quarantined rows)
   3. A Free-tier key that has made 1000 calls in the current month receives an MCP-formatted error on call 1001 — not a plain HTTP 429
   4. Gateway response time is not measurably increased by metering — events are fire-and-forget via ctx.waitUntil
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [ ] 07-01-PLAN.md — Metering core: GatewayEnv TINYBIRD_TOKEN binding, tinybird.ts fire-and-forget event sender, usageCounter.ts KV counter with tier limits and -32002 error, full unit tests
+- [ ] 07-02-PLAN.md — Gateway wiring + dashboard: index.ts metering hook (usage check before, waitUntil after), /usage route, integration tests, dashboard usage bar, Tinybird account setup checkpoint
 
 ### Phase 8: Billing
 **Goal**: Developers can pay via Stripe (USD) or MoMo (VND) to upgrade their tier; webhooks update Supabase atomically with idempotency; free tier requires no payment info
@@ -119,8 +123,8 @@ Plans:
 | 3. ZaloPay + VNPAY Servers | v1.0 | 2/2 | Complete | 2026-03-18 |
 | 4. Zalo OA + ViettelPay Servers | v1.0 | 3/3 | Complete | 2026-03-18 |
 | 5. Gateway | 3/3 | Complete   | 2026-03-20 | - |
-| 6. Auth & API Keys | 3/4 | In Progress|  | - |
-| 7. Metering | v1.1 | 0/? | Not started | - |
+| 6. Auth & API Keys | v1.1 | 4/4 | Complete | 2026-03-22 |
+| 7. Metering | v1.1 | 0/2 | Planning complete | - |
 | 8. Billing | v1.1 | 0/? | Not started | - |
 | 9. npm Publishing | v1.1 | 0/? | Not started | - |
 | 10. Landing Page & Docs | v1.1 | 0/? | Not started | - |
