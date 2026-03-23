@@ -90,7 +90,12 @@ Plans:
   3. A MoMo IPN with a tampered HMAC signature is rejected with HTTP 400 and the tier is not upgraded
   4. A MoMo IPN with a valid signature upgrades the user's tier to Starter in Supabase
   5. A user on the Free tier can call tools immediately after signup — no credit card prompt
-**Plans**: TBD
+**Plans**: 3 plans
+
+Plans:
+- [ ] 08-01-PLAN.md — Billing foundation: PaymentProvider interface, tierUpgrade utility, webhook_events migration, GatewayEnv bindings, Wave 0 test stubs
+- [ ] 08-02-PLAN.md — Stripe Checkout, webhook handler, Customer Portal, billing routes, index.ts wiring
+- [ ] 08-03-PLAN.md — MoMo provider + IPN handler, stripe_customer_id migration, dashboard billing UI
 
 ### Phase 9: npm Publishing
 **Goal**: All 5 server packages are published to npm under @vn-mcp scope and installable standalone outside the monorepo, enabling the self-hosted free tier
@@ -125,7 +130,7 @@ Plans:
 | 5. Gateway | 3/3 | Complete   | 2026-03-20 | - |
 | 6. Auth & API Keys | v1.1 | 4/4 | Complete | 2026-03-22 |
 | 7. Metering | 2/2 | Complete   | 2026-03-23 | - |
-| 8. Billing | v1.1 | 0/? | Not started | - |
+| 8. Billing | v1.1 | 0/3 | Planning complete | - |
 | 9. npm Publishing | v1.1 | 0/? | Not started | - |
 | 10. Landing Page & Docs | v1.1 | 0/? | Not started | - |
 
