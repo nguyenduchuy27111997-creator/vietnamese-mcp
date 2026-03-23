@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Platform Launch
 status: planning
-stopped_at: Phase 7 context gathered
-last_updated: "2026-03-22T16:29:19.955Z"
+stopped_at: Completed 07-metering-01-PLAN.md
+last_updated: "2026-03-23T08:30:06.177Z"
 last_activity: 2026-03-22 — Phase 6 complete; full auth flow verified
 progress:
   total_phases: 6
   completed_phases: 2
-  total_plans: 7
-  completed_plans: 7
+  total_plans: 9
+  completed_plans: 8
   percent: 33
 ---
 
@@ -75,6 +75,9 @@ Pending v1.1 decisions (to be made during planning):
 - [Phase 05-gateway]: Test pattern: create fresh McpServer per test — module-scope servers can only be connected to one transport at a time
 - [Phase 05-gateway]: CORS function origin: Hono cors does exact string matching on arrays; use function form for localhost:* wildcard
 - [Phase 05-gateway]: SSE heartbeat: ': ping\n\n' every 30s via TransformStream, 5-min idle timeout, non-SSE responses returned unchanged
+- [Phase 07-metering]: Metering: TIER_LIMITS business: Infinity + checkUsageLimit short-circuits for business tier
+- [Phase 07-metering]: Metering: usageKey uses UTC date (usage:{keyId}:YYYY-MM) for consistent timezone-safe KV buckets
+- [Phase 07-metering]: Metering: sendTinybirdEvent fire-and-forget — catches all errors, logs via console.error, never rethrows
 
 ### Pending Todos
 
@@ -88,6 +91,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-22T16:29:19.953Z
-Stopped at: Phase 7 context gathered
-Resume file: .planning/phases/07-metering/07-CONTEXT.md
+Last session: 2026-03-23T08:30:06.174Z
+Stopped at: Completed 07-metering-01-PLAN.md
+Resume file: None
