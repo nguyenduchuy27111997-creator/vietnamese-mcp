@@ -32,8 +32,8 @@ Requirements for platform launch. Each maps to roadmap phases.
 
 ### Billing
 
-- [ ] **BILL-01**: Stripe Checkout for Starter/Pro/Business tier subscriptions (USD)
-- [ ] **BILL-02**: Stripe webhooks update user tier in Supabase
+- [x] **BILL-01**: Stripe Checkout for Starter/Pro/Business tier subscriptions (USD)
+- [x] **BILL-02**: Stripe webhooks update user tier in Supabase
 - [ ] **BILL-03**: MoMo one-time payment for monthly subscription (VND)
 - [ ] **BILL-04**: MoMo IPN callback updates user tier in Supabase
 - [x] **BILL-05**: PaymentProvider abstraction decouples Stripe and MoMo
@@ -107,8 +107,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | METR-02 | Phase 7 | Complete |
 | METR-03 | Phase 7 | Complete |
 | METR-04 | Phase 7 | Complete |
-| BILL-01 | Phase 8 | Pending |
-| BILL-02 | Phase 8 | Pending |
+| BILL-01 | Phase 8 | Complete |
+| BILL-02 | Phase 8 | Complete |
 | BILL-03 | Phase 8 | Pending |
 | BILL-04 | Phase 8 | Pending |
 | BILL-05 | Phase 8 | Complete |

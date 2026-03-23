@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Platform Launch
-status: verifying
-stopped_at: Completed 08-billing/08-01-PLAN.md
-last_updated: "2026-03-23T10:21:21.094Z"
-last_activity: "2026-03-23 — Phase 7 complete. Next: Phase 8 Billing (Stripe + MoMo)"
+status: completed
+stopped_at: Completed 08-billing/08-02-PLAN.md
+last_updated: "2026-03-23T10:29:30.768Z"
+last_activity: "2026-03-23 — Phase 8 Plan 01 complete. Next: Phase 8 Plan 02 (Stripe provider)"
 progress:
   total_phases: 6
   completed_phases: 3
   total_plans: 12
-  completed_plans: 10
-  percent: 33
+  completed_plans: 11
+  percent: 83
 ---
 
 # Project State
@@ -25,11 +25,11 @@ See: .planning/PROJECT.md (updated 2026-03-21)
 
 ## Current Position
 
-Phase: 8 of 10 (Phase 8: Billing) — IN PROGRESS (Plan 1 of 3 complete)
-Status: 08-01 foundation complete; Plans 02 (Stripe) and 03 (MoMo) remaining
-Last activity: 2026-03-23 — Phase 8 Plan 01 complete. Next: Phase 8 Plan 02 (Stripe provider)
+Phase: 8 of 10 (Phase 8: Billing) — IN PROGRESS (Plan 2 of 3 complete)
+Status: 08-01 foundation + 08-02 Stripe complete; Plan 03 (MoMo) remaining
+Last activity: 2026-03-23 — Phase 8 Plan 02 (Stripe) complete. Next: Phase 8 Plan 03 (MoMo provider)
 
-Progress: [████████░░] 83% (10 of 12 plans complete)
+Progress: [█████████░] 92% (11 of 12 plans complete)
 
 ## Performance Metrics
 
@@ -84,6 +84,9 @@ Pending v1.1 decisions (to be made during planning):
 - [Phase 08-billing]: Billing foundation (Plan 01) built before Stripe/MoMo providers to share tier-upgrade logic in one place
 - [Phase 08-billing]: stripe_customer_id placed on api_keys table (not separate users_billing table) — simpler, consistent schema
 - [Phase 08-billing]: Test env partial objects cast to 'as unknown as GatewayEnv[Bindings]' after adding 8 required billing fields
+- [Phase 08-billing]: Stripe client created per-request via createStripeClient(env.STRIPE_SECRET_KEY) — CF Workers env only available inside handler
+- [Phase 08-billing]: invoice.paid uses invoice.parent.subscription_details.metadata for tier (Stripe v17+ API) — avoids extra subscriptions.retrieve() call
+- [Phase 08-billing]: JWT auth on /billing/create-checkout and /billing/portal only — stripe-webhook uses its own signature verification
 
 ### Pending Todos
 
@@ -97,6 +100,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-23T10:21:21.091Z
-Stopped at: Completed 08-billing/08-01-PLAN.md
+Last session: 2026-03-23T10:29:30.766Z
+Stopped at: Completed 08-billing/08-02-PLAN.md
 Resume file: None
