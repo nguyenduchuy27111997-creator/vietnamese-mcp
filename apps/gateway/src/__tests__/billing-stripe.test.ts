@@ -191,7 +191,7 @@ describe('BILL-02: Stripe Webhook', () => {
     const mockEq = vi.fn().mockReturnValue({ is: mockIs });
     const mockUpdate = vi.fn().mockReturnValue({ eq: mockEq });
     const mockFrom = vi.fn().mockReturnValue({ update: mockUpdate });
-    vi.mocked(createClient).mockReturnValue({ from: mockFrom } as ReturnType<typeof createClient>);
+    vi.mocked(createClient).mockReturnValue({ from: mockFrom } as unknown as ReturnType<typeof createClient>);
 
     const { fetchWithEnv } = makeWebhookApp();
     const res = await fetchWithEnv(new Request('http://localhost/billing/stripe-webhook', {
@@ -274,7 +274,7 @@ describe('BILL-02: Stripe Webhook', () => {
     const mockEq = vi.fn().mockReturnValue({ is: mockIs });
     const mockSelect = vi.fn().mockReturnValue({ eq: mockEq });
     const mockFrom = vi.fn().mockReturnValue({ select: mockSelect });
-    vi.mocked(createClient).mockReturnValue({ from: mockFrom } as ReturnType<typeof createClient>);
+    vi.mocked(createClient).mockReturnValue({ from: mockFrom } as unknown as ReturnType<typeof createClient>);
 
     const { fetchWithEnv } = makeWebhookApp();
     const res = await fetchWithEnv(new Request('http://localhost/billing/stripe-webhook', {
@@ -314,7 +314,7 @@ describe('BILL-02: Stripe Webhook', () => {
     const mockEq = vi.fn().mockReturnValue({ is: mockIs });
     const mockSelect = vi.fn().mockReturnValue({ eq: mockEq });
     const mockFrom = vi.fn().mockReturnValue({ select: mockSelect });
-    vi.mocked(createClient).mockReturnValue({ from: mockFrom } as ReturnType<typeof createClient>);
+    vi.mocked(createClient).mockReturnValue({ from: mockFrom } as unknown as ReturnType<typeof createClient>);
 
     const { fetchWithEnv } = makeWebhookApp();
     const res = await fetchWithEnv(new Request('http://localhost/billing/stripe-webhook', {
@@ -357,7 +357,7 @@ describe('BILL-02: Stripe Webhook', () => {
     const mockEq = vi.fn().mockReturnValue({ is: mockIs });
     const mockSelect = vi.fn().mockReturnValue({ eq: mockEq });
     const mockFrom = vi.fn().mockReturnValue({ select: mockSelect });
-    vi.mocked(createClient).mockReturnValue({ from: mockFrom } as ReturnType<typeof createClient>);
+    vi.mocked(createClient).mockReturnValue({ from: mockFrom } as unknown as ReturnType<typeof createClient>);
 
     const { fetchWithEnv } = makeWebhookApp();
     const res = await fetchWithEnv(new Request('http://localhost/billing/stripe-webhook', {
@@ -386,7 +386,7 @@ describe('Stripe Customer Portal', () => {
     const mockEq = vi.fn().mockReturnValue({ is: mockIs });
     const mockSelect = vi.fn().mockReturnValue({ eq: mockEq });
     const mockFrom = vi.fn().mockReturnValue({ select: mockSelect });
-    vi.mocked(createClient).mockReturnValue({ from: mockFrom } as ReturnType<typeof createClient>);
+    vi.mocked(createClient).mockReturnValue({ from: mockFrom } as unknown as ReturnType<typeof createClient>);
 
     const { fetchWithEnv } = makeFullApp(defaultAuth);
     const res = await fetchWithEnv(new Request('http://localhost/billing/portal', {
@@ -417,7 +417,7 @@ describe('Stripe Customer Portal', () => {
     const mockEq = vi.fn().mockReturnValue({ is: mockIs });
     const mockSelect = vi.fn().mockReturnValue({ eq: mockEq });
     const mockFrom = vi.fn().mockReturnValue({ select: mockSelect });
-    vi.mocked(createClient).mockReturnValue({ from: mockFrom } as ReturnType<typeof createClient>);
+    vi.mocked(createClient).mockReturnValue({ from: mockFrom } as unknown as ReturnType<typeof createClient>);
 
     const { fetchWithEnv } = makeFullApp(defaultAuth);
     const res = await fetchWithEnv(new Request('http://localhost/billing/portal', {
