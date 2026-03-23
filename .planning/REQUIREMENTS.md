@@ -42,9 +42,9 @@ Requirements for platform launch. Each maps to roadmap phases.
 ### npm Publishing
 
 - [ ] **NPM-01**: All 5 server packages published to npm under @vn-mcp scope
-- [ ] **NPM-02**: @vn-mcp/shared published as versioned dependency (not workspace:*)
-- [ ] **NPM-03**: Each package installable standalone (npm install @vn-mcp/mcp-momo-vn)
-- [ ] **NPM-04**: npm pack --dry-run verification before publish
+- [x] **NPM-02**: @vn-mcp/shared published as versioned dependency (not workspace:*)
+- [x] **NPM-03**: Each package installable standalone (npm install @vn-mcp/mcp-momo-vn)
+- [x] **NPM-04**: npm pack --dry-run verification before publish
 
 ### Landing Page & Docs
 
@@ -114,9 +114,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | BILL-05 | Phase 8 | Complete |
 | BILL-06 | Phase 8 | Complete |
 | NPM-01 | Phase 9 | Pending |
-| NPM-02 | Phase 9 | Pending |
-| NPM-03 | Phase 9 | Pending |
-| NPM-04 | Phase 9 | Pending |
+| NPM-02 | Phase 9 | Complete |
+| NPM-03 | Phase 9 | Complete |
+| NPM-04 | Phase 9 | Complete |
 | SITE-01 | Phase 10 | Pending |
 | SITE-02 | Phase 10 | Pending |
 | SITE-03 | Phase 10 | Pending |

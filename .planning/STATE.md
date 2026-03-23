@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Platform Launch
 status: completed
-stopped_at: Phase 9 context gathered
-last_updated: "2026-03-23T11:21:53.609Z"
+stopped_at: Completed 09-01-PLAN.md
+last_updated: "2026-03-23T11:55:17.141Z"
 last_activity: "2026-03-23 — Phase 8 Plan 02 (Stripe) complete. Next: Phase 8 Plan 03 (MoMo provider)"
 progress:
   total_phases: 6
   completed_phases: 4
-  total_plans: 12
-  completed_plans: 12
+  total_plans: 14
+  completed_plans: 13
   percent: 92
 ---
 
@@ -91,6 +91,8 @@ Pending v1.1 decisions (to be made during planning):
 - [Phase 08-billing]: Mock-first MoMo provider returns test-payment.momo.vn URL until merchant KYC approved
 - [Phase 08-billing]: momo_expires_at set 30 days from IPN receipt tracking one-time MoMo payment expiry
 - [Phase 08-billing]: UpgradeSection inline on DashboardPage with two side-by-side buttons per locked CONTEXT.md decision
+- [Phase 09-npm-publishing]: Build script changed from tsdown (outputs dist/) to tsc --noCheck (outputs build/ per tsconfig outDir) — matches exports/bin fields and produces multi-file structure
+- [Phase 09-npm-publishing]: tsc --noCheck used for all 6 server/shared builds — pre-existing type errors in src/client.ts (_mock type mismatch) are out-of-scope, transpile-only is sufficient for publishing
 
 ### Pending Todos
 
@@ -104,6 +106,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-23T11:21:53.607Z
-Stopped at: Phase 9 context gathered
-Resume file: .planning/phases/09-npm-publishing/09-CONTEXT.md
+Last session: 2026-03-23T11:55:17.139Z
+Stopped at: Completed 09-01-PLAN.md
+Resume file: None

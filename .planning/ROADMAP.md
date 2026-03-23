@@ -135,7 +135,7 @@ Plans:
 | 6. Auth & API Keys | v1.1 | 4/4 | Complete | 2026-03-22 |
 | 7. Metering | 2/2 | Complete   | 2026-03-23 | - |
 | 8. Billing | 3/3 | Complete   | 2026-03-23 | - |
-| 9. npm Publishing | v1.1 | 0/2 | Not started | - |
+| 9. npm Publishing | 1/2 | In Progress|  | - |
 | 10. Landing Page & Docs | v1.1 | 0/? | Not started | - |
 
 **Full v1.0 details:** `.planning/milestones/v1.0-ROADMAP.md`
