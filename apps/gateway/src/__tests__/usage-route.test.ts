@@ -4,7 +4,19 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { Hono } from 'hono';
 import type { GatewayEnv, AuthContext } from '../types.js';
 
-// Will be imported after the route file exists
+// Mock Supabase service role client before importing routes
+vi.mock('../lib/supabase.js', () => ({
+  getServiceRoleClient: vi.fn(() => ({
+    from: () => ({
+      select: () => ({
+        eq: () => ({
+          is: () => Promise.resolve({ data: [{ id: 'key-abc' }], error: null }),
+        }),
+      }),
+    }),
+  })),
+}));
+
 import { usageRouter } from '../routes/usage.js';
 
 function makeKv(getReturn: string | null = null) {
