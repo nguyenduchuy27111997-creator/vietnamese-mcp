@@ -3,6 +3,7 @@ import { supabase } from '../supabase.js';
 import { useKeys } from '../hooks/useKeys.js';
 import type { ApiKey } from '../hooks/useKeys.js';
 import { useUsage } from '../hooks/useUsage.js';
+import { useBilling } from '../hooks/useBilling.js';
 
 function UsageBar({ used, limit, period }: { used: number; limit: number; period: string }) {
   const pct = limit === Infinity ? 0 : Math.min(100, Math.round((used / limit) * 100));
@@ -28,9 +29,58 @@ function UsageBar({ used, limit, period }: { used: number; limit: number; period
   );
 }
 
+function UpgradeSection({
+  currentTier,
+  onStripeCheckout,
+  onMomoCheckout,
+  onManageSubscription,
+}: {
+  currentTier: string;
+  onStripeCheckout: (tier: string) => void;
+  onMomoCheckout: (tier: string) => void;
+  onManageSubscription: () => void;
+}) {
+  if (currentTier !== 'free') {
+    // Paid tier — show manage subscription
+    return (
+      <div style={{ background: '#f0f9ff', border: '1px solid #bae6fd', borderRadius: '8px', padding: '16px', marginBottom: '20px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <span style={{ fontSize: '14px', color: '#0c4a6e' }}>
+            <strong style={{ textTransform: 'capitalize' }}>{currentTier}</strong> plan active
+          </span>
+          <button onClick={onManageSubscription}
+            style={{ padding: '6px 14px', background: '#0284c7', color: '#fff', border: 'none', borderRadius: '6px', cursor: 'pointer', fontSize: '13px' }}>
+            Manage subscription
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // Free tier — show upgrade CTA with two payment options
+  return (
+    <div style={{ background: '#fffbeb', border: '1px solid #fde68a', borderRadius: '8px', padding: '16px', marginBottom: '20px' }}>
+      <p style={{ margin: '0 0 12px', fontSize: '14px', fontWeight: 600, color: '#92400e' }}>
+        Upgrade to unlock more API calls and servers
+      </p>
+      <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+        <button onClick={() => onStripeCheckout('starter')}
+          style={{ padding: '8px 16px', background: '#2563eb', color: '#fff', border: 'none', borderRadius: '6px', cursor: 'pointer', fontSize: '13px' }}>
+          Pay with Card ($19/mo)
+        </button>
+        <button onClick={() => onMomoCheckout('starter')}
+          style={{ padding: '8px 16px', background: '#a50064', color: '#fff', border: 'none', borderRadius: '6px', cursor: 'pointer', fontSize: '13px' }}>
+          Pay with MoMo (449,000 VND)
+        </button>
+      </div>
+    </div>
+  );
+}
+
 export function DashboardPage({ userEmail }: { userEmail: string }) {
   const { keys, loading, error, createKey, revokeKey } = useKeys();
   const { usage } = useUsage();
+  const { startStripeCheckout, startMomoCheckout, openStripePortal } = useBilling();
   const [newKey, setNewKey] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
   const [creating, setCreating] = useState(false);
@@ -59,9 +109,6 @@ export function DashboardPage({ userEmail }: { userEmail: string }) {
           <h1 style={{ fontSize: '20px', margin: 0 }}>API Keys</h1>
           <p style={{ margin: '4px 0 0', fontSize: '13px', color: '#6b7280' }}>
             {userEmail} &middot; Tier: <strong style={{ textTransform: 'capitalize' }}>{tier}</strong>
-            {tier === 'free' && (
-              <> &middot; <a href="https://mcpvn.dev/pricing" style={{ color: '#2563eb' }}>Upgrade</a></>
-            )}
           </p>
         </div>
         <div style={{ display: 'flex', gap: '8px' }}>
@@ -77,6 +124,13 @@ export function DashboardPage({ userEmail }: { userEmail: string }) {
       </div>
 
       {usage && <UsageBar used={usage.used} limit={usage.limit} period={usage.period} />}
+
+      <UpgradeSection
+        currentTier={tier}
+        onStripeCheckout={startStripeCheckout}
+        onMomoCheckout={startMomoCheckout}
+        onManageSubscription={openStripePortal}
+      />
 
       {newKey && (
         <div style={{ background: '#f0fdf4', border: '1px solid #86efac', borderRadius: '8px', padding: '16px', marginBottom: '20px' }}>
