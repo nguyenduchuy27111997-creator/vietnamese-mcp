@@ -11,6 +11,8 @@ export type GatewayEnv = {
     API_KEYS: KVNamespace;
     SUPABASE_URL: string;
     SUPABASE_SERVICE_ROLE_KEY: string;
+    TINYBIRD_TOKEN: string;
+    TINYBIRD_HOST?: string;
   };
   Variables: {
     auth: AuthContext;
