@@ -63,7 +63,7 @@ completed: 2026-03-23
 - **Duration:** 8 min
 - **Started:** 2026-03-23T08:31:18Z
 - **Completed:** 2026-03-23T08:39:00Z
-- **Tasks:** 2 of 3 complete (Task 3 is human checkpoint — Tinybird setup)
+- **Tasks:** 3 of 3 complete
 - **Files modified:** 7
 
 ## Accomplishments
@@ -80,7 +80,7 @@ Each task was committed atomically:
 
 1. **Task 1: Wire metering into gateway index.ts + create /usage route + tests** - `bfa6ab9` (feat)
 2. **Task 2: Add usage bar to dashboard** - `7ac3a75` (feat)
-3. **Task 3: Tinybird setup and smoke test** - PENDING (human checkpoint)
+3. **Task 3: Tinybird setup and smoke test** - approved (human checkpoint — Tinybird account created, data source configured, TINYBIRD_TOKEN secret set, smoke test passed)
 
 ## Files Created/Modified
 - `apps/gateway/src/index.ts` - Added metering imports, /usage route mount, metering-aware MCP handler with waitUntil
@@ -131,8 +131,8 @@ See Task 3 checkpoint for verification steps.
 
 ## Next Phase Readiness
 - Metering enforcement fully wired; ready for production deployment
-- Task 3 (human checkpoint) requires Tinybird account setup before smoke test
-- Phase 8 (Billing/Stripe) can proceed in parallel — metering infrastructure is independent
+- Task 3 (human checkpoint) approved — Tinybird account set up, smoke test passed, metering pipeline live
+- Phase 8 (Billing/Stripe) ready to begin — metering infrastructure complete and verified end-to-end
 
 ---
 *Phase: 07-metering*
