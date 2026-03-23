@@ -36,8 +36,8 @@ Requirements for platform launch. Each maps to roadmap phases.
 - [ ] **BILL-02**: Stripe webhooks update user tier in Supabase
 - [ ] **BILL-03**: MoMo one-time payment for monthly subscription (VND)
 - [ ] **BILL-04**: MoMo IPN callback updates user tier in Supabase
-- [ ] **BILL-05**: PaymentProvider abstraction decouples Stripe and MoMo
-- [ ] **BILL-06**: Free tier requires no credit card
+- [x] **BILL-05**: PaymentProvider abstraction decouples Stripe and MoMo
+- [x] **BILL-06**: Free tier requires no credit card
 
 ### npm Publishing
 
@@ -111,8 +111,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | BILL-02 | Phase 8 | Pending |
 | BILL-03 | Phase 8 | Pending |
 | BILL-04 | Phase 8 | Pending |
-| BILL-05 | Phase 8 | Pending |
-| BILL-06 | Phase 8 | Pending |
+| BILL-05 | Phase 8 | Complete |
+| BILL-06 | Phase 8 | Complete |
 | NPM-01 | Phase 9 | Pending |
 | NPM-02 | Phase 9 | Pending |
 | NPM-03 | Phase 9 | Pending |
