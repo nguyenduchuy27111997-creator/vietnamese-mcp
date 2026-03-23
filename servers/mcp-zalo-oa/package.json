@@ -14,7 +14,7 @@
     "./tools": "./build/tools/index.js"
   },
   "scripts": {
-    "build": "tsdown src/index.ts --format esm --dts",
+    "build": "tsc --project tsconfig.json --noCheck",
     "dev": "tsx src/index.ts",
     "test": "ZALO_OA_SANDBOX=true vitest run",
     "prepublishOnly": "npm run build"

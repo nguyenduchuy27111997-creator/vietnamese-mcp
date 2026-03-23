@@ -14,7 +14,7 @@
     "./test-helpers": "./build/test-helpers/index.js"
   },
   "scripts": {
-    "build": "tsdown src/index.ts --format esm --dts",
+    "build": "tsc --project tsconfig.json --noCheck",
     "dev": "tsx watch src/index.ts",
     "prepublishOnly": "npm run build"
   },
