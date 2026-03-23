@@ -26,7 +26,7 @@ Requirements for platform launch. Each maps to roadmap phases.
 ### Metering
 
 - [x] **METR-01**: Every tool call is logged to Tinybird with API key, server, tool, timestamp
-- [ ] **METR-02**: Usage counts are queryable per API key per billing period
+- [x] **METR-02**: Usage counts are queryable per API key per billing period
 - [x] **METR-03**: Gateway enforces tier call limits (free: 1k/mo, starter: 10k, pro: 100k, business: unlimited)
 - [x] **METR-04**: Metering is non-blocking (ctx.waitUntil)
 
@@ -104,7 +104,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | AUTH-04 | Phase 6 | Complete |
 | AUTH-05 | Phase 6 | Complete |
 | METR-01 | Phase 7 | Complete |
-| METR-02 | Phase 7 | Pending |
+| METR-02 | Phase 7 | Complete |
 | METR-03 | Phase 7 | Complete |
 | METR-04 | Phase 7 | Complete |
 | BILL-01 | Phase 8 | Pending |

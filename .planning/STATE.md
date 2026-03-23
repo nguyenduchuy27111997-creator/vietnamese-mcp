@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Platform Launch
-status: planning
-stopped_at: Completed 07-metering-01-PLAN.md
-last_updated: "2026-03-23T08:30:06.177Z"
-last_activity: 2026-03-22 — Phase 6 complete; full auth flow verified
+status: in_progress
+stopped_at: Checkpoint — Task 3 of 07-02-PLAN.md (Tinybird human setup required)
+last_updated: "2026-03-23T08:35:47.703Z"
+last_activity: 2026-03-23 — Metering wired into gateway; /usage route + dashboard UsageBar added
 progress:
   total_phases: 6
-  completed_phases: 2
+  completed_phases: 3
   total_plans: 9
-  completed_plans: 8
+  completed_plans: 9
   percent: 33
 ---
 
@@ -25,9 +25,9 @@ See: .planning/PROJECT.md (updated 2026-03-21)
 
 ## Current Position
 
-Phase: 7 of 10 (Phase 7: Metering) — NOT STARTED
-Status: Phase 6 complete; ready to plan Phase 7
-Last activity: 2026-03-22 — Phase 6 complete; full auth flow verified
+Phase: 7 of 10 (Phase 7: Metering) — IN PROGRESS (Plan 2 of 2 — checkpoint at Task 3)
+Status: Tasks 1-2 complete; awaiting Tinybird account setup (Task 3 human checkpoint)
+Last activity: 2026-03-23 — Metering wired into gateway; /usage route + dashboard UsageBar added
 
 Progress: [████████░░] 33% (2 of 6 v1.1 phases complete)
 
@@ -78,6 +78,9 @@ Pending v1.1 decisions (to be made during planning):
 - [Phase 07-metering]: Metering: TIER_LIMITS business: Infinity + checkUsageLimit short-circuits for business tier
 - [Phase 07-metering]: Metering: usageKey uses UTC date (usage:{keyId}:YYYY-MM) for consistent timezone-safe KV buckets
 - [Phase 07-metering]: Metering: sendTinybirdEvent fire-and-forget — catches all errors, logs via console.error, never rethrows
+- [Phase 07-metering]: Usage route requires JWT auth (not API key auth) — users query their own aggregate usage from dashboard
+- [Phase 07-metering]: Business tier skips KV read/write entirely in MCP route — zero overhead path
+- [Phase 07-metering]: TINYBIRD_HOST added as wrangler.toml var (not secret) — host URL is not sensitive; TOKEN stays as secret
 
 ### Pending Todos
 
@@ -91,6 +94,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-23T08:30:06.174Z
-Stopped at: Completed 07-metering-01-PLAN.md
+Last session: 2026-03-23T08:35:47.701Z
+Stopped at: Checkpoint — Task 3 of 07-02-PLAN.md (Tinybird human setup required)
 Resume file: None

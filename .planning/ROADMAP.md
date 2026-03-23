@@ -23,7 +23,7 @@
 
 - [x] **Phase 5: Gateway** — All 5 MCP servers reachable via Streamable HTTP on Cloudflare Workers (completed 2026-03-20)
 - [x] **Phase 6: Auth & API Keys** — Users can sign up, generate API keys, and be authenticated at the gateway (completed 2026-03-22)
-- [ ] **Phase 7: Metering** — Every tool call is counted, enforced, and queryable per billing period
+- [x] **Phase 7: Metering** — Every tool call is counted, enforced, and queryable per billing period (completed 2026-03-23)
 - [ ] **Phase 8: Billing** — Stripe (USD) and MoMo (VND) payments upgrade user tiers in Supabase
 - [ ] **Phase 9: npm Publishing** — All 5 servers published to npm under @vn-mcp scope for self-hosted use
 - [ ] **Phase 10: Landing Page & Docs** — Mintlify site with pricing, quickstart, and per-server tool reference
@@ -124,7 +124,7 @@ Plans:
 | 4. Zalo OA + ViettelPay Servers | v1.0 | 3/3 | Complete | 2026-03-18 |
 | 5. Gateway | 3/3 | Complete   | 2026-03-20 | - |
 | 6. Auth & API Keys | v1.1 | 4/4 | Complete | 2026-03-22 |
-| 7. Metering | 1/2 | In Progress|  | - |
+| 7. Metering | 2/2 | Complete   | 2026-03-23 | - |
 | 8. Billing | v1.1 | 0/? | Not started | - |
 | 9. npm Publishing | v1.1 | 0/? | Not started | - |
 | 10. Landing Page & Docs | v1.1 | 0/? | Not started | - |
