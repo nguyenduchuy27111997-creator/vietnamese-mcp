@@ -1,17 +1,22 @@
 {
   "name": "@vn-mcp/shared",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": ["build"],
   "exports": {
-    ".": "./src/index.ts",
-    "./errors": "./src/errors/index.ts",
-    "./http-client": "./src/http-client/index.ts",
-    "./mock-engine": "./src/mock-engine/index.ts",
-    "./test-helpers": "./src/test-helpers/index.ts"
+    ".": "./build/index.js",
+    "./errors": "./build/errors/index.js",
+    "./http-client": "./build/http-client/index.js",
+    "./mock-engine": "./build/mock-engine/index.js",
+    "./test-helpers": "./build/test-helpers/index.js"
   },
   "scripts": {
     "build": "tsdown src/index.ts --format esm --dts",
-    "dev": "tsx watch src/index.ts"
+    "dev": "tsx watch src/index.ts",
+    "prepublishOnly": "npm run build"
   },
   "engines": {
     "node": ">=20"

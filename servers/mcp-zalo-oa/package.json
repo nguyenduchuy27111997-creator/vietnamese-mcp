@@ -1,23 +1,28 @@
 {
   "name": "@vn-mcp/mcp-zalo-oa",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": ["build"],
   "bin": {
     "mcp-zalo-oa": "./build/index.js"
   },
   "exports": {
-    ".": "./src/index.ts",
-    "./tools": "./src/tools/index.ts"
+    ".": "./build/index.js",
+    "./tools": "./build/tools/index.js"
   },
   "scripts": {
     "build": "tsdown src/index.ts --format esm --dts",
     "dev": "tsx src/index.ts",
-    "test": "ZALO_OA_SANDBOX=true vitest run"
+    "test": "ZALO_OA_SANDBOX=true vitest run",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.27.1",
     "zod": "^3.25.76",
-    "@vn-mcp/shared": "*"
+    "@vn-mcp/shared": "^1.0.0"
   },
   "engines": {
     "node": ">=20"
