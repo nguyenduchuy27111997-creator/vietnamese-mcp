@@ -2,9 +2,35 @@ import { useState } from 'react';
 import { supabase } from '../supabase.js';
 import { useKeys } from '../hooks/useKeys.js';
 import type { ApiKey } from '../hooks/useKeys.js';
+import { useUsage } from '../hooks/useUsage.js';
+
+function UsageBar({ used, limit, period }: { used: number; limit: number; period: string }) {
+  const pct = limit === Infinity ? 0 : Math.min(100, Math.round((used / limit) * 100));
+  const label = limit === Infinity
+    ? `${used.toLocaleString()} calls (unlimited)`
+    : `${used.toLocaleString()} / ${limit.toLocaleString()} calls this month`;
+  return (
+    <div style={{ marginBottom: '24px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '13px', color: '#6b7280', marginBottom: '4px' }}>
+        <span>{label}</span>
+        <span>{period}</span>
+      </div>
+      <div style={{ height: '6px', background: '#e5e7eb', borderRadius: '3px', overflow: 'hidden' }}>
+        <div style={{
+          height: '100%',
+          width: `${pct}%`,
+          background: pct >= 90 ? '#ef4444' : '#2563eb',
+          borderRadius: '3px',
+          transition: 'width 0.3s',
+        }} />
+      </div>
+    </div>
+  );
+}
 
 export function DashboardPage({ userEmail }: { userEmail: string }) {
   const { keys, loading, error, createKey, revokeKey } = useKeys();
+  const { usage } = useUsage();
   const [newKey, setNewKey] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
   const [creating, setCreating] = useState(false);
@@ -49,6 +75,8 @@ export function DashboardPage({ userEmail }: { userEmail: string }) {
           </button>
         </div>
       </div>
+
+      {usage && <UsageBar used={usage.used} limit={usage.limit} period={usage.period} />}
 
       {newKey && (
         <div style={{ background: '#f0fdf4', border: '1px solid #86efac', borderRadius: '8px', padding: '16px', marginBottom: '20px' }}>
