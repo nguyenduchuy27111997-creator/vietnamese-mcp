@@ -106,7 +106,11 @@ Plans:
   2. Adding a published server to `.mcp.json` and running a tool call completes end-to-end without errors
   3. Each published package tarball contains no `src/` files, no `workspace:*` references, and is under 50KB
   4. `npm pack --dry-run` passes clean for all 5 servers and @vn-mcp/shared before any publish
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [ ] 09-01-PLAN.md — Package prep: update all 6 package.json (version, publishConfig, files, exports, deps), build all packages, verify tarballs with npm pack --dry-run
+- [ ] 09-02-PLAN.md — Publish: npm account + org setup, publish shared first then 5 servers, standalone install smoke test
 
 ### Phase 10: Landing Page & Docs
 **Goal**: A Mintlify site is deployed with a pricing landing page and developer docs covering both self-hosted (npm) and hosted (API key) paths, enabling a new developer to go from zero to first tool call in under 5 minutes
@@ -131,7 +135,7 @@ Plans:
 | 6. Auth & API Keys | v1.1 | 4/4 | Complete | 2026-03-22 |
 | 7. Metering | 2/2 | Complete   | 2026-03-23 | - |
 | 8. Billing | 3/3 | Complete   | 2026-03-23 | - |
-| 9. npm Publishing | v1.1 | 0/? | Not started | - |
+| 9. npm Publishing | v1.1 | 0/2 | Not started | - |
 | 10. Landing Page & Docs | v1.1 | 0/? | Not started | - |
 
 **Full v1.0 details:** `.planning/milestones/v1.0-ROADMAP.md`
