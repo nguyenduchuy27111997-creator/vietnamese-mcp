@@ -1,10 +1,11 @@
 name = "vn-mcp-gateway"
 main = "src/index.ts"
 compatibility_date = "2025-01-01"
-usage_model = "unbound"
+compatibility_flags = ["nodejs_compat"]
 
 [vars]
 MOCK_MODE = "true"
+TINYBIRD_HOST = "https://api.tinybird.co"
 
 # KV namespace for API key caching (60s TTL).
 # Fill in real IDs after running:
@@ -12,10 +13,16 @@ MOCK_MODE = "true"
 #   wrangler kv namespace create API_KEYS --preview
 [[kv_namespaces]]
 binding = "API_KEYS"
-id = "REPLACE_WITH_PRODUCTION_KV_ID"
-preview_id = "REPLACE_WITH_PREVIEW_KV_ID"
+id = "60a7e29c8d874c84b6054f997b3f7f1e"
+preview_id = "bf65fd8cd8454e4aab1061e4b20cfa7d"
 
 # Supabase credentials are stored as Worker secrets — NOT in this file.
 # Run once to set:
 #   wrangler secret put SUPABASE_URL
 #   wrangler secret put SUPABASE_SERVICE_ROLE_KEY
+
+# Tinybird auth token — store as secret, NOT in this file:
+#   wrangler secret put TINYBIRD_TOKEN
+# Tinybird host depends on workspace region:
+#   EU (GCP default): https://api.tinybird.co
+#   US East (GCP):   https://api.us-east.tinybird.co
