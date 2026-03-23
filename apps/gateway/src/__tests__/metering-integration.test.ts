@@ -95,7 +95,7 @@ function buildApp(auth: AuthContext) {
         SUPABASE_URL: 'https://test.supabase.co',
         SUPABASE_SERVICE_ROLE_KEY: 'service-role-key-test',
         TINYBIRD_TOKEN: 'tb_test_token',
-      } as GatewayEnv['Bindings'],
+      } as unknown as GatewayEnv['Bindings'],
       { waitUntil: waitUntilMock, passThroughOnException: vi.fn() },
     );
 

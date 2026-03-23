@@ -13,6 +13,14 @@ export type GatewayEnv = {
     SUPABASE_SERVICE_ROLE_KEY: string;
     TINYBIRD_TOKEN: string;
     TINYBIRD_HOST?: string;
+    STRIPE_SECRET_KEY: string;
+    STRIPE_WEBHOOK_SECRET: string;
+    STRIPE_PRICE_STARTER: string;
+    STRIPE_PRICE_PRO: string;
+    STRIPE_PRICE_BUSINESS: string;
+    MOMO_PARTNER_CODE: string;
+    MOMO_ACCESS_KEY: string;
+    MOMO_SECRET_KEY: string;
   };
   Variables: {
     auth: AuthContext;

@@ -48,7 +48,7 @@ function makeApp(kvReturn: string | null, auth: AuthContext = { userId: 'u1', ti
       SUPABASE_URL: 'https://test.supabase.co',
       SUPABASE_SERVICE_ROLE_KEY: 'service-role-key-test',
       TINYBIRD_TOKEN: 'tb_test_token',
-    } as GatewayEnv['Bindings']);
+    } as unknown as GatewayEnv['Bindings']);
 
   return { fetchWithEnv, kv };
 }
