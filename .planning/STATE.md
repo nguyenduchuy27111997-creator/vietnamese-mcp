@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Platform Launch
 status: completed
-stopped_at: Completed 08-billing/08-02-PLAN.md
-last_updated: "2026-03-23T10:29:30.768Z"
-last_activity: "2026-03-23 — Phase 8 Plan 01 complete. Next: Phase 8 Plan 02 (Stripe provider)"
+stopped_at: Completed 08-billing/08-03-PLAN.md
+last_updated: "2026-03-23T10:36:46.967Z"
+last_activity: "2026-03-23 — Phase 8 Plan 02 (Stripe) complete. Next: Phase 8 Plan 03 (MoMo provider)"
 progress:
   total_phases: 6
-  completed_phases: 3
+  completed_phases: 4
   total_plans: 12
-  completed_plans: 11
-  percent: 83
+  completed_plans: 12
+  percent: 92
 ---
 
 # Project State
@@ -87,6 +87,10 @@ Pending v1.1 decisions (to be made during planning):
 - [Phase 08-billing]: Stripe client created per-request via createStripeClient(env.STRIPE_SECRET_KEY) — CF Workers env only available inside handler
 - [Phase 08-billing]: invoice.paid uses invoice.parent.subscription_details.metadata for tier (Stripe v17+ API) — avoids extra subscriptions.retrieve() call
 - [Phase 08-billing]: JWT auth on /billing/create-checkout and /billing/portal only — stripe-webhook uses its own signature verification
+- [Phase 08-billing]: MoMo IPN returns HTTP 204 (not 200) per MoMo callback protocol requirement
+- [Phase 08-billing]: Mock-first MoMo provider returns test-payment.momo.vn URL until merchant KYC approved
+- [Phase 08-billing]: momo_expires_at set 30 days from IPN receipt tracking one-time MoMo payment expiry
+- [Phase 08-billing]: UpgradeSection inline on DashboardPage with two side-by-side buttons per locked CONTEXT.md decision
 
 ### Pending Todos
 
@@ -100,6 +104,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-23T10:29:30.766Z
-Stopped at: Completed 08-billing/08-02-PLAN.md
+Last session: 2026-03-23T10:36:46.965Z
+Stopped at: Completed 08-billing/08-03-PLAN.md
 Resume file: None
