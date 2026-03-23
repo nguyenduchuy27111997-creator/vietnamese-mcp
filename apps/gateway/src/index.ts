@@ -6,6 +6,7 @@ import { authMiddleware } from './middleware/auth.js';
 import { jwtAuthMiddleware } from './middleware/jwtAuth.js';
 import { keysRouter } from './routes/keys.js';
 import { usageRouter } from './routes/usage.js';
+import { billingRouter } from './routes/billing.js';
 import { sendTinybirdEvent } from './metering/tinybird.js';
 import { getUsageCount, checkUsageLimit, incrementUsageCounter, usageLimitResponse } from './metering/usageCounter.js';
 import type { GatewayEnv } from './types.js';
@@ -22,15 +23,22 @@ app.use('/keys/*', cors(corsConfig));
 // CORS + Auth on /usage route
 app.use('/usage', cors(corsConfig));
 
+// CORS + Auth on /billing routes (except webhook which uses Stripe signature)
+app.use('/billing/*', cors(corsConfig));
+
 // Auth middleware — API key auth for MCP routes, JWT auth for key management
 // /health is intentionally excluded — no auth required for health checks
 app.use('/mcp/*', authMiddleware);
 app.use('/keys', jwtAuthMiddleware);
 app.use('/keys/*', jwtAuthMiddleware);
 app.use('/usage', jwtAuthMiddleware);
+// JWT auth for checkout and portal — NOT for stripe-webhook or momo-ipn
+app.use('/billing/create-checkout', jwtAuthMiddleware);
+app.use('/billing/portal', jwtAuthMiddleware);
 
 app.route('/keys', keysRouter);
 app.route('/usage', usageRouter);
+app.route('/billing', billingRouter);
 
 // MCP routes — tier comes from auth context; metering check + fire-and-forget after execution
 app.all('/mcp/:server', async (c) => {
