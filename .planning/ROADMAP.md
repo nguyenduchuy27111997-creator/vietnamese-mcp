@@ -121,7 +121,11 @@ Plans:
   2. The landing page shows a pricing table with all 4 tiers (USD and VND pricing), a server catalog, and a signup CTA that routes to Supabase Auth
   3. Per-server tool reference docs are present for all 5 servers with correct tool names, parameters, and example responses
   4. The site is live on Mintlify (or equivalent) and accessible via a public URL
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [ ] 10-01-PLAN.md — Mintlify scaffold (docs.json), landing page (pricing, hero, CTA), quickstart (hosted/self-hosted tabs)
+- [ ] 10-02-PLAN.md — 5 per-server tool reference pages, server overview, pricing page, Mintlify deployment + human verification
 
 ## Progress
 
@@ -136,6 +140,6 @@ Plans:
 | 7. Metering | 2/2 | Complete   | 2026-03-23 | - |
 | 8. Billing | 3/3 | Complete   | 2026-03-23 | - |
 | 9. npm Publishing | 1/2 | In Progress|  | - |
-| 10. Landing Page & Docs | v1.1 | 0/? | Not started | - |
+| 10. Landing Page & Docs | v1.1 | 0/2 | Not started | - |
 
 **Full v1.0 details:** `.planning/milestones/v1.0-ROADMAP.md`
