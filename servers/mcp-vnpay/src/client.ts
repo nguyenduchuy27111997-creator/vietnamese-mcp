@@ -1,12 +1,10 @@
 import { isMockMode, loadFixture, McpApiError } from '@vn-mcp/shared';
-import { fileURLToPath } from 'node:url';
-import { join, dirname } from 'node:path';
 import { createHash } from 'node:crypto';
 import { getVnpayCredentials } from './credentials.js';
 import { buildVnpaySecureHash } from './signatures.js';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const MOCK_DIR = join(__dirname, 'mock');
+import createPaymentUrlFixture from './mock/createPaymentUrl.json' with { type: 'json' };
+import queryTransactionFixture from './mock/queryTransaction.json' with { type: 'json' };
 
 function generateTxnRef(amount: number, orderInfo: string): string {
   const hash = createHash('sha256')
@@ -81,7 +79,7 @@ export const vnpayClient = {
     }
 
     if (isMockMode('vnpay')) {
-      const fixture = loadFixture<{ _mock: true }>(join(MOCK_DIR, 'createPaymentUrl.json'));
+      const fixture = loadFixture<{ _mock: true }>(createPaymentUrlFixture);
 
       const txnRef = generateTxnRef(args.amount, args.orderInfo);
       const credentials = getVnpayCredentials();
@@ -174,7 +172,7 @@ export const vnpayClient = {
         vnp_BankCode: string;
         vnp_Amount: number;
         _mock: true;
-      }>(join(MOCK_DIR, 'queryTransaction.json'));
+      }>(queryTransactionFixture);
 
       return {
         vnp_TxnRef: args.txnRef,

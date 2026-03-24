@@ -1,10 +1,9 @@
 import { isMockMode, loadFixture, McpApiError } from '@vn-mcp/shared';
-import { fileURLToPath } from 'node:url';
-import { join, dirname } from 'node:path';
 import { createHash } from 'node:crypto';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const MOCK_DIR = join(__dirname, 'mock');
+import createOrderFixture from './mock/createOrder.json' with { type: 'json' };
+import queryOrderFixture from './mock/queryOrder.json' with { type: 'json' };
+import refundFixture from './mock/refund.json' with { type: 'json' };
 
 function generateAppTransId(amount: number, description: string): string {
   const now = new Date();
@@ -63,7 +62,7 @@ export const zaloPayClient = {
         order_url: string;
         order_token: string;
         _mock: true;
-      }>(join(MOCK_DIR, 'createOrder.json'));
+      }>(createOrderFixture);
 
       const appTransId = generateAppTransId(args.amount, args.description);
 
@@ -86,7 +85,7 @@ export const zaloPayClient = {
         return_message: string;
         zp_trans_id: number;
         _mock: true;
-      }>(join(MOCK_DIR, 'queryOrder.json'));
+      }>(queryOrderFixture);
 
       return {
         app_trans_id: args.appTransId,
@@ -111,7 +110,7 @@ export const zaloPayClient = {
         return_message: string;
         refund_id: number;
         _mock: true;
-      }>(join(MOCK_DIR, 'refund.json'));
+      }>(refundFixture);
 
       return {
         zp_trans_id: args.zpTransId,

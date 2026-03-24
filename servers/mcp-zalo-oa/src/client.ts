@@ -1,9 +1,9 @@
 import { isMockMode, loadFixture, McpApiError } from '@vn-mcp/shared';
-import { fileURLToPath } from 'node:url';
-import { join, dirname } from 'node:path';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const MOCK_DIR = join(__dirname, 'mock');
+import sendMessageFixture from './mock/sendMessage.json' with { type: 'json' };
+import getFollowerProfileFixture from './mock/getFollowerProfile.json' with { type: 'json' };
+import listFollowersFixture from './mock/listFollowers.json' with { type: 'json' };
+import refreshTokenFixture from './mock/refreshToken.json' with { type: 'json' };
 
 export const zaloOaClient = {
   async sendMessage(args: {
@@ -23,7 +23,7 @@ export const zaloOaClient = {
         status: number;
         message: string;
         _mock: true;
-      }>(join(MOCK_DIR, 'sendMessage.json'));
+      }>(sendMessageFixture);
 
       return {
         success: true,
@@ -57,7 +57,7 @@ export const zaloOaClient = {
         user_gender: number;
         user_id_by_app: string;
         _mock: true;
-      }>(join(MOCK_DIR, 'getFollowerProfile.json'));
+      }>(getFollowerProfileFixture);
 
       return {
         ...fixture,
@@ -94,7 +94,7 @@ export const zaloOaClient = {
         total: number;
         offset: number;
         _mock: true;
-      }>(join(MOCK_DIR, 'listFollowers.json'));
+      }>(listFollowersFixture);
 
       return fixture;
     }
@@ -114,7 +114,7 @@ export const zaloOaClient = {
         refresh_token: string;
         expires_in: number;
         _mock: true;
-      }>(join(MOCK_DIR, 'refreshToken.json'));
+      }>(refreshTokenFixture);
 
       return fixture;
     }

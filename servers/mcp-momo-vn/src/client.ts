@@ -1,10 +1,10 @@
 import { isMockMode, loadFixture, McpApiError } from '@vn-mcp/shared';
-import { fileURLToPath } from 'node:url';
-import { join, dirname } from 'node:path';
 import { createHash } from 'node:crypto';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const MOCK_DIR = join(__dirname, 'mock');
+import createPaymentFixture from './mock/createPayment.json' with { type: 'json' };
+import queryStatusFixture from './mock/queryStatus.json' with { type: 'json' };
+import refundFixture from './mock/refund.json' with { type: 'json' };
+import errorInsufficientBalanceFixture from './mock/errorInsufficientBalance.json' with { type: 'json' };
 
 function generateOrderId(amount: number, orderInfo: string): string {
   const hash = createHash('sha256')
@@ -58,7 +58,7 @@ export const momoClient = {
     extraData?: string;
   }): Promise<CreatePaymentResult> {
     if (args.amount === 99999999) {
-      loadFixture(join(MOCK_DIR, 'errorInsufficientBalance.json'));
+      loadFixture(errorInsufficientBalanceFixture);
       throw new McpApiError('1005', 'Insufficient balance', 'momo', 'Try a smaller amount');
     }
 
@@ -71,7 +71,7 @@ export const momoClient = {
         orderInfo: string;
         requestType: string;
         _mock: true;
-      }>(join(MOCK_DIR, 'createPayment.json'));
+      }>(createPaymentFixture);
 
       const orderId = generateOrderId(args.amount, args.orderInfo);
       const requestId = generateRequestId();
@@ -98,7 +98,7 @@ export const momoClient = {
         message: string;
         payType: string;
         _mock: true;
-      }>(join(MOCK_DIR, 'queryStatus.json'));
+      }>(queryStatusFixture);
 
       return {
         orderId: args.orderId,
@@ -126,7 +126,7 @@ export const momoClient = {
         message: string;
         responseTime: number;
         _mock: true;
-      }>(join(MOCK_DIR, 'refund.json'));
+      }>(refundFixture);
 
       const orderId = `MOMO_REFUND_${args.transId}`;
 

@@ -1,11 +1,13 @@
 {
   "name": "@vn-mcp/mcp-zalopay-vn",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "type": "module",
   "publishConfig": {
     "access": "public"
   },
-  "files": ["build"],
+  "files": [
+    "build"
+  ],
   "bin": {
     "mcp-zalopay-vn": "./build/index.js"
   },
