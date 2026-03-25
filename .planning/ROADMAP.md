@@ -218,8 +218,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 15-01-PLAN.md — Sidebar component, mobile nav Sheet overlay, AppShell layout wrapper
-- [ ] 15-02-PLAN.md — React Router v6 wiring, 6 placeholder pages, new-user redirect to /quickstart, human verification
+- [x] 15-01-PLAN.md — Sidebar component, mobile nav Sheet overlay, AppShell layout wrapper
+- [x] 15-02-PLAN.md — React Router v6 wiring, 6 placeholder pages, new-user redirect to /quickstart, human verification
 
 ### Phase 16: Core Pages
 **Goal**: Overview, API Keys, and Usage pages are fully redesigned with the new design system — showing real data from the backend with polished UI components
@@ -229,7 +229,12 @@ Plans:
   1. The Overview page displays a welcome card, key count, current-month usage, and active tier pulled from the API — all visible without scrolling on a standard desktop viewport
   2. The API Keys page lists all keys in a styled table with status badges; a user can search/filter, copy a key with a copy animation, create a new key via modal, and revoke a key via confirmation dialog
   3. The Usage page shows a bar/line chart of daily API calls over the last 30 days, a per-server breakdown table, and a warning banner when usage exceeds 80% of the tier limit
-**Plans**: TBD
+**Plans**: 3 plans
+
+Plans:
+- [ ] 16-01-PLAN.md — Overview page: useOverview hook + stat cards (keys, usage, tier) with progress bar and activity placeholder
+- [ ] 16-02-PLAN.md — API Keys page: AlertDialog component, table with search/filter, create modal with copy animation, revoke confirmation
+- [ ] 16-03-PLAN.md — Usage page: recharts area chart (30-day), per-server breakdown table, 80% limit warning banner
 
 ### Phase 17: Billing + Settings + Quickstart
 **Goal**: Billing, Settings, and Quickstart pages are complete — developers can upgrade their plan, update their profile, delete their account, and new users are guided through the onboarding wizard
@@ -259,8 +264,8 @@ Plans:
 | 12. Tech Debt | v1.2 | 2/2 | Complete | 2026-03-25 |
 | 13. Validation | v1.2 | 0/2 | Not started | - |
 | 14. Design System Foundation | v2.0 | 2/2 | Complete | 2026-03-25 |
-| 15. App Shell + Navigation | 2/2 | Complete    | 2026-03-25 | - |
-| 16. Core Pages | v2.0 | 0/TBD | Not started | - |
+| 15. App Shell + Navigation | v2.0 | 2/2 | Complete | 2026-03-25 |
+| 16. Core Pages | v2.0 | 0/3 | Not started | - |
 | 17. Billing + Settings + Quickstart | v2.0 | 0/TBD | Not started | - |
 
 **Full v1.0 details:** `.planning/milestones/v1.0-ROADMAP.md`
