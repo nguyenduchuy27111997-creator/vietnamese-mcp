@@ -32,6 +32,7 @@ export class StripeProvider implements PaymentProvider {
       customer_email: params.userEmail || undefined,
       client_reference_id: params.userId,
       metadata: { tier: params.tier },
+      subscription_data: { metadata: { tier: params.tier } },
       success_url: `${params.returnUrl}?upgraded=1`,
       cancel_url: params.returnUrl,
     });
