@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.2
 milestone_name: Production Deployment
 status: planning
-stopped_at: Phase 11 context gathered
-last_updated: "2026-03-25T05:38:11.659Z"
+stopped_at: "Checkpoint: Task 3 human-verify — https://vn-mcp-dashboard.pages.dev awaiting browser confirmation"
+last_updated: "2026-03-25T05:52:01.327Z"
 last_activity: 2026-03-25 — v1.2 roadmap created. Phase 11 is next.
 progress:
   total_phases: 9
   completed_phases: 6
-  total_plans: 16
-  completed_plans: 16
+  total_plans: 18
+  completed_plans: 17
   percent: 0
 ---
 
@@ -49,6 +49,8 @@ Key decisions relevant to v1.2:
 - loadFixture uses JSON imports (not readFileSync) — CF Workers compatible
 - docs.json (not mint.json) — Mintlify v4 config file name
 - MoMo mock-only until merchant KYC approved
+- [Phase 11-deploy]: Force-added .env.production past .gitignore — Supabase anon key is safe for client-side exposure (embedded in built JS)
+- [Phase 11-deploy]: Used wrangler pages deploy with static dist/ upload rather than Git-connected CF Pages deployment
 
 ### Pending Todos
 
@@ -62,6 +64,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-25T05:38:11.655Z
-Stopped at: Phase 11 context gathered
-Resume file: .planning/phases/11-deploy/11-CONTEXT.md
+Last session: 2026-03-25T05:52:01.325Z
+Stopped at: Checkpoint: Task 3 human-verify — https://vn-mcp-dashboard.pages.dev awaiting browser confirmation
+Resume file: None

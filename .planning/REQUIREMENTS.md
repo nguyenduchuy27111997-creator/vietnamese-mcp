@@ -9,10 +9,10 @@ Requirements for production deployment and tech debt resolution. Each maps to ro
 
 ### Deployment
 
-- [ ] **DEPLOY-01**: Dashboard SPA deployed to Cloudflare Pages with production VITE_GATEWAY_URL
+- [x] **DEPLOY-01**: Dashboard SPA deployed to Cloudflare Pages with production VITE_GATEWAY_URL
 - [ ] **DEPLOY-02**: Docs site deployed to Mintlify cloud with public URL
 - [ ] **DEPLOY-03**: All CTA links in docs and landing page point to working production URLs
-- [ ] **DEPLOY-04**: .env.production created for dashboard with gateway URL
+- [x] **DEPLOY-04**: .env.production created for dashboard with gateway URL
 
 ### Validation
 
@@ -55,10 +55,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| DEPLOY-01 | Phase 11 | Pending |
+| DEPLOY-01 | Phase 11 | Complete |
 | DEPLOY-02 | Phase 11 | Pending |
 | DEPLOY-03 | Phase 11 | Pending |
-| DEPLOY-04 | Phase 11 | Pending |
+| DEPLOY-04 | Phase 11 | Complete |
 | DEBT-01 | Phase 12 | Pending |
 | DEBT-02 | Phase 12 | Pending |
 | DEBT-03 | Phase 12 | Pending |

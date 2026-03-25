@@ -194,7 +194,7 @@ Plans:
 | 8. Billing | v1.1 | 3/3 | Complete | 2026-03-23 |
 | 9. npm Publishing | v1.1 | 1/2 | In Progress | - |
 | 10. Landing Page & Docs | v1.1 | 2/2 | Complete | 2026-03-25 |
-| 11. Deploy | v1.2 | 0/2 | Not started | - |
+| 11. Deploy | 1/2 | In Progress|  | - |
 | 12. Tech Debt | v1.2 | 0/2 | Not started | - |
 | 13. Validation | v1.2 | 0/2 | Not started | - |
 
