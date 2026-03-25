@@ -3,7 +3,8 @@
 ## Milestones
 
 - ✅ **v1.0 MCP Servers** — Phases 1-4 (shipped 2026-03-21)
-- 🚧 **v1.1 Platform Launch** — Phases 5-10 (in progress)
+- ✅ **v1.1 Platform Launch** — Phases 5-10 (shipped 2026-03-25)
+- 🚧 **v1.2 Production Deployment** — Phases 11-13 (in progress)
 
 ## Phases
 
@@ -17,16 +18,25 @@
 
 </details>
 
-### 🚧 v1.1 Platform Launch (In Progress)
+<details>
+<summary>✅ v1.1 Platform Launch (Phases 5-10) — SHIPPED 2026-03-25</summary>
 
-**Milestone Goal:** Transform local-only MCP servers into a hosted SaaS platform with metered billing, so developers can connect via SSE transport without running anything locally.
+- [x] Phase 5: Gateway — All 5 MCP servers reachable via Streamable HTTP on Cloudflare Workers (completed 2026-03-20)
+- [x] Phase 6: Auth & API Keys — Users can sign up, generate API keys, and be authenticated at the gateway (completed 2026-03-22)
+- [x] Phase 7: Metering — Every tool call is counted, enforced, and queryable per billing period (completed 2026-03-23)
+- [x] Phase 8: Billing — Stripe (USD) and MoMo (VND) payments upgrade user tiers in Supabase (completed 2026-03-23)
+- [x] Phase 9: npm Publishing — All 5 servers published to npm under @vn-mcp scope for self-hosted use (completed TBD)
+- [x] Phase 10: Landing Page & Docs — Mintlify site with pricing, quickstart, and per-server tool reference (completed 2026-03-25)
 
-- [x] **Phase 5: Gateway** — All 5 MCP servers reachable via Streamable HTTP on Cloudflare Workers (completed 2026-03-20)
-- [x] **Phase 6: Auth & API Keys** — Users can sign up, generate API keys, and be authenticated at the gateway (completed 2026-03-22)
-- [x] **Phase 7: Metering** — Every tool call is counted, enforced, and queryable per billing period (completed 2026-03-23)
-- [x] **Phase 8: Billing** — Stripe (USD) and MoMo (VND) payments upgrade user tiers in Supabase (completed 2026-03-23)
-- [ ] **Phase 9: npm Publishing** — All 5 servers published to npm under @vn-mcp scope for self-hosted use
-- [x] **Phase 10: Landing Page & Docs** — Mintlify site with pricing, quickstart, and per-server tool reference (completed 2026-03-25)
+</details>
+
+### 🚧 v1.2 Production Deployment (In Progress)
+
+**Milestone Goal:** Deploy all services to production with working public URLs, validate the full user journey end-to-end, and resolve accumulated tech debt from v1.1.
+
+- [ ] **Phase 11: Deploy** — Dashboard on CF Pages and docs on Mintlify cloud, both live with production URLs and correct env config
+- [ ] **Phase 12: Tech Debt** — Auth test stubs implemented, MOMO_ACCESS_KEY resolved, Tinybird tool name fixed
+- [ ] **Phase 13: Validation** — Full E2E user journey verified: signup → key → tool call → usage → billing → self-hosted npm
 
 ## Phase Details
 
@@ -43,9 +53,9 @@
 **Plans**: 3 plans
 
 Plans:
-- [ ] 05-01-PLAN.md — Workspace scaffolding: `apps/*` workspace glob, server `./tools` subpath exports, gateway package with wrangler.toml (`usage_model = "unbound"`), tsconfig, vitest config, and Wave 0 test stubs
-- [ ] 05-02-PLAN.md — Gateway core: serverRegistry.ts (5 McpServer instances at module scope), tierAccess.ts (MCP error -32001), router.ts (stateless transport per request), cors.ts, index.ts (Hono app), concrete GATE-01–GATE-05 tests
-- [ ] 05-03-PLAN.md — SSE heartbeat: heartbeat.ts (`wrapWithHeartbeat` via TransformStream), router.ts update, human smoke test via wrangler dev
+- [x] 05-01-PLAN.md — Workspace scaffolding: `apps/*` workspace glob, server `./tools` subpath exports, gateway package with wrangler.toml (`usage_model = "unbound"`), tsconfig, vitest config, and Wave 0 test stubs
+- [x] 05-02-PLAN.md — Gateway core: serverRegistry.ts (5 McpServer instances at module scope), tierAccess.ts (MCP error -32001), router.ts (stateless transport per request), cors.ts, index.ts (Hono app), concrete GATE-01–GATE-05 tests
+- [x] 05-03-PLAN.md — SSE heartbeat: heartbeat.ts (`wrapWithHeartbeat` via TransformStream), router.ts update, human smoke test via wrangler dev
 
 ### Phase 6: Auth & API Keys
 **Goal**: Users can sign up, generate API keys scoped to their tier, and the gateway authenticates every request against those keys with KV caching and RLS isolation
@@ -60,10 +70,10 @@ Plans:
 **Plans**: 4 plans
 
 Plans:
-- [ ] 06-01-PLAN.md — Foundation: GatewayEnv types (types.ts), api_keys SQL migration with RLS + indexes, Wave 0 failing test stubs
-- [ ] 06-02-PLAN.md — Auth core: authMiddleware (Bearer → SHA-256 → KV → Supabase), getServiceRoleClient factory, index.ts wiring (replace const tier stub), wrangler.toml KV binding
-- [ ] 06-03-PLAN.md — Key CRUD: /keys router (GET list, POST create sk_test_ key, DELETE revoke + KV evict), mounted in index.ts
-- [ ] 06-04-PLAN.md — Dashboard: React + Vite SPA on CF Pages with Supabase Auth sign up/login, key list, create, revoke; human smoke test gate
+- [x] 06-01-PLAN.md — Foundation: GatewayEnv types (types.ts), api_keys SQL migration with RLS + indexes, Wave 0 failing test stubs
+- [x] 06-02-PLAN.md — Auth core: authMiddleware (Bearer → SHA-256 → KV → Supabase), getServiceRoleClient factory, index.ts wiring (replace const tier stub), wrangler.toml KV binding
+- [x] 06-03-PLAN.md — Key CRUD: /keys router (GET list, POST create sk_test_ key, DELETE revoke + KV evict), mounted in index.ts
+- [x] 06-04-PLAN.md — Dashboard: React + Vite SPA on CF Pages with Supabase Auth sign up/login, key list, create, revoke; human smoke test gate
 
 ### Phase 7: Metering
 **Goal**: Every tool call emitted through the gateway is logged to Tinybird non-blocking, monthly call counts are queryable per key, and the gateway hard-stops requests when a tier limit is reached
@@ -77,8 +87,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 07-01-PLAN.md — Metering core: GatewayEnv TINYBIRD_TOKEN binding, tinybird.ts fire-and-forget event sender, usageCounter.ts KV counter with tier limits and -32002 error, full unit tests
-- [ ] 07-02-PLAN.md — Gateway wiring + dashboard: index.ts metering hook (usage check before, waitUntil after), /usage route, integration tests, dashboard usage bar, Tinybird account setup checkpoint
+- [x] 07-01-PLAN.md — Metering core: GatewayEnv TINYBIRD_TOKEN binding, tinybird.ts fire-and-forget event sender, usageCounter.ts KV counter with tier limits and -32002 error, full unit tests
+- [x] 07-02-PLAN.md — Gateway wiring + dashboard: index.ts metering hook (usage check before, waitUntil after), /usage route, integration tests, dashboard usage bar, Tinybird account setup checkpoint
 
 ### Phase 8: Billing
 **Goal**: Developers can pay via Stripe (USD) or MoMo (VND) to upgrade their tier; webhooks update Supabase atomically with idempotency; free tier requires no payment info
@@ -93,9 +103,9 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 08-01-PLAN.md — Billing foundation: PaymentProvider interface, tierUpgrade utility, webhook_events migration, GatewayEnv bindings, Wave 0 test stubs
-- [ ] 08-02-PLAN.md — Stripe Checkout, webhook handler, Customer Portal, billing routes, index.ts wiring
-- [ ] 08-03-PLAN.md — MoMo provider + IPN handler, stripe_customer_id migration, dashboard billing UI
+- [x] 08-01-PLAN.md — Billing foundation: PaymentProvider interface, tierUpgrade utility, webhook_events migration, GatewayEnv bindings, Wave 0 test stubs
+- [x] 08-02-PLAN.md — Stripe Checkout, webhook handler, Customer Portal, billing routes, index.ts wiring
+- [x] 08-03-PLAN.md — MoMo provider + IPN handler, stripe_customer_id migration, dashboard billing UI
 
 ### Phase 9: npm Publishing
 **Goal**: All 5 server packages are published to npm under @vn-mcp scope and installable standalone outside the monorepo, enabling the self-hosted free tier
@@ -109,7 +119,7 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 09-01-PLAN.md — Package prep: update all 6 package.json (version, publishConfig, files, exports, deps), build all packages, verify tarballs with npm pack --dry-run
+- [x] 09-01-PLAN.md — Package prep: update all 6 package.json (version, publishConfig, files, exports, deps), build all packages, verify tarballs with npm pack --dry-run
 - [ ] 09-02-PLAN.md — Publish: npm account + org setup, publish shared first then 5 servers, standalone install smoke test
 
 ### Phase 10: Landing Page & Docs
@@ -124,8 +134,51 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 10-01-PLAN.md — Mintlify scaffold (docs.json), landing page (pricing, hero, CTA), quickstart (hosted/self-hosted tabs)
-- [ ] 10-02-PLAN.md — 5 per-server tool reference pages, server overview, pricing page, Mintlify deployment + human verification
+- [x] 10-01-PLAN.md — Mintlify scaffold (docs.json), landing page (pricing, hero, CTA), quickstart (hosted/self-hosted tabs)
+- [x] 10-02-PLAN.md — 5 per-server tool reference pages, server overview, pricing page, Mintlify deployment + human verification
+
+### Phase 11: Deploy
+**Goal**: Dashboard SPA and docs site are live at public production URLs, with correct environment configuration pointing to the deployed gateway
+**Depends on**: Phase 10
+**Requirements**: DEPLOY-01, DEPLOY-02, DEPLOY-03, DEPLOY-04
+**Success Criteria** (what must be TRUE):
+  1. Visiting the dashboard URL loads the React SPA and shows the login screen — not a CF Pages 404
+  2. Visiting the docs URL shows the Mintlify site with all pages navigable — not a "coming soon" placeholder
+  3. Every signup CTA and docs link in the docs site and landing page navigates to a working URL (no dead links)
+  4. The dashboard connects to the production gateway — API calls from the deployed SPA reach the deployed CF Workers endpoint
+**Plans**: TBD
+
+Plans:
+- [ ] 11-01: Deploy dashboard to CF Pages with VITE_GATEWAY_URL and .env.production
+- [ ] 11-02: Deploy docs to Mintlify cloud and update all CTA links to production URLs
+
+### Phase 12: Tech Debt
+**Goal**: Accumulated v1.1 tech debt is resolved — test stubs are implemented, wrangler.toml is clean, and Tinybird receives correct tool names on every event
+**Depends on**: Phase 11
+**Requirements**: DEBT-01, DEBT-02, DEBT-03
+**Success Criteria** (what must be TRUE):
+  1. Running `npm test` in the gateway workspace shows zero skipped or stubbed tests — auth-supabase.test.ts and rls-isolation.test.ts have real assertions that pass
+  2. `wrangler deploy` succeeds without unknown binding warnings — MOMO_ACCESS_KEY is either present in wrangler.toml or removed from GatewayEnv types
+  3. A tool call logged in Tinybird shows the actual tool name (e.g. `momo_create_payment`) instead of `unknown`
+**Plans**: TBD
+
+Plans:
+- [ ] 12-01: Implement auth test stubs (auth-supabase.test.ts, rls-isolation.test.ts) and fix MOMO_ACCESS_KEY in wrangler.toml
+- [ ] 12-02: Fix Tinybird tool name extraction from MCP request body
+
+### Phase 13: Validation
+**Goal**: The full end-to-end user journey works in production — from signup through API key creation, tool calls, usage tracking, tier upgrade, and self-hosted npm install
+**Depends on**: Phase 11, Phase 12
+**Requirements**: VAL-01, VAL-02, VAL-03
+**Success Criteria** (what must be TRUE):
+  1. A new user can sign up on the deployed dashboard, create an API key, make a tool call through the production gateway, and see their usage increment
+  2. A free-tier user can complete Stripe Checkout in the deployed dashboard and their key's tier upgrades to Starter within one webhook delivery
+  3. A developer can run `npm install @vn-mcp/momo`, add the config to `.mcp.json`, and complete a tool call end-to-end without touching the hosted gateway
+**Plans**: TBD
+
+Plans:
+- [ ] 13-01: E2E validation — hosted path (signup → key → tool call → usage → billing upgrade)
+- [ ] 13-02: E2E validation — self-hosted npm path (install → config → tool call)
 
 ## Progress
 
@@ -135,11 +188,14 @@ Plans:
 | 2. MoMo Server | v1.0 | 3/3 | Complete | 2026-03-18 |
 | 3. ZaloPay + VNPAY Servers | v1.0 | 2/2 | Complete | 2026-03-18 |
 | 4. Zalo OA + ViettelPay Servers | v1.0 | 3/3 | Complete | 2026-03-18 |
-| 5. Gateway | 3/3 | Complete   | 2026-03-20 | - |
+| 5. Gateway | v1.1 | 3/3 | Complete | 2026-03-20 |
 | 6. Auth & API Keys | v1.1 | 4/4 | Complete | 2026-03-22 |
-| 7. Metering | 2/2 | Complete   | 2026-03-23 | - |
-| 8. Billing | 3/3 | Complete   | 2026-03-23 | - |
-| 9. npm Publishing | 1/2 | In Progress|  | - |
-| 10. Landing Page & Docs | 2/2 | Complete    | 2026-03-25 | - |
+| 7. Metering | v1.1 | 2/2 | Complete | 2026-03-23 |
+| 8. Billing | v1.1 | 3/3 | Complete | 2026-03-23 |
+| 9. npm Publishing | v1.1 | 1/2 | In Progress | - |
+| 10. Landing Page & Docs | v1.1 | 2/2 | Complete | 2026-03-25 |
+| 11. Deploy | v1.2 | 0/2 | Not started | - |
+| 12. Tech Debt | v1.2 | 0/2 | Not started | - |
+| 13. Validation | v1.2 | 0/2 | Not started | - |
 
 **Full v1.0 details:** `.planning/milestones/v1.0-ROADMAP.md`
