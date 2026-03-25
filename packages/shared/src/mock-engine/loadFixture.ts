@@ -1,14 +1,11 @@
-import { readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
-
 /**
- * Load a JSON fixture file and inject _mock: true.
- * @param fixturePath - absolute path or path relative to cwd
- * @returns Parsed JSON with _mock: true field added
+ * Tag a pre-imported fixture object with _mock: true.
+ * Works in all runtimes (Node, Cloudflare Workers, etc.)
+ * because it no longer reads from the filesystem.
+ *
+ * @param fixture - a JSON object (typically imported via `import … from './mock/foo.json'`)
+ * @returns A shallow copy with `_mock: true` added
  */
-export function loadFixture<T = Record<string, unknown>>(fixturePath: string): T & { _mock: true } {
-  const fullPath = resolve(fixturePath);
-  const raw = readFileSync(fullPath, 'utf-8');
-  const data = JSON.parse(raw) as T;
-  return { ...data, _mock: true as const };
+export function loadFixture<T = Record<string, unknown>>(fixture: T): T & { _mock: true } {
+  return { ...fixture, _mock: true as const };
 }

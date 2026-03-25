@@ -5,7 +5,12 @@ compatibility_flags = ["nodejs_compat"]
 
 [vars]
 MOCK_MODE = "true"
-TINYBIRD_HOST = "https://api.tinybird.co"
+TINYBIRD_HOST = "https://api.europe-west2.gcp.tinybird.co"
+STRIPE_PRICE_STARTER = "price_1TE6ObGzKT7ZenSQoHlXrIsi"
+STRIPE_PRICE_PRO = "price_1TE6OhGzKT7ZenSQ4jaGCbh1"
+STRIPE_PRICE_BUSINESS = "price_1TE6OiGzKT7ZenSQb6bYTzxR"
+MOMO_PARTNER_CODE = "MOMOBKUN20180529"
+MOMO_SECRET_KEY = "placeholder_pending_kyc"
 
 # KV namespace for API key caching (60s TTL).
 # Fill in real IDs after running:

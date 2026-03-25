@@ -1,19 +1,19 @@
 import { WebStandardStreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/webStandardStreamableHttp.js';
-import { servers } from './serverRegistry.js';
+import { serverFactories } from './serverRegistry.js';
 import { checkTierAccess } from './tierAccess.js';
 import { wrapWithHeartbeat } from './heartbeat.js';
 
 /**
  * Handle an incoming MCP request for a named server.
- * Creates a NEW stateless transport per request — no shared state between requests.
+ * Creates a NEW server + transport per request — no shared state between requests.
  */
 export async function handleMcpRequest(
   serverName: string,
   req: Request,
   tier: string,
 ): Promise<Response> {
-  const server = servers[serverName];
-  if (!server) {
+  const createServer = serverFactories[serverName];
+  if (!createServer) {
     return new Response(
       JSON.stringify({
         jsonrpc: '2.0',
@@ -32,6 +32,7 @@ export async function handleMcpRequest(
     sessionIdGenerator: undefined,
   });
 
+  const server = createServer();
   await server.connect(transport);
   const response = await transport.handleRequest(req);
   return wrapWithHeartbeat(response);

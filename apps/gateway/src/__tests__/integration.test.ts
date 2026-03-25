@@ -10,7 +10,7 @@ import { describe, it, expect, beforeAll } from 'vitest';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { createTestClient, callTool } from '@vn-mcp/shared/test-helpers';
 import type { Client } from '@modelcontextprotocol/sdk/client/index.js';
-import { servers, FREE_SERVERS } from '../serverRegistry.js';
+import { serverFactories, FREE_SERVERS } from '../serverRegistry.js';
 import { checkTierAccess } from '../tierAccess.js';
 import { registerAll as registerMomo } from '@vn-mcp/mcp-momo-vn/tools';
 import { registerAll as registerZaloPay } from '@vn-mcp/mcp-zalopay-vn/tools';
@@ -35,12 +35,12 @@ async function freshClient(register: (s: McpServer) => void, name: string): Prom
 // GATE-01: Server registry structure
 describe('GATE-01: Server registry contains exactly 5 named servers', () => {
   it('servers object contains exactly 5 named servers', () => {
-    expect(Object.keys(servers)).toHaveLength(5);
-    expect(Object.keys(servers)).toContain('momo');
-    expect(Object.keys(servers)).toContain('zalopay');
-    expect(Object.keys(servers)).toContain('vnpay');
-    expect(Object.keys(servers)).toContain('zalo-oa');
-    expect(Object.keys(servers)).toContain('viettel-pay');
+    expect(Object.keys(serverFactories)).toHaveLength(5);
+    expect(Object.keys(serverFactories)).toContain('momo');
+    expect(Object.keys(serverFactories)).toContain('zalopay');
+    expect(Object.keys(serverFactories)).toContain('vnpay');
+    expect(Object.keys(serverFactories)).toContain('zalo-oa');
+    expect(Object.keys(serverFactories)).toContain('viettel-pay');
   });
 });
 
@@ -142,8 +142,8 @@ describe('GATE-04: Tier access control', () => {
 // GATE-05: Per-connection McpServer isolation (no shared state)
 describe('GATE-05: McpServer isolation', () => {
   it('servers object holds independent instances — different references', () => {
-    expect(servers['momo']).not.toBe(servers['zalopay']);
-    expect(servers['momo']).not.toBe(servers['vnpay']);
+    expect(serverFactories['momo']).not.toBe(serverFactories['zalopay']);
+    expect(serverFactories['momo']).not.toBe(serverFactories['vnpay']);
   });
 
   it('concurrent clients on same server receive independent connections', async () => {
