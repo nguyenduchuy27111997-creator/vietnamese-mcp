@@ -265,7 +265,7 @@ Plans:
 | 13. Validation | v1.2 | 0/2 | Not started | - |
 | 14. Design System Foundation | v2.0 | 2/2 | Complete | 2026-03-25 |
 | 15. App Shell + Navigation | v2.0 | 2/2 | Complete | 2026-03-25 |
-| 16. Core Pages | v2.0 | 0/3 | Not started | - |
+| 16. Core Pages | 1/3 | In Progress|  | - |
 | 17. Billing + Settings + Quickstart | v2.0 | 0/TBD | Not started | - |
 
 **Full v1.0 details:** `.planning/milestones/v1.0-ROADMAP.md`

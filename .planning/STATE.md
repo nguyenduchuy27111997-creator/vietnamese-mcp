@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v2.0
 milestone_name: Modern Dashboard
 status: planning
-stopped_at: Phase 16 context gathered
-last_updated: "2026-03-25T13:44:50.966Z"
+stopped_at: Completed 16-01-PLAN.md
+last_updated: "2026-03-25T13:54:02.129Z"
 last_activity: 2026-03-25 — v2.0 roadmap created. Phases 14-17 defined, all 15 requirements mapped.
 progress:
   total_phases: 13
   completed_phases: 11
-  total_plans: 26
-  completed_plans: 26
+  total_plans: 29
+  completed_plans: 27
   percent: 0
 ---
 
@@ -55,6 +55,7 @@ Key decisions relevant to v2.0:
 - [Phase 15-app-shell-navigation]: SheetTitle with sr-only class for accessibility, no extra @radix-ui/react-visually-hidden dependency needed
 - [Phase 15]: React.lazy + dynamic import used for per-page code splitting — build output shows 6 separate page chunks
 - [Phase 15]: NewUserRedirect checks keys.length === 0 only on root path to avoid redirect loops
+- [Phase 16-core-pages]: useOverview aggregate hook delegates to useKeys and useUsage with no direct API calls
 
 ### Pending Todos
 
@@ -67,6 +68,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-25T13:44:50.964Z
-Stopped at: Phase 16 context gathered
-Resume file: .planning/phases/16-core-pages/16-CONTEXT.md
+Last session: 2026-03-25T13:54:02.127Z
+Stopped at: Completed 16-01-PLAN.md
+Resume file: None
