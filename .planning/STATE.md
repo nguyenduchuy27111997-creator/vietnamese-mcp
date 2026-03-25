@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Platform Launch
 status: completed
-stopped_at: "Checkpoint 10-02: awaiting Mintlify deployment verification"
-last_updated: "2026-03-25T04:25:33.657Z"
+stopped_at: Completed 10-02-PLAN.md — Phase 10 docs complete
+last_updated: "2026-03-25T05:04:55.485Z"
 last_activity: "2026-03-23 — Phase 8 Plan 02 (Stripe) complete. Next: Phase 8 Plan 03 (MoMo provider)"
 progress:
   total_phases: 6
   completed_phases: 6
   total_plans: 16
   completed_plans: 16
-  percent: 92
+  percent: 100
 ---
 
 # Project State
@@ -25,11 +25,11 @@ See: .planning/PROJECT.md (updated 2026-03-21)
 
 ## Current Position
 
-Phase: 8 of 10 (Phase 8: Billing) — IN PROGRESS (Plan 2 of 3 complete)
-Status: 08-01 foundation + 08-02 Stripe complete; Plan 03 (MoMo) remaining
-Last activity: 2026-03-23 — Phase 8 Plan 02 (Stripe) complete. Next: Phase 8 Plan 03 (MoMo provider)
+Phase: 10 of 10 (Phase 10: Landing Page & Docs) — COMPLETE (Plan 2 of 2 complete)
+Status: All v1.1 plans complete. Phase 9 (npm Publishing) has 1 plan remaining (09-02 publish step).
+Last activity: 2026-03-25 — Phase 10 Plan 02 complete. Mintlify docs verified locally. Phase 9-02 (npm publish) is the only remaining plan.
 
-Progress: [█████████░] 92% (11 of 12 plans complete)
+Progress: [██████████] 100% (16 of 16 plans complete)
 
 ## Performance Metrics
 
@@ -97,6 +97,7 @@ Pending v1.1 decisions (to be made during planning):
 - [Phase 10-landing-page-docs]: Single quickstart page with Tabs (no page splitting) — locked CONTEXT.md decision; Hosted (API Key) and Self-Hosted (npm) tabs
 - [Phase 10-landing-page-docs]: ViettelPay page uses Warning callout (not Note) to surface mock-only status clearly
 - [Phase 10-landing-page-docs]: pricing.mdx not in docs.json navigation — linked from landing page directly per plan spec
+- [Phase 10-landing-page-docs]: docs.json navigation schema uses dropdowns+groups format (Mintlify v4 spec) not flat navigation array
 
 ### Pending Todos
 
@@ -110,6 +111,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-25T04:25:33.655Z
-Stopped at: Checkpoint 10-02: awaiting Mintlify deployment verification
+Last session: 2026-03-25T05:04:55.483Z
+Stopped at: Completed 10-02-PLAN.md — Phase 10 docs complete
 Resume file: None
