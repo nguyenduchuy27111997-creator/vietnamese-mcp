@@ -1,5 +1,14 @@
 # Milestones
 
+## v1.1 Platform Launch (Shipped: 2026-03-25)
+
+**Phases completed:** 6 phases, 16 plans, 3 tasks
+
+**Key accomplishments:**
+- (none recorded)
+
+---
+
 ## v1.0 MCP Servers (Shipped: 2026-03-21)
 
 **Phases completed:** 4 phases, 11 plans, ~22 tasks

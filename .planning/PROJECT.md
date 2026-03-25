@@ -2,11 +2,11 @@
 
 ## What This Is
 
-A monorepo of 5 MCP (Model Context Protocol) servers that connect Claude Code with popular Vietnamese fintech and messaging APIs — MoMo, ZaloPay, VNPAY, Zalo OA, and ViettelPay. The first MCP servers built specifically for the Vietnamese developer ecosystem, enabling Claude Code to natively create payments, check transactions, send messages, and manage OAuth tokens across VN platforms.
+A hosted SaaS platform and npm package collection of 5 MCP (Model Context Protocol) servers for Vietnamese fintech and messaging APIs — MoMo, ZaloPay, VNPAY, Zalo OA, and ViettelPay. Developers connect via SSE transport through a Cloudflare Workers gateway with API key auth, usage metering, and tiered billing — or self-host via npm install.
 
 ## Core Value
 
-Developer installs an MCP server, adds it to `.mcp.json`, and immediately has Claude Code create payment links, check transaction status, send Zalo messages — without writing any integration boilerplate.
+Developer installs an MCP server or signs up for a hosted API key, adds it to `.mcp.json`, and immediately has Claude Code create payment links, check transaction status, send Zalo messages — without writing any integration boilerplate.
 
 ## Requirements
 
@@ -27,51 +27,40 @@ Developer installs an MCP server, adds it to `.mcp.json`, and immediately has Cl
 - ✓ VNPAY: 3 tools (create_payment_url, verify_return, query_transaction) — v1.0
 - ✓ Zalo OA: 4 tools (send_message, get_follower_profile, list_followers, refresh_token) — v1.0
 - ✓ ViettelPay: 3 tools (create_payment, query_status, refund) with MOCK_DEVIATIONS.md — v1.0
+- ✓ Hosted MCP gateway on Cloudflare Workers (SSE/streamable HTTP) — v1.1
+- ✓ Auth + API key management via Supabase (user accounts, per-tier keys) — v1.1
+- ✓ Usage tracking via Tinybird (API calls per key, tier limits) — v1.1
+- ✓ Billing via Stripe (USD) + MoMo mock (VND) with 4 pricing tiers — v1.1
+- ✓ npm publishing for all 5 servers + shared under @vn-mcp scope — v1.1
+- ✓ Landing page + developer docs (Mintlify) — v1.1
+- ✓ 4 pricing tiers: Free / Starter $19 / Pro $49 / Business $149 — v1.1
 
 ### Active
 
-- [ ] Hosted MCP servers on Cloudflare Workers (SSE/streamable HTTP transport)
-- [ ] Auth + API key management via Supabase (user accounts, per-tier keys)
-- [ ] Usage tracking via Tinybird (API calls per key)
-- [ ] Billing via Stripe (USD) + MoMo (VND) with 4 pricing tiers
-- [ ] npm publishing for all 5 servers (free/self-hosted option)
-- [ ] Landing page + developer docs (Mintlify or similar)
-- [ ] 4 pricing tiers: Free / Starter $19 / Pro $49 / Business $149
+(None — planning next milestone)
 
 ### Out of Scope
 
 - Real API integration — still mock-first until developer accounts approved
 - Banking API servers (VCB, TCB, MB) — Phase 2 Growth per brief
 - E-commerce integrations (Shopee, Tiki) — Phase 2 Growth per brief
-- QR code generation / VietQR / VNPAY bank list — feature additions deferred to v1.2+
+- QR code generation / VietQR / VNPAY bank list — feature additions deferred
 - Zalo OA ZNS transactional notifications — feature addition deferred
 - White-label licensing — after platform validated with direct users
-- Browser-based OAuth flow — MCP servers use API key auth via gateway
-- 1:1 REST endpoint mapping — MCP best practice is 4-6 curated tools per server
-
-## Current Milestone: v1.1 Platform Launch
-
-**Goal:** Transform local-only MCP servers into a hosted SaaS platform with metered billing, so developers can connect via SSE transport without running anything locally.
-
-**Target features:**
-- Hosted MCP gateway on Cloudflare Workers (all 5 servers accessible via HTTP)
-- User auth + API key management (Supabase)
-- Usage metering + billing (Tinybird + Stripe + MoMo)
-- npm publish all 5 servers for self-hosted free tier
-- Landing page with pricing, docs, and signup
+- Usage dashboard UI (charts, analytics) — deferred to after first 20 paying customers
+- Custom domain for docs — verify Mintlify free tier support
 
 ## Context
 
-Shipped v1.0 with 2,980 LOC TypeScript across 5 servers and 1 shared package.
-Tech stack: Node.js 20, TypeScript, MCP SDK, Zod, Vitest.
-Architecture: npm workspaces monorepo with composite TypeScript project references.
-All servers run in mock mode — no real API accounts yet.
-Each server proves a distinct auth/signing scheme works with shared primitives:
-- MoMo: HMAC-SHA256 with `&key=value` field ordering
-- ZaloPay: Dual-key HMAC-SHA256 (key1 outbound, key2 callback) with pipe-separated fields
-- VNPAY: URL-parameter HMAC-SHA512 with alphabetical sort
-- Zalo OA: OAuth access/refresh token lifecycle
-- ViettelPay: Mock-only REST+HMAC (real API is SOAP+RSA, documented in MOCK_DEVIATIONS.md)
+Shipped v1.1 Platform Launch with ~7,000 LOC TypeScript across 5 servers, 1 shared package, 1 gateway, 1 dashboard, and 1 docs site.
+
+**Tech stack:** Node.js 20, TypeScript, MCP SDK, Zod, Vitest, Hono.js, Cloudflare Workers, Supabase, Tinybird, Stripe, Mintlify.
+
+**Architecture:** npm workspaces monorepo. Gateway on CF Workers routes MCP requests to 5 server instances via SSE. Auth via SHA-256 hashed API keys with KV caching. Usage metering via Tinybird + KV counters. Billing via Stripe (USD recurring) + MoMo (VND one-time mock).
+
+**Published packages:** @vn-mcp/shared@1.0.0, 5 servers @1.0.2 on npm.
+
+**Known tech debt (8 items):** RLS disabled, MoMo mock-only pending KYC, 6 test stubs, tool name 'unknown' in Tinybird, dashboard not deployed to CF Pages, Mintlify cloud pending, custom domain not configured.
 
 ## Constraints
 
@@ -81,9 +70,9 @@ Each server proves a distinct auth/signing scheme works with shared primitives:
 - **MCP Protocol**: MCP spec v1.0 (stable as of Q1/2026)
 - **Package Manager**: npm — target audience expects npm install workflow
 - **Gateway**: Hono.js on Cloudflare Workers — edge runtime, $0 cost to 100k req/day
-- **Auth**: Supabase Auth + Postgres — built-in API key management, RLS security
-- **Metering**: Tinybird (ClickHouse) — real-time API call analytics
-- **Billing**: Stripe (USD international) + MoMo (VND domestic)
+- **Auth**: Supabase Auth + Postgres — RLS disabled, gateway enforces isolation
+- **Metering**: Tinybird (ClickHouse) — real-time API call analytics, free 1k events/day
+- **Billing**: Stripe (USD international) + MoMo (VND domestic, mock until KYC)
 - **Budget**: < $500 for first 3 months hosting
 
 ## Key Decisions
@@ -91,18 +80,17 @@ Each server proves a distinct auth/signing scheme works with shared primitives:
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
 | Monorepo over separate repos | Shared utilities (auth, errors, testing), consistent patterns | ✓ Good — shared package used by all 5 servers |
-| Mock-first approach | No API accounts yet; enables full dev/test cycle | ✓ Good — 117 tests pass, all servers functional |
+| Mock-first approach | No API accounts yet; enables full dev/test cycle | ✓ Good — 117+ tests pass, all servers functional |
 | Build MoMo first to validate patterns | Prove architecture before replicating to 4 more servers | ✓ Good — pattern replicated cleanly to all servers |
 | ViettelPay built last (low confidence) | No confirmed public API docs; MOCK_DEVIATIONS.md documents all assumptions | ✓ Good — 13-row deviation table written before code |
 | TypeScript + Zod | MCP SDK requirement + type-safe schema validation | ✓ Good — clean compilation, runtime validation |
-| Dual-key scheme for ZaloPay | key1 for outbound, key2 for callback MAC — per official docs | ✓ Good — round-trip signing proven in tests |
-| URL-parameter signing for VNPAY | Alphabetical sort + HMAC-SHA512 — distinct from POST body signing | ✓ Good — shared signHmacSha512 handles both strategies |
-| Zero-params refreshToken for Zalo OA | Credentials from env only, no user-supplied tokens | ✓ Good — simplest secure approach |
-
-| Hosted MCP via Cloudflare Workers | Edge runtime, $0 to 100k req/day, SSE transport for MCP | — Pending |
-| Supabase for auth + API keys | Built-in RLS, API key management, free tier sufficient | — Pending |
-| Stripe + MoMo dual billing | USD international + VND domestic covers all target users | — Pending |
-| Tinybird for usage metering | Real-time ClickHouse analytics, free 1k events/day | — Pending |
+| Hosted MCP via Cloudflare Workers | Edge runtime, $0 to 100k req/day, SSE transport for MCP | ✓ Good — gateway deployed, 5 servers accessible |
+| Supabase for auth + API keys | Built-in auth, Postgres for key storage | ✓ Good — RLS didn't work as expected (disabled), but gateway isolation sufficient |
+| Stripe + MoMo dual billing | USD international + VND domestic covers all target users | ✓ Good — Stripe live, MoMo mock until KYC |
+| Tinybird for usage metering | Real-time ClickHouse analytics, fire-and-forget | ✓ Good — non-blocking via waitUntil |
+| KV counter for tier enforcement | Fast limit check without Tinybird latency | ✓ Good — sub-ms enforcement, Tinybird for analytics |
+| loadFixture refactored to JSON imports | readFileSync incompatible with CF Workers | ✓ Good — all servers bundle correctly |
+| JWT auth for /keys and /usage | Users manage keys before having an API key | ✓ Good — clean separation from API key auth |
 
 ---
-*Last updated: 2026-03-21 after v1.1 milestone start*
+*Last updated: 2026-03-25 after v1.1 milestone complete*
