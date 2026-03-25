@@ -140,6 +140,6 @@ Plans:
 | 7. Metering | 2/2 | Complete   | 2026-03-23 | - |
 | 8. Billing | 3/3 | Complete   | 2026-03-23 | - |
 | 9. npm Publishing | 1/2 | In Progress|  | - |
-| 10. Landing Page & Docs | 2/2 | Complete   | 2026-03-25 | - |
+| 10. Landing Page & Docs | 2/2 | Complete    | 2026-03-25 | - |
 
 **Full v1.0 details:** `.planning/milestones/v1.0-ROADMAP.md`
