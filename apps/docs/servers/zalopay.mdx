@@ -1,0 +1,164 @@
+---
+title: "ZaloPay"
+description: "ZaloPay payment gateway integration. Create payment orders, check order status, process refunds, and validate ZaloPay callback MAC signatures."
+sidebarTitle: "ZaloPay"
+icon: "credit-card"
+---
+
+## Overview
+
+ZaloPay payment gateway integration. Create payment orders, check order status, process refunds, and validate ZaloPay callback MAC signatures using HMAC-SHA256 with `key2`.
+
+## Tools
+
+| Tool | Description |
+|------|-------------|
+| `zalopay_create_order` | Create a ZaloPay payment order. Returns a payment URL for the customer to complete payment. |
+| `zalopay_query_order` | Check the status of a ZaloPay order by its `app_trans_id`. |
+| `zalopay_refund` | Refund a ZaloPay transaction by its `zp_trans_id`. |
+| `zalopay_validate_callback` | Validate a ZaloPay callback payload by verifying its HMAC-SHA256 MAC using `key2`. Returns validation result with parsed transaction details. |
+
+---
+
+## zalopay_create_order
+
+Create a ZaloPay payment order. Returns an `order_url` the customer visits to complete payment.
+
+**Parameters:**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `amount` | number | Yes | Payment amount in VND (e.g., `50000`) |
+| `description` | string | Yes | Human-readable order description shown to customer |
+| `appTransId` | string | No | Unique transaction ID (auto-generated if omitted, format: `YYMMDD_uniqueid`) |
+| `embedData` | string | No | JSON string with extra order metadata |
+| `item` | string | No | JSON string describing the ordered items |
+
+**Example Response:**
+
+```json
+{
+  "return_code": 1,
+  "return_message": "Success",
+  "sub_return_code": 1,
+  "sub_return_message": "Success",
+  "zp_trans_token": "mock_token_abc123",
+  "order_url": "https://sb-openapi.zalopay.vn/v2/order?token=mock_token_abc123",
+  "order_expiry_ts": 1711238167,
+  "_mock": true
+}
+```
+
+`return_code: 1` means the order was created successfully.
+
+---
+
+## zalopay_query_order
+
+Check the status of a ZaloPay order.
+
+**Parameters:**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `appTransId` | string | Yes | The `app_trans_id` used when creating the order |
+
+**Example Response:**
+
+```json
+{
+  "return_code": 1,
+  "return_message": "Success",
+  "sub_return_code": 1,
+  "sub_return_message": "Giao dịch thành công",
+  "is_processing": false,
+  "amount": 50000,
+  "zp_trans_id": 240324123456789,
+  "_mock": true
+}
+```
+
+`return_code: 1` with `is_processing: false` means payment is complete.
+
+---
+
+## zalopay_refund
+
+Refund a ZaloPay transaction.
+
+**Parameters:**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `zpTransId` | number | Yes | The `zp_trans_id` from a successful `zalopay_query_order` response |
+| `amount` | number | Yes | Refund amount in VND (must be ≤ original amount) |
+| `description` | string | No | Reason for the refund |
+
+**Example Response:**
+
+```json
+{
+  "return_code": 1,
+  "return_message": "Success",
+  "refund_id": 240324000001,
+  "_mock": true
+}
+```
+
+---
+
+## zalopay_validate_callback
+
+Validate an incoming ZaloPay callback (webhook) payload by verifying its HMAC-SHA256 MAC against `key2`.
+
+**Parameters:**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `rawBody` | string | Yes | The raw JSON string from the ZaloPay callback request body |
+
+**Example Response:**
+
+```json
+{
+  "valid": true,
+  "appTransId": "240324_mock_trans_id",
+  "zpTransId": 240324123456789,
+  "amount": 50000,
+  "_mock": true
+}
+```
+
+Always check `valid: true` before processing the payment event. The MAC is verified using `key2` (not `key1`).
+
+---
+
+## Environment Variables
+
+| Variable | Description | Mock Fallback |
+|----------|-------------|---------------|
+| `ZALOPAY_SANDBOX` | Enable mock mode (set to `true`) | `true` |
+| `ZALOPAY_APP_ID` | ZaloPay app ID | `2553` |
+| `ZALOPAY_KEY1` | Key1 for request signing | `PcY4iZIKFCIdgZvA6ueMcMHHUbRLYjPL` |
+| `ZALOPAY_KEY2` | Key2 for callback MAC verification | `kLtgPl8HHhfvMuDHPwKfgfsY4Ydm9eIz` |
+| `ZALOPAY_ENDPOINT` | ZaloPay API endpoint | `https://sb-openapi.zalopay.vn` |
+
+<Note>The fallback values are ZaloPay's official public sandbox credentials — safe to use in development.</Note>
+
+---
+
+## Common Workflows
+
+**1. Create and monitor an order:**
+1. Call `zalopay_create_order` with `amount` and `description` → receive `order_url`
+2. Share the `order_url` with the customer to complete payment
+3. Call `zalopay_query_order` with the `appTransId` → confirm `return_code: 1` (success)
+
+**2. Validate a ZaloPay callback:**
+1. Receive raw JSON body from ZaloPay callback webhook
+2. Call `zalopay_validate_callback` with the raw body as a string
+3. Check `valid: true` before processing the payment event — MAC is verified against `key2`
+
+**3. Refund a transaction:**
+1. Call `zalopay_query_order` to get the `zp_trans_id` from a successful order
+2. Call `zalopay_refund` with `zpTransId` and the refund amount

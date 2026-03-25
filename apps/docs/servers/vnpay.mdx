@@ -1,0 +1,134 @@
+---
+title: "VNPAY"
+description: "VNPAY payment gateway integration. Generate HMAC-SHA512 signed payment URLs, verify VNPAY return URLs, and query transaction status."
+sidebarTitle: "VNPAY"
+icon: "building-columns"
+---
+
+## Overview
+
+VNPAY payment gateway integration. Generate HMAC-SHA512 signed payment URLs, verify VNPAY return URLs after customer redirect, and query transaction status by reference number.
+
+## Tools
+
+| Tool | Description |
+|------|-------------|
+| `vnpay_create_payment_url` | Build a signed VNPAY payment URL. Returns the payment URL for the customer to complete payment. |
+| `vnpay_verify_return` | Verify a VNPAY return URL or query string by validating the HMAC-SHA512 secure hash. Returns validation result with parsed transaction details. |
+| `vnpay_query_transaction` | Query the status of a VNPAY transaction by its reference number. |
+
+---
+
+## vnpay_create_payment_url
+
+Build a signed VNPAY payment URL. Returns a URL the customer visits to complete payment via bank portal, ATM card, or credit card.
+
+**Parameters:**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `amount` | number | Yes | Payment amount in VND (e.g., `50000`) |
+| `orderInfo` | string | Yes | Human-readable order description (max 255 chars) |
+| `txnRef` | string | No | Unique transaction reference (auto-generated if omitted) |
+| `returnUrl` | string | No | URL to redirect customer after payment completes |
+| `orderType` | string | No | Order category (e.g., `billpayment`, `topup`) |
+| `locale` | string | No | Language: `vn` (Vietnamese) or `en` (English) |
+| `bankCode` | string | No | Pre-select bank (e.g., `NCB`, `VCB`) to skip bank picker |
+| `ipAddr` | string | No | Customer IP address (recommended for fraud prevention) |
+
+**Example Response:**
+
+```json
+{
+  "paymentUrl": "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html?vnp_Amount=5000000&vnp_Command=pay&...",
+  "txnRef": "TXN1711234567890",
+  "_mock": true
+}
+```
+
+Note: VNPAY amounts are in VND × 100 internally — the server handles this conversion automatically.
+
+---
+
+## vnpay_verify_return
+
+Verify a VNPAY return URL by validating the HMAC-SHA512 secure hash. Call this when VNPAY redirects the customer back to your `returnUrl`.
+
+**Parameters:**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `queryString` | string | Yes | The full query string from the VNPAY return URL (everything after `?`) |
+
+**Example Response:**
+
+```json
+{
+  "valid": true,
+  "txnRef": "TXN1711234567890",
+  "amount": 50000,
+  "responseCode": "00",
+  "transactionStatus": "00",
+  "bankCode": "NCB",
+  "bankTranNo": "VNP14398068",
+  "cardType": "ATM",
+  "payDate": "20240324153000",
+  "_mock": true
+}
+```
+
+`responseCode: "00"` means payment was successful. Always check `valid: true` first — a `valid: false` response indicates a tampered return URL.
+
+---
+
+## vnpay_query_transaction
+
+Query the status of a VNPAY transaction by its reference number.
+
+**Parameters:**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `txnRef` | string | Yes | The transaction reference number from `vnpay_create_payment_url` |
+| `transDate` | string | No | Transaction date in `YYYYMMDDHHMMSS` format (improves accuracy) |
+
+**Example Response:**
+
+```json
+{
+  "responseCode": "00",
+  "message": "Giao dịch thành công",
+  "txnRef": "TXN1711234567890",
+  "amount": 50000,
+  "bankCode": "NCB",
+  "payDate": "20240324153000",
+  "_mock": true
+}
+```
+
+---
+
+## Environment Variables
+
+| Variable | Description | Mock Fallback |
+|----------|-------------|---------------|
+| `VNPAY_SANDBOX` | Enable mock mode (set to `true`) | `true` |
+| `VNPAY_TMN_CODE` | VNPAY Terminal/Merchant code | `VNPAY_TMN_DEMO` |
+| `VNPAY_HASH_SECRET` | Secret key for HMAC-SHA512 signing | `VNPAY_HASH_SECRET_DEMO` |
+| `VNPAY_ENDPOINT` | VNPAY payment gateway URL | `https://sandbox.vnpayment.vn/paymentv2/vpcpay.html` |
+
+<Note>Obtain live credentials from the VNPAY merchant portal after completing KYC. Sandbox credentials are provided at registration.</Note>
+
+---
+
+## Common Workflows
+
+**1. Create a payment and verify the return:**
+1. Call `vnpay_create_payment_url` with `amount` and `orderInfo` → receive a signed payment URL
+2. Redirect customer to the payment URL
+3. Customer completes payment and is redirected back to your `returnUrl`
+4. Call `vnpay_verify_return` with the full return query string → check `valid: true` and `responseCode: "00"`
+
+**2. Query an existing transaction:**
+1. Call `vnpay_query_transaction` with `txnRef` and optionally `transDate` (format: `YYYYMMDDHHMMSS`)
+2. Inspect the response for transaction status and amount

@@ -1,0 +1,162 @@
+---
+title: "Zalo OA"
+description: "Zalo Official Account (OA) messaging integration. Send messages to followers, retrieve follower profiles, list followers, and refresh OAuth access tokens."
+sidebarTitle: "Zalo OA"
+icon: "message"
+---
+
+## Overview
+
+Zalo Official Account (OA) messaging integration. Send messages to followers, retrieve follower profiles, list followers with pagination, and refresh OAuth access tokens when they expire (~1 hour TTL).
+
+## Tools
+
+| Tool | Description |
+|------|-------------|
+| `zalo_oa_send_message` | Send a message to a Zalo OA follower. Supports text, image (URL), and file (URL) types. |
+| `zalo_oa_get_follower_profile` | Get profile information for a Zalo OA follower by `userId`. |
+| `zalo_oa_list_followers` | List followers of the Zalo Official Account with offset pagination. |
+| `zalo_oa_refresh_token` | Refresh the Zalo OA access token using the refresh token from environment. Call this when other Zalo OA tools return token-expired errors. |
+
+---
+
+## zalo_oa_send_message
+
+Send a message to a Zalo OA follower. Supports text messages, image links, and file attachments.
+
+**Parameters:**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `userId` | string | Yes | The Zalo user ID of the follower to message |
+| `type` | string | Yes | Message type: `text`, `image`, or `file` |
+| `text` | string | No | Message text (required when `type` is `text`) |
+| `imageUrl` | string | No | Image URL (required when `type` is `image`) |
+| `fileUrl` | string | No | File URL (required when `type` is `file`) |
+
+**Example Response:**
+
+```json
+{
+  "error": 0,
+  "message": "Success",
+  "data": {
+    "message_id": "mock_msg_id_abc123"
+  },
+  "_mock": true
+}
+```
+
+`error: 0` indicates success. Non-zero error codes indicate failure — if you receive a token error, call `zalo_oa_refresh_token` first.
+
+---
+
+## zalo_oa_get_follower_profile
+
+Get profile information for a Zalo OA follower.
+
+**Parameters:**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `userId` | string | Yes | The Zalo user ID of the follower |
+
+**Example Response:**
+
+```json
+{
+  "error": 0,
+  "message": "Success",
+  "data": {
+    "user_id": "mock_user_123",
+    "display_name": "Nguyen Van A",
+    "avatar": "https://example.com/avatar.jpg",
+    "user_is_follower": true,
+    "user_gender": 1
+  },
+  "_mock": true
+}
+```
+
+---
+
+## zalo_oa_list_followers
+
+List followers of the Zalo Official Account with offset-based pagination.
+
+**Parameters:**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `offset` | number | No | Pagination offset (default: `0`) |
+| `count` | number | No | Number of followers to return (default: `50`, max: `50`) |
+
+**Example Response:**
+
+```json
+{
+  "error": 0,
+  "message": "Success",
+  "data": {
+    "total": 150,
+    "followers": [
+      { "user_id": "mock_user_001" },
+      { "user_id": "mock_user_002" },
+      { "user_id": "mock_user_003" }
+    ]
+  },
+  "_mock": true
+}
+```
+
+---
+
+## zalo_oa_refresh_token
+
+Refresh the Zalo OA access token. Reads the refresh token from environment variables automatically — no parameters required.
+
+**Parameters:**
+
+None. The tool reads `ZALO_OA_REFRESH_TOKEN` from the environment automatically.
+
+**Example Response:**
+
+```json
+{
+  "access_token": "new_access_token_xyz789",
+  "refresh_token": "new_refresh_token_abc456",
+  "expires_in": 3600,
+  "_mock": true
+}
+```
+
+After receiving a new token, update `ZALO_OA_ACCESS_TOKEN` in your `.mcp.json` configuration with the new value.
+
+---
+
+## Environment Variables
+
+| Variable | Description | Mock Fallback |
+|----------|-------------|---------------|
+| `ZALO_OA_SANDBOX` | Enable mock mode (set to `true`) | `true` |
+| `ZALO_OA_APP_ID` | Zalo OA application ID | `demo_app_id` |
+| `ZALO_OA_APP_SECRET` | Zalo OA application secret | `demo_app_secret` |
+| `ZALO_OA_ACCESS_TOKEN` | Current OAuth access token (~1 hour TTL) | `demo_access_token` |
+| `ZALO_OA_REFRESH_TOKEN` | OAuth refresh token for renewing access | `demo_refresh_token` |
+
+<Note>Access tokens expire in ~1 hour. When tools return token expiry errors, call `zalo_oa_refresh_token` and update `ZALO_OA_ACCESS_TOKEN` in your `.mcp.json`.</Note>
+
+---
+
+## Common Workflows
+
+**1. List followers and send a message:**
+1. Call `zalo_oa_list_followers` → receive list of follower `userId` values
+2. Call `zalo_oa_get_follower_profile` with a `userId` to get display name and avatar
+3. Call `zalo_oa_send_message` with `userId`, `type: "text"`, and your message text
+
+**2. Handle an expired access token:**
+1. When a tool returns an error indicating token expiry
+2. Call `zalo_oa_refresh_token` (no parameters — reads credentials from env)
+3. Update `ZALO_OA_ACCESS_TOKEN` in your `.mcp.json` with the new token value
+4. Retry the original tool call

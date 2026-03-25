@@ -1,0 +1,103 @@
+---
+title: "Pricing"
+description: "Simple, transparent pricing for Vietnamese payment APIs"
+---
+
+## Plans
+
+VN MCP uses a simple call-based pricing model. Pay in USD via Stripe or in VND via MoMo.
+
+| Plan | Price (USD) | Price (VND) | Calls/month | Servers |
+|------|-------------|-------------|-------------|---------|
+| **Free** | $0 | Free | 1,000 | 2 servers |
+| **Starter** | $19/mo | 449,000 VND/mo | 10,000 | All 5 servers |
+| **Pro** | $49/mo | 1,190,000 VND/mo | 100,000 | All 5 servers |
+| **Business** | $149/mo | 3,590,000 VND/mo | Unlimited | All 5 servers + priority support |
+
+<Note>Free tier includes 2 servers — MoMo and ZaloPay. Upgrade to access VNPAY, Zalo OA, and ViettelPay.</Note>
+
+---
+
+## Plan Details
+
+### Free — $0
+
+- 1,000 API calls per month
+- Access to MoMo and ZaloPay servers
+- Sandbox/mock mode only
+- Community support
+
+Best for: Prototyping and personal projects.
+
+---
+
+### Starter — $19/mo (449,000 VND/mo)
+
+- 10,000 API calls per month
+- All 5 MCP servers (MoMo, ZaloPay, VNPAY, Zalo OA, ViettelPay)
+- Production API access with live credentials
+- Email support
+
+Best for: Small applications and side projects moving to production.
+
+---
+
+### Pro — $49/mo (1,190,000 VND/mo)
+
+- 100,000 API calls per month
+- All 5 MCP servers
+- Production API access
+- Priority email support
+
+Best for: Growing applications with moderate transaction volume.
+
+---
+
+### Business — $149/mo (3,590,000 VND/mo)
+
+- Unlimited API calls
+- All 5 MCP servers
+- Production API access
+- Priority support with SLA
+- Dedicated onboarding assistance
+
+Best for: High-volume production applications and enterprises.
+
+---
+
+## Payment Methods
+
+<CardGroup cols={2}>
+  <Card title="Stripe (USD)" icon="credit-card">
+    Pay with any major credit/debit card or bank transfer. Billed monthly. Cancel anytime.
+  </Card>
+  <Card title="MoMo (VND)" icon="wallet">
+    Pay in Vietnamese Dong via MoMo e-wallet. VND prices are fixed — no exchange rate risk.
+  </Card>
+</CardGroup>
+
+---
+
+## FAQ
+
+**What counts as an API call?**
+
+Each tool invocation counts as one call. For example, calling `momo_create_payment` once uses 1 call.
+
+**What happens when I hit my limit?**
+
+API calls return a `429 Too Many Requests` error. Upgrade your plan in the dashboard to restore access immediately.
+
+**Can I switch plans?**
+
+Yes, you can upgrade or downgrade at any time from the [dashboard](https://dashboard.mcpvn.dev). Upgrades take effect immediately; downgrades apply at the next billing cycle.
+
+**Is there an annual discount?**
+
+Not currently. Annual pricing is planned for a future release.
+
+---
+
+<Card title="Get started for free" icon="rocket" href="https://dashboard.mcpvn.dev">
+  Create a free account — no credit card required. 1,000 calls/month included.
+</Card>

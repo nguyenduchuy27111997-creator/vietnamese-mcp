@@ -1,0 +1,46 @@
+---
+title: "Server Catalog"
+description: "5 MCP servers, 18 tools for Vietnamese payment and messaging APIs"
+---
+
+VN MCP provides 5 servers covering the major Vietnamese payment gateways and the Zalo messaging platform. All servers support mock/sandbox mode — set the `SANDBOX` env var to `true` for local development without real credentials.
+
+## Server Comparison
+
+| Server | npm Package | Tools | Tool Count | Type |
+|--------|-------------|-------|------------|------|
+| [MoMo](/servers/momo) | `@vn-mcp/mcp-momo-vn` | `momo_create_payment`, `momo_query_status`, `momo_refund`, `momo_validate_ipn` | 4 | Payment |
+| [ZaloPay](/servers/zalopay) | `@vn-mcp/mcp-zalopay-vn` | `zalopay_create_order`, `zalopay_query_order`, `zalopay_refund`, `zalopay_validate_callback` | 4 | Payment |
+| [VNPAY](/servers/vnpay) | `@vn-mcp/mcp-vnpay` | `vnpay_create_payment_url`, `vnpay_verify_return`, `vnpay_query_transaction` | 3 | Payment |
+| [Zalo OA](/servers/zalo-oa) | `@vn-mcp/mcp-zalo-oa` | `zalo_oa_send_message`, `zalo_oa_get_follower_profile`, `zalo_oa_list_followers`, `zalo_oa_refresh_token` | 4 | Messaging |
+| [ViettelPay](/servers/viettel-pay) | `@vn-mcp/mcp-viettel-pay` | `viettel_pay_create_payment`, `viettel_pay_query_status`, `viettel_pay_refund` | 3 | Payment (Mock-only) |
+
+**Total: 18 tools across 5 servers.**
+
+## Quick Overview
+
+<CardGroup cols={2}>
+  <Card title="MoMo" icon="wallet" href="/servers/momo">
+    E-wallet payments with QR, wallet, and ATM payment types. IPN signature validation included.
+  </Card>
+  <Card title="ZaloPay" icon="credit-card" href="/servers/zalopay">
+    ZaloPay orders with HMAC-SHA256 callback MAC verification for secure webhooks.
+  </Card>
+  <Card title="VNPAY" icon="building-columns" href="/servers/vnpay">
+    VNPAY gateway with HMAC-SHA512 signed payment URLs and return URL verification.
+  </Card>
+  <Card title="Zalo OA" icon="message" href="/servers/zalo-oa">
+    Zalo Official Account messaging — send messages, manage followers, refresh tokens.
+  </Card>
+  <Card title="ViettelPay" icon="mobile" href="/servers/viettel-pay">
+    ViettelPay payments (mock-only). Models a REST+HMAC-SHA256 approximation of the SOAP+RSA API.
+  </Card>
+</CardGroup>
+
+## Choosing a Server
+
+- **MoMo** — Best choice for e-wallet payments. Highest penetration among urban Vietnamese users.
+- **ZaloPay** — Strong adoption through Zalo ecosystem. Use with `zalopay_validate_callback` for secure webhook processing.
+- **VNPAY** — Bank transfer and card payments. Required if users prefer ATM/debit cards or bank portals.
+- **Zalo OA** — For notification workflows — order confirmations, OTP, customer messaging after payment.
+- **ViettelPay** — Use only in staging environments. Real API uses SOAP+RSA; this server is a mock approximation.

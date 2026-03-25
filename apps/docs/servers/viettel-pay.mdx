@@ -1,0 +1,136 @@
+---
+title: "ViettelPay"
+description: "ViettelPay payment gateway integration (mock-only). Create payment requests, query transaction status, and process refunds."
+sidebarTitle: "ViettelPay"
+icon: "mobile"
+---
+
+<Warning>
+**This is a mock-only server.** The real ViettelPay API uses SOAP+RSA; this server models a REST+HMAC-SHA256 approximation. All deviations from real API behavior are documented in [MOCK_DEVIATIONS.md](https://github.com/vn-mcp/vietnamese-mcp/blob/main/servers/mcp-viettel-pay/MOCK_DEVIATIONS.md). Use only in staging/development environments.
+</Warning>
+
+## Overview
+
+ViettelPay payment gateway integration (mock-only). Create payment requests, query transaction status, and process refunds. This server provides a REST+HMAC-SHA256 API approximation — the actual ViettelPay production API uses SOAP+RSA.
+
+## Tools
+
+| Tool | Description |
+|------|-------------|
+| `viettel_pay_create_payment` | Create a ViettelPay payment request. Returns a payment URL for the customer. Note: mock-only server. |
+| `viettel_pay_query_status` | Check ViettelPay transaction status by `transactionId`. Note: mock-only server. |
+| `viettel_pay_refund` | Refund a ViettelPay transaction. Note: mock-only server. |
+
+---
+
+## viettel_pay_create_payment
+
+Create a ViettelPay payment request. Returns a payment URL and `transactionId`.
+
+**Parameters:**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `amount` | number | Yes | Payment amount in VND (e.g., `50000`) |
+| `orderInfo` | string | Yes | Human-readable order description |
+| `orderId` | string | No | Unique order ID (auto-generated if omitted) |
+| `returnUrl` | string | No | URL to redirect customer after payment |
+
+**Example Response:**
+
+```json
+{
+  "transactionId": "VTP1711234567890",
+  "paymentUrl": "https://sandbox.viettelpay.vn/vtpay-api/pay?transId=VTP1711234567890",
+  "status": "PENDING",
+  "amount": 50000,
+  "_mock": true
+}
+```
+
+---
+
+## viettel_pay_query_status
+
+Check ViettelPay transaction status.
+
+**Parameters:**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `transactionId` | string | Yes | The `transactionId` from `viettel_pay_create_payment` |
+
+**Example Response:**
+
+```json
+{
+  "transactionId": "VTP1711234567890",
+  "status": "SUCCESS",
+  "amount": 50000,
+  "message": "Giao dịch thành công",
+  "_mock": true
+}
+```
+
+---
+
+## viettel_pay_refund
+
+Refund a ViettelPay transaction.
+
+**Parameters:**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `transactionId` | string | Yes | The `transactionId` from a successful payment |
+| `amount` | number | Yes | Refund amount in VND (must be ≤ original amount) |
+| `description` | string | No | Reason for the refund |
+
+**Example Response:**
+
+```json
+{
+  "refundId": "REF1711234567890",
+  "transactionId": "VTP1711234567890",
+  "amount": 50000,
+  "status": "SUCCESS",
+  "message": "Hoàn tiền thành công",
+  "_mock": true
+}
+```
+
+---
+
+## Environment Variables
+
+| Variable | Description | Mock Fallback |
+|----------|-------------|---------------|
+| `VIETTELPAY_SANDBOX` | Enable mock mode (set to `true`) | `true` |
+| `VIETTEL_PAY_PARTNER_CODE` | ViettelPay partner code | `VTPAY_DEMO` |
+| `VIETTEL_PAY_SECRET_KEY` | Secret key for HMAC-SHA256 signing | `demo_secret_key_vtpay` |
+| `VIETTEL_PAY_ENDPOINT` | ViettelPay API endpoint | `https://sandbox.viettelpay.vn/vtpay-api` |
+
+<Warning>The sandbox env var is `VIETTELPAY_SANDBOX` (not `VIETTEL_PAY_SANDBOX`) — note the naming difference from other servers.</Warning>
+
+---
+
+## Common Workflows
+
+**1. Create and check a payment:**
+1. Call `viettel_pay_create_payment` with `amount` and `orderInfo` → receive `paymentUrl` and `transactionId`
+2. Share the `paymentUrl` with the customer to complete payment
+3. Call `viettel_pay_query_status` with the `transactionId` → confirm `status: "SUCCESS"`
+
+**2. Create and refund a payment:**
+1. Call `viettel_pay_create_payment` → receive `transactionId`
+2. Call `viettel_pay_refund` with `transactionId` and refund amount
+
+## Mock Deviations
+
+This server models a REST+HMAC-SHA256 API. The real ViettelPay API uses SOAP+RSA. Key deviations:
+
+- **Protocol:** REST JSON instead of SOAP XML
+- **Authentication:** HMAC-SHA256 instead of RSA certificate signing
+- **Endpoints:** Approximated REST paths — real SOAP WSDL differs significantly
+
+All specific deviations are documented in `MOCK_DEVIATIONS.md` in the server repository.

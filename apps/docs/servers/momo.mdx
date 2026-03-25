@@ -1,0 +1,167 @@
+---
+title: "MoMo"
+description: "MoMo e-wallet payment gateway integration. Create payment links, check transaction status, process refunds, and validate IPN callbacks."
+sidebarTitle: "MoMo"
+icon: "wallet"
+---
+
+## Overview
+
+MoMo e-wallet payment gateway integration. Create payment links (QR code, wallet, or ATM), check transaction status, process refunds, and validate IPN (Instant Payment Notification) callbacks using HMAC-SHA256 signature verification.
+
+## Tools
+
+| Tool | Description |
+|------|-------------|
+| `momo_create_payment` | Create a MoMo payment link (QR code, wallet, or ATM). Returns `payUrl` for the customer to complete payment. |
+| `momo_query_status` | Check the status of a MoMo payment transaction by `orderId`. |
+| `momo_refund` | Refund a MoMo transaction (full or partial) by `transId`. |
+| `momo_validate_ipn` | Validate a MoMo IPN payload by verifying its HMAC-SHA256 signature. Returns validation result with parsed transaction details. |
+
+---
+
+## momo_create_payment
+
+Create a MoMo payment link. Returns a `payUrl` that the customer visits to complete payment.
+
+**Parameters:**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `amount` | number | Yes | Payment amount in VND (e.g., `50000`) |
+| `orderInfo` | string | Yes | Human-readable order description shown to customer |
+| `orderId` | string | No | Unique order ID (auto-generated if omitted) |
+| `redirectUrl` | string | No | URL to redirect customer after payment |
+| `ipnUrl` | string | No | Endpoint to receive IPN callback from MoMo |
+| `requestType` | string | No | Payment type: `payWithMethod` (default), `captureWallet`, `payWithATM` |
+
+**Example Response:**
+
+```json
+{
+  "orderId": "MOMO1711234567890",
+  "requestId": "REQ1711234567890",
+  "amount": 50000,
+  "payUrl": "https://test-payment.momo.vn/pay/app?isScanQR=0&...",
+  "resultCode": 0,
+  "message": "Thành công",
+  "_mock": true
+}
+```
+
+---
+
+## momo_query_status
+
+Check the status of a MoMo payment transaction.
+
+**Parameters:**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `orderId` | string | Yes | The order ID from `momo_create_payment` |
+
+**Example Response:**
+
+```json
+{
+  "orderId": "MOMO1711234567890",
+  "requestId": "REQ1711234567890",
+  "amount": 50000,
+  "transId": 3456789012,
+  "resultCode": 0,
+  "message": "Thành công",
+  "payType": "qr",
+  "responseTime": 1711234600000,
+  "_mock": true
+}
+```
+
+`resultCode: 0` means success. Non-zero codes indicate pending or failed transactions.
+
+---
+
+## momo_refund
+
+Refund a MoMo transaction (full or partial).
+
+**Parameters:**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `transId` | number | Yes | The `transId` from a successful `momo_query_status` response |
+| `amount` | number | Yes | Refund amount in VND (must be ≤ original amount) |
+| `description` | string | No | Reason for the refund |
+
+**Example Response:**
+
+```json
+{
+  "orderId": "REFUND1711234567890",
+  "requestId": "REFUNDREQ1711234567890",
+  "amount": 50000,
+  "transId": 3456789012,
+  "resultCode": 0,
+  "message": "Thành công",
+  "_mock": true
+}
+```
+
+---
+
+## momo_validate_ipn
+
+Validate an incoming MoMo IPN (Instant Payment Notification) webhook payload by verifying its HMAC-SHA256 signature.
+
+**Parameters:**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `rawBody` | string | Yes | The raw JSON string from the IPN request body (do not parse before passing) |
+
+**Example Response:**
+
+```json
+{
+  "valid": true,
+  "orderId": "MOMO1711234567890",
+  "amount": 50000,
+  "resultCode": 0,
+  "message": "Thành công",
+  "_mock": true
+}
+```
+
+Always check `valid: true` before processing the payment event. A `valid: false` response indicates a tampered or forged IPN payload.
+
+---
+
+## Environment Variables
+
+| Variable | Description | Mock Fallback |
+|----------|-------------|---------------|
+| `MOMO_SANDBOX` | Enable mock mode (set to `true`) | `true` |
+| `MOMO_PARTNER_CODE` | MoMo partner code | `MOMOBKUN20180529` |
+| `MOMO_ACCESS_KEY` | MoMo access key | `klm05TvNBzhg7h7j` |
+| `MOMO_SECRET_KEY` | MoMo secret key for HMAC signing | `at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa` |
+
+<Note>The fallback values are MoMo's official public sandbox credentials — safe to use in development.</Note>
+
+---
+
+## Common Workflows
+
+**1. Create and verify a payment:**
+1. Call `momo_create_payment` with `amount` and `orderInfo` → receive `payUrl`
+2. Share the `payUrl` with the customer to complete payment
+3. Call `momo_query_status` with the `orderId` → confirm `resultCode: 0` (success)
+
+**2. Process a refund:**
+1. Call `momo_create_payment` to create a payment → receive `orderId`
+2. Call `momo_query_status` to get the `transId` from the paid transaction
+3. Call `momo_refund` with the `transId` and refund amount
+
+**3. Validate an incoming IPN callback:**
+1. Receive raw JSON body from MoMo IPN webhook
+2. Call `momo_validate_ipn` with the raw body as a string
+3. Check `valid: true` in response before processing the payment event
