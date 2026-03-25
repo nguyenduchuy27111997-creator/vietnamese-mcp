@@ -1,0 +1,148 @@
+---
+title: "Quickstart"
+description: "Go from zero to first tool call in under 5 minutes."
+---
+
+<Tabs>
+  <Tab title="Hosted (API Key)">
+
+## Step 1: Sign up
+
+Create a free account at [dashboard.mcpvn.dev](https://dashboard.mcpvn.dev).
+
+Free tier includes **1,000 calls/month** — no credit card required.
+
+## Step 2: Generate an API key
+
+1. Go to [dashboard.mcpvn.dev](https://dashboard.mcpvn.dev)
+2. Click **"Create Key"** in the API Keys section
+3. Copy the key — it starts with `sk_test_`
+
+<Note>Store your API key securely. It grants access to all 5 payment servers.</Note>
+
+## Step 3: Configure `.mcp.json`
+
+Add the VN MCP gateway to your Claude Code configuration:
+
+```json
+{
+  "mcpServers": {
+    "vn-payments": {
+      "url": "https://gateway.mcpvn.dev/mcp",
+      "headers": {
+        "x-api-key": "YOUR_API_KEY"
+      }
+    }
+  }
+}
+```
+
+Save this as `.mcp.json` in your project root (or `~/.claude/mcp.json` for global access).
+
+## Step 4: Make your first tool call
+
+Ask Claude Code:
+
+> "Create a MoMo payment for 50,000 VND"
+
+**Expected response:**
+
+```json
+{
+  "orderId": "MOMO1711234567890",
+  "payUrl": "https://test-payment.momo.vn/pay/app?isScanQR=0&...",
+  "resultCode": 0,
+  "message": "Thành công",
+  "_mock": true
+}
+```
+
+The `_mock: true` flag confirms sandbox mode — no real money moves. Upgrade your tier in the dashboard to use live credentials.
+
+  </Tab>
+  <Tab title="Self-Hosted (npm)">
+
+## Step 1: Install the server
+
+Install the MoMo server globally (we'll use MoMo as the example):
+
+```bash
+npm install -g @vn-mcp/mcp-momo-vn
+```
+
+## Step 2: Configure `.mcp.json`
+
+Add the server to your Claude Code configuration with MoMo sandbox credentials:
+
+```json
+{
+  "mcpServers": {
+    "momo-vn": {
+      "command": "npx",
+      "args": ["-y", "@vn-mcp/mcp-momo-vn"],
+      "env": {
+        "MOMO_SANDBOX": "true",
+        "MOMO_PARTNER_CODE": "MOMOBKUN20180529",
+        "MOMO_ACCESS_KEY": "klm05TvNBzhg7h7j",
+        "MOMO_SECRET_KEY": "at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa"
+      }
+    }
+  }
+}
+```
+
+The sandbox credentials above are MoMo's official public test credentials — safe to use in development.
+
+## Step 3: Make your first tool call
+
+Ask Claude Code:
+
+> "Create a MoMo payment for 50,000 VND"
+
+**Expected response:**
+
+```json
+{
+  "orderId": "MOMO1711234567890",
+  "payUrl": "https://test-payment.momo.vn/pay/app?isScanQR=0&...",
+  "resultCode": 0,
+  "message": "Thành công",
+  "_mock": true
+}
+```
+
+## Step 4: Add more servers
+
+Install any of the other 4 servers using the same pattern:
+
+| Server | npm Package | Tools |
+|--------|-------------|-------|
+| MoMo | `@vn-mcp/mcp-momo-vn` | 4 (payments, refund, IPN) |
+| ZaloPay | `@vn-mcp/mcp-zalopay-vn` | 4 (orders, refund, callbacks) |
+| VNPAY | `@vn-mcp/mcp-vnpay` | 3 (payment URL, verify, query) |
+| Zalo OA | `@vn-mcp/mcp-zalo-oa` | 4 (messaging, follower profile) |
+| ViettelPay | `@vn-mcp/mcp-viettel-pay` | 3 (payments, status, refund) |
+
+Add each server as a separate entry in `mcpServers` in your `.mcp.json`.
+
+  </Tab>
+</Tabs>
+
+---
+
+## What's next?
+
+<CardGroup cols={2}>
+  <Card title="MoMo Reference" icon="wallet" href="/servers/momo">
+    All 4 MoMo tools — create payment, query status, refund, validate IPN.
+  </Card>
+  <Card title="ZaloPay Reference" icon="credit-card" href="/servers/zalopay">
+    All 4 ZaloPay tools — create order, query, refund, validate callback.
+  </Card>
+  <Card title="VNPAY Reference" icon="building-columns" href="/servers/vnpay">
+    All 3 VNPAY tools — payment URL, verify return URL, query transaction.
+  </Card>
+  <Card title="Zalo OA Reference" icon="message" href="/servers/zalo-oa">
+    All 4 Zalo OA tools — messaging, follower profiles, token refresh.
+  </Card>
+</CardGroup>
