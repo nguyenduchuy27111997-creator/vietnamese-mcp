@@ -3,6 +3,8 @@ import type { Session } from '@supabase/supabase-js';
 import { supabase } from './supabase.js';
 import { AuthPage } from './pages/AuthPage.js';
 import { DashboardPage } from './pages/DashboardPage.js';
+import { ThemeProvider } from '@/components/theme-provider';
+import { ThemeToggle } from '@/components/theme-toggle';
 
 export default function App() {
   const [session, setSession] = useState<Session | null>(null);
@@ -23,7 +25,14 @@ export default function App() {
 
   if (loading) return null;
 
-  return session
-    ? <DashboardPage userEmail={session.user.email ?? ''} />
-    : <AuthPage />;
+  return (
+    <ThemeProvider defaultTheme="dark">
+      <div className="fixed top-4 right-4 z-50">
+        <ThemeToggle />
+      </div>
+      {session
+        ? <DashboardPage userEmail={session.user.email ?? ''} />
+        : <AuthPage />}
+    </ThemeProvider>
+  );
 }
