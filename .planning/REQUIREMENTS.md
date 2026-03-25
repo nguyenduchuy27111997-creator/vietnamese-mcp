@@ -1,91 +1,53 @@
-# Requirements: VN MCP Hub — v1.1 Platform Launch
+# Requirements: VN MCP Hub — v1.2 Production Deployment
 
-**Defined:** 2026-03-21
-**Core Value:** Developer installs MCP server, adds to `.mcp.json`, and Claude Code can immediately create payments, check transactions, send messages — zero integration boilerplate.
+**Defined:** 2026-03-25
+**Core Value:** Developer installs MCP server or signs up for hosted API key, adds to `.mcp.json`, and immediately uses Claude Code for Vietnamese payments and messaging — zero integration boilerplate.
 
-## v1.1 Requirements
+## v1.2 Requirements
 
-Requirements for platform launch. Each maps to roadmap phases.
+Requirements for production deployment and tech debt resolution. Each maps to roadmap phases.
 
-### Gateway
+### Deployment
 
-- [x] **GATE-01**: All 5 MCP servers accessible via Streamable HTTP transport on a single Cloudflare Workers endpoint
-- [x] **GATE-02**: MCP `tools/list` returns all 18 tools from all 5 servers
-- [x] **GATE-03**: Tool calls execute correctly through the gateway and return mock responses
-- [x] **GATE-04**: CORS headers allow browser-based MCP clients
-- [x] **GATE-05**: Per-connection McpServer instantiation (stateless, no shared state)
+- [ ] **DEPLOY-01**: Dashboard SPA deployed to Cloudflare Pages with production VITE_GATEWAY_URL
+- [ ] **DEPLOY-02**: Docs site deployed to Mintlify cloud with public URL
+- [ ] **DEPLOY-03**: All CTA links in docs and landing page point to working production URLs
+- [ ] **DEPLOY-04**: .env.production created for dashboard with gateway URL
 
-### Auth & API Keys
+### Validation
 
-- [x] **AUTH-01**: User can sign up and log in via Supabase Auth (email/password)
-- [x] **AUTH-02**: User can generate API keys from dashboard
-- [x] **AUTH-03**: Gateway authenticates requests via API key in header
-- [x] **AUTH-04**: API keys are scoped to pricing tiers (free/starter/pro/business)
-- [x] **AUTH-05**: RLS isolation — users cannot access other users' keys or data
+- [ ] **VAL-01**: Full E2E flow works: signup → create API key → MCP tool call → usage check
+- [ ] **VAL-02**: Billing flow works: free user → Stripe Checkout → tier upgrade → increased limits
+- [ ] **VAL-03**: Self-hosted npm flow works: npm install → .mcp.json config → tool call
 
-### Metering
+### Tech Debt
 
-- [x] **METR-01**: Every tool call is logged to Tinybird with API key, server, tool, timestamp
-- [x] **METR-02**: Usage counts are queryable per API key per billing period
-- [x] **METR-03**: Gateway enforces tier call limits (free: 1k/mo, starter: 10k, pro: 100k, business: unlimited)
-- [x] **METR-04**: Metering is non-blocking (ctx.waitUntil)
-
-### Billing
-
-- [x] **BILL-01**: Stripe Checkout for Starter/Pro/Business tier subscriptions (USD)
-- [x] **BILL-02**: Stripe webhooks update user tier in Supabase
-- [x] **BILL-03**: MoMo one-time payment for monthly subscription (VND)
-- [x] **BILL-04**: MoMo IPN callback updates user tier in Supabase
-- [x] **BILL-05**: PaymentProvider abstraction decouples Stripe and MoMo
-- [x] **BILL-06**: Free tier requires no credit card
-
-### npm Publishing
-
-- [ ] **NPM-01**: All 5 server packages published to npm under @vn-mcp scope
-- [x] **NPM-02**: @vn-mcp/shared published as versioned dependency (not workspace:*)
-- [x] **NPM-03**: Each package installable standalone (npm install @vn-mcp/mcp-momo-vn)
-- [x] **NPM-04**: npm pack --dry-run verification before publish
-
-### Landing Page & Docs
-
-- [x] **SITE-01**: Landing page with pricing table (4 tiers), feature highlights, signup CTA
-- [x] **SITE-02**: Developer docs with quick start for both self-hosted (npm) and hosted (API key) paths
-- [x] **SITE-03**: Per-server tool reference docs generated from existing READMEs
-- [x] **SITE-04**: Deployed on Mintlify or equivalent
+- [ ] **DEBT-01**: Implement remaining auth test stubs (auth-supabase.test.ts, rls-isolation.test.ts)
+- [ ] **DEBT-02**: Fix MOMO_ACCESS_KEY — add to wrangler.toml or remove from types
+- [ ] **DEBT-03**: Fix Tinybird tool name — extract from MCP request body instead of 'unknown'
 
 ## v2 Requirements
 
-Deferred to future release. Tracked but not in current roadmap.
+Deferred to future release.
+
+### Real API Integration
+
+- **REAL-01**: MoMo live API integration (after merchant KYC approval)
+- **REAL-02**: ViettelPay real SOAP+RSA integration (after API access)
 
 ### Additional Servers
 
 - **SERV-01**: mcp-vcb-open-api (Vietcombank Open API)
 - **SERV-02**: mcp-tcb-open-api (Techcombank)
-- **SERV-03**: mcp-napas-qr (NAPAS VietQR standard)
-- **SERV-04**: mcp-mb-open-api (MB Bank)
-- **SERV-05**: mcp-vnpt-epay (VNPT ePay)
-
-### Feature Additions
-
-- **FEAT-01**: QR code generation as discrete tool output
-- **FEAT-02**: VNPAY bank list tool (vnpay_get_bank_list)
-- **FEAT-03**: Zalo OA ZNS transactional notifications
-- **FEAT-04**: VietQR generation (NAPAS standard)
-- **FEAT-05**: Real API integration (when developer accounts approved)
-- **FEAT-06**: Usage dashboard for API key holders
-- **FEAT-07**: White-label licensing for agencies
 
 ## Out of Scope
 
 | Feature | Reason |
 |---------|--------|
-| Real API integration | Mock-first until developer accounts approved |
-| Banking API servers (VCB, TCB, MB) | Phase 2 Growth per brief |
-| E-commerce integrations (Shopee, Tiki) | Phase 2 Growth per brief |
-| Browser-based OAuth flow | MCP servers use API key auth via gateway |
-| Usage dashboard UI | Deferred to after first 20 paying customers |
-| White-label licensing | After platform validated with direct users |
-| Custom domain for docs | Verify Mintlify free tier support first |
+| Custom domain (mcpvn.dev) | Verify Mintlify support first; use subdomains for now |
+| Usage dashboard with charts | Deferred to after first 20 paying customers |
+| CI/CD pipeline | Manual deployment sufficient for v1.2 |
+| RLS re-enablement | Gateway isolation sufficient; revisit when multiple clients access DB |
 
 ## Traceability
 
@@ -93,40 +55,21 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| GATE-01 | Phase 5 | Complete |
-| GATE-02 | Phase 5 | Complete |
-| GATE-03 | Phase 5 | Complete |
-| GATE-04 | Phase 5 | Complete |
-| GATE-05 | Phase 5 | Complete |
-| AUTH-01 | Phase 6 | Complete |
-| AUTH-02 | Phase 6 | Complete |
-| AUTH-03 | Phase 6 | Complete |
-| AUTH-04 | Phase 6 | Complete |
-| AUTH-05 | Phase 6 | Complete |
-| METR-01 | Phase 7 | Complete |
-| METR-02 | Phase 7 | Complete |
-| METR-03 | Phase 7 | Complete |
-| METR-04 | Phase 7 | Complete |
-| BILL-01 | Phase 8 | Complete |
-| BILL-02 | Phase 8 | Complete |
-| BILL-03 | Phase 8 | Complete |
-| BILL-04 | Phase 8 | Complete |
-| BILL-05 | Phase 8 | Complete |
-| BILL-06 | Phase 8 | Complete |
-| NPM-01 | Phase 9 | Pending |
-| NPM-02 | Phase 9 | Complete |
-| NPM-03 | Phase 9 | Complete |
-| NPM-04 | Phase 9 | Complete |
-| SITE-01 | Phase 10 | Complete |
-| SITE-02 | Phase 10 | Complete |
-| SITE-03 | Phase 10 | Complete |
-| SITE-04 | Phase 10 | Complete |
+| DEPLOY-01 | TBD | Pending |
+| DEPLOY-02 | TBD | Pending |
+| DEPLOY-03 | TBD | Pending |
+| DEPLOY-04 | TBD | Pending |
+| VAL-01 | TBD | Pending |
+| VAL-02 | TBD | Pending |
+| VAL-03 | TBD | Pending |
+| DEBT-01 | TBD | Pending |
+| DEBT-02 | TBD | Pending |
+| DEBT-03 | TBD | Pending |
 
 **Coverage:**
-- v1.1 requirements: 28 total
-- Mapped to phases: 28
-- Unmapped: 0 ✓
+- v1.2 requirements: 10 total
+- Mapped to phases: 0
+- Unmapped: 10 ⚠️
 
 ---
-*Requirements defined: 2026-03-21*
-*Last updated: 2026-03-21 — Traceability complete after roadmap creation*
+*Requirements defined: 2026-03-25*
