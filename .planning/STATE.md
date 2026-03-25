@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Platform Launch
 status: completed
-stopped_at: Completed 10-01-PLAN.md (Mintlify scaffold)
-last_updated: "2026-03-25T04:14:27.616Z"
+stopped_at: "Checkpoint 10-02: awaiting Mintlify deployment verification"
+last_updated: "2026-03-25T04:25:33.657Z"
 last_activity: "2026-03-23 — Phase 8 Plan 02 (Stripe) complete. Next: Phase 8 Plan 03 (MoMo provider)"
 progress:
   total_phases: 6
-  completed_phases: 5
+  completed_phases: 6
   total_plans: 16
-  completed_plans: 15
+  completed_plans: 16
   percent: 92
 ---
 
@@ -95,6 +95,8 @@ Pending v1.1 decisions (to be made during planning):
 - [Phase 09-npm-publishing]: tsc --noCheck used for all 6 server/shared builds — pre-existing type errors in src/client.ts (_mock type mismatch) are out-of-scope, transpile-only is sufficient for publishing
 - [Phase 10-landing-page-docs]: docs.json (not mint.json) — config file renamed February 2025; unified navigation object with nested tabs/groups
 - [Phase 10-landing-page-docs]: Single quickstart page with Tabs (no page splitting) — locked CONTEXT.md decision; Hosted (API Key) and Self-Hosted (npm) tabs
+- [Phase 10-landing-page-docs]: ViettelPay page uses Warning callout (not Note) to surface mock-only status clearly
+- [Phase 10-landing-page-docs]: pricing.mdx not in docs.json navigation — linked from landing page directly per plan spec
 
 ### Pending Todos
 
@@ -108,6 +110,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-25T04:14:27.614Z
-Stopped at: Completed 10-01-PLAN.md (Mintlify scaffold)
+Last session: 2026-03-25T04:25:33.655Z
+Stopped at: Checkpoint 10-02: awaiting Mintlify deployment verification
 Resume file: None

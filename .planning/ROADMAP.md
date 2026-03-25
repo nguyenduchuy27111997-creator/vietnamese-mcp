@@ -26,7 +26,7 @@
 - [x] **Phase 7: Metering** — Every tool call is counted, enforced, and queryable per billing period (completed 2026-03-23)
 - [x] **Phase 8: Billing** — Stripe (USD) and MoMo (VND) payments upgrade user tiers in Supabase (completed 2026-03-23)
 - [ ] **Phase 9: npm Publishing** — All 5 servers published to npm under @vn-mcp scope for self-hosted use
-- [ ] **Phase 10: Landing Page & Docs** — Mintlify site with pricing, quickstart, and per-server tool reference
+- [x] **Phase 10: Landing Page & Docs** — Mintlify site with pricing, quickstart, and per-server tool reference (completed 2026-03-25)
 
 ## Phase Details
 
@@ -140,6 +140,6 @@ Plans:
 | 7. Metering | 2/2 | Complete   | 2026-03-23 | - |
 | 8. Billing | 3/3 | Complete   | 2026-03-23 | - |
 | 9. npm Publishing | 1/2 | In Progress|  | - |
-| 10. Landing Page & Docs | 1/2 | In Progress|  | - |
+| 10. Landing Page & Docs | 2/2 | Complete   | 2026-03-25 | - |
 
 **Full v1.0 details:** `.planning/milestones/v1.0-ROADMAP.md`

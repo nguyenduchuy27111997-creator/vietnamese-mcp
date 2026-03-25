@@ -50,7 +50,7 @@ Requirements for platform launch. Each maps to roadmap phases.
 
 - [x] **SITE-01**: Landing page with pricing table (4 tiers), feature highlights, signup CTA
 - [x] **SITE-02**: Developer docs with quick start for both self-hosted (npm) and hosted (API key) paths
-- [ ] **SITE-03**: Per-server tool reference docs generated from existing READMEs
+- [x] **SITE-03**: Per-server tool reference docs generated from existing READMEs
 - [x] **SITE-04**: Deployed on Mintlify or equivalent
 
 ## v2 Requirements
@@ -119,7 +119,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | NPM-04 | Phase 9 | Complete |
 | SITE-01 | Phase 10 | Complete |
 | SITE-02 | Phase 10 | Complete |
-| SITE-03 | Phase 10 | Pending |
+| SITE-03 | Phase 10 | Complete |
 | SITE-04 | Phase 10 | Complete |
 
 **Coverage:**
