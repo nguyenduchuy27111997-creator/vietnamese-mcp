@@ -37,10 +37,10 @@ Developer installs an MCP server or signs up for a hosted API key, adds it to `.
 
 ### Active
 
-- [ ] Dashboard deployed to Cloudflare Pages with production gateway URL
-- [ ] Docs deployed to Mintlify cloud with public URL
-- [ ] All URLs validated end-to-end (signup → key → tool call → usage → billing)
-- [ ] Tech debt from v1.1 audit resolved (RLS, test stubs, MoMo access key, Tinybird tool name)
+- [ ] Modern dashboard UI with Tailwind + shadcn/ui design system
+- [ ] App shell with sidebar navigation and dark mode
+- [ ] 7 full pages: Overview, API Keys, Usage, Billing, Settings, Quickstart, App Shell
+- [ ] Linear/Vercel aesthetic — dark sidebar, white content, minimal, professional
 
 ### Out of Scope
 
@@ -53,15 +53,15 @@ Developer installs an MCP server or signs up for a hosted API key, adds it to `.
 - Usage dashboard UI (charts, analytics) — deferred to after first 20 paying customers
 - Custom domain for docs — verify Mintlify free tier support
 
-## Current Milestone: v1.2 Production Deployment
+## Current Milestone: v2.0 Modern Dashboard
 
-**Goal:** Deploy all services to production with working public URLs, validate the full user journey end-to-end, and resolve accumulated tech debt from v1.1.
+**Goal:** Complete UI/UX overhaul of the dashboard SPA — replace inline styles with Tailwind + shadcn/ui, add sidebar navigation, dark mode, and 7 polished pages covering the full user journey.
 
 **Target:**
-- Dashboard on CF Pages (production VITE_GATEWAY_URL)
-- Docs on Mintlify cloud (public URL)
-- Full E2E validation: signup → API key → tool call → usage → upgrade
-- Tech debt cleanup: RLS, test stubs, MoMo access key, Tinybird tool name
+- Design system: Tailwind CSS + shadcn/ui + dark mode default
+- App shell: sidebar nav, user menu, responsive mobile
+- 7 pages: Overview, API Keys, Usage & Analytics, Billing, Settings, Quickstart, App Shell
+- Visual style: Linear/Vercel aesthetic — dark sidebar, white content, minimal
 
 ## Context
 

@@ -1,17 +1,17 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.2
-milestone_name: Production Deployment
-status: executing
-stopped_at: Completed 12-01-PLAN.md — test stubs replaced, MOMO_ACCESS_KEY added to wrangler.toml
-last_updated: "2026-03-25T07:07:16.973Z"
-last_activity: "2026-03-25 — Phase 11 complete. Docs at https://fpt-a833a5a1.mintlify.app/, Dashboard at https://vn-mcp-dashboard.pages.dev, Gateway at https://vn-mcp-gateway.nguyenduchuy27111997.workers.dev."
+milestone: v2.0
+milestone_name: Modern Dashboard
+status: planning
+stopped_at: Defining requirements for v2.0
+last_updated: "2026-03-25"
+last_activity: "2026-03-25 — v2.0 milestone started (Modern Dashboard UI overhaul)"
 progress:
-  total_phases: 9
-  completed_phases: 9
-  total_plans: 22
-  completed_plans: 22
-  percent: 33
+  total_phases: 0
+  completed_phases: 0
+  total_plans: 0
+  completed_plans: 0
+  percent: 0
 ---
 
 # Project State
