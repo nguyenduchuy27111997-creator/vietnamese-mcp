@@ -1,0 +1,74 @@
+---
+title: "Vietnamese Payment APIs for Claude Code"
+description: "5 MCP servers. 18 tools. Mock-first. Ready in 2 minutes."
+mode: "custom"
+---
+
+# Vietnamese Payment APIs for Claude Code
+
+Connect Claude Code to MoMo, ZaloPay, VNPAY, Zalo OA, and ViettelPay through the Model Context Protocol. One gateway URL — all five payment systems.
+
+<CodeBlock language="json" title=".mcp.json">
+{`{
+  "mcpServers": {
+    "vn-payments": {
+      "url": "https://gateway.mcpvn.dev/mcp",
+      "headers": {
+        "x-api-key": "YOUR_API_KEY"
+      }
+    }
+  }
+}`}
+</CodeBlock>
+
+<a href="https://dashboard.mcpvn.dev" style={{display: "inline-block", background: "#2563eb", color: "white", padding: "12px 24px", borderRadius: "8px", fontWeight: "600", textDecoration: "none", marginTop: "16px"}}>Get started — it's free</a>
+
+---
+
+## Why VN MCP?
+
+<CardGroup cols={2}>
+  <Card title="5 Servers" icon="server">
+    MoMo, ZaloPay, VNPAY, Zalo OA, ViettelPay — all major Vietnamese payment platforms in one place.
+  </Card>
+  <Card title="18 Tools" icon="wrench">
+    Payments, messaging, transaction verification — everything Claude Code needs to handle payments end-to-end.
+  </Card>
+  <Card title="Mock-First" icon="flask">
+    Sandbox mode built in. No real credentials needed to start building — mock responses out of the box.
+  </Card>
+  <Card title="MCP Protocol" icon="plug">
+    Works natively with Claude Code via the Model Context Protocol. No SDK, no boilerplate, no glue code.
+  </Card>
+</CardGroup>
+
+---
+
+## Pricing
+
+Free to start. Scale as you grow.
+
+| Tier | Price (USD) | Price (VND) | Calls/month |
+|------|-------------|-------------|-------------|
+| **Free** | $0 | Free | 1,000 |
+| **Starter** | $19/mo | or 449,000 VND/mo | 10,000 |
+| **Pro** | $49/mo | or 1,190,000 VND/mo | 100,000 |
+| **Business** | $149/mo | or 3,590,000 VND/mo | Unlimited |
+
+<a href="https://dashboard.mcpvn.dev" style={{display: "inline-block", background: "#2563eb", color: "white", padding: "10px 20px", borderRadius: "8px", fontWeight: "600", textDecoration: "none", marginTop: "16px"}}>Sign up — no credit card required</a>
+
+---
+
+## Server Catalog
+
+| Server | Tools | Description |
+|--------|-------|-------------|
+| **MoMo** | 4 | E-wallet payments — create payment links, check status, refund, validate IPN |
+| **ZaloPay** | 4 | ZaloPay gateway — create orders, query status, refund, validate callbacks |
+| **VNPAY** | 3 | VNPAY QR & ATM — create payment URLs, verify returns, query transactions |
+| **Zalo OA** | 4 | Zalo Official Account — send messages, get follower profiles, list followers, refresh tokens |
+| **ViettelPay** | 3 | ViettelPay gateway — create payments, query status, refund (mock-only) |
+
+<Card title="View Server Reference" icon="book" href="/servers/overview">
+  Detailed documentation for all 18 tools across the 5 servers.
+</Card>

@@ -1,0 +1,59 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "name": "VN MCP",
+  "theme": "mint",
+  "logo": {
+    "light": "/logo/logo.svg",
+    "dark": "/logo/logo.svg"
+  },
+  "favicon": "/logo/logo.svg",
+  "colors": {
+    "primary": "#2563eb",
+    "light": "#3b82f6",
+    "dark": "#1d4ed8"
+  },
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "pages": ["quickstart"]
+          },
+          {
+            "group": "Server Reference",
+            "pages": [
+              "servers/overview",
+              "servers/momo",
+              "servers/zalopay",
+              "servers/vnpay",
+              "servers/zalo-oa",
+              "servers/viettel-pay"
+            ]
+          }
+        ]
+      }
+    ],
+    "global": {
+      "anchors": [
+        {
+          "name": "Dashboard",
+          "url": "https://dashboard.mcpvn.dev",
+          "icon": "gauge"
+        },
+        {
+          "name": "GitHub",
+          "url": "https://github.com/vn-mcp/vietnamese-mcp",
+          "icon": "github"
+        }
+      ]
+    }
+  },
+  "topbar": {
+    "style": "default"
+  },
+  "footerSocials": {
+    "github": "https://github.com/vn-mcp/vietnamese-mcp"
+  }
+}
