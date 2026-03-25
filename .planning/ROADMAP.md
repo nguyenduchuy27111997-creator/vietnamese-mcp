@@ -200,7 +200,11 @@ Plans:
   2. A manual theme toggle switches between dark and light mode and persists the choice across page reloads
   3. shadcn/ui components (Button, Card, Badge, Dialog) render correctly with the project's color tokens applied
   4. Tailwind classes are available in all dashboard source files — no PostCSS or config errors in the build
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [ ] 14-01-PLAN.md — Tailwind CSS + PostCSS + shadcn/ui toolchain, config files, globals.css with design tokens, dark mode script, fonts
+- [ ] 14-02-PLAN.md — Install 14 shadcn/ui components, ThemeProvider + ThemeToggle, wire into App.tsx
 
 ### Phase 15: App Shell + Navigation
 **Goal**: A persistent sidebar shell wraps all dashboard pages with collapsible navigation, active page highlighting, user avatar/email in the footer, hamburger menu on mobile, and client-side routing connecting all pages
@@ -211,7 +215,11 @@ Plans:
   2. On a mobile viewport the sidebar is hidden and a hamburger icon opens it as an overlay drawer
   3. The sidebar footer shows the logged-in user's email and a sign-out button that logs the user out and redirects to login
   4. A new user with zero API keys is automatically redirected to the Quickstart page on first login
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [ ] 14-01-PLAN.md — Tailwind CSS + PostCSS + shadcn/ui toolchain, config files, globals.css with design tokens, dark mode script, fonts
+- [ ] 14-02-PLAN.md — Install 14 shadcn/ui components, ThemeProvider + ThemeToggle, wire into App.tsx
 
 ### Phase 16: Core Pages
 **Goal**: Overview, API Keys, and Usage pages are fully redesigned with the new design system — showing real data from the backend with polished UI components
@@ -221,7 +229,11 @@ Plans:
   1. The Overview page displays a welcome card, key count, current-month usage, and active tier pulled from the API — all visible without scrolling on a standard desktop viewport
   2. The API Keys page lists all keys in a styled table with status badges; a user can search/filter, copy a key with a copy animation, create a new key via modal, and revoke a key via confirmation dialog
   3. The Usage page shows a bar/line chart of daily API calls over the last 30 days, a per-server breakdown table, and a warning banner when usage exceeds 80% of the tier limit
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [ ] 14-01-PLAN.md — Tailwind CSS + PostCSS + shadcn/ui toolchain, config files, globals.css with design tokens, dark mode script, fonts
+- [ ] 14-02-PLAN.md — Install 14 shadcn/ui components, ThemeProvider + ThemeToggle, wire into App.tsx
 
 ### Phase 17: Billing + Settings + Quickstart
 **Goal**: Billing, Settings, and Quickstart pages are complete — developers can upgrade their plan, update their profile, delete their account, and new users are guided through the onboarding wizard
@@ -231,7 +243,11 @@ Plans:
   1. The Billing page shows the current plan card with tier name and price; a user can select a different tier and be taken to Stripe Checkout (USD) or MoMo payment (VND) without leaving the dashboard
   2. The Settings page displays the user's email (read-only), a password change form, and a danger zone with a delete account button that requires typing a confirmation phrase before proceeding
   3. The Quickstart wizard presents 3 sequential steps (create key → configure .mcp.json → test call) and advances only when each step is completed — a user with an existing key can skip to the relevant step
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [ ] 14-01-PLAN.md — Tailwind CSS + PostCSS + shadcn/ui toolchain, config files, globals.css with design tokens, dark mode script, fonts
+- [ ] 14-02-PLAN.md — Install 14 shadcn/ui components, ThemeProvider + ThemeToggle, wire into App.tsx
 
 ## Progress
 
@@ -250,7 +266,7 @@ Plans:
 | 11. Deploy | v1.2 | 2/2 | Complete | 2026-03-25 |
 | 12. Tech Debt | v1.2 | 2/2 | Complete | 2026-03-25 |
 | 13. Validation | v1.2 | 0/2 | Not started | - |
-| 14. Design System Foundation | v2.0 | 0/TBD | Not started | - |
+| 14. Design System Foundation | v2.0 | 0/2 | Planning | - |
 | 15. App Shell + Navigation | v2.0 | 0/TBD | Not started | - |
 | 16. Core Pages | v2.0 | 0/TBD | Not started | - |
 | 17. Billing + Settings + Quickstart | v2.0 | 0/TBD | Not started | - |
