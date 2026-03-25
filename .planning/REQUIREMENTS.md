@@ -23,7 +23,7 @@ Requirements for dashboard UI/UX overhaul. Each maps to roadmap phases.
 ### Pages
 
 - [x] **PAGE-01**: Overview/Home — welcome card, quick stats (key count, usage, tier), recent activity feed
-- [ ] **PAGE-02**: API Keys — redesigned table with status badges, search/filter, creation modal, copy animation, revoke confirmation dialog
+- [x] **PAGE-02**: API Keys — redesigned table with status badges, search/filter, creation modal, copy animation, revoke confirmation dialog
 - [ ] **PAGE-03**: Usage & Analytics — usage chart (daily calls over 30 days), per-server breakdown table, limit warning banner at 80%+
 - [ ] **PAGE-04**: Billing — current plan card, upgrade/downgrade tier selector, Stripe/MoMo payment buttons, Stripe Portal link, payment method display
 - [ ] **PAGE-05**: Settings — profile section (email display, password change), danger zone (delete account with confirmation)
@@ -69,7 +69,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | NAV-01 | Phase 15 | Complete |
 | NAV-02 | Phase 15 | Complete |
 | PAGE-01 | Phase 16 | Complete |
-| PAGE-02 | Phase 16 | Pending |
+| PAGE-02 | Phase 16 | Complete |
 | PAGE-03 | Phase 16 | Pending |
 | PAGE-04 | Phase 17 | Pending |
 | PAGE-05 | Phase 17 | Pending |
