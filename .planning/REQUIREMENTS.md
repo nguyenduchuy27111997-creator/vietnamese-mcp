@@ -15,10 +15,10 @@ Requirements for dashboard UI/UX overhaul. Each maps to roadmap phases.
 
 ### App Shell
 
-- [ ] **SHELL-01**: Sidebar navigation with collapsible menu (Overview, API Keys, Usage, Billing, Settings)
-- [ ] **SHELL-02**: User avatar/email in sidebar footer with sign-out action
-- [ ] **SHELL-03**: Responsive mobile layout (sidebar collapses to hamburger menu)
-- [ ] **SHELL-04**: Active page indicator in sidebar navigation
+- [x] **SHELL-01**: Sidebar navigation with collapsible menu (Overview, API Keys, Usage, Billing, Settings)
+- [x] **SHELL-02**: User avatar/email in sidebar footer with sign-out action
+- [x] **SHELL-03**: Responsive mobile layout (sidebar collapses to hamburger menu)
+- [x] **SHELL-04**: Active page indicator in sidebar navigation
 
 ### Pages
 
@@ -62,10 +62,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DS-01 | Phase 14 | Complete |
 | DS-02 | Phase 14 | Complete |
 | DS-03 | Phase 14 | Complete |
-| SHELL-01 | Phase 15 | Pending |
-| SHELL-02 | Phase 15 | Pending |
-| SHELL-03 | Phase 15 | Pending |
-| SHELL-04 | Phase 15 | Pending |
+| SHELL-01 | Phase 15 | Complete |
+| SHELL-02 | Phase 15 | Complete |
+| SHELL-03 | Phase 15 | Complete |
+| SHELL-04 | Phase 15 | Complete |
 | NAV-01 | Phase 15 | Pending |
 | NAV-02 | Phase 15 | Pending |
 | PAGE-01 | Phase 16 | Pending |

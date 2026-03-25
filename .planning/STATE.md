@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v2.0
 milestone_name: Modern Dashboard
 status: planning
-stopped_at: Phase 15 context gathered
-last_updated: "2026-03-25T13:29:23.661Z"
+stopped_at: Completed 15-app-shell-navigation/15-01-PLAN.md
+last_updated: "2026-03-25T13:40:02.259Z"
 last_activity: 2026-03-25 — v2.0 roadmap created. Phases 14-17 defined, all 15 requirements mapped.
 progress:
   total_phases: 13
   completed_phases: 10
-  total_plans: 24
-  completed_plans: 24
+  total_plans: 26
+  completed_plans: 25
   percent: 0
 ---
 
@@ -51,6 +51,8 @@ Key decisions relevant to v2.0:
 - [Phase 14-design-system-foundation]: Tailwind v3 chosen over v4 for shadcn/ui compatibility; darkMode:class strategy for explicit theme control
 - [Phase 14-design-system-foundation]: localStorage key 'theme' aligns with FOUC-prevention script from Plan 01 — consistent behavior
 - [Phase 14-design-system-foundation]: ThemeToggle placed as temporary floating button; Phase 15 will move it to sidebar nav
+- [Phase 15-app-shell-navigation]: Used NavLink isActive callback for active route detection — avoids manual location matching
+- [Phase 15-app-shell-navigation]: SheetTitle with sr-only class for accessibility, no extra @radix-ui/react-visually-hidden dependency needed
 
 ### Pending Todos
 
@@ -63,6 +65,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-25T13:29:23.658Z
-Stopped at: Phase 15 context gathered
-Resume file: .planning/phases/15-app-shell-navigation/15-CONTEXT.md
+Last session: 2026-03-25T13:40:02.256Z
+Stopped at: Completed 15-app-shell-navigation/15-01-PLAN.md
+Resume file: None
