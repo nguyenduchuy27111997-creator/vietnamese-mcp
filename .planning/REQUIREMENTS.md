@@ -59,26 +59,26 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| DS-01 | TBD | Pending |
-| DS-02 | TBD | Pending |
-| DS-03 | TBD | Pending |
-| SHELL-01 | TBD | Pending |
-| SHELL-02 | TBD | Pending |
-| SHELL-03 | TBD | Pending |
-| SHELL-04 | TBD | Pending |
-| PAGE-01 | TBD | Pending |
-| PAGE-02 | TBD | Pending |
-| PAGE-03 | TBD | Pending |
-| PAGE-04 | TBD | Pending |
-| PAGE-05 | TBD | Pending |
-| PAGE-06 | TBD | Pending |
-| NAV-01 | TBD | Pending |
-| NAV-02 | TBD | Pending |
+| DS-01 | Phase 14 | Pending |
+| DS-02 | Phase 14 | Pending |
+| DS-03 | Phase 14 | Pending |
+| SHELL-01 | Phase 15 | Pending |
+| SHELL-02 | Phase 15 | Pending |
+| SHELL-03 | Phase 15 | Pending |
+| SHELL-04 | Phase 15 | Pending |
+| NAV-01 | Phase 15 | Pending |
+| NAV-02 | Phase 15 | Pending |
+| PAGE-01 | Phase 16 | Pending |
+| PAGE-02 | Phase 16 | Pending |
+| PAGE-03 | Phase 16 | Pending |
+| PAGE-04 | Phase 17 | Pending |
+| PAGE-05 | Phase 17 | Pending |
+| PAGE-06 | Phase 17 | Pending |
 
 **Coverage:**
 - v2.0 requirements: 15 total
-- Mapped to phases: 0
-- Unmapped: 15 ⚠️
+- Mapped to phases: 15
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-03-25*

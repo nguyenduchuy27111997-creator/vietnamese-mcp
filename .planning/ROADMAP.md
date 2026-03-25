@@ -4,7 +4,8 @@
 
 - ✅ **v1.0 MCP Servers** — Phases 1-4 (shipped 2026-03-21)
 - ✅ **v1.1 Platform Launch** — Phases 5-10 (shipped 2026-03-25)
-- 🚧 **v1.2 Production Deployment** — Phases 11-13 (in progress)
+- ✅ **v1.2 Production Deployment** — Phases 11-13 (shipped 2026-03-25)
+- 🚧 **v2.0 Modern Dashboard** — Phases 14-17 (in progress)
 
 ## Phases
 
@@ -30,13 +31,23 @@
 
 </details>
 
-### 🚧 v1.2 Production Deployment (In Progress)
-
-**Milestone Goal:** Deploy all services to production with working public URLs, validate the full user journey end-to-end, and resolve accumulated tech debt from v1.1.
+<details>
+<summary>✅ v1.2 Production Deployment (Phases 11-13) — SHIPPED 2026-03-25</summary>
 
 - [x] **Phase 11: Deploy** — Dashboard on CF Pages and docs on Mintlify cloud, both live with production URLs and correct env config (completed 2026-03-25)
 - [x] **Phase 12: Tech Debt** — Auth test stubs implemented, MOMO_ACCESS_KEY resolved, Tinybird tool name fixed (completed 2026-03-25)
 - [x] **Phase 13: Validation** — Full E2E user journey verified: signup → key → tool call → usage → billing → self-hosted npm (completed 2026-03-25)
+
+</details>
+
+### 🚧 v2.0 Modern Dashboard (In Progress)
+
+**Milestone Goal:** Complete UI/UX overhaul of the dashboard SPA — replace inline styles with Tailwind + shadcn/ui, add sidebar navigation, dark mode, and 7 polished pages covering the full user journey.
+
+- [ ] **Phase 14: Design System Foundation** — Tailwind + shadcn/ui installed, dark mode default, Linear/Vercel design tokens applied
+- [ ] **Phase 15: App Shell + Navigation** — Sidebar with collapsible nav, user menu, responsive mobile layout, client-side routing
+- [ ] **Phase 16: Core Pages** — Overview, API Keys, and Usage pages fully redesigned with new design system
+- [ ] **Phase 17: Billing + Settings + Quickstart** — Billing plan selector, Settings profile/danger zone, and new-user onboarding wizard
 
 ## Phase Details
 
@@ -180,6 +191,48 @@ Plans:
 - [ ] 13-01-PLAN.md — E2E hosted path: signup, API key creation, MCP tool call, usage tracking, Stripe billing upgrade
 - [ ] 13-02-PLAN.md — E2E self-hosted npm path: install from npm, stdio tool call, .mcp.json config
 
+### Phase 14: Design System Foundation
+**Goal**: apps/dashboard has Tailwind CSS + shadcn/ui fully configured, a dark mode default with manual toggle, and design tokens (colors, typography, spacing) that match the Linear/Vercel aesthetic — so every subsequent page is built on a consistent visual foundation
+**Depends on**: Phase 13
+**Requirements**: DS-01, DS-02, DS-03
+**Success Criteria** (what must be TRUE):
+  1. Running the dashboard in dev mode renders with a dark background by default — no flash of white/unstyled content
+  2. A manual theme toggle switches between dark and light mode and persists the choice across page reloads
+  3. shadcn/ui components (Button, Card, Badge, Dialog) render correctly with the project's color tokens applied
+  4. Tailwind classes are available in all dashboard source files — no PostCSS or config errors in the build
+**Plans**: TBD
+
+### Phase 15: App Shell + Navigation
+**Goal**: A persistent sidebar shell wraps all dashboard pages with collapsible navigation, active page highlighting, user avatar/email in the footer, hamburger menu on mobile, and client-side routing connecting all pages
+**Depends on**: Phase 14
+**Requirements**: SHELL-01, SHELL-02, SHELL-03, SHELL-04, NAV-01, NAV-02
+**Success Criteria** (what must be TRUE):
+  1. Navigating between Overview, API Keys, Usage, Billing, and Settings updates the active indicator in the sidebar and renders the correct page without a full reload
+  2. On a mobile viewport the sidebar is hidden and a hamburger icon opens it as an overlay drawer
+  3. The sidebar footer shows the logged-in user's email and a sign-out button that logs the user out and redirects to login
+  4. A new user with zero API keys is automatically redirected to the Quickstart page on first login
+**Plans**: TBD
+
+### Phase 16: Core Pages
+**Goal**: Overview, API Keys, and Usage pages are fully redesigned with the new design system — showing real data from the backend with polished UI components
+**Depends on**: Phase 15
+**Requirements**: PAGE-01, PAGE-02, PAGE-03
+**Success Criteria** (what must be TRUE):
+  1. The Overview page displays a welcome card, key count, current-month usage, and active tier pulled from the API — all visible without scrolling on a standard desktop viewport
+  2. The API Keys page lists all keys in a styled table with status badges; a user can search/filter, copy a key with a copy animation, create a new key via modal, and revoke a key via confirmation dialog
+  3. The Usage page shows a bar/line chart of daily API calls over the last 30 days, a per-server breakdown table, and a warning banner when usage exceeds 80% of the tier limit
+**Plans**: TBD
+
+### Phase 17: Billing + Settings + Quickstart
+**Goal**: Billing, Settings, and Quickstart pages are complete — developers can upgrade their plan, update their profile, delete their account, and new users are guided through the onboarding wizard
+**Depends on**: Phase 16
+**Requirements**: PAGE-04, PAGE-05, PAGE-06
+**Success Criteria** (what must be TRUE):
+  1. The Billing page shows the current plan card with tier name and price; a user can select a different tier and be taken to Stripe Checkout (USD) or MoMo payment (VND) without leaving the dashboard
+  2. The Settings page displays the user's email (read-only), a password change form, and a danger zone with a delete account button that requires typing a confirmation phrase before proceeding
+  3. The Quickstart wizard presents 3 sequential steps (create key → configure .mcp.json → test call) and advances only when each step is completed — a user with an existing key can skip to the relevant step
+**Plans**: TBD
+
 ## Progress
 
 | Phase | Milestone | Plans Complete | Status | Completed |
@@ -196,6 +249,10 @@ Plans:
 | 10. Landing Page & Docs | v1.1 | 2/2 | Complete | 2026-03-25 |
 | 11. Deploy | v1.2 | 2/2 | Complete | 2026-03-25 |
 | 12. Tech Debt | v1.2 | 2/2 | Complete | 2026-03-25 |
-| 13. Validation | 2/2 | Complete    | 2026-03-25 | - |
+| 13. Validation | v1.2 | 0/2 | Not started | - |
+| 14. Design System Foundation | v2.0 | 0/TBD | Not started | - |
+| 15. App Shell + Navigation | v2.0 | 0/TBD | Not started | - |
+| 16. Core Pages | v2.0 | 0/TBD | Not started | - |
+| 17. Billing + Settings + Quickstart | v2.0 | 0/TBD | Not started | - |
 
 **Full v1.0 details:** `.planning/milestones/v1.0-ROADMAP.md`
