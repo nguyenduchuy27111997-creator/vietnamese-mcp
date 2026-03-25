@@ -1,53 +1,57 @@
-# Requirements: VN MCP Hub — v1.2 Production Deployment
+# Requirements: VN MCP Hub — v2.0 Modern Dashboard
 
 **Defined:** 2026-03-25
 **Core Value:** Developer installs MCP server or signs up for hosted API key, adds to `.mcp.json`, and immediately uses Claude Code for Vietnamese payments and messaging — zero integration boilerplate.
 
-## v1.2 Requirements
+## v2.0 Requirements
 
-Requirements for production deployment and tech debt resolution. Each maps to roadmap phases.
+Requirements for dashboard UI/UX overhaul. Each maps to roadmap phases.
 
-### Deployment
+### Design System
 
-- [x] **DEPLOY-01**: Dashboard SPA deployed to Cloudflare Pages with production VITE_GATEWAY_URL
-- [x] **DEPLOY-02**: Docs site deployed to Mintlify cloud with public URL
-- [x] **DEPLOY-03**: All CTA links in docs and landing page point to working production URLs
-- [x] **DEPLOY-04**: .env.production created for dashboard with gateway URL
+- [ ] **DS-01**: Tailwind CSS + shadcn/ui installed and configured in apps/dashboard
+- [ ] **DS-02**: Dark mode default with light mode toggle (system detect + manual)
+- [ ] **DS-03**: Color palette, typography, and spacing tokens defined matching Linear/Vercel aesthetic
 
-### Validation
+### App Shell
 
-- [ ] **VAL-01**: Full E2E flow works: signup → create API key → MCP tool call → usage check
-- [ ] **VAL-02**: Billing flow works: free user → Stripe Checkout → tier upgrade → increased limits
-- [ ] **VAL-03**: Self-hosted npm flow works: npm install → .mcp.json config → tool call
+- [ ] **SHELL-01**: Sidebar navigation with collapsible menu (Overview, API Keys, Usage, Billing, Settings)
+- [ ] **SHELL-02**: User avatar/email in sidebar footer with sign-out action
+- [ ] **SHELL-03**: Responsive mobile layout (sidebar collapses to hamburger menu)
+- [ ] **SHELL-04**: Active page indicator in sidebar navigation
 
-### Tech Debt
+### Pages
 
-- [x] **DEBT-01**: Implement remaining auth test stubs (auth-supabase.test.ts, rls-isolation.test.ts)
-- [x] **DEBT-02**: Fix MOMO_ACCESS_KEY — add to wrangler.toml or remove from types
-- [x] **DEBT-03**: Fix Tinybird tool name — extract from MCP request body instead of 'unknown'
+- [ ] **PAGE-01**: Overview/Home — welcome card, quick stats (key count, usage, tier), recent activity feed
+- [ ] **PAGE-02**: API Keys — redesigned table with status badges, search/filter, creation modal, copy animation, revoke confirmation dialog
+- [ ] **PAGE-03**: Usage & Analytics — usage chart (daily calls over 30 days), per-server breakdown table, limit warning banner at 80%+
+- [ ] **PAGE-04**: Billing — current plan card, upgrade/downgrade tier selector, Stripe/MoMo payment buttons, Stripe Portal link, payment method display
+- [ ] **PAGE-05**: Settings — profile section (email display, password change), danger zone (delete account with confirmation)
+- [ ] **PAGE-06**: Quickstart — interactive 3-step onboarding wizard (create key → configure .mcp.json → test call) for new users with no keys
 
-## v2 Requirements
+### Navigation
+
+- [ ] **NAV-01**: Client-side routing (React Router or equivalent) between all pages
+- [ ] **NAV-02**: Redirect to Quickstart page for new users with zero API keys
+
+## v3 Requirements
 
 Deferred to future release.
 
-### Real API Integration
-
-- **REAL-01**: MoMo live API integration (after merchant KYC approval)
-- **REAL-02**: ViettelPay real SOAP+RSA integration (after API access)
-
-### Additional Servers
-
-- **SERV-01**: mcp-vcb-open-api (Vietcombank Open API)
-- **SERV-02**: mcp-tcb-open-api (Techcombank)
+- **FEAT-01**: Usage dashboard with real-time charts (WebSocket updates)
+- **FEAT-02**: Team management (invite members, shared keys)
+- **FEAT-03**: Notification center (usage alerts, billing reminders)
+- **FEAT-04**: API playground (test tool calls from dashboard)
 
 ## Out of Scope
 
 | Feature | Reason |
 |---------|--------|
-| Custom domain (mcpvn.dev) | Verify Mintlify support first; use subdomains for now |
-| Usage dashboard with charts | Deferred to after first 20 paying customers |
-| CI/CD pipeline | Manual deployment sufficient for v1.2 |
-| RLS re-enablement | Gateway isolation sufficient; revisit when multiple clients access DB |
+| Landing page redesign | Docs site on Mintlify handles this |
+| Gateway API changes | v2.0 is frontend-only |
+| New MCP servers | Separate milestone |
+| Mobile native app | Web responsive is sufficient |
+| i18n/Vietnamese translation | English-first for developer audience |
 
 ## Traceability
 
@@ -55,21 +59,26 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| DEPLOY-01 | Phase 11 | Complete |
-| DEPLOY-02 | Phase 11 | Complete |
-| DEPLOY-03 | Phase 11 | Complete |
-| DEPLOY-04 | Phase 11 | Complete |
-| DEBT-01 | Phase 12 | Complete |
-| DEBT-02 | Phase 12 | Complete |
-| DEBT-03 | Phase 12 | Complete |
-| VAL-01 | Phase 13 | Pending |
-| VAL-02 | Phase 13 | Pending |
-| VAL-03 | Phase 13 | Pending |
+| DS-01 | TBD | Pending |
+| DS-02 | TBD | Pending |
+| DS-03 | TBD | Pending |
+| SHELL-01 | TBD | Pending |
+| SHELL-02 | TBD | Pending |
+| SHELL-03 | TBD | Pending |
+| SHELL-04 | TBD | Pending |
+| PAGE-01 | TBD | Pending |
+| PAGE-02 | TBD | Pending |
+| PAGE-03 | TBD | Pending |
+| PAGE-04 | TBD | Pending |
+| PAGE-05 | TBD | Pending |
+| PAGE-06 | TBD | Pending |
+| NAV-01 | TBD | Pending |
+| NAV-02 | TBD | Pending |
 
 **Coverage:**
-- v1.2 requirements: 10 total
-- Mapped to phases: 10
-- Unmapped: 0 ✓
+- v2.0 requirements: 15 total
+- Mapped to phases: 0
+- Unmapped: 15 ⚠️
 
 ---
 *Requirements defined: 2026-03-25*
