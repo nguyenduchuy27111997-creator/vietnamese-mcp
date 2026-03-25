@@ -1,25 +1,28 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "name": "VN MCP",
   "theme": "mint",
-  "logo": {
-    "light": "/logo/logo.svg",
-    "dark": "/logo/logo.svg"
-  },
-  "favicon": "/logo/logo.svg",
+  "name": "VN MCP Hub",
+  "description": "Vietnamese Payment & Messaging APIs for Claude Code — MoMo, ZaloPay, VNPAY, Zalo OA, ViettelPay",
   "colors": {
     "primary": "#2563eb",
     "light": "#3b82f6",
     "dark": "#1d4ed8"
   },
+  "logo": {
+    "light": "/logo/logo.svg",
+    "dark": "/logo/logo.svg"
+  },
+  "favicon": "/logo/logo.svg",
   "navigation": {
-    "tabs": [
+    "dropdowns": [
       {
-        "tab": "Documentation",
+        "dropdown": "Documentation",
+        "icon": "book",
+        "description": "Quickstart guides and server reference",
         "groups": [
           {
             "group": "Getting Started",
-            "pages": ["quickstart"]
+            "pages": ["index", "quickstart", "pricing"]
           },
           {
             "group": "Server Reference",
@@ -34,26 +37,24 @@
           }
         ]
       }
+    ]
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "GitHub",
+        "href": "https://github.com/nguyenduchuy27111997-creator/vietnamese-mcp"
+      }
     ],
-    "global": {
-      "anchors": [
-        {
-          "name": "Dashboard",
-          "url": "https://dashboard.mcpvn.dev",
-          "icon": "gauge"
-        },
-        {
-          "name": "GitHub",
-          "url": "https://github.com/vn-mcp/vietnamese-mcp",
-          "icon": "github"
-        }
-      ]
+    "primary": {
+      "type": "button",
+      "label": "Get Started",
+      "href": "https://github.com/nguyenduchuy27111997-creator/vietnamese-mcp"
     }
   },
-  "topbar": {
-    "style": "default"
-  },
-  "footerSocials": {
-    "github": "https://github.com/vn-mcp/vietnamese-mcp"
+  "footer": {
+    "socials": {
+      "github": "https://github.com/nguyenduchuy27111997-creator/vietnamese-mcp"
+    }
   }
 }
