@@ -195,7 +195,7 @@ Plans:
 | 9. npm Publishing | v1.1 | 1/2 | In Progress | - |
 | 10. Landing Page & Docs | v1.1 | 2/2 | Complete | 2026-03-25 |
 | 11. Deploy | v1.2 | 2/2 | Complete | 2026-03-25 |
-| 12. Tech Debt | v1.2 | 0/2 | Not started | - |
+| 12. Tech Debt | 1/2 | In Progress|  | - |
 | 13. Validation | v1.2 | 0/2 | Not started | - |
 
 **Full v1.0 details:** `.planning/milestones/v1.0-ROADMAP.md`

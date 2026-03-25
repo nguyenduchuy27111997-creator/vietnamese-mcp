@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.2
 milestone_name: Production Deployment
-status: in-progress
-stopped_at: "Completed 11-02-PLAN.md — Phase 11 complete, all services live"
-last_updated: "2026-03-25T06:20:00Z"
-last_activity: 2026-03-25 — Phase 11 plan 02 complete. Docs live at https://fpt-a833a5a1.mintlify.app/. All 3 production services verified.
+status: executing
+stopped_at: Completed 12-02-PLAN.md — tool name extraction in Tinybird events
+last_updated: "2026-03-25T06:47:11.537Z"
+last_activity: "2026-03-25 — Phase 11 complete. Docs at https://fpt-a833a5a1.mintlify.app/, Dashboard at https://vn-mcp-dashboard.pages.dev, Gateway at https://vn-mcp-gateway.nguyenduchuy27111997.workers.dev."
 progress:
   total_phases: 9
-  completed_phases: 6
-  total_plans: 18
-  completed_plans: 18
-  percent: 17
+  completed_phases: 7
+  total_plans: 20
+  completed_plans: 19
+  percent: 33
 ---
 
 # Project State
@@ -53,6 +53,8 @@ Key decisions relevant to v1.2:
 - [Phase 11-deploy]: Used wrangler pages deploy with static dist/ upload rather than Git-connected CF Pages deployment
 - [Phase 11-deploy]: Mintlify cloud deployed via GitHub integration at fpt-a833a5a1.mintlify.app (not CF Pages fallback)
 - [Phase 11-deploy]: Production URLs — docs=fpt-a833a5a1.mintlify.app, dashboard=vn-mcp-dashboard.pages.dev, gateway=vn-mcp-gateway.nguyenduchuy27111997.workers.dev
+- [Phase 12-tech-debt]: Clone c.req.raw before reading body so handleMcpRequest transport receives unconsumed Request
+- [Phase 12-tech-debt]: Non-tools/call methods log empty string tool name (not 'unknown') for clean Tinybird analytics
 
 ### Pending Todos
 
@@ -66,6 +68,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-25T06:20:00Z
-Stopped at: Completed 11-02-PLAN.md — Phase 11 fully deployed. Ready for Phase 12 (Validate).
+Last session: 2026-03-25T06:47:11.535Z
+Stopped at: Completed 12-02-PLAN.md — tool name extraction in Tinybird events
 Resume file: None
