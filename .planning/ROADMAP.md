@@ -146,11 +146,11 @@ Plans:
   2. Visiting the docs URL shows the Mintlify site with all pages navigable — not a "coming soon" placeholder
   3. Every signup CTA and docs link in the docs site and landing page navigates to a working URL (no dead links)
   4. The dashboard connects to the production gateway — API calls from the deployed SPA reach the deployed CF Workers endpoint
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 11-01: Deploy dashboard to CF Pages with VITE_GATEWAY_URL and .env.production
-- [ ] 11-02: Deploy docs to Mintlify cloud and update all CTA links to production URLs
+- [ ] 11-01-PLAN.md — Create .env.production, build dashboard, deploy to CF Pages, verify login screen loads
+- [ ] 11-02-PLAN.md — Update all CTA/gateway URLs in docs to production values, deploy docs to Mintlify cloud, verify all links
 
 ### Phase 12: Tech Debt
 **Goal**: Accumulated v1.1 tech debt is resolved — test stubs are implemented, wrangler.toml is clean, and Tinybird receives correct tool names on every event
