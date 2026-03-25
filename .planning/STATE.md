@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Platform Launch
 status: completed
-stopped_at: Phase 10 context gathered
-last_updated: "2026-03-24T20:28:30.814Z"
+stopped_at: Completed 10-01-PLAN.md (Mintlify scaffold)
+last_updated: "2026-03-25T04:14:27.616Z"
 last_activity: "2026-03-23 — Phase 8 Plan 02 (Stripe) complete. Next: Phase 8 Plan 03 (MoMo provider)"
 progress:
   total_phases: 6
   completed_phases: 5
-  total_plans: 14
-  completed_plans: 14
+  total_plans: 16
+  completed_plans: 15
   percent: 92
 ---
 
@@ -93,6 +93,8 @@ Pending v1.1 decisions (to be made during planning):
 - [Phase 08-billing]: UpgradeSection inline on DashboardPage with two side-by-side buttons per locked CONTEXT.md decision
 - [Phase 09-npm-publishing]: Build script changed from tsdown (outputs dist/) to tsc --noCheck (outputs build/ per tsconfig outDir) — matches exports/bin fields and produces multi-file structure
 - [Phase 09-npm-publishing]: tsc --noCheck used for all 6 server/shared builds — pre-existing type errors in src/client.ts (_mock type mismatch) are out-of-scope, transpile-only is sufficient for publishing
+- [Phase 10-landing-page-docs]: docs.json (not mint.json) — config file renamed February 2025; unified navigation object with nested tabs/groups
+- [Phase 10-landing-page-docs]: Single quickstart page with Tabs (no page splitting) — locked CONTEXT.md decision; Hosted (API Key) and Self-Hosted (npm) tabs
 
 ### Pending Todos
 
@@ -106,6 +108,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-24T20:28:30.810Z
-Stopped at: Phase 10 context gathered
-Resume file: .planning/phases/10-landing-page-docs/10-CONTEXT.md
+Last session: 2026-03-25T04:14:27.614Z
+Stopped at: Completed 10-01-PLAN.md (Mintlify scaffold)
+Resume file: None
