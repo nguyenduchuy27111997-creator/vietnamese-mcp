@@ -34,7 +34,7 @@
 
 **Milestone Goal:** Deploy all services to production with working public URLs, validate the full user journey end-to-end, and resolve accumulated tech debt from v1.1.
 
-- [ ] **Phase 11: Deploy** — Dashboard on CF Pages and docs on Mintlify cloud, both live with production URLs and correct env config
+- [x] **Phase 11: Deploy** — Dashboard on CF Pages and docs on Mintlify cloud, both live with production URLs and correct env config (completed 2026-03-25)
 - [ ] **Phase 12: Tech Debt** — Auth test stubs implemented, MOMO_ACCESS_KEY resolved, Tinybird tool name fixed
 - [ ] **Phase 13: Validation** — Full E2E user journey verified: signup → key → tool call → usage → billing → self-hosted npm
 
@@ -150,7 +150,7 @@ Plans:
 
 Plans:
 - [x] 11-01-PLAN.md — Create .env.production, build dashboard, deploy to CF Pages, verify login screen loads
-- [ ] 11-02-PLAN.md — Update all CTA/gateway URLs in docs to production values, deploy docs to Mintlify cloud, verify all links
+- [x] 11-02-PLAN.md — Update all CTA/gateway URLs in docs to production values, deploy docs to Mintlify cloud, verify all links
 
 ### Phase 12: Tech Debt
 **Goal**: Accumulated v1.1 tech debt is resolved — test stubs are implemented, wrangler.toml is clean, and Tinybird receives correct tool names on every event
@@ -194,7 +194,7 @@ Plans:
 | 8. Billing | v1.1 | 3/3 | Complete | 2026-03-23 |
 | 9. npm Publishing | v1.1 | 1/2 | In Progress | - |
 | 10. Landing Page & Docs | v1.1 | 2/2 | Complete | 2026-03-25 |
-| 11. Deploy | v1.2 | 1/2 | In Progress | - |
+| 11. Deploy | v1.2 | 2/2 | Complete | 2026-03-25 |
 | 12. Tech Debt | v1.2 | 0/2 | Not started | - |
 | 13. Validation | v1.2 | 0/2 | Not started | - |
 

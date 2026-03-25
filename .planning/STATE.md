@@ -3,9 +3,9 @@ gsd_state_version: 1.0
 milestone: v1.2
 milestone_name: Production Deployment
 status: in-progress
-stopped_at: "Completed 11-01-PLAN.md — ready for 11-02 (docs deploy)"
-last_updated: "2026-03-25T06:15:00Z"
-last_activity: 2026-03-25 — Phase 11 plan 01 complete. Dashboard live at https://vn-mcp-dashboard.pages.dev.
+stopped_at: "Completed 11-02-PLAN.md — Phase 11 complete, all services live"
+last_updated: "2026-03-25T06:20:00Z"
+last_activity: 2026-03-25 — Phase 11 plan 02 complete. Docs live at https://fpt-a833a5a1.mintlify.app/. All 3 production services verified.
 progress:
   total_phases: 9
   completed_phases: 6
@@ -26,11 +26,11 @@ See: .planning/PROJECT.md (updated 2026-03-25)
 ## Current Position
 
 Phase: 11 of 13 (Phase 11: Deploy)
-Plan: 1 of 2 complete in current phase
+Plan: 2 of 2 complete in current phase
 Status: In progress
-Last activity: 2026-03-25 — Phase 11 plan 01 complete. Dashboard live at https://vn-mcp-dashboard.pages.dev. Next: 11-02 docs deploy.
+Last activity: 2026-03-25 — Phase 11 complete. Docs at https://fpt-a833a5a1.mintlify.app/, Dashboard at https://vn-mcp-dashboard.pages.dev, Gateway at https://vn-mcp-gateway.nguyenduchuy27111997.workers.dev.
 
-Progress: [█░░░░░░░░░] 17% (1 of 6 plans complete)
+Progress: [██░░░░░░░░] 33% (2 of 6 plans complete)
 
 ## Performance Metrics
 
@@ -51,6 +51,8 @@ Key decisions relevant to v1.2:
 - MoMo mock-only until merchant KYC approved
 - [Phase 11-deploy]: Force-added .env.production past .gitignore — Supabase anon key is safe for client-side exposure (embedded in built JS)
 - [Phase 11-deploy]: Used wrangler pages deploy with static dist/ upload rather than Git-connected CF Pages deployment
+- [Phase 11-deploy]: Mintlify cloud deployed via GitHub integration at fpt-a833a5a1.mintlify.app (not CF Pages fallback)
+- [Phase 11-deploy]: Production URLs — docs=fpt-a833a5a1.mintlify.app, dashboard=vn-mcp-dashboard.pages.dev, gateway=vn-mcp-gateway.nguyenduchuy27111997.workers.dev
 
 ### Pending Todos
 
@@ -64,6 +66,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-25T06:15:00Z
-Stopped at: Completed 11-01-PLAN.md — ready for 11-02 (docs deploy to Mintlify)
+Last session: 2026-03-25T06:20:00Z
+Stopped at: Completed 11-02-PLAN.md — Phase 11 fully deployed. Ready for Phase 12 (Validate).
 Resume file: None
