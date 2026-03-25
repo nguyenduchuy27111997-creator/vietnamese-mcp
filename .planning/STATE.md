@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v2.0
 milestone_name: Modern Dashboard
 status: planning
-stopped_at: Completed 14-01-PLAN.md
-last_updated: "2026-03-25T13:23:06.259Z"
+stopped_at: Completed 14-02-PLAN.md
+last_updated: "2026-03-25T13:27:18.506Z"
 last_activity: 2026-03-25 — v2.0 roadmap created. Phases 14-17 defined, all 15 requirements mapped.
 progress:
   total_phases: 13
-  completed_phases: 9
+  completed_phases: 10
   total_plans: 24
-  completed_plans: 23
+  completed_plans: 24
   percent: 0
 ---
 
@@ -49,6 +49,8 @@ Key decisions relevant to v2.0:
 - [Phase 11-deploy]: Production dashboard URL is vn-mcp-dashboard.pages.dev
 - [Phase 11-deploy]: Supabase anon key is safe for client-side exposure (embedded in built JS)
 - [Phase 14-design-system-foundation]: Tailwind v3 chosen over v4 for shadcn/ui compatibility; darkMode:class strategy for explicit theme control
+- [Phase 14-design-system-foundation]: localStorage key 'theme' aligns with FOUC-prevention script from Plan 01 — consistent behavior
+- [Phase 14-design-system-foundation]: ThemeToggle placed as temporary floating button; Phase 15 will move it to sidebar nav
 
 ### Pending Todos
 
@@ -61,6 +63,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-25T13:23:06.256Z
-Stopped at: Completed 14-01-PLAN.md
+Last session: 2026-03-25T13:27:18.504Z
+Stopped at: Completed 14-02-PLAN.md
 Resume file: None

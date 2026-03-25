@@ -10,7 +10,7 @@ Requirements for dashboard UI/UX overhaul. Each maps to roadmap phases.
 ### Design System
 
 - [x] **DS-01**: Tailwind CSS + shadcn/ui installed and configured in apps/dashboard
-- [ ] **DS-02**: Dark mode default with light mode toggle (system detect + manual)
+- [x] **DS-02**: Dark mode default with light mode toggle (system detect + manual)
 - [x] **DS-03**: Color palette, typography, and spacing tokens defined matching Linear/Vercel aesthetic
 
 ### App Shell
@@ -60,7 +60,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | Requirement | Phase | Status |
 |-------------|-------|--------|
 | DS-01 | Phase 14 | Complete |
-| DS-02 | Phase 14 | Pending |
+| DS-02 | Phase 14 | Complete |
 | DS-03 | Phase 14 | Complete |
 | SHELL-01 | Phase 15 | Pending |
 | SHELL-02 | Phase 15 | Pending |
