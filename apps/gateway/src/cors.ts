@@ -5,6 +5,7 @@
 export const corsConfig = {
   origin: (origin: string) => {
     if (origin && origin.startsWith('http://localhost:')) return origin;
+    if (origin && origin.endsWith('.pages.dev')) return origin;
     return 'https://claude.ai';
   },
   allowMethods: ['GET', 'POST', 'DELETE', 'OPTIONS'],
