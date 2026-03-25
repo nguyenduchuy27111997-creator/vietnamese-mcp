@@ -37,7 +37,10 @@ Developer installs an MCP server or signs up for a hosted API key, adds it to `.
 
 ### Active
 
-(None — planning next milestone)
+- [ ] Dashboard deployed to Cloudflare Pages with production gateway URL
+- [ ] Docs deployed to Mintlify cloud with public URL
+- [ ] All URLs validated end-to-end (signup → key → tool call → usage → billing)
+- [ ] Tech debt from v1.1 audit resolved (RLS, test stubs, MoMo access key, Tinybird tool name)
 
 ### Out of Scope
 
@@ -49,6 +52,16 @@ Developer installs an MCP server or signs up for a hosted API key, adds it to `.
 - White-label licensing — after platform validated with direct users
 - Usage dashboard UI (charts, analytics) — deferred to after first 20 paying customers
 - Custom domain for docs — verify Mintlify free tier support
+
+## Current Milestone: v1.2 Production Deployment
+
+**Goal:** Deploy all services to production with working public URLs, validate the full user journey end-to-end, and resolve accumulated tech debt from v1.1.
+
+**Target:**
+- Dashboard on CF Pages (production VITE_GATEWAY_URL)
+- Docs on Mintlify cloud (public URL)
+- Full E2E validation: signup → API key → tool call → usage → upgrade
+- Tech debt cleanup: RLS, test stubs, MoMo access key, Tinybird tool name
 
 ## Context
 
