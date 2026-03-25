@@ -19,7 +19,7 @@ export type GatewayEnv = {
     STRIPE_PRICE_PRO: string;
     STRIPE_PRICE_BUSINESS: string;
     MOMO_PARTNER_CODE: string;
-    MOMO_ACCESS_KEY?: string;
+    MOMO_ACCESS_KEY: string;
     MOMO_SECRET_KEY: string;
   };
   Variables: {
