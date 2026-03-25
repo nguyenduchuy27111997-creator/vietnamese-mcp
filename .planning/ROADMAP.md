@@ -35,7 +35,7 @@
 **Milestone Goal:** Deploy all services to production with working public URLs, validate the full user journey end-to-end, and resolve accumulated tech debt from v1.1.
 
 - [x] **Phase 11: Deploy** — Dashboard on CF Pages and docs on Mintlify cloud, both live with production URLs and correct env config (completed 2026-03-25)
-- [ ] **Phase 12: Tech Debt** — Auth test stubs implemented, MOMO_ACCESS_KEY resolved, Tinybird tool name fixed
+- [x] **Phase 12: Tech Debt** — Auth test stubs implemented, MOMO_ACCESS_KEY resolved, Tinybird tool name fixed (completed 2026-03-25)
 - [ ] **Phase 13: Validation** — Full E2E user journey verified: signup → key → tool call → usage → billing → self-hosted npm
 
 ## Phase Details
@@ -195,7 +195,7 @@ Plans:
 | 9. npm Publishing | v1.1 | 1/2 | In Progress | - |
 | 10. Landing Page & Docs | v1.1 | 2/2 | Complete | 2026-03-25 |
 | 11. Deploy | v1.2 | 2/2 | Complete | 2026-03-25 |
-| 12. Tech Debt | 1/2 | In Progress|  | - |
+| 12. Tech Debt | 2/2 | Complete   | 2026-03-25 | - |
 | 13. Validation | v1.2 | 0/2 | Not started | - |
 
 **Full v1.0 details:** `.planning/milestones/v1.0-ROADMAP.md`

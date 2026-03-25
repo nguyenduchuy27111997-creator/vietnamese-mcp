@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.2
 milestone_name: Production Deployment
 status: executing
-stopped_at: Completed 12-02-PLAN.md — tool name extraction in Tinybird events
-last_updated: "2026-03-25T06:47:11.537Z"
+stopped_at: Completed 12-01-PLAN.md — test stubs replaced, MOMO_ACCESS_KEY added to wrangler.toml
+last_updated: "2026-03-25T06:47:48.577Z"
 last_activity: "2026-03-25 — Phase 11 complete. Docs at https://fpt-a833a5a1.mintlify.app/, Dashboard at https://vn-mcp-dashboard.pages.dev, Gateway at https://vn-mcp-gateway.nguyenduchuy27111997.workers.dev."
 progress:
   total_phases: 9
-  completed_phases: 7
+  completed_phases: 8
   total_plans: 20
-  completed_plans: 19
+  completed_plans: 20
   percent: 33
 ---
 
@@ -55,6 +55,7 @@ Key decisions relevant to v1.2:
 - [Phase 11-deploy]: Production URLs — docs=fpt-a833a5a1.mintlify.app, dashboard=vn-mcp-dashboard.pages.dev, gateway=vn-mcp-gateway.nguyenduchuy27111997.workers.dev
 - [Phase 12-tech-debt]: Clone c.req.raw before reading body so handleMcpRequest transport receives unconsumed Request
 - [Phase 12-tech-debt]: Non-tools/call methods log empty string tool name (not 'unknown') for clean Tinybird analytics
+- [Phase 12-tech-debt]: auth-supabase tests mock Supabase JS client directly (no HTTP endpoints) since gateway has no /auth routes; rls-isolation tests verify application layer (keys router) not DB-layer RLS; MOMO_ACCESS_KEY made required in GatewayEnv type
 
 ### Pending Todos
 
@@ -68,6 +69,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-25T06:47:11.535Z
-Stopped at: Completed 12-02-PLAN.md — tool name extraction in Tinybird events
+Last session: 2026-03-25T06:47:48.574Z
+Stopped at: Completed 12-01-PLAN.md — test stubs replaced, MOMO_ACCESS_KEY added to wrangler.toml
 Resume file: None

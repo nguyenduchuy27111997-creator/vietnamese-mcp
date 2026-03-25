@@ -22,8 +22,8 @@ Requirements for production deployment and tech debt resolution. Each maps to ro
 
 ### Tech Debt
 
-- [ ] **DEBT-01**: Implement remaining auth test stubs (auth-supabase.test.ts, rls-isolation.test.ts)
-- [ ] **DEBT-02**: Fix MOMO_ACCESS_KEY — add to wrangler.toml or remove from types
+- [x] **DEBT-01**: Implement remaining auth test stubs (auth-supabase.test.ts, rls-isolation.test.ts)
+- [x] **DEBT-02**: Fix MOMO_ACCESS_KEY — add to wrangler.toml or remove from types
 - [x] **DEBT-03**: Fix Tinybird tool name — extract from MCP request body instead of 'unknown'
 
 ## v2 Requirements
@@ -59,8 +59,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DEPLOY-02 | Phase 11 | Complete |
 | DEPLOY-03 | Phase 11 | Complete |
 | DEPLOY-04 | Phase 11 | Complete |
-| DEBT-01 | Phase 12 | Pending |
-| DEBT-02 | Phase 12 | Pending |
+| DEBT-01 | Phase 12 | Complete |
+| DEBT-02 | Phase 12 | Complete |
 | DEBT-03 | Phase 12 | Complete |
 | VAL-01 | Phase 13 | Pending |
 | VAL-02 | Phase 13 | Pending |
