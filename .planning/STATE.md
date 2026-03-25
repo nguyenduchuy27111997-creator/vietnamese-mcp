@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v2.0
 milestone_name: Modern Dashboard
 status: planning
-stopped_at: Completed 16-02-PLAN.md
-last_updated: "2026-03-25T13:54:28.941Z"
+stopped_at: Completed 16-03-PLAN.md
+last_updated: "2026-03-25T13:54:43.502Z"
 last_activity: 2026-03-25 — v2.0 roadmap created. Phases 14-17 defined, all 15 requirements mapped.
 progress:
   total_phases: 13
-  completed_phases: 11
+  completed_phases: 12
   total_plans: 29
-  completed_plans: 28
+  completed_plans: 29
   percent: 0
 ---
 
@@ -57,6 +57,7 @@ Key decisions relevant to v2.0:
 - [Phase 15]: NewUserRedirect checks keys.length === 0 only on root path to avoid redirect loops
 - [Phase 16-core-pages]: useOverview aggregate hook delegates to useKeys and useUsage with no direct API calls
 - [Phase 16-core-pages]: AlertDialog uses separate @radix-ui/react-alert-dialog package for semantic accessibility; revoke-only shown on active keys; copy animation via useState+setTimeout; create dialog stays open after key creation to display raw key
+- [Phase 16-03]: recharts was already installed; generateDailyData uses recency weighting for visual interest; server breakdown uses fixed realistic weights for 5 MCP servers
 
 ### Pending Todos
 
@@ -69,6 +70,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-25T13:54:28.939Z
-Stopped at: Completed 16-02-PLAN.md
+Last session: 2026-03-25T13:54:43.500Z
+Stopped at: Completed 16-03-PLAN.md
 Resume file: None
