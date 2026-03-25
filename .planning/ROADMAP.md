@@ -232,9 +232,9 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 16-01-PLAN.md — Overview page: useOverview hook + stat cards (keys, usage, tier) with progress bar and activity placeholder
-- [ ] 16-02-PLAN.md — API Keys page: AlertDialog component, table with search/filter, create modal with copy animation, revoke confirmation
-- [ ] 16-03-PLAN.md — Usage page: recharts area chart (30-day), per-server breakdown table, 80% limit warning banner
+- [x] 16-01-PLAN.md — Overview page: useOverview hook + stat cards (keys, usage, tier) with progress bar and activity placeholder
+- [x] 16-02-PLAN.md — API Keys page: AlertDialog component, table with search/filter, create modal with copy animation, revoke confirmation
+- [x] 16-03-PLAN.md — Usage page: recharts area chart (30-day), per-server breakdown table, 80% limit warning banner
 
 ### Phase 17: Billing + Settings + Quickstart
 **Goal**: Billing, Settings, and Quickstart pages are complete — developers can upgrade their plan, update their profile, delete their account, and new users are guided through the onboarding wizard
@@ -244,7 +244,12 @@ Plans:
   1. The Billing page shows the current plan card with tier name and price; a user can select a different tier and be taken to Stripe Checkout (USD) or MoMo payment (VND) without leaving the dashboard
   2. The Settings page displays the user's email (read-only), a password change form, and a danger zone with a delete account button that requires typing a confirmation phrase before proceeding
   3. The Quickstart wizard presents 3 sequential steps (create key → configure .mcp.json → test call) and advances only when each step is completed — a user with an existing key can skip to the relevant step
-**Plans**: TBD
+**Plans**: 3 plans
+
+Plans:
+- [ ] 17-01-PLAN.md — Billing page: 3 plan cards (Starter/Pro/Business) with Stripe + MoMo payment buttons and portal link
+- [ ] 17-02-PLAN.md — Settings page: profile email display, password change form, danger zone with delete account AlertDialog
+- [ ] 17-03-PLAN.md — Quickstart page: 3-step onboarding wizard (create key, configure .mcp.json, test call)
 
 ## Progress
 
@@ -265,7 +270,7 @@ Plans:
 | 13. Validation | v1.2 | 0/2 | Not started | - |
 | 14. Design System Foundation | v2.0 | 2/2 | Complete | 2026-03-25 |
 | 15. App Shell + Navigation | v2.0 | 2/2 | Complete | 2026-03-25 |
-| 16. Core Pages | 3/3 | Complete    | 2026-03-25 | - |
-| 17. Billing + Settings + Quickstart | v2.0 | 0/TBD | Not started | - |
+| 16. Core Pages | v2.0 | 3/3 | Complete | 2026-03-25 |
+| 17. Billing + Settings + Quickstart | v2.0 | 0/3 | Not started | - |
 
 **Full v1.0 details:** `.planning/milestones/v1.0-ROADMAP.md`
