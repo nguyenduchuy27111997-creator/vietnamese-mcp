@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v2.0
 milestone_name: Modern Dashboard
 status: planning
-stopped_at: Completed 15-app-shell-navigation/15-01-PLAN.md
-last_updated: "2026-03-25T13:40:02.259Z"
+stopped_at: Completed 15-app-shell-navigation/15-02-PLAN.md
+last_updated: "2026-03-25T13:42:33.452Z"
 last_activity: 2026-03-25 — v2.0 roadmap created. Phases 14-17 defined, all 15 requirements mapped.
 progress:
   total_phases: 13
-  completed_phases: 10
+  completed_phases: 11
   total_plans: 26
-  completed_plans: 25
+  completed_plans: 26
   percent: 0
 ---
 
@@ -53,6 +53,8 @@ Key decisions relevant to v2.0:
 - [Phase 14-design-system-foundation]: ThemeToggle placed as temporary floating button; Phase 15 will move it to sidebar nav
 - [Phase 15-app-shell-navigation]: Used NavLink isActive callback for active route detection — avoids manual location matching
 - [Phase 15-app-shell-navigation]: SheetTitle with sr-only class for accessibility, no extra @radix-ui/react-visually-hidden dependency needed
+- [Phase 15]: React.lazy + dynamic import used for per-page code splitting — build output shows 6 separate page chunks
+- [Phase 15]: NewUserRedirect checks keys.length === 0 only on root path to avoid redirect loops
 
 ### Pending Todos
 
@@ -65,6 +67,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-25T13:40:02.256Z
-Stopped at: Completed 15-app-shell-navigation/15-01-PLAN.md
+Last session: 2026-03-25T13:42:28.817Z
+Stopped at: Completed 15-app-shell-navigation/15-02-PLAN.md
 Resume file: None

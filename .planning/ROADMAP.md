@@ -45,7 +45,7 @@
 **Milestone Goal:** Complete UI/UX overhaul of the dashboard SPA — replace inline styles with Tailwind + shadcn/ui, add sidebar navigation, dark mode, and 7 polished pages covering the full user journey.
 
 - [x] **Phase 14: Design System Foundation** — Tailwind + shadcn/ui installed, dark mode default, Linear/Vercel design tokens applied (completed 2026-03-25)
-- [ ] **Phase 15: App Shell + Navigation** — Sidebar with collapsible nav, user menu, responsive mobile layout, client-side routing
+- [x] **Phase 15: App Shell + Navigation** — Sidebar with collapsible nav, user menu, responsive mobile layout, client-side routing (completed 2026-03-25)
 - [ ] **Phase 16: Core Pages** — Overview, API Keys, and Usage pages fully redesigned with new design system
 - [ ] **Phase 17: Billing + Settings + Quickstart** — Billing plan selector, Settings profile/danger zone, and new-user onboarding wizard
 
@@ -259,7 +259,7 @@ Plans:
 | 12. Tech Debt | v1.2 | 2/2 | Complete | 2026-03-25 |
 | 13. Validation | v1.2 | 0/2 | Not started | - |
 | 14. Design System Foundation | v2.0 | 2/2 | Complete | 2026-03-25 |
-| 15. App Shell + Navigation | 1/2 | In Progress|  | - |
+| 15. App Shell + Navigation | 2/2 | Complete   | 2026-03-25 | - |
 | 16. Core Pages | v2.0 | 0/TBD | Not started | - |
 | 17. Billing + Settings + Quickstart | v2.0 | 0/TBD | Not started | - |
 

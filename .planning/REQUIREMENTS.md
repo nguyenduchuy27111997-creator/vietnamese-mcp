@@ -31,8 +31,8 @@ Requirements for dashboard UI/UX overhaul. Each maps to roadmap phases.
 
 ### Navigation
 
-- [ ] **NAV-01**: Client-side routing (React Router or equivalent) between all pages
-- [ ] **NAV-02**: Redirect to Quickstart page for new users with zero API keys
+- [x] **NAV-01**: Client-side routing (React Router or equivalent) between all pages
+- [x] **NAV-02**: Redirect to Quickstart page for new users with zero API keys
 
 ## v3 Requirements
 
@@ -66,8 +66,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SHELL-02 | Phase 15 | Complete |
 | SHELL-03 | Phase 15 | Complete |
 | SHELL-04 | Phase 15 | Complete |
-| NAV-01 | Phase 15 | Pending |
-| NAV-02 | Phase 15 | Pending |
+| NAV-01 | Phase 15 | Complete |
+| NAV-02 | Phase 15 | Complete |
 | PAGE-01 | Phase 16 | Pending |
 | PAGE-02 | Phase 16 | Pending |
 | PAGE-03 | Phase 16 | Pending |
