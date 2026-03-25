@@ -163,8 +163,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 12-01-PLAN.md — Implement auth + RLS test stubs with real assertions, add MOMO_ACCESS_KEY to wrangler.toml
-- [ ] 12-02-PLAN.md — Extract tool name from MCP JSON-RPC request body for Tinybird events
+- [x] 12-01-PLAN.md — Implement auth + RLS test stubs with real assertions, add MOMO_ACCESS_KEY to wrangler.toml
+- [x] 12-02-PLAN.md — Extract tool name from MCP JSON-RPC request body for Tinybird events
 
 ### Phase 13: Validation
 **Goal**: The full end-to-end user journey works in production — from signup through API key creation, tool calls, usage tracking, tier upgrade, and self-hosted npm install
@@ -174,11 +174,11 @@ Plans:
   1. A new user can sign up on the deployed dashboard, create an API key, make a tool call through the production gateway, and see their usage increment
   2. A free-tier user can complete Stripe Checkout in the deployed dashboard and their key's tier upgrades to Starter within one webhook delivery
   3. A developer can run `npm install @vn-mcp/momo`, add the config to `.mcp.json`, and complete a tool call end-to-end without touching the hosted gateway
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 13-01: E2E validation — hosted path (signup → key → tool call → usage → billing upgrade)
-- [ ] 13-02: E2E validation — self-hosted npm path (install → config → tool call)
+- [ ] 13-01-PLAN.md — E2E hosted path: signup, API key creation, MCP tool call, usage tracking, Stripe billing upgrade
+- [ ] 13-02-PLAN.md — E2E self-hosted npm path: install from npm, stdio tool call, .mcp.json config
 
 ## Progress
 
@@ -195,7 +195,7 @@ Plans:
 | 9. npm Publishing | v1.1 | 1/2 | In Progress | - |
 | 10. Landing Page & Docs | v1.1 | 2/2 | Complete | 2026-03-25 |
 | 11. Deploy | v1.2 | 2/2 | Complete | 2026-03-25 |
-| 12. Tech Debt | 2/2 | Complete   | 2026-03-25 | - |
+| 12. Tech Debt | v1.2 | 2/2 | Complete | 2026-03-25 |
 | 13. Validation | v1.2 | 0/2 | Not started | - |
 
 **Full v1.0 details:** `.planning/milestones/v1.0-ROADMAP.md`
