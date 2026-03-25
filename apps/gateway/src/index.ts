@@ -13,6 +13,16 @@ import type { GatewayEnv } from './types.js';
 
 const app = new Hono<GatewayEnv>();
 
+// Sync wrangler [vars] to process.env so isMockMode() works in CF Workers
+app.use('*', async (c, next) => {
+  const sandboxVars = ['MOMO_SANDBOX', 'ZALOPAY_SANDBOX', 'VNPAY_SANDBOX', 'VIETTELPAY_SANDBOX', 'ZALO_OA_SANDBOX'];
+  for (const key of sandboxVars) {
+    const val = (c.env as Record<string, string>)[key];
+    if (val) process.env[key] = val;
+  }
+  return next();
+});
+
 // CORS on MCP routes — handles OPTIONS preflight automatically
 app.use('/mcp/*', cors(corsConfig));
 

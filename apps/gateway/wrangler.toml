@@ -5,6 +5,11 @@ compatibility_flags = ["nodejs_compat"]
 
 [vars]
 MOCK_MODE = "true"
+MOMO_SANDBOX = "true"
+ZALOPAY_SANDBOX = "true"
+VNPAY_SANDBOX = "true"
+VIETTELPAY_SANDBOX = "true"
+ZALO_OA_SANDBOX = "true"
 TINYBIRD_HOST = "https://api.europe-west2.gcp.tinybird.co"
 STRIPE_PRICE_STARTER = "price_1TE6ObGzKT7ZenSQoHlXrIsi"
 STRIPE_PRICE_PRO = "price_1TE6OhGzKT7ZenSQ4jaGCbh1"
