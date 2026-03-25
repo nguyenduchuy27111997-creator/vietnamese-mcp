@@ -160,11 +160,11 @@ Plans:
   1. Running `npm test` in the gateway workspace shows zero skipped or stubbed tests — auth-supabase.test.ts and rls-isolation.test.ts have real assertions that pass
   2. `wrangler deploy` succeeds without unknown binding warnings — MOMO_ACCESS_KEY is either present in wrangler.toml or removed from GatewayEnv types
   3. A tool call logged in Tinybird shows the actual tool name (e.g. `momo_create_payment`) instead of `unknown`
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 12-01: Implement auth test stubs (auth-supabase.test.ts, rls-isolation.test.ts) and fix MOMO_ACCESS_KEY in wrangler.toml
-- [ ] 12-02: Fix Tinybird tool name extraction from MCP request body
+- [ ] 12-01-PLAN.md — Implement auth + RLS test stubs with real assertions, add MOMO_ACCESS_KEY to wrangler.toml
+- [ ] 12-02-PLAN.md — Extract tool name from MCP JSON-RPC request body for Tinybird events
 
 ### Phase 13: Validation
 **Goal**: The full end-to-end user journey works in production — from signup through API key creation, tool calls, usage tracking, tier upgrade, and self-hosted npm install
