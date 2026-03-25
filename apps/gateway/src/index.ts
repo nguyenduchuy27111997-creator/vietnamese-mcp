@@ -53,6 +53,18 @@ app.all('/mcp/:server', async (c) => {
     }
   }
 
+  // Extract tool name from MCP JSON-RPC body (clone to preserve body for transport)
+  let toolName = '';
+  try {
+    const cloned = c.req.raw.clone();
+    const body = await cloned.json() as { method?: string; params?: { name?: string } };
+    if (body.method === 'tools/call' && body.params?.name) {
+      toolName = body.params.name;
+    }
+  } catch {
+    // Not JSON (e.g. SSE) or parse error — leave as empty string
+  }
+
   // Execute tool
   const response = await handleMcpRequest(serverName, c.req.raw, tier);
 
@@ -63,7 +75,7 @@ app.all('/mcp/:server', async (c) => {
         {
           api_key_id: keyId,
           server: serverName,
-          tool: 'unknown', // MCP protocol doesn't expose tool name at transport level
+          tool: toolName,
           timestamp: new Date().toISOString(),
           response_status: 'ok',
         },
