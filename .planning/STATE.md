@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v2.1
 milestone_name: Growth & Marketing
 status: executing
-stopped_at: Completed 19-02-PLAN.md
-last_updated: "2026-03-26T18:24:49.960Z"
+stopped_at: Completed 20-03-PLAN.md
+last_updated: "2026-03-26T18:35:16.836Z"
 last_activity: 2026-03-27 — 18-03 complete. Assets dir created, README GIF embed active, GIF recording deferred to pre-launch.
 progress:
   total_phases: 17
   completed_phases: 15
-  total_plans: 37
-  completed_plans: 37
+  total_plans: 40
+  completed_plans: 39
   percent: 10
 ---
 
@@ -59,6 +59,9 @@ v2.1 decisions:
 - [Phase 19-example-apps]: Example apps live in examples/ directory, standalone with own package.json, not in root workspaces
 - [Phase 19-example-apps]: Payment checkout example uses plain fetch with JSON-RPC — no SDK, minimal deps, easy for developers to understand
 - [Phase 19-example-apps]: Used correct tool names zalo_oa_send_message/zalo_oa_list_followers (plan had wrong zalooa_ prefix)
+- [Phase 20-blog-changelog]: Changelog content sourced from ROADMAP.md milestone dates — single source of truth for version history
+- [Phase 20-01]: Blog added as second navigation dropdown in docs.json, separate from Documentation
+- [Phase 20-01]: Launch blog post uses Mintlify CardGroup component to present 5 MCP servers visually
 
 ### Pending Todos
 
@@ -72,6 +75,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-26T18:24:19.955Z
-Stopped at: Completed 19-02-PLAN.md
+Last session: 2026-03-26T18:35:16.833Z
+Stopped at: Completed 20-03-PLAN.md
 Resume file: None

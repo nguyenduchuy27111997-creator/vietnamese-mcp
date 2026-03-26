@@ -26,9 +26,9 @@
 
 ### Blog & Changelog
 
-- [ ] **BLOG-01**: Launch announcement blog post on Mintlify ("Introducing VN MCP Hub")
+- [x] **BLOG-01**: Launch announcement blog post on Mintlify ("Introducing VN MCP Hub")
 - [ ] **BLOG-02**: Per-server guide posts (MoMo payments, ZaloPay integration, etc.)
-- [ ] **BLOG-03**: Changelog page added to Mintlify docs site
+- [x] **BLOG-03**: Changelog page added to Mintlify docs site
 
 ## v3 Requirements
 
@@ -59,9 +59,9 @@ Deferred to future release.
 | EX-01 | Phase 19 | Complete |
 | EX-02 | Phase 19 | Complete |
 | EX-03 | Phase 19 | Complete |
-| BLOG-01 | Phase 20 | Pending |
+| BLOG-01 | Phase 20 | Complete |
 | BLOG-02 | Phase 20 | Pending |
-| BLOG-03 | Phase 20 | Pending |
+| BLOG-03 | Phase 20 | Complete |
 | PH-01 | Phase 21 | Pending |
 | PH-02 | Phase 21 | Pending |
 | PH-03 | Phase 21 | Pending |
