@@ -1,0 +1,72 @@
+---
+title: "Changelog"
+description: "Release history for VN MCP Hub — from v1.0 MCP servers to v2.0 modern dashboard."
+sidebarTitle: "Changelog"
+icon: "clock-rotate-left"
+---
+
+## v2.0 — Modern Dashboard (March 26, 2026)
+
+A complete dashboard redesign with dark mode, new design system, and polished UI.
+
+**New:**
+- Design system foundation with Tailwind CSS + shadcn/ui, dark mode default
+- Collapsible sidebar navigation with mobile responsive layout
+- Overview page with stat cards (API keys, usage, tier)
+- API Keys page with search, filter, create modal, copy animation, revoke confirmation
+- Usage page with 30-day area chart and per-server breakdown
+- Billing page with Stripe (USD) and MoMo (VND) payment options
+- Settings page with password change and account deletion
+- Quickstart onboarding wizard (3-step: create key, configure, test)
+
+---
+
+## v1.2 — Production Deployment (March 25, 2026)
+
+Production-ready deployment with E2E validation.
+
+**New:**
+- Dashboard deployed to Cloudflare Pages
+- Docs deployed to Mintlify cloud
+- Auth test stubs implemented with real assertions
+- Tinybird tool name extraction fixed
+- Full E2E user journey validated (signup through billing)
+
+---
+
+## v1.1 — Platform Launch (March 25, 2026)
+
+From standalone servers to a full developer platform.
+
+**New:**
+- Cloudflare Workers gateway — all 5 servers via Streamable HTTP at a single endpoint
+- Supabase Auth with email/password signup and API key management
+- KV-cached API key authentication with 60-second TTL
+- Tier-based access control (Free: 2 servers, Starter/Pro/Business: all 5)
+- Tinybird metering — fire-and-forget event logging with monthly usage limits
+- Stripe Checkout (USD) and MoMo IPN (VND) billing with webhook idempotency
+- npm packages published under @vn-mcp scope for self-hosted use
+- Mintlify docs site with pricing, quickstart, and per-server tool reference
+- Developer dashboard with key management, usage display, and billing
+
+---
+
+## v1.0 — MCP Servers (March 21, 2026)
+
+The initial release — 5 MCP servers for Vietnamese fintech and messaging.
+
+**New:**
+- **MoMo** server — create payments, check status, refund, validate IPN (4 tools)
+- **ZaloPay** server — create orders, query, refund, validate callbacks (4 tools)
+- **VNPAY** server — generate signed payment URLs, verify returns, query transactions (3 tools)
+- **Zalo OA** server — send messages, get profiles, list followers, refresh tokens (4 tools)
+- **ViettelPay** server — create payments, query status, refund (3 tools, mock-only)
+- Monorepo with shared utilities (HMAC signing, error formatting)
+- Sandbox/mock mode for all servers — works offline with no real credentials
+- 18 tools total across all 5 servers
+
+---
+
+<Note>
+Dates reflect when each milestone was feature-complete in the repository. Public availability depends on npm publish and deployment status.
+</Note>
