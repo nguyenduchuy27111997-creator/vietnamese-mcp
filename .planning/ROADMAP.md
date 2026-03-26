@@ -329,7 +329,7 @@ Plans:
 | 15. App Shell + Navigation | v2.0 | 2/2 | Complete | 2026-03-25 |
 | 16. Core Pages | v2.0 | 3/3 | Complete | 2026-03-25 |
 | 17. Billing + Settings + Quickstart | v2.0 | 3/3 | Complete | 2026-03-26 |
-| 18. GitHub README & SEO | 3/3 | Complete   | 2026-03-26 | - |
+| 18. GitHub README & SEO | 3/3 | Complete    | 2026-03-26 | - |
 | 19. Example Apps | v2.1 | 0/TBD | Not started | - |
 | 20. Blog & Changelog | v2.1 | 0/TBD | Not started | - |
 | 21. Product Hunt Launch | v2.1 | 0/TBD | Not started | - |
