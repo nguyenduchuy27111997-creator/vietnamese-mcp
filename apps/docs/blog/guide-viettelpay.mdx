@@ -1,0 +1,93 @@
+---
+title: "ViettelPay Guide: Payment Integration with Claude Code"
+description: "Use the ViettelPay MCP server to create payment requests, check transaction status, and process refunds — all via Claude Code."
+date: "2026-03-27"
+author: "VN MCP Hub Team"
+tags: ["guide", "viettelpay", "payments", "mcp", "vietnam"]
+---
+
+ViettelPay is the payment platform from Viettel — Vietnam's largest telecommunications provider. The ViettelPay MCP server lets Claude Code create payment requests, query transaction status, and process refunds using an HMAC-SHA256 signed REST model. This is a great option for developers building apps targeting Viettel's extensive network of customers across Vietnam.
+
+<Note>The ViettelPay server is mock-only. The real ViettelPay API uses SOAP+RSA — this server models REST+HMAC-SHA256 behavior. All deviations are documented in MOCK_DEVIATIONS.md. Do not use production ViettelPay credentials with this server.</Note>
+
+## Quick Setup
+
+**Option 1 — npm (self-hosted):**
+
+```bash
+npm install -g @vn-mcp/mcp-viettel-pay
+```
+
+Add to your `.mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "viettelpay": {
+      "command": "mcp-viettel-pay",
+      "env": {
+        "VIETTELPAY_SANDBOX": "true",
+        "VIETTEL_PAY_PARTNER_CODE": "VTPAY_DEMO",
+        "VIETTEL_PAY_SECRET_KEY": "demo_secret_key_vtpay",
+        "VIETTEL_PAY_ENDPOINT": "https://sandbox.viettelpay.vn/vtpay-api"
+      }
+    }
+  }
+}
+```
+
+**Option 2 — Hosted gateway:**
+
+```json
+{
+  "mcpServers": {
+    "viettelpay": {
+      "url": "https://vn-mcp-gateway.nguyenduchuy27111997.workers.dev/mcp/viettelpay"
+    }
+  }
+}
+```
+
+## Available Tools
+
+| Tool | Description |
+|------|-------------|
+| `viettel_pay_create_payment` | Create a ViettelPay payment request. Returns a payment URL and transactionId. |
+| `viettel_pay_query_status` | Check ViettelPay transaction status by `transactionId`. |
+| `viettel_pay_refund` | Refund a ViettelPay transaction by `transactionId` and refund amount. |
+
+## Example Prompts for Claude
+
+Type these directly into Claude Code after connecting the ViettelPay MCP server:
+
+- "Create a ViettelPay payment for 300,000 VND for order VTP-2026-099"
+- "Check ViettelPay transaction status for TXN_VTP_001"
+- "Refund 100,000 VND from ViettelPay transaction TXN_VTP_001"
+
+## Common Workflows
+
+**1. Create and check a payment:**
+1. Call `viettel_pay_create_payment` with `amount` and `orderInfo` — receive a payment URL and `transactionId`
+2. Share the payment URL with the customer to complete payment
+3. Call `viettel_pay_query_status` with the `transactionId` — confirm status success
+
+**2. Create and refund a payment:**
+1. Call `viettel_pay_create_payment` — receive `transactionId`
+2. Call `viettel_pay_refund` with `transactionId` and refund amount
+
+## Environment Variables
+
+| Variable | Description | Mock Fallback |
+|----------|-------------|---------------|
+| `VIETTELPAY_SANDBOX` | Enable mock mode (set to `true`) | `true` |
+| `VIETTEL_PAY_PARTNER_CODE` | ViettelPay partner code | `VTPAY_DEMO` |
+| `VIETTEL_PAY_SECRET_KEY` | Secret key for HMAC-SHA256 signing | `demo_secret_key_vtpay` |
+| `VIETTEL_PAY_ENDPOINT` | ViettelPay API endpoint | `https://sandbox.viettelpay.vn/vtpay-api` |
+
+<Note>The sandbox env var is `VIETTELPAY_SANDBOX` (not `VIETTEL_PAY_SANDBOX`). The sandbox credentials above are safe for development.</Note>
+
+## Next Steps
+
+- Full tool reference with all parameters and response schemas: [ViettelPay Server Reference](/servers/viettelpay)
+- See all 5 servers in action: [Introducing VN MCP Hub](/blog/launch)
+- Source code and issues: [GitHub — mcp-viettel-pay](https://github.com/nguyenduchuy27111997/vietnamese-mcp/tree/main/servers/mcp-viettel-pay)

@@ -1,0 +1,97 @@
+---
+title: "Zalo OA Guide: Send Messages to Followers with Claude Code"
+description: "Use the Zalo OA MCP server to send messages to followers, retrieve profiles, list your audience, and manage OAuth tokens — all through Claude Code."
+date: "2026-03-27"
+author: "VN MCP Hub Team"
+tags: ["guide", "zalo-oa", "messaging", "mcp", "vietnam"]
+---
+
+Zalo Official Account (OA) is how Vietnamese businesses communicate with their customers on Zalo — Vietnam's dominant messaging app with over 75 million users. Unlike the payment servers, the Zalo OA MCP server is a **messaging** server: send text and media messages to followers, browse your audience, and handle OAuth token refresh cycles — all driven by Claude Code.
+
+## Quick Setup
+
+**Option 1 — npm (self-hosted):**
+
+```bash
+npm install -g @vn-mcp/mcp-zalo-oa
+```
+
+Add to your `.mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "zalo-oa": {
+      "command": "mcp-zalo-oa",
+      "env": {
+        "ZALO_OA_SANDBOX": "true",
+        "ZALO_OA_APP_ID": "demo_app_id",
+        "ZALO_OA_APP_SECRET": "demo_app_secret",
+        "ZALO_OA_ACCESS_TOKEN": "demo_access_token",
+        "ZALO_OA_REFRESH_TOKEN": "demo_refresh_token"
+      }
+    }
+  }
+}
+```
+
+**Option 2 — Hosted gateway:**
+
+```json
+{
+  "mcpServers": {
+    "zalo-oa": {
+      "url": "https://vn-mcp-gateway.nguyenduchuy27111997.workers.dev/mcp/zalo-oa"
+    }
+  }
+}
+```
+
+## Available Tools
+
+| Tool | Description |
+|------|-------------|
+| `zalo_oa_send_message` | Send a message to a Zalo OA follower. Supports text, image (URL), and file (URL) types. |
+| `zalo_oa_get_follower_profile` | Get profile information for a Zalo OA follower by userId. |
+| `zalo_oa_list_followers` | List followers of the Zalo Official Account with offset pagination. |
+| `zalo_oa_refresh_token` | Refresh the Zalo OA access token using the refresh token from environment. |
+
+## Example Prompts for Claude
+
+Type these directly into Claude Code after connecting the Zalo OA MCP server:
+
+- "List all followers of my Zalo Official Account"
+- "Send a text message 'Your order has shipped!' to Zalo user 12345"
+- "Get the profile of Zalo follower user 67890"
+- "Refresh my Zalo OA access token"
+
+## Common Workflows
+
+**1. List followers and send a message:**
+1. Call `zalo_oa_list_followers` — receive a list of follower `userId` values
+2. Call `zalo_oa_get_follower_profile` with a `userId` to get display name and avatar
+3. Call `zalo_oa_send_message` with `userId`, `type=text`, and your message content
+
+**2. Handle an expired access token:**
+1. When a tool returns a token-expiry error
+2. Call `zalo_oa_refresh_token` (no parameters — reads credentials from env)
+3. Update `ZALO_OA_ACCESS_TOKEN` in your `.mcp.json` with the new token value
+4. Retry the original tool call
+
+## Environment Variables
+
+| Variable | Description | Mock Fallback |
+|----------|-------------|---------------|
+| `ZALO_OA_SANDBOX` | Enable mock mode (set to `true`) | `true` |
+| `ZALO_OA_APP_ID` | Zalo OA application ID | `demo_app_id` |
+| `ZALO_OA_APP_SECRET` | Zalo OA application secret | `demo_app_secret` |
+| `ZALO_OA_ACCESS_TOKEN` | Current OAuth access token (~1 hour TTL) | `demo_access_token` |
+| `ZALO_OA_REFRESH_TOKEN` | OAuth refresh token for renewing access | `demo_refresh_token` |
+
+<Note>Sandbox credentials are safe for development. Access tokens expire in ~1 hour — use `zalo_oa_refresh_token` to renew when needed.</Note>
+
+## Next Steps
+
+- Full tool reference with all parameters and response schemas: [Zalo OA Server Reference](/servers/zalo-oa)
+- See all 5 servers in action: [Introducing VN MCP Hub](/blog/launch)
+- Source code and issues: [GitHub — mcp-zalo-oa](https://github.com/nguyenduchuy27111997/vietnamese-mcp/tree/main/servers/mcp-zalo-oa)

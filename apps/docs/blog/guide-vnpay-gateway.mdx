@@ -1,0 +1,93 @@
+---
+title: "VNPAY Guide: Payment Gateway Integration with Claude Code"
+description: "Integrate VNPAY into your app using the VNPAY MCP server — generate signed payment URLs, verify return URLs, and query transactions via Claude Code."
+date: "2026-03-27"
+author: "VN MCP Hub Team"
+tags: ["guide", "vnpay", "payments", "mcp", "vietnam"]
+---
+
+VNPAY is one of Vietnam's largest payment gateway networks, accepted by banks and merchants nationwide. The VNPAY MCP server lets Claude Code generate HMAC-SHA512 signed payment URLs, verify return URLs after customer checkout, and query transaction history — all without writing boilerplate integration code.
+
+## Quick Setup
+
+**Option 1 — npm (self-hosted):**
+
+```bash
+npm install -g @vn-mcp/mcp-vnpay
+```
+
+Add to your `.mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "vnpay": {
+      "command": "mcp-vnpay",
+      "env": {
+        "VNPAY_SANDBOX": "true",
+        "VNPAY_TMN_CODE": "VNPAY_TMN_DEMO",
+        "VNPAY_HASH_SECRET": "VNPAY_HASH_SECRET_DEMO",
+        "VNPAY_ENDPOINT": "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html"
+      }
+    }
+  }
+}
+```
+
+**Option 2 — Hosted gateway:**
+
+```json
+{
+  "mcpServers": {
+    "vnpay": {
+      "url": "https://vn-mcp-gateway.nguyenduchuy27111997.workers.dev/mcp/vnpay"
+    }
+  }
+}
+```
+
+## Available Tools
+
+| Tool | Description |
+|------|-------------|
+| `vnpay_create_payment_url` | Build a signed VNPAY payment URL. Returns the payment URL for the customer to complete payment. |
+| `vnpay_verify_return` | Verify a VNPAY return URL or query string by validating the HMAC-SHA512 secure hash. |
+| `vnpay_query_transaction` | Query the status of a VNPAY transaction by its reference number. |
+
+## Example Prompts for Claude
+
+Type these directly into Claude Code after connecting the VNPAY MCP server:
+
+- "Generate a VNPAY payment URL for 500,000 VND order INV-2026-042"
+- "Verify this VNPAY return URL: https://myshop.vn/return?vnp_Amount=50000000&vnp_BankCode=NCB&vnp_SecureHash=abc123"
+- "Query VNPAY transaction with reference TXN20260327001"
+
+## Common Workflows
+
+**1. Create a payment and verify the return:**
+1. Call `vnpay_create_payment_url` with `amount` and `orderInfo` — receive a signed payment URL
+2. Redirect the customer to the payment URL to complete checkout
+3. When the customer returns, call `vnpay_verify_return` with the full return URL — check `valid: true`
+
+**2. Query an existing transaction:**
+1. Call `vnpay_query_transaction` with `txnRef` and optionally `transDate` (format: YYYYMMDDHHMMSS)
+2. Inspect the response for transaction status and amount
+
+<Note>VNPAY uses HMAC-SHA512 for signature verification — different from MoMo and ZaloPay, which use HMAC-SHA256. The server handles the correct algorithm automatically.</Note>
+
+## Environment Variables
+
+| Variable | Description | Mock Fallback |
+|----------|-------------|---------------|
+| `VNPAY_SANDBOX` | Enable mock mode (set to `true`) | `true` |
+| `VNPAY_TMN_CODE` | VNPAY Terminal/Merchant code | `VNPAY_TMN_DEMO` |
+| `VNPAY_HASH_SECRET` | Secret key for HMAC-SHA512 signing | `VNPAY_HASH_SECRET_DEMO` |
+| `VNPAY_ENDPOINT` | VNPAY payment gateway URL | `https://sandbox.vnpayment.vn/paymentv2/vpcpay.html` |
+
+<Note>The sandbox fallback values are safe for development. Replace with your real VNPAY merchant credentials before going to production.</Note>
+
+## Next Steps
+
+- Full tool reference with all parameters and response schemas: [VNPAY Server Reference](/servers/vnpay)
+- See all 5 servers in action: [Introducing VN MCP Hub](/blog/launch)
+- Source code and issues: [GitHub — mcp-vnpay](https://github.com/nguyenduchuy27111997/vietnamese-mcp/tree/main/servers/mcp-vnpay)
