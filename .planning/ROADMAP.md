@@ -334,7 +334,7 @@ Plans:
 | 16. Core Pages | v2.0 | 3/3 | Complete | 2026-03-25 |
 | 17. Billing + Settings + Quickstart | v2.0 | 3/3 | Complete | 2026-03-26 |
 | 18. GitHub README & SEO | v2.1 | 3/3 | Complete | 2026-03-26 |
-| 19. Example Apps | 2/2 | Complete   | 2026-03-26 | - |
+| 19. Example Apps | 2/2 | Complete    | 2026-03-26 | - |
 | 20. Blog & Changelog | v2.1 | 0/TBD | Not started | - |
 | 21. Product Hunt Launch | v2.1 | 0/TBD | Not started | - |
 
