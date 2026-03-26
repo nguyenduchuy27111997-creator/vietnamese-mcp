@@ -275,8 +275,8 @@ Plans:
 
 Plans:
 - [x] 18-01-PLAN.md — Root README rewrite with badges, feature table, architecture diagram, dual quickstart (npm + hosted gateway)
-- [ ] 18-02-PLAN.md — Per-server README updates: npm install, binary .mcp.json config, example prompts for all 5 servers
-- [ ] 18-03-PLAN.md — GIF demo: assets directory, README embed, human recording checkpoint
+- [x] 18-02-PLAN.md — Per-server README updates: npm install, binary .mcp.json config, example prompts for all 5 servers
+- [x] 18-03-PLAN.md — GIF demo: assets directory, README embed (GIF recording deferred to pre-launch)
 
 ### Phase 19: Example Apps
 **Goal**: A developer who clones the repo finds two working starter apps they can run in under 5 minutes — a payment checkout flow using MoMo/VNPAY and a Zalo chatbot — each with a README, configured `.mcp.json`, and a GIF showing the expected behavior

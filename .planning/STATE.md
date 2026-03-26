@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v2.1
 milestone_name: Growth & Marketing
 status: executing
-stopped_at: "Checkpoint: Task 2 of 18-03-PLAN.md — awaiting human GIF recording"
-last_updated: "2026-03-26T18:02:27.185Z"
-last_activity: 2026-03-26 — 18-01 complete. MIT LICENSE + root README.md rewrite with badges, server catalog, dual quickstart, architecture diagram.
+stopped_at: "Completed 18-03-PLAN.md (GIF deferred — placeholder active in README)"
+last_updated: "2026-03-27T00:00:00Z"
+last_activity: 2026-03-27 — 18-03 complete. Assets dir created, README GIF embed active, GIF recording deferred to pre-launch.
 progress:
   total_phases: 17
   completed_phases: 14
-  total_plans: 35
-  completed_plans: 35
-  percent: 5
+  total_plans: 36
+  completed_plans: 36
+  percent: 10
 ---
 
 # Project State
@@ -26,11 +26,11 @@ See: .planning/PROJECT.md (updated 2026-03-26)
 ## Current Position
 
 Phase: 18 of 21 (Phase 18: GitHub README & SEO)
-Plan: 1 of 3 in current phase
+Plan: 3 of 3 in current phase (phase complete)
 Status: In progress
-Last activity: 2026-03-26 — 18-01 complete. MIT LICENSE + root README.md rewrite with badges, server catalog, dual quickstart, architecture diagram.
+Last activity: 2026-03-27 — 18-03 complete. Assets dir created, README GIF embed active, GIF recording deferred to pre-launch.
 
-Progress: [█░░░░░░░░░] 5% (1 of ~20 plans complete)
+Progress: [██░░░░░░░░] 10% (3 of ~20 plans complete)
 
 ## Performance Metrics
 
@@ -65,9 +65,10 @@ None.
 
 - [Phase 9] 09-02 (npm publish) still incomplete — GH-02 npm version badges depend on published packages
 - [Phase 13] E2E validation plans (13-01, 13-02) not yet executed — GIF demo in GH-03 depends on working production flow
+- [Phase 18-03] GIF demo deferred — assets/demo.gif placeholder active in README, record before Product Hunt launch
 
 ## Session Continuity
 
-Last session: 2026-03-26T18:02:19.902Z
-Stopped at: Checkpoint: Task 2 of 18-03-PLAN.md — awaiting human GIF recording
+Last session: 2026-03-27T00:00:00Z
+Stopped at: Completed 18-03-PLAN.md (GIF deferred — placeholder active in README)
 Resume file: None

@@ -38,7 +38,7 @@ Task 1 (auto) is complete:
 - Alt text set to: "VN MCP Hub Demo — signup, create API key, make MoMo payment via Claude Code"
 - Demo note added below embed: "Sign up, create an API key, and make a MoMo payment — all from Claude Code in under 60 seconds."
 
-Task 2 (checkpoint:human-verify) is **pending** — human must record and place the GIF.
+Task 2 (checkpoint:human-verify) is **skipped** — user chose to defer GIF recording to pre-Product Hunt launch. Placeholder img tag is active and will render automatically once `assets/demo.gif` is committed.
 
 ## Decisions Made
 
