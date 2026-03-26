@@ -1,32 +1,45 @@
-# mcp-viettel-pay
+# @vn-mcp/mcp-viettel-pay
+
+[![npm version](https://img.shields.io/npm/v/@vn-mcp/mcp-viettel-pay)](https://www.npmjs.com/package/@vn-mcp/mcp-viettel-pay)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../../LICENSE)
 
 ViettelPay payment gateway MCP server for Vietnam (mock-only). Create payment requests, query transaction status, and process refunds.
 
 > **Note:** This is a mock-only server. The real ViettelPay API uses SOAP+RSA. This server models a REST+HMAC-SHA256 API for development purposes. See [MOCK_DEVIATIONS.md](./MOCK_DEVIATIONS.md) for all assumptions.
 
-## Quick Start
+## Install
 
-1. Install dependencies from monorepo root: `npm install`
-2. Configure environment variables in `.mcp.json` (see below)
-3. Add server entry to `.mcp.json`
-4. Verify: `npm test --workspace=servers/mcp-viettel-pay`
+```bash
+npm install -g @vn-mcp/mcp-viettel-pay
+```
 
-## .mcp.json Entry
+## Configure
+
+Add to your `.mcp.json`:
 
 ```json
-"viettel-pay": {
-  "command": "node",
-  "args": ["./servers/mcp-viettel-pay/build/index.js"],
-  "env": {
-    "VIETTELPAY_SANDBOX": "true",
-    "VIETTEL_PAY_PARTNER_CODE": "VTPAY_DEMO",
-    "VIETTEL_PAY_SECRET_KEY": "demo_secret_key_vtpay",
-    "VIETTEL_PAY_ENDPOINT": "https://sandbox.viettelpay.vn/vtpay-api"
+{
+  "mcpServers": {
+    "viettel-pay": {
+      "command": "mcp-viettel-pay",
+      "env": {
+        "VIETTELPAY_SANDBOX": "true",
+        "VIETTEL_PAY_PARTNER_CODE": "VTPAY_DEMO",
+        "VIETTEL_PAY_SECRET_KEY": "demo_secret_key_vtpay",
+        "VIETTEL_PAY_ENDPOINT": "https://sandbox.viettelpay.vn/vtpay-api"
+      }
+    }
   }
 }
 ```
 
 **Important:** The sandbox env var is `VIETTELPAY_SANDBOX` (not `VIETTEL_PAY_SANDBOX`).
+
+## Example
+
+After configuring `.mcp.json`, try in Claude Code:
+
+> "Create a ViettelPay payment for 100,000 VND for mobile top-up"
 
 ## Tools
 
@@ -88,3 +101,9 @@ Refund a ViettelPay transaction.
 Set `VIETTELPAY_SANDBOX=true`. All tools return deterministic mock responses with `_mock: true`.
 
 All ViettelPay behavior in this server is assumed. See [MOCK_DEVIATIONS.md](./MOCK_DEVIATIONS.md) for the full list of deviations from the real API.
+
+## Links
+
+- [Documentation](https://fpt-a833a5a1.mintlify.app/)
+- [All Servers](../../README.md)
+- [npm](https://www.npmjs.com/package/@vn-mcp/mcp-viettel-pay)

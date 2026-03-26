@@ -1,29 +1,42 @@
-# mcp-zalo-oa
+# @vn-mcp/mcp-zalo-oa
+
+[![npm version](https://img.shields.io/npm/v/@vn-mcp/mcp-zalo-oa)](https://www.npmjs.com/package/@vn-mcp/mcp-zalo-oa)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../../LICENSE)
 
 Zalo Official Account (OA) messaging MCP server for Vietnam. Send messages to followers, retrieve follower profiles, list followers, and refresh OAuth tokens.
 
-## Quick Start
+## Install
 
-1. Install dependencies from monorepo root: `npm install`
-2. Configure environment variables in `.mcp.json` (see below)
-3. Add server entry to `.mcp.json`
-4. Verify: `npm test --workspace=servers/mcp-zalo-oa`
+```bash
+npm install -g @vn-mcp/mcp-zalo-oa
+```
 
-## .mcp.json Entry
+## Configure
+
+Add to your `.mcp.json`:
 
 ```json
-"zalo-oa": {
-  "command": "node",
-  "args": ["./servers/mcp-zalo-oa/build/index.js"],
-  "env": {
-    "ZALO_OA_SANDBOX": "true",
-    "ZALO_OA_APP_ID": "demo_app_id",
-    "ZALO_OA_APP_SECRET": "demo_app_secret",
-    "ZALO_OA_ACCESS_TOKEN": "demo_access_token",
-    "ZALO_OA_REFRESH_TOKEN": "demo_refresh_token"
+{
+  "mcpServers": {
+    "zalo-oa": {
+      "command": "mcp-zalo-oa",
+      "env": {
+        "ZALO_OA_SANDBOX": "true",
+        "ZALO_OA_APP_ID": "demo_app_id",
+        "ZALO_OA_APP_SECRET": "demo_app_secret",
+        "ZALO_OA_ACCESS_TOKEN": "demo_access_token",
+        "ZALO_OA_REFRESH_TOKEN": "demo_refresh_token"
+      }
+    }
   }
 }
 ```
+
+## Example
+
+After configuring `.mcp.json`, try in Claude Code:
+
+> "Send a Zalo OA message to user 12345 saying 'Your order has shipped!'"
 
 ## Tools
 
@@ -97,3 +110,9 @@ Refresh the Zalo OA access token using the refresh token from environment. Call 
 Set `ZALO_OA_SANDBOX=true`. All tools return deterministic mock responses with `_mock: true`.
 
 Access tokens have approximately 1 hour TTL in production. Use `zalo_oa_refresh_token` when the access token expires.
+
+## Links
+
+- [Documentation](https://fpt-a833a5a1.mintlify.app/)
+- [All Servers](../../README.md)
+- [npm](https://www.npmjs.com/package/@vn-mcp/mcp-zalo-oa)
