@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "momo-hosted": {
+      "type": "streamable-http",
+      "url": "https://vn-mcp-gateway.nguyenduchuy27111997.workers.dev/mcp/momo",
+      "headers": {
+        "Authorization": "Bearer YOUR_API_KEY"
+      }
+    },
+    "vnpay-hosted": {
+      "type": "streamable-http",
+      "url": "https://vn-mcp-gateway.nguyenduchuy27111997.workers.dev/mcp/vnpay",
+      "headers": {
+        "Authorization": "Bearer YOUR_API_KEY"
+      }
+    }
+  }
+}
