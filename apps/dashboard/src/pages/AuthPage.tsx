@@ -1,14 +1,10 @@
 import { useState } from 'react';
 import { supabase } from '../supabase.js';
-
-const inputStyle: React.CSSProperties = {
-  display: 'block', width: '100%', padding: '8px 12px', marginBottom: '12px',
-  border: '1px solid #d1d5db', borderRadius: '6px', fontSize: '14px',
-};
-const btnStyle = (color: string): React.CSSProperties => ({
-  width: '100%', padding: '10px', background: color, color: '#fff',
-  border: 'none', borderRadius: '6px', fontSize: '14px', cursor: 'pointer',
-});
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { KeyRound, AlertCircle, Loader2 } from 'lucide-react';
 
 export function AuthPage() {
   const [mode, setMode] = useState<'login' | 'signup'>('login');
@@ -30,22 +26,101 @@ export function AuthPage() {
   };
 
   return (
-    <div style={{ maxWidth: 380, margin: '80px auto', padding: '32px', background: '#fff', borderRadius: '12px', boxShadow: '0 1px 3px rgba(0,0,0,.1)' }}>
-      <h1 style={{ fontSize: '20px', marginBottom: '24px' }}>VN MCP Hub</h1>
-      <form onSubmit={submit}>
-        <input style={inputStyle} type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} required />
-        <input style={inputStyle} type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} required />
-        {error && <p style={{ color: '#ef4444', fontSize: '13px', marginBottom: '8px' }}>{error}</p>}
-        <button type="submit" style={btnStyle('#2563eb')} disabled={loading}>
-          {loading ? 'Loading\u2026' : mode === 'signup' ? 'Create account' : 'Sign in'}
-        </button>
-      </form>
-      <p style={{ textAlign: 'center', marginTop: '16px', fontSize: '13px', color: '#6b7280' }}>
-        {mode === 'signup' ? 'Already have an account? ' : "Don't have an account? "}
-        <button onClick={() => setMode(mode === 'signup' ? 'login' : 'signup')} style={{ background: 'none', border: 'none', color: '#2563eb', cursor: 'pointer', padding: 0 }}>
-          {mode === 'signup' ? 'Sign in' : 'Sign up'}
-        </button>
-      </p>
+    <div className="min-h-screen flex items-center justify-center bg-background px-4">
+      {/* Subtle grid background */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border)/0.3)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border)/0.3)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
+
+      {/* Gradient glow behind card */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl" />
+
+      <div className="relative w-full max-w-[400px]">
+        {/* Logo & branding */}
+        <div className="flex flex-col items-center mb-8">
+          <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 mb-4">
+            <KeyRound className="w-6 h-6 text-primary" />
+          </div>
+          <h1 className="text-2xl font-semibold tracking-tight">VN MCP Hub</h1>
+          <p className="text-sm text-muted-foreground mt-1">
+            Vietnamese Payment APIs for Claude Code
+          </p>
+        </div>
+
+        <Card className="border-border/50 shadow-xl shadow-black/5">
+          <CardHeader className="space-y-1 pb-4">
+            <CardTitle className="text-xl">
+              {mode === 'signup' ? 'Create an account' : 'Welcome back'}
+            </CardTitle>
+            <CardDescription>
+              {mode === 'signup'
+                ? 'Enter your email to get started — free, no credit card'
+                : 'Sign in to manage your API keys'}
+            </CardDescription>
+          </CardHeader>
+
+          <form onSubmit={submit}>
+            <CardContent className="space-y-3 pb-4">
+              <div className="space-y-2">
+                <Input
+                  type="email"
+                  placeholder="name@example.com"
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
+                  required
+                  autoComplete="email"
+                  className="h-10"
+                />
+              </div>
+              <div className="space-y-2">
+                <Input
+                  type="password"
+                  placeholder={mode === 'signup' ? 'Create a password' : 'Password'}
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
+                  required
+                  autoComplete={mode === 'signup' ? 'new-password' : 'current-password'}
+                  className="h-10"
+                />
+              </div>
+
+              {error && (
+                <Alert variant="destructive" className="py-2">
+                  <AlertCircle className="h-4 w-4" />
+                  <AlertDescription className="text-sm">{error}</AlertDescription>
+                </Alert>
+              )}
+
+              <Button type="submit" className="w-full h-10" disabled={loading}>
+                {loading ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    {mode === 'signup' ? 'Creating account...' : 'Signing in...'}
+                  </>
+                ) : (
+                  mode === 'signup' ? 'Create account' : 'Sign in'
+                )}
+              </Button>
+            </CardContent>
+          </form>
+
+          <CardFooter className="flex justify-center pb-6">
+            <p className="text-sm text-muted-foreground">
+              {mode === 'signup' ? 'Already have an account?' : "Don't have an account?"}{' '}
+              <button
+                type="button"
+                onClick={() => { setMode(mode === 'signup' ? 'login' : 'signup'); setError(null); }}
+                className="text-primary hover:text-primary/80 font-medium transition-colors"
+              >
+                {mode === 'signup' ? 'Sign in' : 'Sign up'}
+              </button>
+            </p>
+          </CardFooter>
+        </Card>
+
+        {/* Footer */}
+        <p className="text-center text-xs text-muted-foreground mt-6">
+          5 MCP servers &middot; 18 tools &middot; Mock-first development
+        </p>
+      </div>
     </div>
   );
 }
