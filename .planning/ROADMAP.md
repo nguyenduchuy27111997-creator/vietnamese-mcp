@@ -5,7 +5,8 @@
 - ✅ **v1.0 MCP Servers** — Phases 1-4 (shipped 2026-03-21)
 - ✅ **v1.1 Platform Launch** — Phases 5-10 (shipped 2026-03-25)
 - ✅ **v1.2 Production Deployment** — Phases 11-13 (shipped 2026-03-25)
-- 🚧 **v2.0 Modern Dashboard** — Phases 14-17 (in progress)
+- ✅ **v2.0 Modern Dashboard** — Phases 14-17 (shipped 2026-03-26)
+- 🚧 **v2.1 Growth & Marketing** — Phases 18-21 (in progress)
 
 ## Phases
 
@@ -40,14 +41,24 @@
 
 </details>
 
-### 🚧 v2.0 Modern Dashboard (In Progress)
-
-**Milestone Goal:** Complete UI/UX overhaul of the dashboard SPA — replace inline styles with Tailwind + shadcn/ui, add sidebar navigation, dark mode, and 7 polished pages covering the full user journey.
+<details>
+<summary>✅ v2.0 Modern Dashboard (Phases 14-17) — SHIPPED 2026-03-26</summary>
 
 - [x] **Phase 14: Design System Foundation** — Tailwind + shadcn/ui installed, dark mode default, Linear/Vercel design tokens applied (completed 2026-03-25)
 - [x] **Phase 15: App Shell + Navigation** — Sidebar with collapsible nav, user menu, responsive mobile layout, client-side routing (completed 2026-03-25)
 - [x] **Phase 16: Core Pages** — Overview, API Keys, and Usage pages fully redesigned with new design system (completed 2026-03-25)
 - [x] **Phase 17: Billing + Settings + Quickstart** — Billing plan selector, Settings profile/danger zone, and new-user onboarding wizard (completed 2026-03-26)
+
+</details>
+
+### 🚧 v2.1 Growth & Marketing (In Progress)
+
+**Milestone Goal:** Get the first users — polished GitHub presence, example apps developers can clone, blog content that drives organic discovery, and a Product Hunt launch to announce the platform.
+
+- [ ] **Phase 18: GitHub README & SEO** — Root README rewritten with badges, GIF demo, and per-server install guides
+- [ ] **Phase 19: Example Apps** — Two complete starter apps (payment checkout + Zalo chatbot) with READMEs and GIF demos
+- [ ] **Phase 20: Blog & Changelog** — Mintlify launch post, per-server guides, and changelog page
+- [ ] **Phase 21: Product Hunt Launch** — Listing created with screenshots, tagline, and launch-day checklist ready
 
 ## Phase Details
 
@@ -247,9 +258,50 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 17-01-PLAN.md — Billing page: 3 plan cards (Starter/Pro/Business) with Stripe + MoMo payment buttons and portal link
-- [ ] 17-02-PLAN.md — Settings page: profile email display, password change form, danger zone with delete account AlertDialog
-- [ ] 17-03-PLAN.md — Quickstart page: 3-step onboarding wizard (create key, configure .mcp.json, test call)
+- [x] 17-01-PLAN.md — Billing page: 3 plan cards (Starter/Pro/Business) with Stripe + MoMo payment buttons and portal link
+- [x] 17-02-PLAN.md — Settings page: profile email display, password change form, danger zone with delete account AlertDialog
+- [x] 17-03-PLAN.md — Quickstart page: 3-step onboarding wizard (create key, configure .mcp.json, test call)
+
+### Phase 18: GitHub README & SEO
+**Goal**: The GitHub repository is the best first impression — a developer landing on the repo immediately understands what VN MCP Hub does, sees live npm badges, watches a GIF of the end-to-end flow, and can copy-paste a working install command
+**Depends on**: Phase 17
+**Requirements**: GH-01, GH-02, GH-03, GH-04
+**Success Criteria** (what must be TRUE):
+  1. The root README.md opens with a clear one-liner, feature highlights table, and architecture diagram — a developer understands the product in under 30 seconds without clicking any links
+  2. All four badges (npm version, license, build status, MCP server count) are visible at the top of the README and link to correct destinations
+  3. A GIF or video demo is embedded in the README showing the complete flow: signup, key creation, tool call returning a mock MoMo payment response
+  4. Each per-server README (momo, zalopay, vnpay, zalo-oa, viettelpay) includes an `npm install` command, a minimal `.mcp.json` snippet, and a tool call example
+**Plans**: TBD
+
+### Phase 19: Example Apps
+**Goal**: A developer who clones the repo finds two working starter apps they can run in under 5 minutes — a payment checkout flow using MoMo/VNPAY and a Zalo chatbot — each with a README, configured `.mcp.json`, and a GIF showing the expected behavior
+**Depends on**: Phase 18
+**Requirements**: EX-01, EX-02, EX-03
+**Success Criteria** (what must be TRUE):
+  1. Running the payment checkout example app (React) results in a rendered UI where clicking "Pay with MoMo" calls the hosted gateway and returns a mock payment URL — no manual configuration beyond setting an API key in `.env`
+  2. Running the Zalo chatbot example (Node.js) and sending a test message results in the bot calling `zalooa_send_message` through the hosted gateway and logging the mock response — no manual configuration beyond setting an API key
+  3. Both example READMEs contain: prerequisites, a 3-step setup (clone, install, configure), a `.mcp.json` snippet, and an embedded GIF or screenshot showing the running app
+**Plans**: TBD
+
+### Phase 20: Blog & Changelog
+**Goal**: The Mintlify docs site has a blog section with a launch announcement and per-server guides, plus a changelog page — giving developers context on what the platform does and driving organic SEO discovery
+**Depends on**: Phase 18
+**Requirements**: BLOG-01, BLOG-02, BLOG-03
+**Success Criteria** (what must be TRUE):
+  1. The Mintlify blog is live and the launch post ("Introducing VN MCP Hub") is publicly accessible at a stable URL — covers what the platform is, why it exists, and how to get started in under 5 minutes
+  2. At least one per-server guide post is published for each of the 5 servers, each containing: an intro, tool reference summary, a copy-pasteable `.mcp.json` config, and an example Claude Code prompt that uses the server
+  3. A changelog page exists in the docs site listing v1.0, v1.1, v1.2, and v2.0 entries with dates, key features added, and links to relevant docs — a developer can see the project history at a glance
+**Plans**: TBD
+
+### Phase 21: Product Hunt Launch
+**Goal**: The Product Hunt listing is fully prepared and ready to go live — all assets created, screenshots captured, tagline written, maker profile set up, and a launch-day action checklist drafted so the launch can be executed without scrambling
+**Depends on**: Phase 19, Phase 20
+**Requirements**: PH-01, PH-02, PH-03
+**Success Criteria** (what must be TRUE):
+  1. The Product Hunt listing is live (or scheduled) with a tagline under 60 characters, a description covering the problem/solution/who-it's-for, and a working link to the landing page
+  2. At least 5 dashboard screenshots are captured in dark mode covering: auth/login, overview, API keys list, usage chart, and billing plan selection — all at 1280x800 or higher resolution
+  3. A launch-day checklist document exists covering: first comment text drafted, 3 social posts written (Twitter/X, LinkedIn, dev community), and a response template for common Product Hunt questions
+**Plans**: TBD
 
 ## Progress
 
@@ -271,6 +323,10 @@ Plans:
 | 14. Design System Foundation | v2.0 | 2/2 | Complete | 2026-03-25 |
 | 15. App Shell + Navigation | v2.0 | 2/2 | Complete | 2026-03-25 |
 | 16. Core Pages | v2.0 | 3/3 | Complete | 2026-03-25 |
-| 17. Billing + Settings + Quickstart | 3/3 | Complete    | 2026-03-26 | - |
+| 17. Billing + Settings + Quickstart | v2.0 | 3/3 | Complete | 2026-03-26 |
+| 18. GitHub README & SEO | v2.1 | 0/TBD | Not started | - |
+| 19. Example Apps | v2.1 | 0/TBD | Not started | - |
+| 20. Blog & Changelog | v2.1 | 0/TBD | Not started | - |
+| 21. Product Hunt Launch | v2.1 | 0/TBD | Not started | - |
 
 **Full v1.0 details:** `.planning/milestones/v1.0-ROADMAP.md`

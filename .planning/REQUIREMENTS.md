@@ -52,24 +52,24 @@ Deferred to future release.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| PH-01 | TBD | Pending |
-| PH-02 | TBD | Pending |
-| PH-03 | TBD | Pending |
-| EX-01 | TBD | Pending |
-| EX-02 | TBD | Pending |
-| EX-03 | TBD | Pending |
-| GH-01 | TBD | Pending |
-| GH-02 | TBD | Pending |
-| GH-03 | TBD | Pending |
-| GH-04 | TBD | Pending |
-| BLOG-01 | TBD | Pending |
-| BLOG-02 | TBD | Pending |
-| BLOG-03 | TBD | Pending |
+| GH-01 | Phase 18 | Pending |
+| GH-02 | Phase 18 | Pending |
+| GH-03 | Phase 18 | Pending |
+| GH-04 | Phase 18 | Pending |
+| EX-01 | Phase 19 | Pending |
+| EX-02 | Phase 19 | Pending |
+| EX-03 | Phase 19 | Pending |
+| BLOG-01 | Phase 20 | Pending |
+| BLOG-02 | Phase 20 | Pending |
+| BLOG-03 | Phase 20 | Pending |
+| PH-01 | Phase 21 | Pending |
+| PH-02 | Phase 21 | Pending |
+| PH-03 | Phase 21 | Pending |
 
 **Coverage:**
 - v2.1 requirements: 13 total
-- Mapped to phases: 0
-- Unmapped: 13
+- Mapped to phases: 13
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-03-26*
