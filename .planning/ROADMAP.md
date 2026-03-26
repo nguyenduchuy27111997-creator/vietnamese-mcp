@@ -340,7 +340,7 @@ Plans:
 | 17. Billing + Settings + Quickstart | v2.0 | 3/3 | Complete | 2026-03-26 |
 | 18. GitHub README & SEO | v2.1 | 3/3 | Complete | 2026-03-26 |
 | 19. Example Apps | v2.1 | 2/2 | Complete | 2026-03-26 |
-| 20. Blog & Changelog | 3/3 | Complete   | 2026-03-26 | - |
+| 20. Blog & Changelog | 3/3 | Complete    | 2026-03-26 | - |
 | 21. Product Hunt Launch | v2.1 | 0/TBD | Not started | - |
 
 **Full v1.0 details:** `.planning/milestones/v1.0-ROADMAP.md`
