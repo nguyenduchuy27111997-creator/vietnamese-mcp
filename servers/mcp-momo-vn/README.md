@@ -1,28 +1,41 @@
-# mcp-momo-vn
+# @vn-mcp/mcp-momo-vn
+
+[![npm version](https://img.shields.io/npm/v/@vn-mcp/mcp-momo-vn)](https://www.npmjs.com/package/@vn-mcp/mcp-momo-vn)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../../LICENSE)
 
 MoMo e-wallet payment gateway MCP server for Vietnam. Create payments, check status, process refunds, and validate IPN callbacks.
 
-## Quick Start
+## Install
 
-1. Install dependencies from monorepo root: `npm install`
-2. Configure environment variables in `.mcp.json` (see below)
-3. Add server entry to `.mcp.json`
-4. Verify: `npm test --workspace=servers/mcp-momo-vn`
+```bash
+npm install -g @vn-mcp/mcp-momo-vn
+```
 
-## .mcp.json Entry
+## Configure
+
+Add to your `.mcp.json`:
 
 ```json
-"momo-vn": {
-  "command": "node",
-  "args": ["./servers/mcp-momo-vn/build/index.js"],
-  "env": {
-    "MOMO_SANDBOX": "true",
-    "MOMO_PARTNER_CODE": "MOMOBKUN20180529",
-    "MOMO_ACCESS_KEY": "klm05TvNBzhg7h7j",
-    "MOMO_SECRET_KEY": "at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa"
+{
+  "mcpServers": {
+    "momo-vn": {
+      "command": "mcp-momo-vn",
+      "env": {
+        "MOMO_SANDBOX": "true",
+        "MOMO_PARTNER_CODE": "MOMOBKUN20180529",
+        "MOMO_ACCESS_KEY": "klm05TvNBzhg7h7j",
+        "MOMO_SECRET_KEY": "at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa"
+      }
+    }
   }
 }
 ```
+
+## Example
+
+After configuring `.mcp.json`, try in Claude Code:
+
+> "Create a MoMo payment for 150,000 VND for order #1234"
 
 ## Tools
 
@@ -101,3 +114,9 @@ Validate a MoMo IPN (Instant Payment Notification) payload by verifying its HMAC
 Set `MOMO_SANDBOX=true`. All tools return deterministic mock responses with `_mock: true`.
 
 The sandbox credentials above are MoMo's published test credentials — no API account needed.
+
+## Links
+
+- [Documentation](https://fpt-a833a5a1.mintlify.app/)
+- [All Servers](../../README.md)
+- [npm](https://www.npmjs.com/package/@vn-mcp/mcp-momo-vn)

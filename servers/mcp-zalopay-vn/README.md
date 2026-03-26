@@ -1,29 +1,42 @@
-# mcp-zalopay-vn
+# @vn-mcp/mcp-zalopay-vn
+
+[![npm version](https://img.shields.io/npm/v/@vn-mcp/mcp-zalopay-vn)](https://www.npmjs.com/package/@vn-mcp/mcp-zalopay-vn)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../../LICENSE)
 
 ZaloPay payment gateway MCP server for Vietnam. Create orders, check status, process refunds, and validate ZaloPay callbacks.
 
-## Quick Start
+## Install
 
-1. Install dependencies from monorepo root: `npm install`
-2. Configure environment variables in `.mcp.json` (see below)
-3. Add server entry to `.mcp.json`
-4. Verify: `npm test --workspace=servers/mcp-zalopay-vn`
+```bash
+npm install -g @vn-mcp/mcp-zalopay-vn
+```
 
-## .mcp.json Entry
+## Configure
+
+Add to your `.mcp.json`:
 
 ```json
-"zalopay-vn": {
-  "command": "node",
-  "args": ["./servers/mcp-zalopay-vn/build/index.js"],
-  "env": {
-    "ZALOPAY_SANDBOX": "true",
-    "ZALOPAY_APP_ID": "2553",
-    "ZALOPAY_KEY1": "PcY4iZIKFCIdgZvA6ueMcMHHUbRLYjPL",
-    "ZALOPAY_KEY2": "kLtgPl8HHhfvMuDHPwKfgfsY4Ydm9eIz",
-    "ZALOPAY_ENDPOINT": "https://sb-openapi.zalopay.vn"
+{
+  "mcpServers": {
+    "zalopay-vn": {
+      "command": "mcp-zalopay-vn",
+      "env": {
+        "ZALOPAY_SANDBOX": "true",
+        "ZALOPAY_APP_ID": "2553",
+        "ZALOPAY_KEY1": "PcY4iZIKFCIdgZvA6ueMcMHHUbRLYjPL",
+        "ZALOPAY_KEY2": "kLtgPl8HHhfvMuDHPwKfgfsY4Ydm9eIz",
+        "ZALOPAY_ENDPOINT": "https://sb-openapi.zalopay.vn"
+      }
+    }
   }
 }
 ```
+
+## Example
+
+After configuring `.mcp.json`, try in Claude Code:
+
+> "Create a ZaloPay order for 200,000 VND for coffee subscription"
 
 ## Tools
 
@@ -102,3 +115,9 @@ Validate a ZaloPay callback payload by verifying its HMAC-SHA256 MAC using key2.
 Set `ZALOPAY_SANDBOX=true`. All tools return deterministic mock responses with `_mock: true`.
 
 The sandbox credentials above are ZaloPay's published test credentials — no API account needed.
+
+## Links
+
+- [Documentation](https://fpt-a833a5a1.mintlify.app/)
+- [All Servers](../../README.md)
+- [npm](https://www.npmjs.com/package/@vn-mcp/mcp-zalopay-vn)
