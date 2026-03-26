@@ -1,84 +1,75 @@
-# Requirements: VN MCP Hub — v2.0 Modern Dashboard
+# Requirements: VN MCP Hub — v2.1 Growth & Marketing
 
-**Defined:** 2026-03-25
+**Defined:** 2026-03-26
 **Core Value:** Developer installs MCP server or signs up for hosted API key, adds to `.mcp.json`, and immediately uses Claude Code for Vietnamese payments and messaging — zero integration boilerplate.
 
-## v2.0 Requirements
+## v2.1 Requirements
 
-Requirements for dashboard UI/UX overhaul. Each maps to roadmap phases.
+### Product Hunt Launch
 
-### Design System
+- [ ] **PH-01**: Product Hunt listing created with tagline, description, screenshots, and maker profile
+- [ ] **PH-02**: Dashboard screenshots captured (dark mode: auth, overview, keys, usage, billing pages)
+- [ ] **PH-03**: Launch day checklist prepared (social posts, first comment, community responses)
 
-- [x] **DS-01**: Tailwind CSS + shadcn/ui installed and configured in apps/dashboard
-- [x] **DS-02**: Dark mode default with light mode toggle (system detect + manual)
-- [x] **DS-03**: Color palette, typography, and spacing tokens defined matching Linear/Vercel aesthetic
+### Example Apps
 
-### App Shell
+- [ ] **EX-01**: Payment checkout example app — React app that creates MoMo/VNPAY payments via hosted gateway
+- [ ] **EX-02**: Zalo chatbot example app — Node.js bot that sends messages via Zalo OA MCP server
+- [ ] **EX-03**: Each example has README with setup instructions, .mcp.json config, and GIF demo
 
-- [x] **SHELL-01**: Sidebar navigation with collapsible menu (Overview, API Keys, Usage, Billing, Settings)
-- [x] **SHELL-02**: User avatar/email in sidebar footer with sign-out action
-- [x] **SHELL-03**: Responsive mobile layout (sidebar collapses to hamburger menu)
-- [x] **SHELL-04**: Active page indicator in sidebar navigation
+### GitHub README & SEO
 
-### Pages
+- [ ] **GH-01**: Root README.md rewritten with project overview, feature highlights, quick start, and architecture diagram
+- [ ] **GH-02**: Badges added (npm version, license, build status, MCP servers count)
+- [ ] **GH-03**: GIF/video demo showing end-to-end flow (signup → key → tool call)
+- [ ] **GH-04**: Per-server README.md files updated with npm install instructions and usage examples
 
-- [x] **PAGE-01**: Overview/Home — welcome card, quick stats (key count, usage, tier), recent activity feed
-- [x] **PAGE-02**: API Keys — redesigned table with status badges, search/filter, creation modal, copy animation, revoke confirmation dialog
-- [x] **PAGE-03**: Usage & Analytics — usage chart (daily calls over 30 days), per-server breakdown table, limit warning banner at 80%+
-- [x] **PAGE-04**: Billing — current plan card, upgrade/downgrade tier selector, Stripe/MoMo payment buttons, Stripe Portal link, payment method display
-- [x] **PAGE-05**: Settings — profile section (email display, password change), danger zone (delete account with confirmation)
-- [x] **PAGE-06**: Quickstart — interactive 3-step onboarding wizard (create key → configure .mcp.json → test call) for new users with no keys
+### Blog & Changelog
 
-### Navigation
-
-- [x] **NAV-01**: Client-side routing (React Router or equivalent) between all pages
-- [x] **NAV-02**: Redirect to Quickstart page for new users with zero API keys
+- [ ] **BLOG-01**: Launch announcement blog post on Mintlify ("Introducing VN MCP Hub")
+- [ ] **BLOG-02**: Per-server guide posts (MoMo payments, ZaloPay integration, etc.)
+- [ ] **BLOG-03**: Changelog page added to Mintlify docs site
 
 ## v3 Requirements
 
 Deferred to future release.
 
-- **FEAT-01**: Usage dashboard with real-time charts (WebSocket updates)
-- **FEAT-02**: Team management (invite members, shared keys)
-- **FEAT-03**: Notification center (usage alerts, billing reminders)
-- **FEAT-04**: API playground (test tool calls from dashboard)
+- **REAL-01**: Real MoMo API integration (after merchant KYC)
+- **REAL-02**: Real ZaloPay/VNPAY sandbox integration
+- **TEAM-01**: Team management (invite members, shared keys)
+- **PLAY-01**: API playground in dashboard
 
 ## Out of Scope
 
 | Feature | Reason |
 |---------|--------|
-| Landing page redesign | Docs site on Mintlify handles this |
-| Gateway API changes | v2.0 is frontend-only |
-| New MCP servers | Separate milestone |
-| Mobile native app | Web responsive is sufficient |
-| i18n/Vietnamese translation | English-first for developer audience |
+| Paid advertising | Organic-first; validate product-market fit before spending |
+| Video production | Screenshots and GIFs sufficient for launch |
+| Community Discord/Slack | Premature — build after first 50 users |
+| Localization (Vietnamese) | English-first for developer audience |
 
 ## Traceability
 
-Which phases cover which requirements. Updated during roadmap creation.
-
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| DS-01 | Phase 14 | Complete |
-| DS-02 | Phase 14 | Complete |
-| DS-03 | Phase 14 | Complete |
-| SHELL-01 | Phase 15 | Complete |
-| SHELL-02 | Phase 15 | Complete |
-| SHELL-03 | Phase 15 | Complete |
-| SHELL-04 | Phase 15 | Complete |
-| NAV-01 | Phase 15 | Complete |
-| NAV-02 | Phase 15 | Complete |
-| PAGE-01 | Phase 16 | Complete |
-| PAGE-02 | Phase 16 | Complete |
-| PAGE-03 | Phase 16 | Complete |
-| PAGE-04 | Phase 17 | Complete |
-| PAGE-05 | Phase 17 | Complete |
-| PAGE-06 | Phase 17 | Complete |
+| PH-01 | TBD | Pending |
+| PH-02 | TBD | Pending |
+| PH-03 | TBD | Pending |
+| EX-01 | TBD | Pending |
+| EX-02 | TBD | Pending |
+| EX-03 | TBD | Pending |
+| GH-01 | TBD | Pending |
+| GH-02 | TBD | Pending |
+| GH-03 | TBD | Pending |
+| GH-04 | TBD | Pending |
+| BLOG-01 | TBD | Pending |
+| BLOG-02 | TBD | Pending |
+| BLOG-03 | TBD | Pending |
 
 **Coverage:**
-- v2.0 requirements: 15 total
-- Mapped to phases: 15
-- Unmapped: 0 ✓
+- v2.1 requirements: 13 total
+- Mapped to phases: 0
+- Unmapped: 13
 
 ---
-*Requirements defined: 2026-03-25*
+*Requirements defined: 2026-03-26*
