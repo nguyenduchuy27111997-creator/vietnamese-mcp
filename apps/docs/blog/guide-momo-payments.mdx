@@ -1,0 +1,99 @@
+---
+title: "MoMo Payments Guide: Accept E-Wallet Payments with Claude Code"
+description: "Learn how to integrate MoMo e-wallet payments into your app using the MoMo MCP server — create payment links, check status, process refunds, and validate IPN callbacks, all via Claude Code."
+date: "2026-03-27"
+author: "VN MCP Hub Team"
+tags: ["guide", "momo", "payments", "mcp", "vietnam"]
+---
+
+The MoMo MCP server lets Claude Code interact directly with Vietnam's most popular e-wallet. Whether you're building a checkout flow, automating refunds, or validating webhook callbacks, this guide walks you through everything you need. No manual API calls — just describe what you want and Claude does it.
+
+## Quick Setup
+
+**Option 1 — npm (self-hosted):**
+
+```bash
+npm install -g @vn-mcp/mcp-momo-vn
+```
+
+Add to your `.mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "momo": {
+      "command": "mcp-momo-vn",
+      "env": {
+        "MOMO_SANDBOX": "true",
+        "MOMO_PARTNER_CODE": "MOMOBKUN20180529",
+        "MOMO_ACCESS_KEY": "klm05TvNBzhg7h7j",
+        "MOMO_SECRET_KEY": "at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa"
+      }
+    }
+  }
+}
+```
+
+**Option 2 — Hosted gateway:**
+
+```json
+{
+  "mcpServers": {
+    "momo": {
+      "url": "https://vn-mcp-gateway.nguyenduchuy27111997.workers.dev/mcp/momo"
+    }
+  }
+}
+```
+
+## Available Tools
+
+| Tool | Description |
+|------|-------------|
+| `momo_create_payment` | Create a MoMo payment link (QR code, wallet, or ATM). Returns `payUrl` for the customer to complete payment. |
+| `momo_query_status` | Check the status of a MoMo payment transaction by `orderId`. |
+| `momo_refund` | Refund a MoMo transaction (full or partial) by `transId`. |
+| `momo_validate_ipn` | Validate a MoMo IPN payload by verifying its HMAC-SHA256 signature. |
+
+## Example Prompts for Claude
+
+Type these directly into Claude Code after connecting the MoMo MCP server:
+
+- "Create a MoMo payment for 150,000 VND for order SHOP-2026-001"
+- "Check the status of MoMo order MOMO1711234567890"
+- "Refund 50,000 VND from transaction 3456789012"
+- "Validate this MoMo IPN payload and tell me if the signature is valid: `{\"orderId\":\"MOMO1711234567890\",\"resultCode\":0,...}`"
+
+## Common Workflows
+
+**1. Create and verify a payment:**
+1. Call `momo_create_payment` with `amount` and `orderInfo` — receive `payUrl`
+2. Share the `payUrl` with the customer to complete payment
+3. Call `momo_query_status` with the `orderId` — confirm `resultCode: 0` (success)
+
+**2. Process a refund:**
+1. Call `momo_create_payment` to create a payment — receive `orderId`
+2. Call `momo_query_status` to get the `transId` from the paid transaction
+3. Call `momo_refund` with the `transId` and refund amount
+
+**3. Validate an incoming IPN callback:**
+1. Receive raw JSON body from MoMo IPN webhook
+2. Call `momo_validate_ipn` with the raw body as a string
+3. Check `valid: true` in response before processing the payment event
+
+## Environment Variables
+
+| Variable | Description | Mock Fallback |
+|----------|-------------|---------------|
+| `MOMO_SANDBOX` | Enable mock mode (set to `true`) | `true` |
+| `MOMO_PARTNER_CODE` | MoMo partner code | `MOMOBKUN20180529` |
+| `MOMO_ACCESS_KEY` | MoMo access key | `klm05TvNBzhg7h7j` |
+| `MOMO_SECRET_KEY` | MoMo secret key for HMAC signing | `at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa` |
+
+<Note>The fallback values above are MoMo's official public sandbox credentials — safe for development and testing.</Note>
+
+## Next Steps
+
+- Full tool reference with all parameters and response schemas: [MoMo Server Reference](/servers/momo)
+- See all 5 servers in action: [Introducing VN MCP Hub](/blog/launch)
+- Source code and issues: [GitHub — mcp-momo-vn](https://github.com/nguyenduchuy27111997/vietnamese-mcp/tree/main/servers/mcp-momo-vn)
