@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v2.1
 milestone_name: Growth & Marketing
-status: planning
-stopped_at: Roadmap created for v2.1 — Phase 18 ready to plan
-last_updated: "2026-03-26"
-last_activity: "2026-03-26 — v2.1 roadmap created. Phases 18-21 defined, all 13 requirements mapped."
+status: executing
+stopped_at: Completed 18-02-PLAN.md
+last_updated: "2026-03-26T17:52:27.378Z"
+last_activity: 2026-03-26 — 18-01 complete. MIT LICENSE + root README.md rewrite with badges, server catalog, dual quickstart, architecture diagram.
 progress:
-  total_phases: 4
-  completed_phases: 0
-  total_plans: 0
-  completed_plans: 0
-  percent: 0
+  total_phases: 17
+  completed_phases: 13
+  total_plans: 35
+  completed_plans: 34
+  percent: 5
 ---
 
 # Project State
@@ -26,11 +26,11 @@ See: .planning/PROJECT.md (updated 2026-03-26)
 ## Current Position
 
 Phase: 18 of 21 (Phase 18: GitHub README & SEO)
-Plan: 0 of TBD in current phase
-Status: Ready to plan
-Last activity: 2026-03-26 — v2.1 roadmap created. Phases 18-21 defined, all 13 requirements mapped.
+Plan: 1 of 3 in current phase
+Status: In progress
+Last activity: 2026-03-26 — 18-01 complete. MIT LICENSE + root README.md rewrite with badges, server catalog, dual quickstart, architecture diagram.
 
-Progress: [░░░░░░░░░░] 0% (0 of TBD plans complete)
+Progress: [█░░░░░░░░░] 5% (1 of ~20 plans complete)
 
 ## Performance Metrics
 
@@ -49,6 +49,12 @@ Key decisions relevant to v2.1:
 - [Phase 9-npm]: All 5 servers published under @vn-mcp scope — badges point to these packages
 - [Phase 17-billing]: Dashboard has dark mode, Stripe + MoMo flows — screenshot targets for PH
 
+v2.1 decisions:
+- [18-01]: README badges on a single line before H1 title for compact GitHub rendering
+- [18-01]: Feature Highlights table added to satisfy must_haves truth and reach 150-line minimum
+- [18-01]: Self-hosted npm quickstart placed before hosted gateway (developer-first workflow)
+- [Phase 18]: .mcp.json uses npm binary command (mcp-momo-vn etc.) not monorepo node path — enables standalone install without cloning repo
+
 ### Pending Todos
 
 None.
@@ -60,6 +66,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-26
-Stopped at: v2.1 roadmap created — ROADMAP.md, STATE.md, REQUIREMENTS.md written
+Last session: 2026-03-26T17:52:27.375Z
+Stopped at: Completed 18-02-PLAN.md
 Resume file: None

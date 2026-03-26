@@ -19,10 +19,10 @@
 
 ### GitHub README & SEO
 
-- [ ] **GH-01**: Root README.md rewritten with project overview, feature highlights, quick start, and architecture diagram
-- [ ] **GH-02**: Badges added (npm version, license, build status, MCP servers count)
+- [x] **GH-01**: Root README.md rewritten with project overview, feature highlights, quick start, and architecture diagram
+- [x] **GH-02**: Badges added (npm version, license, build status, MCP servers count)
 - [ ] **GH-03**: GIF/video demo showing end-to-end flow (signup → key → tool call)
-- [ ] **GH-04**: Per-server README.md files updated with npm install instructions and usage examples
+- [x] **GH-04**: Per-server README.md files updated with npm install instructions and usage examples
 
 ### Blog & Changelog
 
@@ -52,10 +52,10 @@ Deferred to future release.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| GH-01 | Phase 18 | Pending |
-| GH-02 | Phase 18 | Pending |
+| GH-01 | Phase 18 | Complete |
+| GH-02 | Phase 18 | Complete |
 | GH-03 | Phase 18 | Pending |
-| GH-04 | Phase 18 | Pending |
+| GH-04 | Phase 18 | Complete |
 | EX-01 | Phase 19 | Pending |
 | EX-02 | Phase 19 | Pending |
 | EX-03 | Phase 19 | Pending |

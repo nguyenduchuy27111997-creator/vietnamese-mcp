@@ -274,7 +274,7 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 18-01-PLAN.md — Root README rewrite with badges, feature table, architecture diagram, dual quickstart (npm + hosted gateway)
+- [x] 18-01-PLAN.md — Root README rewrite with badges, feature table, architecture diagram, dual quickstart (npm + hosted gateway)
 - [ ] 18-02-PLAN.md — Per-server README updates: npm install, binary .mcp.json config, example prompts for all 5 servers
 - [ ] 18-03-PLAN.md — GIF demo: assets directory, README embed, human recording checkpoint
 
@@ -329,7 +329,7 @@ Plans:
 | 15. App Shell + Navigation | v2.0 | 2/2 | Complete | 2026-03-25 |
 | 16. Core Pages | v2.0 | 3/3 | Complete | 2026-03-25 |
 | 17. Billing + Settings + Quickstart | v2.0 | 3/3 | Complete | 2026-03-26 |
-| 18. GitHub README & SEO | v2.1 | 0/3 | Not started | - |
+| 18. GitHub README & SEO | v2.1 | 1/3 | In Progress | - |
 | 19. Example Apps | v2.1 | 0/TBD | Not started | - |
 | 20. Blog & Changelog | v2.1 | 0/TBD | Not started | - |
 | 21. Product Hunt Launch | v2.1 | 0/TBD | Not started | - |
