@@ -1,16 +1,16 @@
 ---
 gsd_state_version: 1.0
-milestone: v2.0
-milestone_name: Modern Dashboard
+milestone: v2.1
+milestone_name: Growth & Marketing
 status: planning
-stopped_at: Completed 17-03-PLAN.md
-last_updated: "2026-03-26T12:27:15.049Z"
-last_activity: 2026-03-25 — v2.0 roadmap created. Phases 14-17 defined, all 15 requirements mapped.
+stopped_at: Defining requirements for v2.1
+last_updated: "2026-03-26"
+last_activity: "2026-03-26 — v2.1 milestone started (Growth & Marketing)"
 progress:
-  total_phases: 13
-  completed_phases: 13
-  total_plans: 32
-  completed_plans: 32
+  total_phases: 0
+  completed_phases: 0
+  total_plans: 0
+  completed_plans: 0
   percent: 0
 ---
 

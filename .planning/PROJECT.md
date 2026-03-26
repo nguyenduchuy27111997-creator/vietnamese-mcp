@@ -37,10 +37,10 @@ Developer installs an MCP server or signs up for a hosted API key, adds it to `.
 
 ### Active
 
-- [ ] Modern dashboard UI with Tailwind + shadcn/ui design system
-- [ ] App shell with sidebar navigation and dark mode
-- [ ] 7 full pages: Overview, API Keys, Usage, Billing, Settings, Quickstart, App Shell
-- [ ] Linear/Vercel aesthetic — dark sidebar, white content, minimal, professional
+- [ ] Product Hunt launch (listing, screenshots, tagline, maker profile)
+- [ ] Example apps / starter templates (payment checkout, Zalo chatbot)
+- [ ] GitHub README polish (badges, GIF demos, install counts, SEO)
+- [ ] Mintlify blog + changelog (launch post, server guides)
 
 ### Out of Scope
 
@@ -53,15 +53,15 @@ Developer installs an MCP server or signs up for a hosted API key, adds it to `.
 - Usage dashboard UI (charts, analytics) — deferred to after first 20 paying customers
 - Custom domain for docs — verify Mintlify free tier support
 
-## Current Milestone: v2.0 Modern Dashboard
+## Current Milestone: v2.1 Growth & Marketing
 
-**Goal:** Complete UI/UX overhaul of the dashboard SPA — replace inline styles with Tailwind + shadcn/ui, add sidebar navigation, dark mode, and 7 polished pages covering the full user journey.
+**Goal:** Get the first users — Product Hunt launch, example apps developers can clone, polished GitHub presence, and blog content that drives organic discovery.
 
 **Target:**
-- Design system: Tailwind CSS + shadcn/ui + dark mode default
-- App shell: sidebar nav, user menu, responsive mobile
-- 7 pages: Overview, API Keys, Usage & Analytics, Billing, Settings, Quickstart, App Shell
-- Visual style: Linear/Vercel aesthetic — dark sidebar, white content, minimal
+- Product Hunt listing with screenshots, tagline, maker profile
+- 2-3 example apps (payment checkout, Zalo chatbot starter)
+- GitHub README with badges, GIF demos, install counts
+- Mintlify blog with launch announcement + server guides
 
 ## Context
 
