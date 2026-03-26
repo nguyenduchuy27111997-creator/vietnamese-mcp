@@ -55,7 +55,7 @@
 
 **Milestone Goal:** Get the first users — polished GitHub presence, example apps developers can clone, blog content that drives organic discovery, and a Product Hunt launch to announce the platform.
 
-- [ ] **Phase 18: GitHub README & SEO** — Root README rewritten with badges, GIF demo, and per-server install guides
+- [x] **Phase 18: GitHub README & SEO** — Root README rewritten with badges, GIF demo, and per-server install guides (completed 2026-03-26)
 - [ ] **Phase 19: Example Apps** — Two complete starter apps (payment checkout + Zalo chatbot) with READMEs and GIF demos
 - [ ] **Phase 20: Blog & Changelog** — Mintlify launch post, per-server guides, and changelog page
 - [ ] **Phase 21: Product Hunt Launch** — Listing created with screenshots, tagline, and launch-day checklist ready
@@ -329,7 +329,7 @@ Plans:
 | 15. App Shell + Navigation | v2.0 | 2/2 | Complete | 2026-03-25 |
 | 16. Core Pages | v2.0 | 3/3 | Complete | 2026-03-25 |
 | 17. Billing + Settings + Quickstart | v2.0 | 3/3 | Complete | 2026-03-26 |
-| 18. GitHub README & SEO | v2.1 | 1/3 | In Progress | - |
+| 18. GitHub README & SEO | 3/3 | Complete   | 2026-03-26 | - |
 | 19. Example Apps | v2.1 | 0/TBD | Not started | - |
 | 20. Blog & Changelog | v2.1 | 0/TBD | Not started | - |
 | 21. Product Hunt Launch | v2.1 | 0/TBD | Not started | - |

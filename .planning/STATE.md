@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v2.1
 milestone_name: Growth & Marketing
 status: executing
-stopped_at: Completed 18-02-PLAN.md
-last_updated: "2026-03-26T17:52:27.378Z"
+stopped_at: "Checkpoint: Task 2 of 18-03-PLAN.md — awaiting human GIF recording"
+last_updated: "2026-03-26T18:02:27.185Z"
 last_activity: 2026-03-26 — 18-01 complete. MIT LICENSE + root README.md rewrite with badges, server catalog, dual quickstart, architecture diagram.
 progress:
   total_phases: 17
-  completed_phases: 13
+  completed_phases: 14
   total_plans: 35
-  completed_plans: 34
+  completed_plans: 35
   percent: 5
 ---
 
@@ -54,6 +54,8 @@ v2.1 decisions:
 - [18-01]: Feature Highlights table added to satisfy must_haves truth and reach 150-line minimum
 - [18-01]: Self-hosted npm quickstart placed before hosted gateway (developer-first workflow)
 - [Phase 18]: .mcp.json uses npm binary command (mcp-momo-vn etc.) not monorepo node path — enables standalone install without cloning repo
+- [Phase 18-03]: Activated README img tag immediately so it renders as soon as demo.gif lands in assets/
+- [Phase 18-03]: Alt text uses full product description with keywords for GitHub SEO
 
 ### Pending Todos
 
@@ -66,6 +68,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-26T17:52:27.375Z
-Stopped at: Completed 18-02-PLAN.md
+Last session: 2026-03-26T18:02:19.902Z
+Stopped at: Checkpoint: Task 2 of 18-03-PLAN.md — awaiting human GIF recording
 Resume file: None

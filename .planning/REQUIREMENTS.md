@@ -21,7 +21,7 @@
 
 - [x] **GH-01**: Root README.md rewritten with project overview, feature highlights, quick start, and architecture diagram
 - [x] **GH-02**: Badges added (npm version, license, build status, MCP servers count)
-- [ ] **GH-03**: GIF/video demo showing end-to-end flow (signup → key → tool call)
+- [x] **GH-03**: GIF/video demo showing end-to-end flow (signup → key → tool call)
 - [x] **GH-04**: Per-server README.md files updated with npm install instructions and usage examples
 
 ### Blog & Changelog
@@ -54,7 +54,7 @@ Deferred to future release.
 |-------------|-------|--------|
 | GH-01 | Phase 18 | Complete |
 | GH-02 | Phase 18 | Complete |
-| GH-03 | Phase 18 | Pending |
+| GH-03 | Phase 18 | Complete |
 | GH-04 | Phase 18 | Complete |
 | EX-01 | Phase 19 | Pending |
 | EX-02 | Phase 19 | Pending |
