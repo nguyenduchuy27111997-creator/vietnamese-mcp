@@ -22,7 +22,7 @@
         "groups": [
           {
             "group": "Getting Started",
-            "pages": ["index", "quickstart", "pricing"]
+            "pages": ["index", "quickstart", "pricing", "changelog"]
           },
           {
             "group": "Server Reference",
@@ -33,6 +33,24 @@
               "servers/vnpay",
               "servers/zalo-oa",
               "servers/viettel-pay"
+            ]
+          }
+        ]
+      },
+      {
+        "dropdown": "Blog",
+        "icon": "pen-nib",
+        "description": "Announcements, guides, and tutorials",
+        "groups": [
+          {
+            "group": "Posts",
+            "pages": [
+              "blog/introducing-vn-mcp-hub",
+              "blog/guide-momo-payments",
+              "blog/guide-zalopay-integration",
+              "blog/guide-vnpay-gateway",
+              "blog/guide-zalo-oa-messaging",
+              "blog/guide-viettelpay"
             ]
           }
         ]
