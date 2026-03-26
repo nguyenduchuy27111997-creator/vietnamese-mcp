@@ -300,7 +300,12 @@ Plans:
   1. The Mintlify blog is live and the launch post ("Introducing VN MCP Hub") is publicly accessible at a stable URL — covers what the platform is, why it exists, and how to get started in under 5 minutes
   2. At least one per-server guide post is published for each of the 5 servers, each containing: an intro, tool reference summary, a copy-pasteable `.mcp.json` config, and an example Claude Code prompt that uses the server
   3. A changelog page exists in the docs site listing v1.0, v1.1, v1.2, and v2.0 entries with dates, key features added, and links to relevant docs — a developer can see the project history at a glance
-**Plans**: TBD
+**Plans**: 3 plans
+
+Plans:
+- [ ] 20-01-PLAN.md — Launch announcement blog post + blog/changelog navigation in docs.json
+- [ ] 20-02-PLAN.md — 5 per-server guide blog posts (MoMo, ZaloPay, VNPAY, Zalo OA, ViettelPay)
+- [ ] 20-03-PLAN.md — Changelog page with v1.0 through v2.0 release history
 
 ### Phase 21: Product Hunt Launch
 **Goal**: The Product Hunt listing is fully prepared and ready to go live — all assets created, screenshots captured, tagline written, maker profile set up, and a launch-day action checklist drafted so the launch can be executed without scrambling
@@ -334,8 +339,8 @@ Plans:
 | 16. Core Pages | v2.0 | 3/3 | Complete | 2026-03-25 |
 | 17. Billing + Settings + Quickstart | v2.0 | 3/3 | Complete | 2026-03-26 |
 | 18. GitHub README & SEO | v2.1 | 3/3 | Complete | 2026-03-26 |
-| 19. Example Apps | 2/2 | Complete    | 2026-03-26 | - |
-| 20. Blog & Changelog | v2.1 | 0/TBD | Not started | - |
+| 19. Example Apps | v2.1 | 2/2 | Complete | 2026-03-26 |
+| 20. Blog & Changelog | v2.1 | 0/3 | Not started | - |
 | 21. Product Hunt Launch | v2.1 | 0/TBD | Not started | - |
 
 **Full v1.0 details:** `.planning/milestones/v1.0-ROADMAP.md`
