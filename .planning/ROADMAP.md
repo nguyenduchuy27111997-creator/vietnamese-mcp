@@ -271,6 +271,6 @@ Plans:
 | 14. Design System Foundation | v2.0 | 2/2 | Complete | 2026-03-25 |
 | 15. App Shell + Navigation | v2.0 | 2/2 | Complete | 2026-03-25 |
 | 16. Core Pages | v2.0 | 3/3 | Complete | 2026-03-25 |
-| 17. Billing + Settings + Quickstart | 3/3 | Complete   | 2026-03-26 | - |
+| 17. Billing + Settings + Quickstart | 3/3 | Complete    | 2026-03-26 | - |
 
 **Full v1.0 details:** `.planning/milestones/v1.0-ROADMAP.md`
