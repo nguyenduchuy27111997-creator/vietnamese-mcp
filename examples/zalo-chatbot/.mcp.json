@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "zalo-oa": {
+      "command": "npx",
+      "args": ["@vn-mcp/mcp-zalo-oa"],
+      "env": {
+        "ZALO_OA_SANDBOX": "true",
+        "ZALO_OA_ACCESS_TOKEN": "mock_access_token",
+        "ZALO_OA_REFRESH_TOKEN": "mock_refresh_token",
+        "ZALO_OA_APP_ID": "mock_app_id",
+        "ZALO_OA_APP_SECRET": "mock_app_secret"
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "vn-mcp-zalo-chatbot-example",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "tsx src/bot.ts",
+    "build": "tsc",
+    "start:built": "node build/bot.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.27.1",
+    "@vn-mcp/mcp-zalo-oa": "^1.0.2"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
