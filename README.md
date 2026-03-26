@@ -4,11 +4,11 @@
 
 The first collection of Model Context Protocol (MCP) servers for Vietnamese fintech and messaging APIs. Plug into Claude Code and interact with Vietnam's major payment gateways and messaging platforms — zero integration boilerplate.
 
-<!-- GIF demo will be added in plan 18-03
 <p align="center">
-  <img src="./assets/demo.gif" alt="VN MCP Hub Demo" width="720" />
+  <img src="./assets/demo.gif" alt="VN MCP Hub Demo — signup, create API key, make MoMo payment via Claude Code" width="720" />
 </p>
--->
+
+> **Demo:** Sign up, create an API key, and make a MoMo payment — all from Claude Code in under 60 seconds.
 
 ## What is this?
 
