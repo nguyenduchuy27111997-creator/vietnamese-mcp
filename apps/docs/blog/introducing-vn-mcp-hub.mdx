@@ -1,0 +1,131 @@
+---
+title: "Introducing VN MCP Hub"
+description: "The first collection of MCP servers for Vietnamese fintech and messaging APIs. Connect Claude Code to MoMo, ZaloPay, VNPAY, ViettelPay, and Zalo OA — zero integration boilerplate."
+date: "2026-03-27"
+author: "VN MCP Hub Team"
+tags: ["launch", "mcp", "vietnam", "payments", "claude-code"]
+---
+
+Today we are launching **VN MCP Hub** — the first collection of Model Context Protocol (MCP) servers purpose-built for Vietnamese payment gateways and messaging platforms. With 5 servers and 18 tools, Claude Code can now create payment links, check transaction status, issue refunds, and send Zalo OA messages without writing a single line of integration code. You install a package, add three lines to `.mcp.json`, and Claude takes care of the rest.
+
+## The Problem
+
+Vietnamese developers integrating payment gateways face a fragmented landscape. MoMo, ZaloPay, and VNPAY each have their own SDK, their own documentation style, and their own authentication scheme — HMAC-SHA256 here, SHA512 there, RSA signatures somewhere else. Every new integration means reading three different docs sites, implementing bespoke signature verification, and manually testing IPN/callback payloads.
+
+AI coding assistants like Claude can write boilerplate, but they cannot *call* these APIs directly. Claude can draft your MoMo integration — but it cannot execute a test payment to verify the code actually works. Until now.
+
+## What is MCP?
+
+Model Context Protocol (MCP) is an open protocol created by Anthropic that lets AI models interact with external tools and data sources through a standardized interface. Think of it as "USB-C for AI" — one connector that works with any compatible tool, no custom integration code required.
+
+When you configure an MCP server in your project, Claude Code gains the ability to call that server's tools during a conversation. Instead of writing code and running it manually, Claude can execute the action directly and report the result. Full documentation is available at [modelcontextprotocol.io](https://modelcontextprotocol.io).
+
+## What VN MCP Hub Provides
+
+Five production-ready MCP servers covering the most widely used Vietnamese payment and messaging APIs:
+
+<CardGroup cols={2}>
+  <Card title="MoMo" icon="wallet">
+    E-wallet payments: create payment links, check transaction status, issue refunds, and validate IPN callbacks. HMAC-SHA256 signing built in.
+  </Card>
+  <Card title="ZaloPay" icon="credit-card">
+    Payment orders: create, query, and refund orders. Callback validation with MAC verification included.
+  </Card>
+  <Card title="VNPAY" icon="building-columns">
+    Payment gateway: generate signed redirect URLs, verify return parameters, and query transaction history. Supports SHA512 signing.
+  </Card>
+  <Card title="Zalo OA" icon="message">
+    Official Account messaging: send text and template messages to followers, list followers, and manage subscriber profiles.
+  </Card>
+  <Card title="ViettelPay" icon="mobile">
+    Payments: create, query, and refund transactions. Runs in mock mode — safe for development and demos without real credentials.
+  </Card>
+</CardGroup>
+
+**18 tools total.** All servers support sandbox/mock mode so you can develop and test offline without touching production credentials.
+
+## Getting Started in 2 Minutes
+
+There are two ways to use VN MCP Hub: self-hosted via npm or through our hosted gateway.
+
+### Self-hosted (npm)
+
+Install the server globally:
+
+```bash
+npm install -g @vn-mcp/mcp-momo-vn
+```
+
+Add it to your project's `.mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "momo": {
+      "command": "mcp-momo-vn",
+      "env": {
+        "MOMO_SANDBOX": "true"
+      }
+    }
+  }
+}
+```
+
+That's it. Restart Claude Code and you have MoMo tools available immediately. Replace `MOMO_SANDBOX: "true"` with real credentials when you're ready for production.
+
+### Hosted Gateway
+
+If you prefer not to manage server processes yourself:
+
+1. Sign up at [vn-mcp-dashboard.pages.dev](https://vn-mcp-dashboard.pages.dev)
+2. Create an API key for the server you need
+3. Add the gateway URL to `.mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "momo": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://vn-mcp-gateway.nguyenduchuy27111997.workers.dev/mcp/momo"],
+      "env": {
+        "API_KEY": "your-api-key-here"
+      }
+    }
+  }
+}
+```
+
+Then ask Claude:
+
+> "Create a MoMo payment for 50,000 VND for order #1234"
+
+Claude will call the `momo_create_payment` tool, return the payment URL, and show you the full API response — no manual API calls required.
+
+<Note>
+  All five servers are available on both self-hosted (npm) and hosted gateway paths. Mix and match as needed per project.
+</Note>
+
+## What's Next
+
+This week we are publishing per-server deep-dive guides:
+
+- **MoMo Payments** — IPN validation, refund flows, QR code generation
+- **ZaloPay Integration** — Order lifecycle, callback security
+- **VNPAY Gateway** — Signature generation, return URL handling
+- **Zalo OA Messaging** — Follower management, template messages
+- **ViettelPay** — Mock mode walkthrough, production migration
+
+Our [changelog](/changelog) is now live — follow it for releases and updates.
+
+We are also preparing for a Product Hunt launch. If you find VN MCP Hub useful, a vote would mean a lot to the project.
+
+**Links:**
+- [Documentation](/quickstart)
+- [GitHub](https://github.com/nguyenduchuy27111997-creator/vietnamese-mcp)
+- [Dashboard](https://vn-mcp-dashboard.pages.dev)
+
+## Why We Built This
+
+Vietnamese fintech APIs are genuinely excellent — MoMo has tens of millions of users, ZaloPay is deeply integrated into the Zalo ecosystem, and VNPAY is accepted everywhere. But they were invisible to AI tools.
+
+We built VN MCP Hub because we wanted Claude to be a first-class citizen in Vietnamese software development — able to not just write integration code but actually execute it. Star us on GitHub, try a server in sandbox mode, and let us know what you think. Issues, PRs, and feedback are all welcome.
