@@ -47,7 +47,7 @@
 - [x] **Phase 14: Design System Foundation** — Tailwind + shadcn/ui installed, dark mode default, Linear/Vercel design tokens applied (completed 2026-03-25)
 - [x] **Phase 15: App Shell + Navigation** — Sidebar with collapsible nav, user menu, responsive mobile layout, client-side routing (completed 2026-03-25)
 - [x] **Phase 16: Core Pages** — Overview, API Keys, and Usage pages fully redesigned with new design system (completed 2026-03-25)
-- [ ] **Phase 17: Billing + Settings + Quickstart** — Billing plan selector, Settings profile/danger zone, and new-user onboarding wizard
+- [x] **Phase 17: Billing + Settings + Quickstart** — Billing plan selector, Settings profile/danger zone, and new-user onboarding wizard (completed 2026-03-26)
 
 ## Phase Details
 
@@ -271,6 +271,6 @@ Plans:
 | 14. Design System Foundation | v2.0 | 2/2 | Complete | 2026-03-25 |
 | 15. App Shell + Navigation | v2.0 | 2/2 | Complete | 2026-03-25 |
 | 16. Core Pages | v2.0 | 3/3 | Complete | 2026-03-25 |
-| 17. Billing + Settings + Quickstart | 1/3 | In Progress|  | - |
+| 17. Billing + Settings + Quickstart | 3/3 | Complete   | 2026-03-26 | - |
 
 **Full v1.0 details:** `.planning/milestones/v1.0-ROADMAP.md`
