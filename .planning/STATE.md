@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v2.1
 milestone_name: Growth & Marketing
 status: executing
-stopped_at: Completed 18-03-PLAN.md (GIF deferred — placeholder active in README)
-last_updated: "2026-03-26T18:09:20.905Z"
+stopped_at: Completed 19-02-PLAN.md
+last_updated: "2026-03-26T18:24:19.957Z"
 last_activity: 2026-03-27 — 18-03 complete. Assets dir created, README GIF embed active, GIF recording deferred to pre-launch.
 progress:
   total_phases: 17
-  completed_phases: 14
-  total_plans: 35
-  completed_plans: 35
+  completed_phases: 15
+  total_plans: 37
+  completed_plans: 37
   percent: 10
 ---
 
@@ -56,6 +56,9 @@ v2.1 decisions:
 - [Phase 18]: .mcp.json uses npm binary command (mcp-momo-vn etc.) not monorepo node path — enables standalone install without cloning repo
 - [Phase 18-03]: Activated README img tag immediately so it renders as soon as demo.gif lands in assets/
 - [Phase 18-03]: Alt text uses full product description with keywords for GitHub SEO
+- [Phase 19-example-apps]: Example apps live in examples/ directory, standalone with own package.json, not in root workspaces
+- [Phase 19-example-apps]: Payment checkout example uses plain fetch with JSON-RPC — no SDK, minimal deps, easy for developers to understand
+- [Phase 19-example-apps]: Used correct tool names zalo_oa_send_message/zalo_oa_list_followers (plan had wrong zalooa_ prefix)
 
 ### Pending Todos
 
@@ -69,6 +72,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-27T00:00:00Z
-Stopped at: Completed 18-03-PLAN.md (GIF deferred — placeholder active in README)
+Last session: 2026-03-26T18:24:19.955Z
+Stopped at: Completed 19-02-PLAN.md
 Resume file: None

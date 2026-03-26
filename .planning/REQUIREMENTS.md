@@ -13,9 +13,9 @@
 
 ### Example Apps
 
-- [ ] **EX-01**: Payment checkout example app — React app that creates MoMo/VNPAY payments via hosted gateway
-- [ ] **EX-02**: Zalo chatbot example app — Node.js bot that sends messages via Zalo OA MCP server
-- [ ] **EX-03**: Each example has README with setup instructions, .mcp.json config, and GIF demo
+- [x] **EX-01**: Payment checkout example app — React app that creates MoMo/VNPAY payments via hosted gateway
+- [x] **EX-02**: Zalo chatbot example app — Node.js bot that sends messages via Zalo OA MCP server
+- [x] **EX-03**: Each example has README with setup instructions, .mcp.json config, and GIF demo
 
 ### GitHub README & SEO
 
@@ -56,9 +56,9 @@ Deferred to future release.
 | GH-02 | Phase 18 | Complete |
 | GH-03 | Phase 18 | Complete |
 | GH-04 | Phase 18 | Complete |
-| EX-01 | Phase 19 | Pending |
-| EX-02 | Phase 19 | Pending |
-| EX-03 | Phase 19 | Pending |
+| EX-01 | Phase 19 | Complete |
+| EX-02 | Phase 19 | Complete |
+| EX-03 | Phase 19 | Complete |
 | BLOG-01 | Phase 20 | Pending |
 | BLOG-02 | Phase 20 | Pending |
 | BLOG-03 | Phase 20 | Pending |
