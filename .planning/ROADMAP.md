@@ -271,7 +271,12 @@ Plans:
   2. All four badges (npm version, license, build status, MCP server count) are visible at the top of the README and link to correct destinations
   3. A GIF or video demo is embedded in the README showing the complete flow: signup, key creation, tool call returning a mock MoMo payment response
   4. Each per-server README (momo, zalopay, vnpay, zalo-oa, viettelpay) includes an `npm install` command, a minimal `.mcp.json` snippet, and a tool call example
-**Plans**: TBD
+**Plans**: 3 plans
+
+Plans:
+- [ ] 18-01-PLAN.md — Root README rewrite with badges, feature table, architecture diagram, dual quickstart (npm + hosted gateway)
+- [ ] 18-02-PLAN.md — Per-server README updates: npm install, binary .mcp.json config, example prompts for all 5 servers
+- [ ] 18-03-PLAN.md — GIF demo: assets directory, README embed, human recording checkpoint
 
 ### Phase 19: Example Apps
 **Goal**: A developer who clones the repo finds two working starter apps they can run in under 5 minutes — a payment checkout flow using MoMo/VNPAY and a Zalo chatbot — each with a README, configured `.mcp.json`, and a GIF showing the expected behavior
@@ -324,7 +329,7 @@ Plans:
 | 15. App Shell + Navigation | v2.0 | 2/2 | Complete | 2026-03-25 |
 | 16. Core Pages | v2.0 | 3/3 | Complete | 2026-03-25 |
 | 17. Billing + Settings + Quickstart | v2.0 | 3/3 | Complete | 2026-03-26 |
-| 18. GitHub README & SEO | v2.1 | 0/TBD | Not started | - |
+| 18. GitHub README & SEO | v2.1 | 0/3 | Not started | - |
 | 19. Example Apps | v2.1 | 0/TBD | Not started | - |
 | 20. Blog & Changelog | v2.1 | 0/TBD | Not started | - |
 | 21. Product Hunt Launch | v2.1 | 0/TBD | Not started | - |
