@@ -279,14 +279,18 @@ Plans:
 - [x] 18-03-PLAN.md — GIF demo: assets directory, README embed (GIF recording deferred to pre-launch)
 
 ### Phase 19: Example Apps
-**Goal**: A developer who clones the repo finds two working starter apps they can run in under 5 minutes — a payment checkout flow using MoMo/VNPAY and a Zalo chatbot — each with a README, configured `.mcp.json`, and a GIF showing the expected behavior
+**Goal**: Two working starter apps (payment checkout + Zalo chatbot) developers can clone and run in under 5 minutes
 **Depends on**: Phase 18
 **Requirements**: EX-01, EX-02, EX-03
 **Success Criteria** (what must be TRUE):
   1. Running the payment checkout example app (React) results in a rendered UI where clicking "Pay with MoMo" calls the hosted gateway and returns a mock payment URL — no manual configuration beyond setting an API key in `.env`
   2. Running the Zalo chatbot example (Node.js) and sending a test message results in the bot calling `zalooa_send_message` through the hosted gateway and logging the mock response — no manual configuration beyond setting an API key
   3. Both example READMEs contain: prerequisites, a 3-step setup (clone, install, configure), a `.mcp.json` snippet, and an embedded GIF or screenshot showing the running app
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [ ] 19-01-PLAN.md — Payment checkout React app with MoMo/VNPAY buttons, gateway fetch calls, README with 3-step setup
+- [ ] 19-02-PLAN.md — Zalo chatbot Node.js bot using @vn-mcp/mcp-zalo-oa via stdio, README with 3-step setup
 
 ### Phase 20: Blog & Changelog
 **Goal**: The Mintlify docs site has a blog section with a launch announcement and per-server guides, plus a changelog page — giving developers context on what the platform does and driving organic SEO discovery
@@ -329,8 +333,8 @@ Plans:
 | 15. App Shell + Navigation | v2.0 | 2/2 | Complete | 2026-03-25 |
 | 16. Core Pages | v2.0 | 3/3 | Complete | 2026-03-25 |
 | 17. Billing + Settings + Quickstart | v2.0 | 3/3 | Complete | 2026-03-26 |
-| 18. GitHub README & SEO | 3/3 | Complete    | 2026-03-26 | - |
-| 19. Example Apps | v2.1 | 0/TBD | Not started | - |
+| 18. GitHub README & SEO | v2.1 | 3/3 | Complete | 2026-03-26 |
+| 19. Example Apps | v2.1 | 0/2 | Not started | - |
 | 20. Blog & Changelog | v2.1 | 0/TBD | Not started | - |
 | 21. Product Hunt Launch | v2.1 | 0/TBD | Not started | - |
 
