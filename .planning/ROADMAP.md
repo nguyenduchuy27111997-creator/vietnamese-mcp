@@ -57,7 +57,7 @@
 
 - [x] **Phase 18: GitHub README & SEO** — Root README rewritten with badges, GIF demo, and per-server install guides (completed 2026-03-26)
 - [x] **Phase 19: Example Apps** — Two complete starter apps (payment checkout + Zalo chatbot) with READMEs and GIF demos (completed 2026-03-26)
-- [ ] **Phase 20: Blog & Changelog** — Mintlify launch post, per-server guides, and changelog page
+- [x] **Phase 20: Blog & Changelog** — Mintlify launch post, per-server guides, and changelog page (completed 2026-03-26)
 - [ ] **Phase 21: Product Hunt Launch** — Listing created with screenshots, tagline, and launch-day checklist ready
 
 ## Phase Details
@@ -340,7 +340,7 @@ Plans:
 | 17. Billing + Settings + Quickstart | v2.0 | 3/3 | Complete | 2026-03-26 |
 | 18. GitHub README & SEO | v2.1 | 3/3 | Complete | 2026-03-26 |
 | 19. Example Apps | v2.1 | 2/2 | Complete | 2026-03-26 |
-| 20. Blog & Changelog | 2/3 | In Progress|  | - |
+| 20. Blog & Changelog | 3/3 | Complete   | 2026-03-26 | - |
 | 21. Product Hunt Launch | v2.1 | 0/TBD | Not started | - |
 
 **Full v1.0 details:** `.planning/milestones/v1.0-ROADMAP.md`

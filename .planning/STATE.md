@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v2.1
 milestone_name: Growth & Marketing
 status: executing
-stopped_at: Completed 20-03-PLAN.md
-last_updated: "2026-03-26T18:35:16.836Z"
+stopped_at: Completed 20-02-PLAN.md
+last_updated: "2026-03-26T18:36:13.744Z"
 last_activity: 2026-03-27 — 18-03 complete. Assets dir created, README GIF embed active, GIF recording deferred to pre-launch.
 progress:
   total_phases: 17
-  completed_phases: 15
+  completed_phases: 16
   total_plans: 40
-  completed_plans: 39
+  completed_plans: 40
   percent: 10
 ---
 
@@ -62,6 +62,8 @@ v2.1 decisions:
 - [Phase 20-blog-changelog]: Changelog content sourced from ROADMAP.md milestone dates — single source of truth for version history
 - [Phase 20-01]: Blog added as second navigation dropdown in docs.json, separate from Documentation
 - [Phase 20-01]: Launch blog post uses Mintlify CardGroup component to present 5 MCP servers visually
+- [Phase 20-blog-changelog]: All 5 guides follow identical 7-section template for consistency
+- [Phase 20-blog-changelog]: ViettelPay guide prominently notes mock-only status with Note callout
 
 ### Pending Todos
 
@@ -75,6 +77,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-26T18:35:16.833Z
-Stopped at: Completed 20-03-PLAN.md
+Last session: 2026-03-26T18:36:09.457Z
+Stopped at: Completed 20-02-PLAN.md
 Resume file: None
