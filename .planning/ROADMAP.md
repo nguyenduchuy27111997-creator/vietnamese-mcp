@@ -420,6 +420,6 @@ Plans:
 | 22. API Key Scoping | v3.0 | 2/2 | Complete | 2026-03-27 |
 | 23. API Playground | v3.0 | 2/2 | Complete | 2026-03-27 |
 | 24. Webhook Event Logs | 2/2 | Complete    | 2026-03-27 | - |
-| 25. Usage Export | 2/2 | Complete   | 2026-03-27 | - |
+| 25. Usage Export | 2/2 | Complete    | 2026-03-27 | - |
 
 **Full v1.0 details:** `.planning/milestones/v1.0-ROADMAP.md`
