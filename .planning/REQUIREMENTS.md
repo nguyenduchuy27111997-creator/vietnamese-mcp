@@ -55,27 +55,27 @@ Deferred to future release.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| PLAY-01 | TBD | Pending |
-| PLAY-02 | TBD | Pending |
-| PLAY-03 | TBD | Pending |
-| PLAY-04 | TBD | Pending |
-| HOOK-01 | TBD | Pending |
-| HOOK-02 | TBD | Pending |
-| HOOK-03 | TBD | Pending |
-| HOOK-04 | TBD | Pending |
-| SCOPE-01 | TBD | Pending |
-| SCOPE-02 | TBD | Pending |
-| SCOPE-03 | TBD | Pending |
-| SCOPE-04 | TBD | Pending |
-| EXPORT-01 | TBD | Pending |
-| EXPORT-02 | TBD | Pending |
-| EXPORT-03 | TBD | Pending |
-| EXPORT-04 | TBD | Pending |
+| SCOPE-01 | Phase 22 | Pending |
+| SCOPE-02 | Phase 22 | Pending |
+| SCOPE-03 | Phase 22 | Pending |
+| SCOPE-04 | Phase 22 | Pending |
+| PLAY-01 | Phase 23 | Pending |
+| PLAY-02 | Phase 23 | Pending |
+| PLAY-03 | Phase 23 | Pending |
+| PLAY-04 | Phase 23 | Pending |
+| HOOK-01 | Phase 24 | Pending |
+| HOOK-02 | Phase 24 | Pending |
+| HOOK-03 | Phase 24 | Pending |
+| HOOK-04 | Phase 24 | Pending |
+| EXPORT-01 | Phase 25 | Pending |
+| EXPORT-02 | Phase 25 | Pending |
+| EXPORT-03 | Phase 25 | Pending |
+| EXPORT-04 | Phase 25 | Pending |
 
 **Coverage:**
 - v3.0 requirements: 16 total
-- Mapped to phases: 0
-- Unmapped: 16
+- Mapped to phases: 16
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-03-27*

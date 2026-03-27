@@ -6,7 +6,8 @@
 - ✅ **v1.1 Platform Launch** — Phases 5-10 (shipped 2026-03-25)
 - ✅ **v1.2 Production Deployment** — Phases 11-13 (shipped 2026-03-25)
 - ✅ **v2.0 Modern Dashboard** — Phases 14-17 (shipped 2026-03-26)
-- 🚧 **v2.1 Growth & Marketing** — Phases 18-21 (in progress)
+- ✅ **v2.1 Growth & Marketing** — Phases 18-21 (shipped 2026-03-27)
+- 🚧 **v3.0 Developer Experience** — Phases 22-25 (in progress)
 
 ## Phases
 
@@ -51,14 +52,24 @@
 
 </details>
 
-### 🚧 v2.1 Growth & Marketing (In Progress)
-
-**Milestone Goal:** Get the first users — polished GitHub presence, example apps developers can clone, blog content that drives organic discovery, and a Product Hunt launch to announce the platform.
+<details>
+<summary>✅ v2.1 Growth & Marketing (Phases 18-21) — SHIPPED 2026-03-27</summary>
 
 - [x] **Phase 18: GitHub README & SEO** — Root README rewritten with badges, GIF demo, and per-server install guides (completed 2026-03-26)
 - [x] **Phase 19: Example Apps** — Two complete starter apps (payment checkout + Zalo chatbot) with READMEs and GIF demos (completed 2026-03-26)
 - [x] **Phase 20: Blog & Changelog** — Mintlify launch post, per-server guides, and changelog page (completed 2026-03-26)
 - [x] **Phase 21: Product Hunt Launch** — Listing created with screenshots, tagline, and launch-day checklist ready (completed 2026-03-27)
+
+</details>
+
+### 🚧 v3.0 Developer Experience (In Progress)
+
+**Milestone Goal:** Make the platform sticky — API key scoping for granular permissions, an API playground for testing tool calls directly from the dashboard, webhook event logs for debugging, and usage export for self-service analytics.
+
+- [ ] **Phase 22: API Key Scoping** — Keys can be restricted to specific servers; gateway enforces scope with 403; dashboard shows scope badges
+- [ ] **Phase 23: API Playground** — Dashboard page where developers select a server, pick a tool, fill params, and execute a real JSON-RPC call
+- [ ] **Phase 24: Webhook Event Logs** — Gateway logs Stripe/MoMo webhook events; dashboard page shows filterable list with full payload viewer
+- [ ] **Phase 25: Usage Export** — Gateway CSV endpoint and dashboard download button for per-server, per-day usage data
 
 ## Phase Details
 
@@ -321,6 +332,66 @@ Plans:
 - [ ] 21-01-PLAN.md — PH listing copy (tagline, description, maker story) + launch day checklist (first comment, social posts, response templates)
 - [ ] 21-02-PLAN.md — Screenshot capture guide (5 dark-mode dashboard pages at 1280x800) + PH listing assembly checkpoint
 
+### Phase 22: API Key Scoping
+**Goal**: API keys can be restricted to specific servers; the gateway enforces scope and returns 403 for out-of-scope requests; the dashboard key creation UI lets users select allowed servers and shows scope badges on existing keys
+**Depends on**: Phase 21
+**Requirements**: SCOPE-01, SCOPE-02, SCOPE-03, SCOPE-04
+**Success Criteria** (what must be TRUE):
+  1. A key created with scope ["momo", "zalopay"] is rejected with HTTP 403 when used to call the vnpay server — not a 401, not a tier error
+  2. Creating a key via the dashboard shows server checkboxes defaulting to all 5 servers; unchecking servers and saving persists the restriction
+  3. The API Keys table displays scope badges next to each key (e.g., "MoMo ZaloPay") so a developer can see key permissions at a glance without opening edit dialogs
+  4. A key created with default scope (all servers) passes gateway auth to all 5 servers — existing behavior is unchanged
+**Plans**: TBD
+
+Plans:
+- [ ] 22-01: Supabase migration adding `allowed_servers` column to api_keys + gateway authMiddleware scope check (403 path)
+- [ ] 22-02: Dashboard key creation modal with server checkboxes + scope badges on API Keys table
+
+### Phase 23: API Playground
+**Goal**: Developers can test any tool call from the dashboard without leaving the browser — select a server, pick a tool, fill in parameters auto-generated from the tool schema, execute the call against the gateway using their own API key, and see the raw JSON-RPC request and response side by side
+**Depends on**: Phase 22 (scoped key is the auth mechanism the playground uses)
+**Requirements**: PLAY-01, PLAY-02, PLAY-03, PLAY-04
+**Success Criteria** (what must be TRUE):
+  1. Navigating to the Playground page shows a server dropdown with all 5 servers; selecting one populates a tool dropdown with that server's tools
+  2. Selecting a tool renders a parameter form auto-generated from the tool schema — required fields are marked, input types match field types (text, number, boolean)
+  3. Clicking Execute sends the JSON-RPC request to the gateway using the user's API key and displays the response — a mock `momo_create_payment` call returns a mock payment URL within 3 seconds
+  4. The request/response panel shows the raw JSON-RPC payload and formatted response with syntax highlighting — a developer can copy the exact payload to use outside the dashboard
+**Plans**: TBD
+
+Plans:
+- [ ] 23-01: Gateway CORS update to allow dashboard origin for playground requests + gateway playground route (if needed)
+- [ ] 23-02: Playground page — server/tool dropdowns, schema-driven param form, Execute button, request/response panel with syntax highlighting
+
+### Phase 24: Webhook Event Logs
+**Goal**: Every Stripe and MoMo webhook event received by the gateway is logged to a queryable store; a dashboard page shows the event list with timestamp, provider, event type, and status; clicking an event expands the full payload; the list is filterable by provider and status
+**Depends on**: Phase 22 (dashboard auth pattern established)
+**Requirements**: HOOK-01, HOOK-02, HOOK-03, HOOK-04
+**Success Criteria** (what must be TRUE):
+  1. After a Stripe or MoMo webhook fires, the event appears in the dashboard Webhook Logs page within 5 seconds — timestamp, provider (Stripe/MoMo), event type, and success/failed status are visible in the list row
+  2. Clicking a log row expands to show the full raw payload JSON with syntax highlighting — the developer can see exactly what was received
+  3. Filtering the list by provider "Stripe" hides all MoMo events; filtering by status "failed" shows only events where processing returned a non-200 response
+  4. The webhook logs page loads in under 2 seconds with 100+ events in the store — pagination or virtual scroll prevents DOM overload
+**Plans**: TBD
+
+Plans:
+- [ ] 24-01: Supabase migration for webhook_logs table + gateway webhook handler update to insert log rows on every Stripe/MoMo event
+- [ ] 24-02: Dashboard Webhook Logs page — event list table, expandable payload drawer, provider/status filters
+
+### Phase 25: Usage Export
+**Goal**: Developers can download their usage data as a CSV file directly from the dashboard — a date range picker selects the window, the gateway endpoint queries Tinybird and streams CSV with proper headers, and the browser triggers a file download
+**Depends on**: Phase 22 (JWT auth pattern for /usage/export route)
+**Requirements**: EXPORT-01, EXPORT-02, EXPORT-03, EXPORT-04
+**Success Criteria** (what must be TRUE):
+  1. Clicking "Export CSV" on the Usage page triggers a file download named `usage-export-YYYY-MM-DD.csv` — no page navigation, no new tab
+  2. The downloaded CSV contains columns: date, server, tool, call_count — one row per (date, server, tool) combination within the selected range
+  3. Selecting "Last 30 days" from the date range picker and clicking Export produces a CSV covering exactly the last 30 calendar days — no gaps, no extra rows outside the range
+  4. The gateway GET /usage/export endpoint returns Content-Type: text/csv and Content-Disposition: attachment — curl downloads a valid CSV without needing dashboard UI
+**Plans**: TBD
+
+Plans:
+- [ ] 25-01: Gateway GET /usage/export endpoint — JWT auth, date range params, Tinybird query, CSV serialization, correct response headers
+- [ ] 25-02: Dashboard Usage page — date range picker (7/30/90 days + custom), Export CSV button wired to /usage/export endpoint
+
 ## Progress
 
 | Phase | Milestone | Plans Complete | Status | Completed |
@@ -345,6 +416,10 @@ Plans:
 | 18. GitHub README & SEO | v2.1 | 3/3 | Complete | 2026-03-26 |
 | 19. Example Apps | v2.1 | 2/2 | Complete | 2026-03-26 |
 | 20. Blog & Changelog | v2.1 | 3/3 | Complete | 2026-03-26 |
-| 21. Product Hunt Launch | 2/2 | Complete    | 2026-03-27 | - |
+| 21. Product Hunt Launch | v2.1 | 2/2 | Complete | 2026-03-27 |
+| 22. API Key Scoping | v3.0 | 0/2 | Not started | - |
+| 23. API Playground | v3.0 | 0/2 | Not started | - |
+| 24. Webhook Event Logs | v3.0 | 0/2 | Not started | - |
+| 25. Usage Export | v3.0 | 0/2 | Not started | - |
 
 **Full v1.0 details:** `.planning/milestones/v1.0-ROADMAP.md`
