@@ -23,6 +23,15 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Checkbox } from '@/components/ui/checkbox';
+
+const ALL_SERVERS = [
+  { id: 'momo', label: 'MoMo' },
+  { id: 'zalopay', label: 'ZaloPay' },
+  { id: 'vnpay', label: 'VNPAY' },
+  { id: 'zalo-oa', label: 'Zalo OA' },
+  { id: 'viettel-pay', label: 'ViettelPay' },
+] as const;
 
 function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString('en-US', {
@@ -42,6 +51,7 @@ export function KeysPage() {
   const [creating, setCreating] = useState(false);
   const [revokeTarget, setRevokeTarget] = useState<ApiKey | null>(null);
   const [copied, setCopied] = useState(false);
+  const [selectedServers, setSelectedServers] = useState<string[]>(ALL_SERVERS.map(s => s.id));
 
   const filtered = keys.filter(
     (k) =>
@@ -51,7 +61,8 @@ export function KeysPage() {
 
   const handleCreate = async () => {
     setCreating(true);
-    const raw = await createKey(newKeyName.trim() || undefined);
+    const allowedServers = selectedServers.length === ALL_SERVERS.length ? undefined : selectedServers;
+    const raw = await createKey(newKeyName.trim() || undefined, allowedServers);
     setCreating(false);
     if (raw) {
       setCreatedKey(raw);
@@ -85,7 +96,7 @@ export function KeysPage() {
         <h1 className="text-2xl font-semibold flex items-center gap-2">
           <Key className="h-6 w-6" /> API Keys
         </h1>
-        <Button onClick={() => setCreateOpen(true)}>
+        <Button onClick={() => { setSelectedServers(ALL_SERVERS.map(s => s.id)); setCreateOpen(true); }}>
           <Plus className="h-4 w-4 mr-2" /> Create Key
         </Button>
       </div>
@@ -103,7 +114,7 @@ export function KeysPage() {
           <p className="text-muted-foreground mb-4">
             No API keys yet. Create one to get started.
           </p>
-          <Button onClick={() => setCreateOpen(true)}>
+          <Button onClick={() => { setSelectedServers(ALL_SERVERS.map(s => s.id)); setCreateOpen(true); }}>
             <Plus className="h-4 w-4 mr-2" /> Create Key
           </Button>
         </div>
@@ -128,6 +139,7 @@ export function KeysPage() {
                   <TableHead>Key Prefix</TableHead>
                   <TableHead>Name</TableHead>
                   <TableHead>Tier</TableHead>
+                  <TableHead>Scope</TableHead>
                   <TableHead>Created</TableHead>
                   <TableHead>Status</TableHead>
                   <TableHead className="text-right">Actions</TableHead>
@@ -136,7 +148,7 @@ export function KeysPage() {
               <TableBody>
                 {filtered.length === 0 ? (
                   <TableRow>
-                    <TableCell colSpan={6} className="text-center text-muted-foreground py-8">
+                    <TableCell colSpan={7} className="text-center text-muted-foreground py-8">
                       No keys match your search.
                     </TableCell>
                   </TableRow>
@@ -153,6 +165,24 @@ export function KeysPage() {
                         <Badge variant="outline" className="text-xs">
                           {key.tier}
                         </Badge>
+                      </TableCell>
+                      <TableCell>
+                        <div className="flex flex-wrap gap-1">
+                          {key.allowed_servers === null || key.allowed_servers === undefined ? (
+                            <Badge variant="secondary" className="text-xs">All servers</Badge>
+                          ) : key.allowed_servers.length === 0 ? (
+                            <Badge variant="destructive" className="text-xs">No servers</Badge>
+                          ) : (
+                            key.allowed_servers.map(s => {
+                              const server = ALL_SERVERS.find(srv => srv.id === s);
+                              return (
+                                <Badge key={s} variant="outline" className="text-xs">
+                                  {server?.label ?? s}
+                                </Badge>
+                              );
+                            })
+                          )}
+                        </div>
                       </TableCell>
                       <TableCell className="text-sm text-muted-foreground">
                         {formatDate(key.created_at)}
@@ -227,14 +257,35 @@ export function KeysPage() {
                 placeholder="My API Key"
                 value={newKeyName}
                 onChange={(e) => setNewKeyName(e.target.value)}
-                onKeyDown={(e) => { if (e.key === 'Enter') handleCreate(); }}
+                onKeyDown={(e) => { if (e.key === 'Enter' && selectedServers.length > 0) handleCreate(); }}
                 autoFocus
               />
+              <div className="space-y-3">
+                <label className="text-sm font-medium">Allowed Servers</label>
+                <p className="text-xs text-muted-foreground">Select which servers this key can access. All servers are selected by default.</p>
+                <div className="grid grid-cols-2 gap-2">
+                  {ALL_SERVERS.map(server => (
+                    <label key={server.id} className="flex items-center gap-2 text-sm cursor-pointer">
+                      <Checkbox
+                        checked={selectedServers.includes(server.id)}
+                        onCheckedChange={(checked) => {
+                          setSelectedServers(prev =>
+                            checked
+                              ? [...prev, server.id]
+                              : prev.filter(s => s !== server.id)
+                          );
+                        }}
+                      />
+                      {server.label}
+                    </label>
+                  ))}
+                </div>
+              </div>
               <DialogFooter>
                 <Button variant="outline" onClick={handleCloseCreate}>
                   Cancel
                 </Button>
-                <Button onClick={handleCreate} disabled={creating}>
+                <Button onClick={handleCreate} disabled={creating || selectedServers.length === 0}>
                   {creating ? 'Creating...' : 'Create Key'}
                 </Button>
               </DialogFooter>

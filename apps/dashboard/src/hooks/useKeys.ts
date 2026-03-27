@@ -10,6 +10,7 @@ export type ApiKey = {
   tier: string;
   created_at: string;
   revoked_at: string | null;
+  allowed_servers: string[] | null;
 };
 
 async function getAuthHeader(): Promise<string | null> {
@@ -36,13 +37,13 @@ export function useKeys() {
 
   useEffect(() => { fetchKeys(); }, [fetchKeys]);
 
-  const createKey = useCallback(async (name?: string): Promise<string | null> => {
+  const createKey = useCallback(async (name?: string, allowedServers?: string[]): Promise<string | null> => {
     const auth = await getAuthHeader();
     if (!auth) return null;
     const res = await fetch(`${GATEWAY_URL}/keys`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Authorization: auth },
-      body: JSON.stringify({ name: name ?? 'My API Key' }),
+      body: JSON.stringify({ name: name ?? 'My API Key', allowed_servers: allowedServers ?? null }),
     });
     if (!res.ok) {
       const body = await res.json() as { error?: string };
