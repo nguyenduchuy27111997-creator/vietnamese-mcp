@@ -15,9 +15,9 @@
 ### Webhook Event Logs
 
 - [x] **HOOK-01**: Gateway logs webhook events (Stripe/MoMo) to a queryable store (Supabase table or Tinybird)
-- [ ] **HOOK-02**: Dashboard page showing webhook event list with timestamp, provider, event type, status (success/failed)
-- [ ] **HOOK-03**: Click on event expands to show full payload JSON with syntax highlighting
-- [ ] **HOOK-04**: Filter by provider (Stripe/MoMo) and status (success/failed)
+- [x] **HOOK-02**: Dashboard page showing webhook event list with timestamp, provider, event type, status (success/failed)
+- [x] **HOOK-03**: Click on event expands to show full payload JSON with syntax highlighting
+- [x] **HOOK-04**: Filter by provider (Stripe/MoMo) and status (success/failed)
 
 ### API Key Scoping
 
@@ -64,9 +64,9 @@ Deferred to future release.
 | PLAY-03 | Phase 23 | Complete |
 | PLAY-04 | Phase 23 | Complete |
 | HOOK-01 | Phase 24 | Complete |
-| HOOK-02 | Phase 24 | Pending |
-| HOOK-03 | Phase 24 | Pending |
-| HOOK-04 | Phase 24 | Pending |
+| HOOK-02 | Phase 24 | Complete |
+| HOOK-03 | Phase 24 | Complete |
+| HOOK-04 | Phase 24 | Complete |
 | EXPORT-01 | Phase 25 | Pending |
 | EXPORT-02 | Phase 25 | Pending |
 | EXPORT-03 | Phase 25 | Pending |
