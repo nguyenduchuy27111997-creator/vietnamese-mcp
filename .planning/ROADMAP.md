@@ -315,7 +315,11 @@ Plans:
   1. The Product Hunt listing is live (or scheduled) with a tagline under 60 characters, a description covering the problem/solution/who-it's-for, and a working link to the landing page
   2. At least 5 dashboard screenshots are captured in dark mode covering: auth/login, overview, API keys list, usage chart, and billing plan selection — all at 1280x800 or higher resolution
   3. A launch-day checklist document exists covering: first comment text drafted, 3 social posts written (Twitter/X, LinkedIn, dev community), and a response template for common Product Hunt questions
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [ ] 21-01-PLAN.md — PH listing copy (tagline, description, maker story) + launch day checklist (first comment, social posts, response templates)
+- [ ] 21-02-PLAN.md — Screenshot capture guide (5 dark-mode dashboard pages at 1280x800) + PH listing assembly checkpoint
 
 ## Progress
 
@@ -340,7 +344,7 @@ Plans:
 | 17. Billing + Settings + Quickstart | v2.0 | 3/3 | Complete | 2026-03-26 |
 | 18. GitHub README & SEO | v2.1 | 3/3 | Complete | 2026-03-26 |
 | 19. Example Apps | v2.1 | 2/2 | Complete | 2026-03-26 |
-| 20. Blog & Changelog | 3/3 | Complete    | 2026-03-26 | - |
-| 21. Product Hunt Launch | v2.1 | 0/TBD | Not started | - |
+| 20. Blog & Changelog | v2.1 | 3/3 | Complete | 2026-03-26 |
+| 21. Product Hunt Launch | v2.1 | 0/2 | Not started | - |
 
 **Full v1.0 details:** `.planning/milestones/v1.0-ROADMAP.md`
