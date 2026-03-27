@@ -29,9 +29,9 @@
 ### Usage Export
 
 - [ ] **EXPORT-01**: Dashboard button to download usage data as CSV
-- [ ] **EXPORT-02**: CSV includes: date, server, tool, call count columns
+- [x] **EXPORT-02**: CSV includes: date, server, tool, call count columns
 - [ ] **EXPORT-03**: Date range picker (last 7/30/90 days or custom range)
-- [ ] **EXPORT-04**: Gateway endpoint GET /usage/export returns CSV with proper Content-Type header
+- [x] **EXPORT-04**: Gateway endpoint GET /usage/export returns CSV with proper Content-Type header
 
 ## v4 Requirements
 
@@ -68,9 +68,9 @@ Deferred to future release.
 | HOOK-03 | Phase 24 | Complete |
 | HOOK-04 | Phase 24 | Complete |
 | EXPORT-01 | Phase 25 | Pending |
-| EXPORT-02 | Phase 25 | Pending |
+| EXPORT-02 | Phase 25 | Complete |
 | EXPORT-03 | Phase 25 | Pending |
-| EXPORT-04 | Phase 25 | Pending |
+| EXPORT-04 | Phase 25 | Complete |
 
 **Coverage:**
 - v3.0 requirements: 16 total

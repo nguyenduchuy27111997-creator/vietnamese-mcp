@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v3.0
 milestone_name: Developer Experience
 status: completed
-stopped_at: Completed 24-02-PLAN.md — Webhook Logs dashboard verified end-to-end by user
-last_updated: "2026-03-27T05:23:48.482Z"
+stopped_at: Completed 25-01-PLAN.md — GET /usage/export endpoint implemented and tested
+last_updated: "2026-03-27T05:37:05.941Z"
 last_activity: "2026-03-27 — 23-02 complete. API Playground fully verified end-to-end: execute button wired to gateway, SSE parsing, tabbed request/response panel."
 progress:
   total_phases: 21
   completed_phases: 20
-  total_plans: 48
-  completed_plans: 48
+  total_plans: 50
+  completed_plans: 49
   percent: 100
 ---
 
@@ -61,6 +61,9 @@ Key decisions relevant to v3.0:
 - [Phase 24-webhook-event-logs]: logWebhookEvent fire-and-forget: no throw on insert failure so webhook processing is never blocked
 - [Phase 24-webhook-event-logs]: GET /webhook-logs shows all logs (not scoped to user_id) — platform-wide debugging tool for v1
 - [Phase 24-webhook-event-logs]: Provider/Status filter Select uses 'all' sentinel value mapping to empty string (fetch without filter param)
+- [Phase 25-usage-export]: UUID sanitization on key IDs before Tinybird SQL interpolation prevents injection
+- [Phase 25-usage-export]: Tinybird /v0/sql POST used for export queries with FORMAT CSVWithNames for direct streaming
+- [Phase 25-usage-export]: Fallback to header-only CSV when Tinybird unavailable — graceful degradation over 500 error
 
 ### Pending Todos
 
@@ -74,6 +77,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-27T05:09:52.679Z
-Stopped at: Completed 24-02-PLAN.md — Webhook Logs dashboard verified end-to-end by user
+Last session: 2026-03-27T05:37:05.938Z
+Stopped at: Completed 25-01-PLAN.md — GET /usage/export endpoint implemented and tested
 Resume file: None
