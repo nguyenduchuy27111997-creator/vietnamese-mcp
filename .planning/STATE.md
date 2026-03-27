@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v3.0
 milestone_name: Developer Experience
-status: planning
-stopped_at: Completed 22-api-key-scoping/22-01-PLAN.md
-last_updated: "2026-03-27T03:58:56.422Z"
-last_activity: 2026-03-27 — v3.0 roadmap created. Phases 22-25 defined. Ready to plan Phase 22.
+status: executing
+stopped_at: Completed 22-api-key-scoping/22-02-PLAN.md
+last_updated: "2026-03-27T04:28:24.407Z"
+last_activity: 2026-03-27 — 22-01 complete. API key scoping infrastructure (allowed_servers, scopeCheckMiddleware, 403 enforcement) shipped.
 progress:
   total_phases: 21
-  completed_phases: 17
+  completed_phases: 18
   total_plans: 44
-  completed_plans: 43
-  percent: 0
+  completed_plans: 44
+  percent: 98
 ---
 
 # Project State
@@ -51,6 +51,8 @@ Key decisions relevant to v3.0:
 - [Phase 6]: api_keys table in Supabase — Phase 22 adds allowed_servers column
 - [Phase 22-api-key-scoping]: allowedServers made optional in AuthContext to preserve backward compatibility with existing code
 - [Phase 22-api-key-scoping]: scopeCheckMiddleware extracted as dedicated middleware for isolated testability
+- [Phase 22-api-key-scoping]: null allowed_servers from POST /keys when all 5 servers selected — consistent with 22-01 semantics where null = all servers
+- [Phase 22-api-key-scoping]: Create button disabled when 0 servers selected in scope UI to prevent creating permanently-blocked keys
 
 ### Pending Todos
 
@@ -64,6 +66,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-27T03:58:56.419Z
-Stopped at: Completed 22-api-key-scoping/22-01-PLAN.md
+Last session: 2026-03-27T04:28:19.841Z
+Stopped at: Completed 22-api-key-scoping/22-02-PLAN.md
 Resume file: None
