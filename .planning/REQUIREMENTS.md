@@ -21,9 +21,9 @@
 
 ### API Key Scoping
 
-- [ ] **SCOPE-01**: API keys can be restricted to specific servers (e.g., key only works for MoMo + ZaloPay)
+- [x] **SCOPE-01**: API keys can be restricted to specific servers (e.g., key only works for MoMo + ZaloPay)
 - [ ] **SCOPE-02**: Key creation UI shows server checkboxes (default: all servers)
-- [ ] **SCOPE-03**: Gateway auth middleware checks key scope and returns 403 if server not allowed
+- [x] **SCOPE-03**: Gateway auth middleware checks key scope and returns 403 if server not allowed
 - [ ] **SCOPE-04**: Dashboard API Keys table shows scope badges per key
 
 ### Usage Export
@@ -55,9 +55,9 @@ Deferred to future release.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| SCOPE-01 | Phase 22 | Pending |
+| SCOPE-01 | Phase 22 | Complete |
 | SCOPE-02 | Phase 22 | Pending |
-| SCOPE-03 | Phase 22 | Pending |
+| SCOPE-03 | Phase 22 | Complete |
 | SCOPE-04 | Phase 22 | Pending |
 | PLAY-01 | Phase 23 | Pending |
 | PLAY-02 | Phase 23 | Pending |

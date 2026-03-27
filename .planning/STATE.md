@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v3.0
 milestone_name: Developer Experience
 status: planning
-stopped_at: Roadmap created for v3.0 — ready to plan Phase 22
-last_updated: "2026-03-27"
-last_activity: "2026-03-27 — v3.0 roadmap created (Phases 22-25)"
+stopped_at: Completed 22-api-key-scoping/22-01-PLAN.md
+last_updated: "2026-03-27T03:58:56.422Z"
+last_activity: 2026-03-27 — v3.0 roadmap created. Phases 22-25 defined. Ready to plan Phase 22.
 progress:
-  total_phases: 4
-  completed_phases: 0
-  total_plans: 0
-  completed_plans: 0
+  total_phases: 21
+  completed_phases: 17
+  total_plans: 44
+  completed_plans: 43
   percent: 0
 ---
 
@@ -26,11 +26,11 @@ See: .planning/PROJECT.md (updated 2026-03-25)
 ## Current Position
 
 Phase: 22 of 25 (Phase 22: API Key Scoping)
-Plan: 0 of TBD in current phase
-Status: Ready to plan
-Last activity: 2026-03-27 — v3.0 roadmap created. Phases 22-25 defined. Ready to plan Phase 22.
+Plan: 1 of TBD in current phase (22-01 complete)
+Status: In progress
+Last activity: 2026-03-27 — 22-01 complete. API key scoping infrastructure (allowed_servers, scopeCheckMiddleware, 403 enforcement) shipped.
 
-Progress: [░░░░░░░░░░] 0% (0 of ~8 plans complete)
+Progress: [██████████] 98% (43 of 44 plans complete)
 
 ## Performance Metrics
 
@@ -49,6 +49,8 @@ Key decisions relevant to v3.0:
 - [Phase 7]: Tinybird fire-and-forget via waitUntil — export queries Tinybird (Phase 25)
 - [Phase 8]: webhook_events table exists — Phase 24 adds a webhook_logs table (separate concern: logs vs idempotency)
 - [Phase 6]: api_keys table in Supabase — Phase 22 adds allowed_servers column
+- [Phase 22-api-key-scoping]: allowedServers made optional in AuthContext to preserve backward compatibility with existing code
+- [Phase 22-api-key-scoping]: scopeCheckMiddleware extracted as dedicated middleware for isolated testability
 
 ### Pending Todos
 
@@ -62,6 +64,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-27
-Stopped at: v3.0 roadmap created — Phases 22-25 written to ROADMAP.md
+Last session: 2026-03-27T03:58:56.419Z
+Stopped at: Completed 22-api-key-scoping/22-01-PLAN.md
 Resume file: None
