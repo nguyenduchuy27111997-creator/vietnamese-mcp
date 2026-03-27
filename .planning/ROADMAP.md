@@ -62,7 +62,7 @@
 
 </details>
 
-### 🚧 v3.0 Developer Experience (In Progress)
+### v3.0 Developer Experience (In Progress)
 
 **Milestone Goal:** Make the platform sticky — API key scoping for granular permissions, an API playground for testing tool calls directly from the dashboard, webhook event logs for debugging, and usage export for self-service analytics.
 
@@ -344,8 +344,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 22-01-PLAN.md — Supabase migration + gateway types + auth middleware + scope enforcement (403) + keys CRUD update
-- [ ] 22-02-PLAN.md — Dashboard Checkbox component + useKeys hook update + KeysPage scope UI (checkboxes + badges)
+- [x] 22-01-PLAN.md — Supabase migration + gateway types + auth middleware + scope enforcement (403) + keys CRUD update
+- [x] 22-02-PLAN.md — Dashboard Checkbox component + useKeys hook update + KeysPage scope UI (checkboxes + badges)
 
 ### Phase 23: API Playground
 **Goal**: Developers can test any tool call from the dashboard without leaving the browser — select a server, pick a tool, fill in parameters auto-generated from the tool schema, execute the call against the gateway using their own API key, and see the raw JSON-RPC request and response side by side
@@ -359,8 +359,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 23-01: Gateway CORS update to allow dashboard origin for playground requests + gateway playground route (if needed)
-- [ ] 23-02: Playground page — server/tool dropdowns, schema-driven param form, Execute button, request/response panel with syntax highlighting
+- [ ] 23-01-PLAN.md — Tool schema registry (18 tools), shadcn Select component, sidebar nav + route wiring, PlaygroundPage with server/tool dropdowns and auto-generated param form
+- [ ] 23-02-PLAN.md — Execute button with JSON-RPC fetch + SSE parsing, request/response tabbed panel with syntax highlighting and copy buttons, human verification
 
 ### Phase 24: Webhook Event Logs
 **Goal**: Every Stripe and MoMo webhook event received by the gateway is logged to a queryable store; a dashboard page shows the event list with timestamp, provider, event type, and status; clicking an event expands the full payload; the list is filterable by provider and status
@@ -417,7 +417,7 @@ Plans:
 | 19. Example Apps | v2.1 | 2/2 | Complete | 2026-03-26 |
 | 20. Blog & Changelog | v2.1 | 3/3 | Complete | 2026-03-26 |
 | 21. Product Hunt Launch | v2.1 | 2/2 | Complete | 2026-03-27 |
-| 22. API Key Scoping | 2/2 | Complete    | 2026-03-27 | - |
+| 22. API Key Scoping | v3.0 | 2/2 | Complete | 2026-03-27 |
 | 23. API Playground | v3.0 | 0/2 | Not started | - |
 | 24. Webhook Event Logs | v3.0 | 0/2 | Not started | - |
 | 25. Usage Export | v3.0 | 0/2 | Not started | - |
