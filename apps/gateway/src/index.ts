@@ -9,6 +9,7 @@ import { keysRouter } from './routes/keys.js';
 import { usageRouter } from './routes/usage.js';
 import { billingRouter } from './routes/billing.js';
 import { webhookLogsRouter } from './routes/webhookLogs.js';
+import { usageExportRouter } from './routes/usageExport.js';
 import { sendTinybirdEvent } from './metering/tinybird.js';
 import { getUsageCount, checkUsageLimit, incrementUsageCounter, usageLimitResponse } from './metering/usageCounter.js';
 import type { GatewayEnv } from './types.js';
@@ -31,6 +32,11 @@ app.use('/mcp/*', cors(corsConfig));
 // CORS + Auth on /keys routes
 app.use('/keys', cors(corsConfig));
 app.use('/keys/*', cors(corsConfig));
+
+// CORS + Auth on /usage/export route (must be before /usage to ensure correct matching)
+app.use('/usage/export', cors(corsConfig));
+app.use('/usage/export', jwtAuthMiddleware);
+app.route('/usage/export', usageExportRouter);
 
 // CORS + Auth on /usage route
 app.use('/usage', cors(corsConfig));
