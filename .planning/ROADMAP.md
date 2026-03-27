@@ -341,11 +341,11 @@ Plans:
   2. Creating a key via the dashboard shows server checkboxes defaulting to all 5 servers; unchecking servers and saving persists the restriction
   3. The API Keys table displays scope badges next to each key (e.g., "MoMo ZaloPay") so a developer can see key permissions at a glance without opening edit dialogs
   4. A key created with default scope (all servers) passes gateway auth to all 5 servers — existing behavior is unchanged
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 22-01: Supabase migration adding `allowed_servers` column to api_keys + gateway authMiddleware scope check (403 path)
-- [ ] 22-02: Dashboard key creation modal with server checkboxes + scope badges on API Keys table
+- [ ] 22-01-PLAN.md — Supabase migration + gateway types + auth middleware + scope enforcement (403) + keys CRUD update
+- [ ] 22-02-PLAN.md — Dashboard Checkbox component + useKeys hook update + KeysPage scope UI (checkboxes + badges)
 
 ### Phase 23: API Playground
 **Goal**: Developers can test any tool call from the dashboard without leaving the browser — select a server, pick a tool, fill in parameters auto-generated from the tool schema, execute the call against the gateway using their own API key, and see the raw JSON-RPC request and response side by side
@@ -356,7 +356,7 @@ Plans:
   2. Selecting a tool renders a parameter form auto-generated from the tool schema — required fields are marked, input types match field types (text, number, boolean)
   3. Clicking Execute sends the JSON-RPC request to the gateway using the user's API key and displays the response — a mock `momo_create_payment` call returns a mock payment URL within 3 seconds
   4. The request/response panel shows the raw JSON-RPC payload and formatted response with syntax highlighting — a developer can copy the exact payload to use outside the dashboard
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
 - [ ] 23-01: Gateway CORS update to allow dashboard origin for playground requests + gateway playground route (if needed)
@@ -371,7 +371,7 @@ Plans:
   2. Clicking a log row expands to show the full raw payload JSON with syntax highlighting — the developer can see exactly what was received
   3. Filtering the list by provider "Stripe" hides all MoMo events; filtering by status "failed" shows only events where processing returned a non-200 response
   4. The webhook logs page loads in under 2 seconds with 100+ events in the store — pagination or virtual scroll prevents DOM overload
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
 - [ ] 24-01: Supabase migration for webhook_logs table + gateway webhook handler update to insert log rows on every Stripe/MoMo event
@@ -386,7 +386,7 @@ Plans:
   2. The downloaded CSV contains columns: date, server, tool, call_count — one row per (date, server, tool) combination within the selected range
   3. Selecting "Last 30 days" from the date range picker and clicking Export produces a CSV covering exactly the last 30 calendar days — no gaps, no extra rows outside the range
   4. The gateway GET /usage/export endpoint returns Content-Type: text/csv and Content-Disposition: attachment — curl downloads a valid CSV without needing dashboard UI
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
 - [ ] 25-01: Gateway GET /usage/export endpoint — JWT auth, date range params, Tinybird query, CSV serialization, correct response headers
