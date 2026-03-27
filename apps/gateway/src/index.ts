@@ -3,6 +3,7 @@ import { cors } from 'hono/cors';
 import { handleMcpRequest } from './router.js';
 import { corsConfig } from './cors.js';
 import { authMiddleware } from './middleware/auth.js';
+import { scopeCheckMiddleware } from './middleware/scopeCheck.js';
 import { jwtAuthMiddleware } from './middleware/jwtAuth.js';
 import { keysRouter } from './routes/keys.js';
 import { usageRouter } from './routes/usage.js';
@@ -39,6 +40,7 @@ app.use('/billing/*', cors(corsConfig));
 // Auth middleware — API key auth for MCP routes, JWT auth for key management
 // /health is intentionally excluded — no auth required for health checks
 app.use('/mcp/*', authMiddleware);
+app.use('/mcp/:server', scopeCheckMiddleware);
 app.use('/keys', jwtAuthMiddleware);
 app.use('/keys/*', jwtAuthMiddleware);
 app.use('/usage', jwtAuthMiddleware);
