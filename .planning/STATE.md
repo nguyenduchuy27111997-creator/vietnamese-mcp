@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v3.0
 milestone_name: Developer Experience
 status: completed
-stopped_at: Completed 25-01-PLAN.md — GET /usage/export endpoint implemented and tested
-last_updated: "2026-03-27T05:37:05.941Z"
+stopped_at: Completed 25-02 tasks 1-2, awaiting human verify checkpoint (Task 3)
+last_updated: "2026-03-27T05:48:36.581Z"
 last_activity: "2026-03-27 — 23-02 complete. API Playground fully verified end-to-end: execute button wired to gateway, SSE parsing, tabbed request/response panel."
 progress:
   total_phases: 21
-  completed_phases: 20
+  completed_phases: 21
   total_plans: 50
-  completed_plans: 49
+  completed_plans: 50
   percent: 100
 ---
 
@@ -64,6 +64,7 @@ Key decisions relevant to v3.0:
 - [Phase 25-usage-export]: UUID sanitization on key IDs before Tinybird SQL interpolation prevents injection
 - [Phase 25-usage-export]: Tinybird /v0/sql POST used for export queries with FORMAT CSVWithNames for direct streaming
 - [Phase 25-usage-export]: Fallback to header-only CSV when Tinybird unavailable — graceful degradation over 500 error
+- [Phase 25-usage-export]: ExportSection self-contained with own auth token fetch, blob URL download pattern, customEnd defaults to today
 
 ### Pending Todos
 
@@ -77,6 +78,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-27T05:37:05.938Z
-Stopped at: Completed 25-01-PLAN.md — GET /usage/export endpoint implemented and tested
+Last session: 2026-03-27T05:48:36.578Z
+Stopped at: Completed 25-02 tasks 1-2, awaiting human verify checkpoint (Task 3)
 Resume file: None

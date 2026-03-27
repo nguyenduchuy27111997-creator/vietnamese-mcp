@@ -69,7 +69,7 @@
 - [x] **Phase 22: API Key Scoping** — Keys can be restricted to specific servers; gateway enforces scope with 403; dashboard shows scope badges (completed 2026-03-27)
 - [x] **Phase 23: API Playground** — Dashboard page where developers select a server, pick a tool, fill params, and execute a real JSON-RPC call (completed 2026-03-27)
 - [x] **Phase 24: Webhook Event Logs** — Gateway logs Stripe/MoMo webhook events; dashboard page shows filterable list with full payload viewer (completed 2026-03-27)
-- [ ] **Phase 25: Usage Export** — Gateway CSV endpoint and dashboard download button for per-server, per-day usage data
+- [x] **Phase 25: Usage Export** — Gateway CSV endpoint and dashboard download button for per-server, per-day usage data (completed 2026-03-27)
 
 ## Phase Details
 
@@ -420,6 +420,6 @@ Plans:
 | 22. API Key Scoping | v3.0 | 2/2 | Complete | 2026-03-27 |
 | 23. API Playground | v3.0 | 2/2 | Complete | 2026-03-27 |
 | 24. Webhook Event Logs | 2/2 | Complete    | 2026-03-27 | - |
-| 25. Usage Export | 1/2 | In Progress|  | - |
+| 25. Usage Export | 2/2 | Complete   | 2026-03-27 | - |
 
 **Full v1.0 details:** `.planning/milestones/v1.0-ROADMAP.md`
