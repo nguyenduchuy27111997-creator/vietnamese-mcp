@@ -21,7 +21,7 @@ export const authMiddleware: MiddlewareHandler<GatewayEnv> = async (c, next) => 
   const supabase = getServiceRoleClient(c.env);
   const { data, error } = await supabase
     .from('api_keys')
-    .select('id, user_id, tier, revoked_at')
+    .select('id, user_id, tier, revoked_at, allowed_servers')
     .eq('key_hash', keyHash)
     .is('revoked_at', null)  // CRITICAL: reject revoked keys
     .single();
@@ -34,6 +34,7 @@ export const authMiddleware: MiddlewareHandler<GatewayEnv> = async (c, next) => 
     userId: data.user_id,
     tier: data.tier,
     keyId: data.id,
+    allowedServers: data.allowed_servers ?? null,
   };
 
   // 3. Cache result with 60s TTL

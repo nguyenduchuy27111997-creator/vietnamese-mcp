@@ -12,7 +12,7 @@ keysRouter.get('/', async (c) => {
 
   const { data, error } = await supabase
     .from('api_keys')
-    .select('id, key_prefix, name, tier, created_at, revoked_at')
+    .select('id, key_prefix, name, tier, created_at, revoked_at, allowed_servers')
     .eq('user_id', auth.userId)
     .order('created_at', { ascending: false });
 
@@ -43,7 +43,18 @@ keysRouter.post('/', async (c) => {
 
   const keyHash = await sha256hex(rawKey);
 
-  const body = await c.req.json<{ name?: string }>().catch(() => ({}));
+  const VALID_SERVERS = ['momo', 'zalopay', 'vnpay', 'zalo-oa', 'viettel-pay'];
+
+  const body = await c.req.json<{ name?: string; allowed_servers?: string[] }>().catch(() => ({}));
+
+  // Validate allowed_servers entries if provided
+  if (body.allowed_servers !== undefined) {
+    for (const server of body.allowed_servers) {
+      if (!VALID_SERVERS.includes(server)) {
+        return c.json({ error: `Invalid server name: ${server}` }, 400);
+      }
+    }
+  }
 
   const { data, error } = await supabase
     .from('api_keys')
@@ -53,8 +64,9 @@ keysRouter.post('/', async (c) => {
       key_prefix: keyPrefix,
       tier: auth.tier,
       name: body.name ?? 'My API Key',
+      allowed_servers: body.allowed_servers ?? null,
     })
-    .select('id, key_prefix, tier, created_at')
+    .select('id, key_prefix, tier, created_at, allowed_servers')
     .single();
 
   if (error) return c.json({ error: 'Failed to create key' }, 500);

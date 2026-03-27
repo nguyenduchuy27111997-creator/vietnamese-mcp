@@ -4,6 +4,7 @@ export type AuthContext = {
   userId: string;
   tier: string;
   keyId: string;
+  allowedServers?: string[] | null;
 };
 
 export type GatewayEnv = {
