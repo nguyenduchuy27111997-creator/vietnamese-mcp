@@ -1,6 +1,7 @@
 import { AlertTriangle } from 'lucide-react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { useUsage } from '../hooks/useUsage.js';
+import { ExportSection } from '../components/ExportSection.js';
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '@/components/ui/card';
 import { Table, TableHeader, TableBody, TableHead, TableRow, TableCell } from '@/components/ui/table';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
@@ -163,6 +164,9 @@ export function UsagePage() {
           )}
         </CardContent>
       </Card>
+
+      {/* Export usage data */}
+      <ExportSection />
 
       {/* Per-server breakdown table */}
       <Card>
