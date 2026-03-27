@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { Home, Key, BarChart3, CreditCard, Settings, LogOut, Terminal } from 'lucide-react';
+import { Home, Key, BarChart3, CreditCard, Settings, LogOut, Terminal, ScrollText } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { ThemeToggle } from '@/components/theme-toggle';
@@ -10,6 +10,7 @@ const navItems = [
   { to: '/usage', label: 'Usage', icon: BarChart3 },
   { to: '/playground', label: 'Playground', icon: Terminal },
   { to: '/billing', label: 'Billing', icon: CreditCard },
+  { to: '/webhook-logs', label: 'Webhook Logs', icon: ScrollText },
   { to: '/settings', label: 'Settings', icon: Settings },
 ] as const;
 
