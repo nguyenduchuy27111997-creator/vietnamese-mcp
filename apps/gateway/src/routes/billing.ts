@@ -7,6 +7,7 @@ import { handleTierUpgrade, checkIdempotency } from '../billing/tierUpgrade.js';
 import { getServiceRoleClient } from '../lib/supabase.js';
 import { verifyMomoIpn } from '../billing/momo.js';
 import type { MomoIpnPayload } from '../billing/momo.js';
+import { logWebhookEvent } from '../lib/webhookLogger.js';
 
 export const billingRouter = new Hono<GatewayEnv>();
 
@@ -69,88 +70,111 @@ billingRouter.post('/stripe-webhook', async (c) => {
 
   const supabase = getServiceRoleClient(c.env);
 
-  switch (event.type) {
-    case 'checkout.session.completed': {
-      const session = event.data.object as Stripe.Checkout.Session;
-      const userId = session.client_reference_id;
-      const tier = session.metadata?.tier ?? 'starter';
-      if (!userId) break;
+  let stripeStatus: 'success' | 'failed' = 'success';
+  let stripeUserId: string | undefined;
 
-      // Store stripe_customer_id on user's active keys for future portal/subscription events
-      // NOTE: stripe_customer_id column added in Plan 01 migration 002_webhook_events.sql
-      if (session.customer) {
-        await supabase
+  try {
+    switch (event.type) {
+      case 'checkout.session.completed': {
+        const session = event.data.object as Stripe.Checkout.Session;
+        const userId = session.client_reference_id;
+        const tier = session.metadata?.tier ?? 'starter';
+        if (!userId) break;
+
+        stripeUserId = userId;
+
+        // Store stripe_customer_id on user's active keys for future portal/subscription events
+        // NOTE: stripe_customer_id column added in Plan 01 migration 002_webhook_events.sql
+        if (session.customer) {
+          await supabase
+            .from('api_keys')
+            .update({ stripe_customer_id: session.customer as string })
+            .eq('user_id', userId)
+            .is('revoked_at', null);
+        }
+
+        await handleTierUpgrade(userId, tier, c.env);
+        break;
+      }
+
+      case 'invoice.paid': {
+        // Subscription renewal — re-confirm tier (Pitfall 4 from RESEARCH.md).
+        // Without this, renewals would succeed in Stripe but the tier wouldn't
+        // be re-applied if it was somehow reset or if a race condition occurred.
+        const invoice = event.data.object as Stripe.Invoice;
+        const customerId = typeof invoice.customer === 'string' ? invoice.customer : String(invoice.customer);
+        if (!customerId) break;
+
+        // Try to get tier from invoice.parent.subscription_details.metadata first (no extra API call)
+        // Fall back to retrieving the subscription if metadata not available
+        const subscriptionDetails = invoice.parent?.subscription_details;
+        let tier: string | undefined = subscriptionDetails?.metadata?.['tier'];
+
+        if (!tier) {
+          // Retrieve subscription to get tier from its metadata
+          const subscriptionId = subscriptionDetails?.subscription;
+          const subscriptionIdStr = typeof subscriptionId === 'string'
+            ? subscriptionId
+            : subscriptionId?.id;
+          if (!subscriptionIdStr) break;
+
+          const stripe = createStripeClient(c.env.STRIPE_SECRET_KEY);
+          const subscription = await stripe.subscriptions.retrieve(subscriptionIdStr);
+          tier = subscription.metadata?.['tier'];
+        }
+
+        if (!tier) break;
+
+        // Find user by stripe_customer_id
+        const { data: keyRow } = await supabase
           .from('api_keys')
-          .update({ stripe_customer_id: session.customer as string })
-          .eq('user_id', userId)
-          .is('revoked_at', null);
+          .select('user_id')
+          .eq('stripe_customer_id', customerId)
+          .is('revoked_at', null)
+          .limit(1)
+          .single();
+
+        if (keyRow?.user_id) {
+          stripeUserId = keyRow.user_id;
+          await handleTierUpgrade(keyRow.user_id, tier, c.env);
+        }
+        break;
       }
 
-      await handleTierUpgrade(userId, tier, c.env);
-      break;
+      case 'customer.subscription.deleted': {
+        const sub = event.data.object as Stripe.Subscription;
+        const customerId = typeof sub.customer === 'string' ? sub.customer : String(sub.customer);
+        // Look up user by stripe_customer_id
+        const { data: keyRow } = await supabase
+          .from('api_keys')
+          .select('user_id')
+          .eq('stripe_customer_id', customerId)
+          .is('revoked_at', null)
+          .limit(1)
+          .single();
+
+        if (keyRow?.user_id) {
+          stripeUserId = keyRow.user_id;
+          await handleTierUpgrade(keyRow.user_id, 'free', c.env);
+        }
+        break;
+      }
     }
-
-    case 'invoice.paid': {
-      // Subscription renewal — re-confirm tier (Pitfall 4 from RESEARCH.md).
-      // Without this, renewals would succeed in Stripe but the tier wouldn't
-      // be re-applied if it was somehow reset or if a race condition occurred.
-      const invoice = event.data.object as Stripe.Invoice;
-      const customerId = typeof invoice.customer === 'string' ? invoice.customer : String(invoice.customer);
-      if (!customerId) break;
-
-      // Try to get tier from invoice.parent.subscription_details.metadata first (no extra API call)
-      // Fall back to retrieving the subscription if metadata not available
-      const subscriptionDetails = invoice.parent?.subscription_details;
-      let tier: string | undefined = subscriptionDetails?.metadata?.['tier'];
-
-      if (!tier) {
-        // Retrieve subscription to get tier from its metadata
-        const subscriptionId = subscriptionDetails?.subscription;
-        const subscriptionIdStr = typeof subscriptionId === 'string'
-          ? subscriptionId
-          : subscriptionId?.id;
-        if (!subscriptionIdStr) break;
-
-        const stripe = createStripeClient(c.env.STRIPE_SECRET_KEY);
-        const subscription = await stripe.subscriptions.retrieve(subscriptionIdStr);
-        tier = subscription.metadata?.['tier'];
-      }
-
-      if (!tier) break;
-
-      // Find user by stripe_customer_id
-      const { data: keyRow } = await supabase
-        .from('api_keys')
-        .select('user_id')
-        .eq('stripe_customer_id', customerId)
-        .is('revoked_at', null)
-        .limit(1)
-        .single();
-
-      if (keyRow?.user_id) {
-        await handleTierUpgrade(keyRow.user_id, tier, c.env);
-      }
-      break;
-    }
-
-    case 'customer.subscription.deleted': {
-      const sub = event.data.object as Stripe.Subscription;
-      const customerId = typeof sub.customer === 'string' ? sub.customer : String(sub.customer);
-      // Look up user by stripe_customer_id
-      const { data: keyRow } = await supabase
-        .from('api_keys')
-        .select('user_id')
-        .eq('stripe_customer_id', customerId)
-        .is('revoked_at', null)
-        .limit(1)
-        .single();
-
-      if (keyRow?.user_id) {
-        await handleTierUpgrade(keyRow.user_id, 'free', c.env);
-      }
-      break;
-    }
+  } catch {
+    stripeStatus = 'failed';
   }
+
+  // Fire-and-forget log — must not break webhook processing
+  c.executionCtx.waitUntil(
+    logWebhookEvent(c.env, {
+      eventId: event.id,
+      provider: 'stripe',
+      eventType: event.type,
+      status: stripeStatus,
+      payload: event,
+      userId: stripeUserId,
+    }),
+  );
 
   return c.json({ received: true });
 });
@@ -190,7 +214,18 @@ billingRouter.post('/momo-ipn', async (c) => {
 
   // 1. Verify HMAC signature (crypto.subtle — CF Workers compatible)
   const valid = await verifyMomoIpn(body, c.env.MOMO_SECRET_KEY);
-  if (!valid) return c.json({ error: 'Invalid signature' }, 400);
+  if (!valid) {
+    c.executionCtx.waitUntil(
+      logWebhookEvent(c.env, {
+        eventId: body.orderId ?? 'unknown',
+        provider: 'momo',
+        eventType: 'ipn',
+        status: 'failed',
+        payload: body,
+      }),
+    );
+    return c.json({ error: 'Invalid signature' }, 400);
+  }
 
   // 2. Only process success (resultCode === 0)
   if (body.resultCode !== 0) return c.body(null, 204);
@@ -207,6 +242,15 @@ billingRouter.post('/momo-ipn', async (c) => {
     userId = decoded.userId;
     tier = decoded.tier;
   } catch {
+    c.executionCtx.waitUntil(
+      logWebhookEvent(c.env, {
+        eventId: body.orderId,
+        provider: 'momo',
+        eventType: 'ipn',
+        status: 'failed',
+        payload: body,
+      }),
+    );
     return c.json({ error: 'Invalid extraData' }, 400);
   }
 
@@ -220,6 +264,18 @@ billingRouter.post('/momo-ipn', async (c) => {
     .update({ momo_expires_at: expiresAt })
     .eq('user_id', userId)
     .is('revoked_at', null);
+
+  // Fire-and-forget log — success path
+  c.executionCtx.waitUntil(
+    logWebhookEvent(c.env, {
+      eventId: body.orderId,
+      provider: 'momo',
+      eventType: 'ipn',
+      status: 'success',
+      payload: body,
+      userId,
+    }),
+  );
 
   // MoMo REQUIRES 204 No Content (not 200) — Pitfall 5
   return c.body(null, 204);

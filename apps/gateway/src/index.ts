@@ -8,6 +8,7 @@ import { jwtAuthMiddleware } from './middleware/jwtAuth.js';
 import { keysRouter } from './routes/keys.js';
 import { usageRouter } from './routes/usage.js';
 import { billingRouter } from './routes/billing.js';
+import { webhookLogsRouter } from './routes/webhookLogs.js';
 import { sendTinybirdEvent } from './metering/tinybird.js';
 import { getUsageCount, checkUsageLimit, incrementUsageCounter, usageLimitResponse } from './metering/usageCounter.js';
 import type { GatewayEnv } from './types.js';
@@ -51,6 +52,11 @@ app.use('/billing/portal', jwtAuthMiddleware);
 app.route('/keys', keysRouter);
 app.route('/usage', usageRouter);
 app.route('/billing', billingRouter);
+
+// CORS + Auth on /webhook-logs route
+app.use('/webhook-logs', cors(corsConfig));
+app.use('/webhook-logs', jwtAuthMiddleware);
+app.route('/webhook-logs', webhookLogsRouter);
 
 // MCP routes — tier comes from auth context; metering check + fire-and-forget after execution
 app.all('/mcp/:server', async (c) => {
