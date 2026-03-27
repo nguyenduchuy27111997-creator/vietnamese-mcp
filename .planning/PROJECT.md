@@ -37,10 +37,10 @@ Developer installs an MCP server or signs up for a hosted API key, adds it to `.
 
 ### Active
 
-- [ ] Product Hunt launch (listing, screenshots, tagline, maker profile)
-- [ ] Example apps / starter templates (payment checkout, Zalo chatbot)
-- [ ] GitHub README polish (badges, GIF demos, install counts, SEO)
-- [ ] Mintlify blog + changelog (launch post, server guides)
+- [ ] API Playground — test tool calls from the dashboard (select server, pick tool, fill params, see response)
+- [ ] Webhook Event Logs — view Stripe/MoMo webhook events in dashboard with timestamp, status, payload
+- [ ] API Key Scoping — restrict keys to specific servers (granular permissions)
+- [ ] Usage Export — download usage data as CSV (per-server, per-day breakdown)
 
 ### Out of Scope
 
@@ -53,15 +53,15 @@ Developer installs an MCP server or signs up for a hosted API key, adds it to `.
 - Usage dashboard UI (charts, analytics) — deferred to after first 20 paying customers
 - Custom domain for docs — verify Mintlify free tier support
 
-## Current Milestone: v2.1 Growth & Marketing
+## Current Milestone: v3.0 Developer Experience
 
-**Goal:** Get the first users — Product Hunt launch, example apps developers can clone, polished GitHub presence, and blog content that drives organic discovery.
+**Goal:** Make the platform sticky — API playground for testing tool calls, webhook event logs for debugging, API key scoping for granular permissions, and usage export for analytics.
 
 **Target:**
-- Product Hunt listing with screenshots, tagline, maker profile
-- 2-3 example apps (payment checkout, Zalo chatbot starter)
-- GitHub README with badges, GIF demos, install counts
-- Mintlify blog with launch announcement + server guides
+- API Playground page in dashboard (Stripe API Explorer-like)
+- Webhook Event Logs page (Stripe/MoMo events with payload viewer)
+- API Key Scoping (restrict keys to specific servers)
+- Usage Export (CSV download with per-server, per-day breakdown)
 
 ## Context
 
