@@ -345,6 +345,6 @@ Plans:
 | 18. GitHub README & SEO | v2.1 | 3/3 | Complete | 2026-03-26 |
 | 19. Example Apps | v2.1 | 2/2 | Complete | 2026-03-26 |
 | 20. Blog & Changelog | v2.1 | 3/3 | Complete | 2026-03-26 |
-| 21. Product Hunt Launch | v2.1 | 0/2 | Not started | - |
+| 21. Product Hunt Launch | 1/2 | In Progress|  | - |
 
 **Full v1.0 details:** `.planning/milestones/v1.0-ROADMAP.md`

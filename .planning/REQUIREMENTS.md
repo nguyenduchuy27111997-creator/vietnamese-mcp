@@ -7,9 +7,9 @@
 
 ### Product Hunt Launch
 
-- [ ] **PH-01**: Product Hunt listing created with tagline, description, screenshots, and maker profile
+- [x] **PH-01**: Product Hunt listing created with tagline, description, screenshots, and maker profile
 - [ ] **PH-02**: Dashboard screenshots captured (dark mode: auth, overview, keys, usage, billing pages)
-- [ ] **PH-03**: Launch day checklist prepared (social posts, first comment, community responses)
+- [x] **PH-03**: Launch day checklist prepared (social posts, first comment, community responses)
 
 ### Example Apps
 
@@ -62,9 +62,9 @@ Deferred to future release.
 | BLOG-01 | Phase 20 | Complete |
 | BLOG-02 | Phase 20 | Complete |
 | BLOG-03 | Phase 20 | Complete |
-| PH-01 | Phase 21 | Pending |
+| PH-01 | Phase 21 | Complete |
 | PH-02 | Phase 21 | Pending |
-| PH-03 | Phase 21 | Pending |
+| PH-03 | Phase 21 | Complete |
 
 **Coverage:**
 - v2.1 requirements: 13 total

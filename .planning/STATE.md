@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v2.1
 milestone_name: Growth & Marketing
 status: executing
-stopped_at: Completed 20-02-PLAN.md
-last_updated: "2026-03-26T18:36:45.843Z"
+stopped_at: Completed 21-01-PLAN.md
+last_updated: "2026-03-27T03:20:35.845Z"
 last_activity: 2026-03-27 — 18-03 complete. Assets dir created, README GIF embed active, GIF recording deferred to pre-launch.
 progress:
   total_phases: 17
   completed_phases: 16
-  total_plans: 40
-  completed_plans: 40
+  total_plans: 42
+  completed_plans: 41
   percent: 10
 ---
 
@@ -64,6 +64,8 @@ v2.1 decisions:
 - [Phase 20-01]: Launch blog post uses Mintlify CardGroup component to present 5 MCP servers visually
 - [Phase 20-blog-changelog]: All 5 guides follow identical 7-section template for consistency
 - [Phase 20-blog-changelog]: ViettelPay guide prominently notes mock-only status with Note callout
+- [Phase 21-product-hunt-launch]: Tagline is 49 chars (under 60 limit) — chose clarity over length
+- [Phase 21-product-hunt-launch]: Response templates cover 4 most common PH objections for a dev tool
 
 ### Pending Todos
 
@@ -77,6 +79,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-26T18:36:09.457Z
-Stopped at: Completed 20-02-PLAN.md
+Last session: 2026-03-27T03:20:35.843Z
+Stopped at: Completed 21-01-PLAN.md
 Resume file: None
