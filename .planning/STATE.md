@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v3.0
 milestone_name: Developer Experience
 status: executing
-stopped_at: Completed 22-api-key-scoping/22-02-PLAN.md
-last_updated: "2026-03-27T04:29:02.481Z"
+stopped_at: Completed 23-api-playground/23-01-PLAN.md
+last_updated: "2026-03-27T04:45:26.122Z"
 last_activity: 2026-03-27 — 22-01 complete. API key scoping infrastructure (allowed_servers, scopeCheckMiddleware, 403 enforcement) shipped.
 progress:
   total_phases: 21
   completed_phases: 18
-  total_plans: 44
-  completed_plans: 44
+  total_plans: 46
+  completed_plans: 45
   percent: 98
 ---
 
@@ -53,6 +53,8 @@ Key decisions relevant to v3.0:
 - [Phase 22-api-key-scoping]: scopeCheckMiddleware extracted as dedicated middleware for isolated testability
 - [Phase 22-api-key-scoping]: null allowed_servers from POST /keys when all 5 servers selected — consistent with 22-01 semantics where null = all servers
 - [Phase 22-api-key-scoping]: Create button disabled when 0 servers selected in scope UI to prevent creating permanently-blocked keys
+- [Phase 23-api-playground]: Hardcoded tool schemas in dashboard (not fetched from gateway) — simpler, no API round-trip for static metadata
+- [Phase 23-api-playground]: Execute button disabled in Plan 01 scope — Plan 02 wires the actual HTTP call
 
 ### Pending Todos
 
@@ -66,6 +68,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-27T04:28:19.841Z
-Stopped at: Completed 22-api-key-scoping/22-02-PLAN.md
+Last session: 2026-03-27T04:45:21.900Z
+Stopped at: Completed 23-api-playground/23-01-PLAN.md
 Resume file: None

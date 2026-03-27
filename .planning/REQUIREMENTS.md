@@ -7,8 +7,8 @@
 
 ### API Playground
 
-- [ ] **PLAY-01**: Dashboard page where user can select a server (MoMo, ZaloPay, etc.) from a dropdown
-- [ ] **PLAY-02**: Tool selector showing all tools for the selected server with parameter forms auto-generated from tool schemas
+- [x] **PLAY-01**: Dashboard page where user can select a server (MoMo, ZaloPay, etc.) from a dropdown
+- [x] **PLAY-02**: Tool selector showing all tools for the selected server with parameter forms auto-generated from tool schemas
 - [ ] **PLAY-03**: Execute button sends JSON-RPC request to gateway with user's API key and displays formatted response
 - [ ] **PLAY-04**: Request/response panel shows raw JSON-RPC payload and response with syntax highlighting
 
@@ -59,8 +59,8 @@ Deferred to future release.
 | SCOPE-02 | Phase 22 | Complete |
 | SCOPE-03 | Phase 22 | Complete |
 | SCOPE-04 | Phase 22 | Complete |
-| PLAY-01 | Phase 23 | Pending |
-| PLAY-02 | Phase 23 | Pending |
+| PLAY-01 | Phase 23 | Complete |
+| PLAY-02 | Phase 23 | Complete |
 | PLAY-03 | Phase 23 | Pending |
 | PLAY-04 | Phase 23 | Pending |
 | HOOK-01 | Phase 24 | Pending |
