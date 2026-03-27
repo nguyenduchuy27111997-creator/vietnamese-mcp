@@ -3,9 +3,9 @@ gsd_state_version: 1.0
 milestone: v3.0
 milestone_name: Developer Experience
 status: completed
-stopped_at: Completed 25-02 tasks 1-2, awaiting human verify checkpoint (Task 3)
-last_updated: "2026-03-27T05:48:36.581Z"
-last_activity: "2026-03-27 — 23-02 complete. API Playground fully verified end-to-end: execute button wired to gateway, SSE parsing, tabbed request/response panel."
+stopped_at: Completed 25-02 all tasks including human-verify checkpoint — Phase 25 complete
+last_updated: "2026-03-27T08:17:19.713Z"
+last_activity: "2026-03-27 — 25-02 complete. Usage Export feature verified end-to-end: ExportSection with date range picker and CSV download integrated into UsagePage."
 progress:
   total_phases: 21
   completed_phases: 21
@@ -21,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-25)
 
 **Core value:** Developer installs MCP server, adds to `.mcp.json`, and Claude Code can immediately create payments, check transactions, send messages — zero integration boilerplate.
-**Current focus:** v3.0 Developer Experience — Phase 23: API Playground (complete)
+**Current focus:** v3.0 Developer Experience — Phase 25: Usage Export (complete)
 
 ## Current Position
 
-Phase: 23 of 25 (Phase 23: API Playground)
-Plan: 2 of 2 in current phase (23-02 complete)
-Status: Phase 23 complete
-Last activity: 2026-03-27 — 23-02 complete. API Playground fully verified end-to-end: execute button wired to gateway, SSE parsing, tabbed request/response panel.
+Phase: 25 of 25 (Phase 25: Usage Export)
+Plan: 2 of 2 in current phase (25-02 complete)
+Status: Phase 25 complete
+Last activity: 2026-03-27 — 25-02 complete. Usage Export feature verified end-to-end: ExportSection with date range picker and CSV download integrated into UsagePage.
 
 Progress: [██████████] 100% (46 of 46 plans complete)
 
@@ -78,6 +78,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-27T05:48:36.578Z
-Stopped at: Completed 25-02 tasks 1-2, awaiting human verify checkpoint (Task 3)
+Last session: 2026-03-27T06:00:00Z
+Stopped at: Completed 25-02 all tasks including human-verify checkpoint — Phase 25 complete
 Resume file: None
