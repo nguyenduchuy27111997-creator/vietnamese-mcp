@@ -1,75 +1,81 @@
-# Requirements: VN MCP Hub — v2.1 Growth & Marketing
+# Requirements: VN MCP Hub — v3.0 Developer Experience
 
-**Defined:** 2026-03-26
+**Defined:** 2026-03-27
 **Core Value:** Developer installs MCP server or signs up for hosted API key, adds to `.mcp.json`, and immediately uses Claude Code for Vietnamese payments and messaging — zero integration boilerplate.
 
-## v2.1 Requirements
+## v3.0 Requirements
 
-### Product Hunt Launch
+### API Playground
 
-- [x] **PH-01**: Product Hunt listing created with tagline, description, screenshots, and maker profile
-- [ ] **PH-02**: Dashboard screenshots captured (dark mode: auth, overview, keys, usage, billing pages)
-- [x] **PH-03**: Launch day checklist prepared (social posts, first comment, community responses)
+- [ ] **PLAY-01**: Dashboard page where user can select a server (MoMo, ZaloPay, etc.) from a dropdown
+- [ ] **PLAY-02**: Tool selector showing all tools for the selected server with parameter forms auto-generated from tool schemas
+- [ ] **PLAY-03**: Execute button sends JSON-RPC request to gateway with user's API key and displays formatted response
+- [ ] **PLAY-04**: Request/response panel shows raw JSON-RPC payload and response with syntax highlighting
 
-### Example Apps
+### Webhook Event Logs
 
-- [x] **EX-01**: Payment checkout example app — React app that creates MoMo/VNPAY payments via hosted gateway
-- [x] **EX-02**: Zalo chatbot example app — Node.js bot that sends messages via Zalo OA MCP server
-- [x] **EX-03**: Each example has README with setup instructions, .mcp.json config, and GIF demo
+- [ ] **HOOK-01**: Gateway logs webhook events (Stripe/MoMo) to a queryable store (Supabase table or Tinybird)
+- [ ] **HOOK-02**: Dashboard page showing webhook event list with timestamp, provider, event type, status (success/failed)
+- [ ] **HOOK-03**: Click on event expands to show full payload JSON with syntax highlighting
+- [ ] **HOOK-04**: Filter by provider (Stripe/MoMo) and status (success/failed)
 
-### GitHub README & SEO
+### API Key Scoping
 
-- [x] **GH-01**: Root README.md rewritten with project overview, feature highlights, quick start, and architecture diagram
-- [x] **GH-02**: Badges added (npm version, license, build status, MCP servers count)
-- [x] **GH-03**: GIF/video demo showing end-to-end flow (signup → key → tool call)
-- [x] **GH-04**: Per-server README.md files updated with npm install instructions and usage examples
+- [ ] **SCOPE-01**: API keys can be restricted to specific servers (e.g., key only works for MoMo + ZaloPay)
+- [ ] **SCOPE-02**: Key creation UI shows server checkboxes (default: all servers)
+- [ ] **SCOPE-03**: Gateway auth middleware checks key scope and returns 403 if server not allowed
+- [ ] **SCOPE-04**: Dashboard API Keys table shows scope badges per key
 
-### Blog & Changelog
+### Usage Export
 
-- [x] **BLOG-01**: Launch announcement blog post on Mintlify ("Introducing VN MCP Hub")
-- [x] **BLOG-02**: Per-server guide posts (MoMo payments, ZaloPay integration, etc.)
-- [x] **BLOG-03**: Changelog page added to Mintlify docs site
+- [ ] **EXPORT-01**: Dashboard button to download usage data as CSV
+- [ ] **EXPORT-02**: CSV includes: date, server, tool, call count columns
+- [ ] **EXPORT-03**: Date range picker (last 7/30/90 days or custom range)
+- [ ] **EXPORT-04**: Gateway endpoint GET /usage/export returns CSV with proper Content-Type header
 
-## v3 Requirements
+## v4 Requirements
 
 Deferred to future release.
 
 - **REAL-01**: Real MoMo API integration (after merchant KYC)
 - **REAL-02**: Real ZaloPay/VNPAY sandbox integration
 - **TEAM-01**: Team management (invite members, shared keys)
-- **PLAY-01**: API playground in dashboard
+- **SSO-01**: Google/GitHub OAuth login
 
 ## Out of Scope
 
 | Feature | Reason |
 |---------|--------|
-| Paid advertising | Organic-first; validate product-market fit before spending |
-| Video production | Screenshots and GIFs sufficient for launch |
-| Community Discord/Slack | Premature — build after first 50 users |
-| Localization (Vietnamese) | English-first for developer audience |
+| Real-time WebSocket updates | Polling sufficient for v3.0; WebSocket adds complexity |
+| Audit log | Enterprise feature — defer until team management exists |
+| Custom webhook endpoints | Users configure their own webhooks — out of scope for dashboard |
+| Rate limiting dashboard | Infrastructure concern — handle at CF Workers level |
 
 ## Traceability
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| GH-01 | Phase 18 | Complete |
-| GH-02 | Phase 18 | Complete |
-| GH-03 | Phase 18 | Complete |
-| GH-04 | Phase 18 | Complete |
-| EX-01 | Phase 19 | Complete |
-| EX-02 | Phase 19 | Complete |
-| EX-03 | Phase 19 | Complete |
-| BLOG-01 | Phase 20 | Complete |
-| BLOG-02 | Phase 20 | Complete |
-| BLOG-03 | Phase 20 | Complete |
-| PH-01 | Phase 21 | Complete |
-| PH-02 | Phase 21 | Pending |
-| PH-03 | Phase 21 | Complete |
+| PLAY-01 | TBD | Pending |
+| PLAY-02 | TBD | Pending |
+| PLAY-03 | TBD | Pending |
+| PLAY-04 | TBD | Pending |
+| HOOK-01 | TBD | Pending |
+| HOOK-02 | TBD | Pending |
+| HOOK-03 | TBD | Pending |
+| HOOK-04 | TBD | Pending |
+| SCOPE-01 | TBD | Pending |
+| SCOPE-02 | TBD | Pending |
+| SCOPE-03 | TBD | Pending |
+| SCOPE-04 | TBD | Pending |
+| EXPORT-01 | TBD | Pending |
+| EXPORT-02 | TBD | Pending |
+| EXPORT-03 | TBD | Pending |
+| EXPORT-04 | TBD | Pending |
 
 **Coverage:**
-- v2.1 requirements: 13 total
-- Mapped to phases: 13
-- Unmapped: 0
+- v3.0 requirements: 16 total
+- Mapped to phases: 0
+- Unmapped: 16
 
 ---
-*Requirements defined: 2026-03-26*
+*Requirements defined: 2026-03-27*
