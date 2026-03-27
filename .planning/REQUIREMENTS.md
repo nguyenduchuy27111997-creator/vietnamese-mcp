@@ -9,8 +9,8 @@
 
 - [x] **PLAY-01**: Dashboard page where user can select a server (MoMo, ZaloPay, etc.) from a dropdown
 - [x] **PLAY-02**: Tool selector showing all tools for the selected server with parameter forms auto-generated from tool schemas
-- [ ] **PLAY-03**: Execute button sends JSON-RPC request to gateway with user's API key and displays formatted response
-- [ ] **PLAY-04**: Request/response panel shows raw JSON-RPC payload and response with syntax highlighting
+- [x] **PLAY-03**: Execute button sends JSON-RPC request to gateway with user's API key and displays formatted response
+- [x] **PLAY-04**: Request/response panel shows raw JSON-RPC payload and response with syntax highlighting
 
 ### Webhook Event Logs
 
@@ -61,8 +61,8 @@ Deferred to future release.
 | SCOPE-04 | Phase 22 | Complete |
 | PLAY-01 | Phase 23 | Complete |
 | PLAY-02 | Phase 23 | Complete |
-| PLAY-03 | Phase 23 | Pending |
-| PLAY-04 | Phase 23 | Pending |
+| PLAY-03 | Phase 23 | Complete |
+| PLAY-04 | Phase 23 | Complete |
 | HOOK-01 | Phase 24 | Pending |
 | HOOK-02 | Phase 24 | Pending |
 | HOOK-03 | Phase 24 | Pending |

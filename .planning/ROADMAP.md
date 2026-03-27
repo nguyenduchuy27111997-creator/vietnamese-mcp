@@ -67,7 +67,7 @@
 **Milestone Goal:** Make the platform sticky — API key scoping for granular permissions, an API playground for testing tool calls directly from the dashboard, webhook event logs for debugging, and usage export for self-service analytics.
 
 - [x] **Phase 22: API Key Scoping** — Keys can be restricted to specific servers; gateway enforces scope with 403; dashboard shows scope badges (completed 2026-03-27)
-- [ ] **Phase 23: API Playground** — Dashboard page where developers select a server, pick a tool, fill params, and execute a real JSON-RPC call
+- [x] **Phase 23: API Playground** — Dashboard page where developers select a server, pick a tool, fill params, and execute a real JSON-RPC call (completed 2026-03-27)
 - [ ] **Phase 24: Webhook Event Logs** — Gateway logs Stripe/MoMo webhook events; dashboard page shows filterable list with full payload viewer
 - [ ] **Phase 25: Usage Export** — Gateway CSV endpoint and dashboard download button for per-server, per-day usage data
 
@@ -418,7 +418,7 @@ Plans:
 | 20. Blog & Changelog | v2.1 | 3/3 | Complete | 2026-03-26 |
 | 21. Product Hunt Launch | v2.1 | 2/2 | Complete | 2026-03-27 |
 | 22. API Key Scoping | v3.0 | 2/2 | Complete | 2026-03-27 |
-| 23. API Playground | 1/2 | In Progress|  | - |
+| 23. API Playground | 2/2 | Complete   | 2026-03-27 | - |
 | 24. Webhook Event Logs | v3.0 | 0/2 | Not started | - |
 | 25. Usage Export | v3.0 | 0/2 | Not started | - |
 

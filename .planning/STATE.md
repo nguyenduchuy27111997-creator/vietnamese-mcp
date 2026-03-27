@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v3.0
 milestone_name: Developer Experience
 status: executing
-stopped_at: Completed 23-api-playground/23-01-PLAN.md
-last_updated: "2026-03-27T04:45:26.122Z"
+stopped_at: "Checkpoint: 23-02 Task 2 human-verify"
+last_updated: "2026-03-27T04:48:40.292Z"
 last_activity: 2026-03-27 — 22-01 complete. API key scoping infrastructure (allowed_servers, scopeCheckMiddleware, 403 enforcement) shipped.
 progress:
   total_phases: 21
-  completed_phases: 18
+  completed_phases: 19
   total_plans: 46
-  completed_plans: 45
+  completed_plans: 46
   percent: 98
 ---
 
@@ -55,6 +55,8 @@ Key decisions relevant to v3.0:
 - [Phase 22-api-key-scoping]: Create button disabled when 0 servers selected in scope UI to prevent creating permanently-blocked keys
 - [Phase 23-api-playground]: Hardcoded tool schemas in dashboard (not fetched from gateway) — simpler, no API round-trip for static metadata
 - [Phase 23-api-playground]: Execute button disabled in Plan 01 scope — Plan 02 wires the actual HTTP call
+- [Phase 23-api-playground]: API key is password input (not dropdown) — useKeys() only has key_prefix, full key only shown at creation
+- [Phase 23-api-playground]: SSE parsing via text()+split approach, no react-syntax-highlighter, pre/code with bg-muted sufficient
 
 ### Pending Todos
 
@@ -68,6 +70,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-27T04:45:21.900Z
-Stopped at: Completed 23-api-playground/23-01-PLAN.md
+Last session: 2026-03-27T04:48:40.289Z
+Stopped at: Checkpoint: 23-02 Task 2 human-verify
 Resume file: None
