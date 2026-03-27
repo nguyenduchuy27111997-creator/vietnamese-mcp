@@ -359,11 +359,11 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 23-01-PLAN.md — Tool schema registry (18 tools), shadcn Select component, sidebar nav + route wiring, PlaygroundPage with server/tool dropdowns and auto-generated param form
-- [ ] 23-02-PLAN.md — Execute button with JSON-RPC fetch + SSE parsing, request/response tabbed panel with syntax highlighting and copy buttons, human verification
+- [x] 23-01-PLAN.md — Tool schema registry (18 tools), shadcn Select component, sidebar nav + route wiring, PlaygroundPage with server/tool dropdowns and auto-generated param form
+- [x] 23-02-PLAN.md — Execute button with JSON-RPC fetch + SSE parsing, request/response tabbed panel with syntax highlighting and copy buttons, human verification
 
 ### Phase 24: Webhook Event Logs
-**Goal**: Every Stripe and MoMo webhook event received by the gateway is logged to a queryable store; a dashboard page shows the event list with timestamp, provider, event type, and status; clicking an event expands the full payload; the list is filterable by provider and status
+**Goal**: Gateway logs all webhook events; dashboard shows filterable list with payload viewer
 **Depends on**: Phase 22 (dashboard auth pattern established)
 **Requirements**: HOOK-01, HOOK-02, HOOK-03, HOOK-04
 **Success Criteria** (what must be TRUE):
@@ -374,8 +374,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 24-01: Supabase migration for webhook_logs table + gateway webhook handler update to insert log rows on every Stripe/MoMo event
-- [ ] 24-02: Dashboard Webhook Logs page — event list table, expandable payload drawer, provider/status filters
+- [ ] 24-01-PLAN.md — Supabase migration + webhookLogger utility + billing route logging + GET /webhook-logs endpoint with JWT auth and filters
+- [ ] 24-02-PLAN.md — Dashboard WebhookLogsPage with table, expandable payload viewer, provider/status filters, sidebar nav + routing
 
 ### Phase 25: Usage Export
 **Goal**: Developers can download their usage data as a CSV file directly from the dashboard — a date range picker selects the window, the gateway endpoint queries Tinybird and streams CSV with proper headers, and the browser triggers a file download
@@ -418,7 +418,7 @@ Plans:
 | 20. Blog & Changelog | v2.1 | 3/3 | Complete | 2026-03-26 |
 | 21. Product Hunt Launch | v2.1 | 2/2 | Complete | 2026-03-27 |
 | 22. API Key Scoping | v3.0 | 2/2 | Complete | 2026-03-27 |
-| 23. API Playground | 2/2 | Complete    | 2026-03-27 | - |
+| 23. API Playground | v3.0 | 2/2 | Complete | 2026-03-27 |
 | 24. Webhook Event Logs | v3.0 | 0/2 | Not started | - |
 | 25. Usage Export | v3.0 | 0/2 | Not started | - |
 
