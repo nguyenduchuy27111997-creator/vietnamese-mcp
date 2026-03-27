@@ -4,7 +4,7 @@ milestone: v3.0
 milestone_name: Developer Experience
 status: executing
 stopped_at: Completed 22-api-key-scoping/22-02-PLAN.md
-last_updated: "2026-03-27T04:28:24.407Z"
+last_updated: "2026-03-27T04:29:02.481Z"
 last_activity: 2026-03-27 — 22-01 complete. API key scoping infrastructure (allowed_servers, scopeCheckMiddleware, 403 enforcement) shipped.
 progress:
   total_phases: 21

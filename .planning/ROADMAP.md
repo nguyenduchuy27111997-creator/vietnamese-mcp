@@ -417,7 +417,7 @@ Plans:
 | 19. Example Apps | v2.1 | 2/2 | Complete | 2026-03-26 |
 | 20. Blog & Changelog | v2.1 | 3/3 | Complete | 2026-03-26 |
 | 21. Product Hunt Launch | v2.1 | 2/2 | Complete | 2026-03-27 |
-| 22. API Key Scoping | 2/2 | Complete   | 2026-03-27 | - |
+| 22. API Key Scoping | 2/2 | Complete    | 2026-03-27 | - |
 | 23. API Playground | v3.0 | 0/2 | Not started | - |
 | 24. Webhook Event Logs | v3.0 | 0/2 | Not started | - |
 | 25. Usage Export | v3.0 | 0/2 | Not started | - |
