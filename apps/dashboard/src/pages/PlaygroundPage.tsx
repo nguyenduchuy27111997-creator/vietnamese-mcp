@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Terminal, Play } from 'lucide-react';
+import { Terminal, Play, Loader2, Copy, Eye, EyeOff } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { SERVERS, type ToolSchema, type ToolParam } from '../lib/tool-schemas.js';
 import { useKeys } from '../hooks/useKeys.js';
@@ -7,6 +7,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Switch } from '@/components/ui/switch';
+import { Badge } from '@/components/ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {
   Select,
   SelectContent,
@@ -14,6 +16,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+
+const GATEWAY_URL = (import.meta.env.VITE_GATEWAY_URL as string) ?? '';
 
 function ParamField({
   param,
@@ -100,7 +104,11 @@ export function PlaygroundPage() {
   const [selectedServerId, setSelectedServerId] = useState<string | null>(null);
   const [selectedToolName, setSelectedToolName] = useState<string | null>(null);
   const [params, setParams] = useState<Record<string, string | number | boolean>>({});
-  const [selectedKeyId, setSelectedKeyId] = useState<string | null>(null);
+  const [apiKey, setApiKey] = useState('');
+  const [showApiKey, setShowApiKey] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [request, setRequest] = useState<object | null>(null);
+  const [response, setResponse] = useState<{ error: boolean; status: number; body: unknown } | null>(null);
 
   const activeServer = SERVERS.find((s) => s.id === selectedServerId) ?? null;
   const activeTool = activeServer?.tools.find((t) => t.name === selectedToolName) ?? null;
@@ -122,6 +130,114 @@ export function PlaygroundPage() {
 
   function handleParamChange(name: string, value: string | number | boolean) {
     setParams((prev) => ({ ...prev, [name]: value }));
+  }
+
+  function buildArgs(): Record<string, unknown> {
+    if (!activeTool) return {};
+    const args: Record<string, unknown> = {};
+    for (const param of activeTool.params) {
+      const val = params[param.name];
+      if (param.type === 'number') {
+        if (val !== '' && val !== undefined) {
+          args[param.name] = Number(val);
+        } else if (param.required) {
+          args[param.name] = Number(val);
+        }
+      } else if (param.type === 'boolean') {
+        args[param.name] = val === true || val === 'true';
+      } else {
+        // string
+        if (val !== '' && val !== undefined) {
+          args[param.name] = val;
+        } else if (param.required) {
+          args[param.name] = val;
+        }
+      }
+    }
+    return args;
+  }
+
+  async function executeCall() {
+    if (!selectedServerId || !selectedToolName || !apiKey) return;
+
+    setLoading(true);
+    setResponse(null);
+
+    const requestBody = {
+      jsonrpc: '2.0' as const,
+      id: 1,
+      method: 'tools/call' as const,
+      params: {
+        name: selectedToolName,
+        arguments: buildArgs(),
+      },
+    };
+
+    setRequest(requestBody);
+
+    const url = `${GATEWAY_URL}/mcp/${selectedServerId}`;
+
+    try {
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json, text/event-stream',
+          'Authorization': `Bearer ${apiKey}`,
+        },
+        body: JSON.stringify(requestBody),
+      });
+
+      if (!res.ok) {
+        const errText = await res.text();
+        setResponse({ error: true, status: res.status, body: errText });
+        return;
+      }
+
+      // Parse SSE response
+      const text = await res.text();
+      // SSE format: "event: message\ndata: {json}\n\n"
+      const lines = text.split('\n');
+      let jsonData: unknown = null;
+      for (const line of lines) {
+        if (line.startsWith('data: ')) {
+          try {
+            jsonData = JSON.parse(line.slice(6));
+          } catch { /* skip non-JSON lines */ }
+        }
+      }
+
+      // If response is plain JSON (not SSE), try parsing directly
+      if (!jsonData) {
+        try {
+          jsonData = JSON.parse(text);
+        } catch {
+          jsonData = { raw: text };
+        }
+      }
+
+      setResponse({ error: false, status: res.status, body: jsonData });
+    } catch (err) {
+      setResponse({ error: true, status: 0, body: String(err) });
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  function copyRequest() {
+    if (request) {
+      navigator.clipboard.writeText(JSON.stringify(request, null, 2));
+    }
+  }
+
+  function copyResponse() {
+    if (response) {
+      const text =
+        typeof response.body === 'string'
+          ? response.body
+          : JSON.stringify(response.body, null, 2);
+      navigator.clipboard.writeText(text);
+    }
   }
 
   return (
@@ -207,52 +323,112 @@ export function PlaygroundPage() {
               </div>
             )}
 
-            {/* API key selector */}
+            {/* API key input */}
             <div className="space-y-1.5 border-t pt-4">
               <label className="text-sm font-medium">API Key</label>
-              {activeKeys.length === 0 ? (
-                <p className="text-sm text-muted-foreground">
-                  No active keys.{' '}
-                  <Link to="/keys" className="text-primary underline">
-                    Create an API key first
-                  </Link>
-                  .
-                </p>
-              ) : (
-                <Select value={selectedKeyId ?? ''} onValueChange={setSelectedKeyId}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select an API key..." />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {activeKeys.map((key) => (
-                      <SelectItem key={key.id} value={key.id}>
-                        {key.name} ({key.key_prefix}...)
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              )}
+              <div className="relative">
+                <Input
+                  type={showApiKey ? 'text' : 'password'}
+                  value={apiKey}
+                  onChange={(e) => setApiKey(e.target.value)}
+                  placeholder="sk_test_..."
+                  className="pr-10"
+                />
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon"
+                  className="absolute right-1 top-1/2 -translate-y-1/2 h-7 w-7"
+                  onClick={() => setShowApiKey((v) => !v)}
+                >
+                  {showApiKey ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                </Button>
+              </div>
+              <p className="text-xs text-muted-foreground">
+                Paste your full API key (from{' '}
+                <Link to="/keys" className="text-primary underline">
+                  API Keys page
+                </Link>
+                ). {activeKeys.length > 0 && `You have ${activeKeys.length} active key${activeKeys.length > 1 ? 's' : ''}: ${activeKeys.map(k => `${k.name} (${k.key_prefix}...)`).join(', ')}.`}
+              </p>
             </div>
 
-            {/* Execute button (disabled — Plan 02 wires this) */}
-            <Button disabled className="w-full">
-              <Play className="h-4 w-4" />
-              Execute
+            {/* Execute button */}
+            <Button
+              onClick={executeCall}
+              disabled={!selectedServerId || !selectedToolName || !apiKey || loading}
+              className="w-full"
+            >
+              {loading ? (
+                <Loader2 className="h-4 w-4 animate-spin mr-2" />
+              ) : (
+                <Play className="h-4 w-4 mr-2" />
+              )}
+              {loading ? 'Executing...' : 'Execute'}
             </Button>
           </CardContent>
         </Card>
 
-        {/* Right panel: response preview */}
-        <Card className="bg-muted/30">
+        {/* Right panel: request/response */}
+        <Card>
           <CardHeader>
-            <CardTitle className="text-base font-mono">Response</CardTitle>
+            <CardTitle className="text-base font-mono">Request / Response</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="min-h-[300px] flex items-center justify-center">
-              <p className="text-sm text-muted-foreground font-mono text-center">
-                Execute a tool call to see the request and response here.
-              </p>
-            </div>
+            <Tabs defaultValue="response">
+              <TabsList className="mb-4">
+                <TabsTrigger value="request">Request</TabsTrigger>
+                <TabsTrigger value="response">Response</TabsTrigger>
+              </TabsList>
+
+              <TabsContent value="request">
+                {request ? (
+                  <div className="relative">
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="absolute top-2 right-2 z-10"
+                      onClick={copyRequest}
+                    >
+                      <Copy className="h-4 w-4" />
+                    </Button>
+                    <pre className="bg-muted rounded-lg p-4 overflow-auto max-h-[600px] text-sm font-mono text-foreground">
+                      <code>{JSON.stringify(request, null, 2)}</code>
+                    </pre>
+                  </div>
+                ) : (
+                  <p className="text-muted-foreground text-sm p-4">
+                    Execute a tool call to see the request payload.
+                  </p>
+                )}
+              </TabsContent>
+
+              <TabsContent value="response">
+                {response ? (
+                  <div className="relative">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Badge variant={response.error ? 'destructive' : 'default'}>
+                        {response.status || 'Error'}
+                      </Badge>
+                      <Button variant="ghost" size="icon" onClick={copyResponse}>
+                        <Copy className="h-4 w-4" />
+                      </Button>
+                    </div>
+                    <pre className="bg-muted rounded-lg p-4 overflow-auto max-h-[560px] text-sm font-mono text-foreground">
+                      <code>
+                        {typeof response.body === 'string'
+                          ? response.body
+                          : JSON.stringify(response.body, null, 2)}
+                      </code>
+                    </pre>
+                  </div>
+                ) : (
+                  <p className="text-muted-foreground text-sm p-4">
+                    Execute a tool call to see the response here.
+                  </p>
+                )}
+              </TabsContent>
+            </Tabs>
           </CardContent>
         </Card>
       </div>
