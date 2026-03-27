@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v2.1
 milestone_name: Growth & Marketing
 status: executing
-stopped_at: "Checkpoint 21-02 Task 2: Awaiting human screenshot capture and PH listing assembly"
-last_updated: "2026-03-27T03:22:32.715Z"
+stopped_at: Completed 21-02-PLAN.md — Phase 21 plans complete
+last_updated: "2026-03-27T03:26:29.786Z"
 last_activity: 2026-03-27 — 18-03 complete. Assets dir created, README GIF embed active, GIF recording deferred to pre-launch.
 progress:
   total_phases: 17
-  completed_phases: 16
+  completed_phases: 17
   total_plans: 42
-  completed_plans: 41
+  completed_plans: 42
   percent: 10
 ---
 
@@ -66,6 +66,7 @@ v2.1 decisions:
 - [Phase 20-blog-changelog]: ViettelPay guide prominently notes mock-only status with Note callout
 - [Phase 21-product-hunt-launch]: Tagline is 49 chars (under 60 limit) — chose clarity over length
 - [Phase 21-product-hunt-launch]: Response templates cover 4 most common PH objections for a dev tool
+- [Phase 21-product-hunt-launch]: PH listing assembly deferred to pre-launch day — user will capture screenshots and assemble draft when ready
 
 ### Pending Todos
 
@@ -79,6 +80,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-27T03:22:32.709Z
-Stopped at: Checkpoint 21-02 Task 2: Awaiting human screenshot capture and PH listing assembly
+Last session: 2026-03-27T03:26:29.783Z
+Stopped at: Completed 21-02-PLAN.md — Phase 21 plans complete
 Resume file: None
