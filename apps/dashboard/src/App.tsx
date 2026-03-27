@@ -14,6 +14,7 @@ const UsagePage = lazy(() => import('./pages/UsagePage.js').then(m => ({ default
 const BillingPage = lazy(() => import('./pages/BillingPage.js').then(m => ({ default: m.BillingPage })));
 const SettingsPage = lazy(() => import('./pages/SettingsPage.js').then(m => ({ default: m.SettingsPage })));
 const QuickstartPage = lazy(() => import('./pages/QuickstartPage.js').then(m => ({ default: m.QuickstartPage })));
+const PlaygroundPage = lazy(() => import('./pages/PlaygroundPage.js').then(m => ({ default: m.PlaygroundPage })));
 
 function NewUserRedirect() {
   const { keys, loading } = useKeys();
@@ -46,6 +47,7 @@ function AuthenticatedApp({ session }: { session: Session }) {
             <Route path="billing" element={<BillingPage />} />
             <Route path="settings" element={<SettingsPage />} />
             <Route path="quickstart" element={<QuickstartPage />} />
+            <Route path="playground" element={<PlaygroundPage />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Route>
         </Routes>
